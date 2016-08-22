@@ -13,6 +13,7 @@ categories: Math
 3. [Finding Eigenvalues & Eigenvectors](#finding-eigenvalues--eigenvectors)
 4. [The Eigendecomposition](#the-eigendecomposition)
 5. [Applications - Powers of A](#applications---powers-of-a)
+6. [References](#references)
 
 
 
@@ -130,3 +131,10 @@ $$A^2 = S\Lambda S^{-1} S\Lambda S^{-1} = S \Lambda^2 S^{-1}$$.
 We can repeat this process to find $A^k = S \Lambda^k S^{-1}$. As I said before, computing the powers of diagonal matrices is very easy, and if we know the eigenvectors of $A$, computing any power of $A$ hence becomes easy as well. 
 
 
+## References
+
+1. Axler, Sheldon. Linear Algebra Done Right. New York: Springer, 2000. Print.
+2. Strang, Gilbert. Introduction to Linear Algebra. Wellesley, MA: Wellesley-Cambridge, 2009. Print.
+3. Lax, Peter D., and Peter D. Lax. Linear Algebra and Its Applications. Hoboken, NJ: Wiley-Interscience, 2007. Print.
+4. Gilbert Strang. 18.06SC Linear Algebra. Fall 2011. Massachusetts Institute of Technology: MIT OpenCourseWare, http://ocw.mit.edu. License: Creative Commons BY-NC-SA.
+5. https://en.wikipedia.org/wiki/Linear_map
