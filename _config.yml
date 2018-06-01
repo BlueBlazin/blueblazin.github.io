@@ -16,3 +16,4 @@ github_username: blueblazin.github.com
 
 # Build settings
 markdown: kramdown
+highlighter: rouge
