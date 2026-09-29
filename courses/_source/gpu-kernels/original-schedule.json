@@ -1,0 +1,1624 @@
+[
+  {
+    "week": 1,
+    "hours": 7,
+    "modules": [
+      0,
+      1
+    ],
+    "days": [
+      {
+        "day": "Monday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Set up the independent kernel lab",
+            "action": "Create the kernel-course repository, run the supplied CPU decoder fixture, and map the tensors you will optimize.",
+            "evidence": "A local CPU smoke, fixed configuration and random state dict, and one dimensioned decoder diagram.",
+            "activity": 101,
+            "source_activity": 101,
+            "module": 0,
+            "track": "I",
+            "part": 1,
+            "total_parts": 1,
+            "hours": 1,
+            "key": "intro-1"
+          }
+        ]
+      },
+      {
+        "day": "Tuesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Freeze environments, measurement rules, and spending limits",
+            "action": "Write the local/NVIDIA/H100 environment plan and a bounded measurement contract before renting a GPU.",
+            "evidence": "reports/kernels/environment-plan.md and a spending ledger with a shutdown checklist.",
+            "activity": 102,
+            "source_activity": 102,
+            "module": 0,
+            "track": "I",
+            "part": 1,
+            "total_parts": 1,
+            "hours": 1,
+            "key": "intro-2"
+          }
+        ]
+      },
+      {
+        "day": "Wednesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Model GPU Indexing and Memory Traffic Locally",
+            "action": "Execute a Python shape-and-traffic calculator, then map it to GPU execution and memory.",
+            "evidence": "A working local calculator, dimensioned table and three bottleneck hypotheses.",
+            "activity": 1,
+            "module": 1,
+            "track": "K",
+            "part": 1,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 3,
+            "key": "1-1",
+            "legacy_lesson": "week-02-tuesday"
+          }
+        ]
+      },
+      {
+        "day": "Thursday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Prepare a Bounded Profiling Session",
+            "action": "Smoke-test a pinned 4090 environment and the tiny decoder; record versions. Timebox setup, preserving a precise blocker if the image fails.",
+            "evidence": "Working smoke command and hardware manifest, or documented setup blocker.",
+            "activity": 1,
+            "module": 1,
+            "track": "K",
+            "part": 2,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 3,
+            "key": "1-2",
+            "legacy_lesson": "week-02-wednesday"
+          }
+        ]
+      },
+      {
+        "day": "Friday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Build Reliable GPU Timing Utilities",
+            "action": "Implement warm-up, synchronization, and repeated timing; separate compilation, transfers, and steady-state execution. Check one deliberately incorrect asynchronous measurement.",
+            "evidence": "Timing utility and explained discrepancy between valid and invalid measurements.",
+            "activity": 1,
+            "module": 1,
+            "track": "K",
+            "part": 3,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 3,
+            "key": "1-3",
+            "legacy_lesson": "week-02-thursday"
+          }
+        ]
+      },
+      {
+        "day": "Saturday",
+        "hours": 2,
+        "steps": [
+          {
+            "title": "Profile and Explain Dominant Operations",
+            "action": "Capture a short decoder profile; estimate FLOPs and bytes for the three dominant operations, then compare measurements with your predictions.",
+            "evidence": "Three-operation bottleneck table with measurements, estimates, and separate MPS results if used.",
+            "activity": 1,
+            "module": 1,
+            "track": "K",
+            "part": 4,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 3,
+            "key": "1-4",
+            "legacy_lesson": "week-02-saturday"
+          },
+          {
+            "title": "Write CUDA Vector Addition Indexing",
+            "action": "Read only the needed CUDA/vector-add material; write thread indexing and a minimal wrapper using the working remote environment.",
+            "evidence": "CUDA launch and indexing explained for a small contiguous vector.",
+            "activity": 2,
+            "module": 1,
+            "track": "K",
+            "part": 1,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 4,
+            "key": "2-1",
+            "legacy_lesson": "week-02-saturday"
+          }
+        ]
+      },
+      {
+        "day": "Sunday",
+        "hours": 0,
+        "steps": []
+      }
+    ]
+  },
+  {
+    "week": 2,
+    "hours": 7,
+    "modules": [
+      1,
+      2
+    ],
+    "days": [
+      {
+        "day": "Monday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Validate CUDA Boundaries and Timing",
+            "action": "Handle non-multiple lengths and launch bounds; compare outputs with PyTorch and record synchronized timing with compilation excluded.",
+            "evidence": "CUDA agreement on ordinary and boundary lengths; separate compilation timing.",
+            "activity": 2,
+            "module": 1,
+            "track": "K",
+            "part": 2,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 4,
+            "key": "2-2",
+            "legacy_lesson": "week-03-monday"
+          }
+        ]
+      },
+      {
+        "day": "Tuesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Implement Triton Vector Addition Masks",
+            "action": "Implement Triton program IDs, offsets, and masked loads/stores; reuse the same inputs and reference from the CUDA exercise.",
+            "evidence": "Triton vector addition passes ordinary and non-multiple lengths.",
+            "activity": 2,
+            "module": 1,
+            "track": "K",
+            "part": 3,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 4,
+            "key": "2-3",
+            "legacy_lesson": "week-03-tuesday"
+          }
+        ]
+      },
+      {
+        "day": "Wednesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Compare Both Vector Addition Implementations",
+            "action": "Run the common correctness matrix and steady-state timing for CUDA, Triton, and PyTorch; explain launch overhead and memory traffic.",
+            "evidence": "Both kernels pass; timing table separates compilation and steady-state execution.",
+            "activity": 2,
+            "module": 1,
+            "track": "K",
+            "part": 4,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 4,
+            "key": "2-4",
+            "legacy_lesson": "week-03-wednesday"
+          }
+        ]
+      },
+      {
+        "day": "Thursday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Derive Stable Row Softmax",
+            "action": "Read K3's softmax section; derive max subtraction and reduction shapes, then define supported row widths and extreme-logit cases.",
+            "evidence": "Stable formula, bytes estimate, and a fixed correctness matrix.",
+            "activity": 3,
+            "module": 2,
+            "track": "K",
+            "part": 1,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 10,
+            "key": "3-1",
+            "legacy_lesson": "week-06-monday"
+          }
+        ]
+      },
+      {
+        "day": "Friday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Implement Triton Softmax Reductions",
+            "action": "Write masked row loads, FP32 reduction, exponentiation, normalization, and stores; first validate small power-of-two rows.",
+            "evidence": "Small-row outputs match the controlled-precision reference.",
+            "activity": 3,
+            "module": 2,
+            "track": "K",
+            "part": 2,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 10,
+            "key": "3-2",
+            "legacy_lesson": "week-06-tuesday"
+          }
+        ]
+      },
+      {
+        "day": "Saturday",
+        "hours": 2,
+        "steps": [
+          {
+            "title": "Handle Softmax Tails and Extremes",
+            "action": "Repair masking and numerical behavior for non-power-of-two widths, repeated values, and extreme finite logits; record supported inputs.",
+            "evidence": "Tail and extreme-logit cases pass without unexplained nonfinite values.",
+            "activity": 3,
+            "module": 2,
+            "track": "K",
+            "part": 3,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 10,
+            "key": "3-3",
+            "legacy_lesson": "week-06-wednesday"
+          },
+          {
+            "title": "Benchmark Softmax Against Both Baselines",
+            "action": "Measure eager, compiled, and Triton softmax across fixed shapes using warm-up and repeated synchronized batches; interpret bytes moved.",
+            "evidence": "Correctness matrix and fair timing table with bandwidth interpretation.",
+            "activity": 3,
+            "module": 2,
+            "track": "K",
+            "part": 4,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 10,
+            "key": "3-4",
+            "legacy_lesson": "week-06-thursday"
+          }
+        ]
+      },
+      {
+        "day": "Sunday",
+        "hours": 0,
+        "steps": []
+      }
+    ]
+  },
+  {
+    "week": 3,
+    "hours": 7,
+    "modules": [
+      2,
+      3
+    ],
+    "days": [
+      {
+        "day": "Monday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Specify RMSNorm Precision and Shapes",
+            "action": "Derive RMSNorm's reduction and scaling; define epsilon, supported layouts, row counts, widths, and accumulation dtype before coding.",
+            "evidence": "Explicit supported-shape contract and reference calculations.",
+            "activity": 4,
+            "module": 2,
+            "track": "K",
+            "part": 1,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 11,
+            "key": "4-1",
+            "legacy_lesson": "week-06-saturday"
+          }
+        ]
+      },
+      {
+        "day": "Tuesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Implement Triton RMSNorm Forward",
+            "action": "Implement masked row loads, FP32 square-mean accumulation, reciprocal square root, scaling, and stores; compare small inputs with PyTorch.",
+            "evidence": "Forward outputs agree on small supported shapes.",
+            "activity": 4,
+            "module": 2,
+            "track": "K",
+            "part": 2,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 11,
+            "key": "4-2",
+            "legacy_lesson": "week-06-saturday"
+          }
+        ]
+      },
+      {
+        "day": "Wednesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Validate RMSNorm Across Row Shapes",
+            "action": "Check boundary widths, varied row counts, zeros, repeated values, and supported dtypes; report errors against the reference.",
+            "evidence": "Error table covers the declared support and precision contract.",
+            "activity": 4,
+            "module": 2,
+            "track": "K",
+            "part": 3,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 11,
+            "key": "4-3",
+            "legacy_lesson": "week-07-monday"
+          }
+        ]
+      },
+      {
+        "day": "Thursday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Measure RMSNorm Wins and Losses",
+            "action": "Benchmark eager, compiled, and custom RMSNorm under consistent precision; retain regressions and explain likely memory or launch bottlenecks.",
+            "evidence": "Validated support matrix and timing table containing wins and losses.",
+            "activity": 4,
+            "module": 2,
+            "track": "K",
+            "part": 4,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 11,
+            "key": "4-4",
+            "legacy_lesson": "week-07-tuesday"
+          }
+        ]
+      },
+      {
+        "day": "Friday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Review execution, reductions, and benchmark validity",
+            "action": "Audit vector add, softmax, and RMSNorm using a closed-book explanation and one targeted numerical check.",
+            "evidence": "review-2.md with a memory diagram, masked-row example, and an honest benchmark audit.",
+            "activity": 202,
+            "source_activity": 202,
+            "module": 2,
+            "track": "R",
+            "part": 1,
+            "total_parts": 1,
+            "hours": 1,
+            "key": "review-2"
+          }
+        ]
+      },
+      {
+        "day": "Saturday",
+        "hours": 2,
+        "steps": [
+          {
+            "title": "Repair a blocker or consolidate",
+            "action": "Use the scheduled hour for an unfinished check or targeted retrieval. Finish early when current.",
+            "evidence": "A resolved blocker or minimal reproducer, and a precise next action.",
+            "activity": null,
+            "source_activity": "flex2",
+            "module": 2,
+            "track": "X",
+            "part": 1,
+            "total_parts": 1,
+            "hours": 1,
+            "key": "flex-2"
+          },
+          {
+            "title": "Derive Tiled Matrix Multiplication",
+            "action": "Read K3's matmul section; map program IDs, block indices, strides, and the reduction dimension to a tiny numerical example.",
+            "evidence": "Dimensioned tile diagram and controlled-precision reference.",
+            "activity": 5,
+            "module": 3,
+            "track": "K",
+            "part": 1,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 17,
+            "key": "5-1",
+            "legacy_lesson": "week-09-saturday"
+          }
+        ]
+      },
+      {
+        "day": "Sunday",
+        "hours": 0,
+        "steps": []
+      }
+    ]
+  },
+  {
+    "week": 4,
+    "hours": 7,
+    "modules": [
+      3
+    ],
+    "days": [
+      {
+        "day": "Monday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Implement Triton Matmul Tile Loop",
+            "action": "Write masked A/B tile loads, dot products, and FP32 accumulators; initially restrict dimensions to exact tile multiples.",
+            "evidence": "Exact-tile matrix products match the reference.",
+            "activity": 5,
+            "module": 3,
+            "track": "K",
+            "part": 2,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 17,
+            "key": "5-2",
+            "legacy_lesson": "week-10-monday"
+          }
+        ]
+      },
+      {
+        "day": "Tuesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Support Matmul Boundaries and Strides",
+            "action": "Add tail masks and supported stride handling; check dimensions on both sides of tile boundaries and document unsupported layouts.",
+            "evidence": "Boundary-shape comparisons pass under the stated layout contract.",
+            "activity": 5,
+            "module": 3,
+            "track": "K",
+            "part": 3,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 17,
+            "key": "5-3",
+            "legacy_lesson": "week-10-tuesday"
+          }
+        ]
+      },
+      {
+        "day": "Wednesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Validate Tensor Core Matmul Precision",
+            "action": "Check the selected tensor-core path and precision settings; run the frozen random/boundary matrix and document numerical tolerances.",
+            "evidence": "Random and boundary comparisons pass against a matched-precision reference.",
+            "activity": 5,
+            "module": 3,
+            "track": "K",
+            "part": 4,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 17,
+            "key": "5-4",
+            "legacy_lesson": "week-10-wednesday"
+          }
+        ]
+      },
+      {
+        "day": "Thursday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Freeze Matmul Tuning and Baselines",
+            "action": "Choose a small tile search before measuring; prepare torch.matmul and compiled-composition baselines with matching precision and resident inputs.",
+            "evidence": "Predeclared tiles, shapes, and baseline settings.",
+            "activity": 6,
+            "module": 3,
+            "track": "K",
+            "part": 1,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 18,
+            "key": "6-1",
+            "legacy_lesson": "week-10-thursday"
+          }
+        ]
+      },
+      {
+        "day": "Friday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Measure Tile Reuse and Occupancy",
+            "action": "Run the bounded tile search using repeated synchronized batches; inspect the strongest and weakest configurations without expanding the search.",
+            "evidence": "Tile timing table with median, variability, and reuse observations.",
+            "activity": 6,
+            "module": 3,
+            "track": "K",
+            "part": 2,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 18,
+            "key": "6-2",
+            "legacy_lesson": "week-10-saturday"
+          }
+        ]
+      },
+      {
+        "day": "Saturday",
+        "hours": 2,
+        "steps": [
+          {
+            "title": "Fuse One Matmul Output Epilogue",
+            "action": "Add either bias or activation to the kernel; verify the fused result against the matching PyTorch composition before benchmarking.",
+            "evidence": "Fused output matches its unfused reference on supported shapes.",
+            "activity": 6,
+            "module": 3,
+            "track": "K",
+            "part": 3,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 18,
+            "key": "6-3",
+            "legacy_lesson": "week-10-saturday"
+          },
+          {
+            "title": "Explain Matmul Performance Tradeoffs Clearly",
+            "action": "Compare the fused kernel with library matmul and compiled composition; explain reuse, occupancy, and measured regressions without requiring a library win.",
+            "evidence": "Final timing table and supported conclusions about reuse and occupancy.",
+            "activity": 6,
+            "module": 3,
+            "track": "K",
+            "part": 4,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 18,
+            "key": "6-4",
+            "legacy_lesson": "week-11-monday"
+          }
+        ]
+      },
+      {
+        "day": "Sunday",
+        "hours": 0,
+        "steps": []
+      }
+    ]
+  },
+  {
+    "week": 5,
+    "hours": 7,
+    "modules": [
+      4
+    ],
+    "days": [
+      {
+        "day": "Monday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Derive Online Softmax State Updates",
+            "action": "Read the required K4 sections; derive running maximum, normalizer, and weighted-output updates when a new score tile arrives.",
+            "evidence": "Written recurrence with dimensions and rescaling factors.",
+            "activity": 7,
+            "module": 4,
+            "track": "K",
+            "part": 1,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 24,
+            "key": "7-1",
+            "legacy_lesson": "week-13-saturday"
+          }
+        ]
+      },
+      {
+        "day": "Tuesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Verify Online Softmax Tile Merges",
+            "action": "Implement the recurrence on tiny PyTorch vectors; compare different tile partitions with dense softmax and inspect extreme finite values.",
+            "evidence": "Tile-merge results match dense normalization.",
+            "activity": 7,
+            "module": 4,
+            "track": "K",
+            "part": 2,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 24,
+            "key": "7-2",
+            "legacy_lesson": "week-13-saturday"
+          }
+        ]
+      },
+      {
+        "day": "Wednesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Implement Blockwise Causal Attention Reference",
+            "action": "Apply the verified recurrence to Q/K/V blocks with causal masking, avoiding storage of the full score matrix.",
+            "evidence": "Small causal attention outputs agree with the dense reference.",
+            "activity": 7,
+            "module": 4,
+            "track": "K",
+            "part": 3,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 24,
+            "key": "7-3",
+            "legacy_lesson": "week-14-monday"
+          }
+        ]
+      },
+      {
+        "day": "Thursday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Validate Attention Recurrence and Memory",
+            "action": "Run varied small lengths and tile boundaries; explain causal masks, online state, and memory accounting in a concise derivation.",
+            "evidence": "Dense-reference parity plus explained recurrence and memory savings.",
+            "activity": 7,
+            "module": 4,
+            "track": "K",
+            "part": 4,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 24,
+            "key": "7-4",
+            "legacy_lesson": "week-14-tuesday"
+          }
+        ]
+      },
+      {
+        "day": "Friday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Specify Restricted Triton Attention Forward",
+            "action": "Fix one head dimension, bounded lengths, dtype, and causal convention; map the blockwise reference to Triton tiles using K3/K4.",
+            "evidence": "Restricted support contract and tile/state mapping.",
+            "activity": 8,
+            "module": 4,
+            "track": "K",
+            "part": 1,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 25,
+            "key": "8-1",
+            "legacy_lesson": "week-14-wednesday"
+          }
+        ]
+      },
+      {
+        "day": "Saturday",
+        "hours": 2,
+        "steps": [
+          {
+            "title": "Implement Attention Tiles and Online State",
+            "action": "Translate Q/K/V loading and the online normalization update to Triton; debug a tiny exact-tile case against the existing reference.",
+            "evidence": "A tiny supported attention case matches dense output.",
+            "activity": 8,
+            "module": 4,
+            "track": "K",
+            "part": 2,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 25,
+            "key": "8-2",
+            "legacy_lesson": "week-14-thursday"
+          },
+          {
+            "title": "Validate Attention Causality and Tails",
+            "action": "Add supported tail and causal masks; check numerical errors and nonfinite values. Narrow the shape family if needed, preserving an honest completion gate.",
+            "evidence": "Causal and tail tests pass without NaNs on declared inputs.",
+            "activity": 8,
+            "module": 4,
+            "track": "K",
+            "part": 3,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 25,
+            "key": "8-3",
+            "legacy_lesson": "week-14-saturday"
+          }
+        ]
+      },
+      {
+        "day": "Sunday",
+        "hours": 0,
+        "steps": []
+      }
+    ]
+  },
+  {
+    "week": 6,
+    "hours": 7,
+    "modules": [
+      4,
+      5
+    ],
+    "days": [
+      {
+        "day": "Monday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Benchmark Restricted Attention Forward Correctness",
+            "action": "Compare validated outputs, peak memory, and latency with dense attention and SDPA. If correctness remains unresolved, record the blocker and extend the lab.",
+            "evidence": "Working restricted forward with correctness, latency, and memory results; backward remains optional.",
+            "activity": 8,
+            "module": 4,
+            "track": "K",
+            "part": 4,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 25,
+            "key": "8-4",
+            "legacy_lesson": "week-14-saturday"
+          }
+        ]
+      },
+      {
+        "day": "Tuesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Review tiled matmul and online attention",
+            "action": "Reconstruct a tile and online-softmax merge, then audit one causal boundary case.",
+            "evidence": "review-4.md with dimensioned tile addresses, a worked merge, and a supported-shape audit.",
+            "activity": 204,
+            "source_activity": 204,
+            "module": 4,
+            "track": "R",
+            "part": 1,
+            "total_parts": 1,
+            "hours": 1,
+            "key": "review-4"
+          }
+        ]
+      },
+      {
+        "day": "Wednesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Repair a blocker or consolidate",
+            "action": "Use the scheduled hour for an unfinished check or targeted retrieval. Finish early when current.",
+            "evidence": "A resolved blocker or minimal reproducer, and a precise next action.",
+            "activity": null,
+            "source_activity": "flex4",
+            "module": 4,
+            "track": "X",
+            "part": 1,
+            "total_parts": 1,
+            "hours": 1,
+            "key": "flex-4"
+          }
+        ]
+      },
+      {
+        "day": "Thursday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Derive RMSNorm Input and Weight Gradients",
+            "action": "Derive input and weight gradients, including reduction axes and epsilon; check the algebra using a small high-precision PyTorch reference.",
+            "evidence": "Dimensioned backward equations and a validated reference.",
+            "activity": 9,
+            "module": 5,
+            "track": "K",
+            "part": 1,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 31,
+            "key": "9-1",
+            "legacy_lesson": "week-17-friday"
+          }
+        ]
+      },
+      {
+        "day": "Friday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Implement RMSNorm Input Gradient Kernel",
+            "action": "Translate the input-gradient reduction to Triton; test small supported shapes and inspect accumulation precision against the reference.",
+            "evidence": "Input gradients agree on small supported GPU cases.",
+            "activity": 9,
+            "module": 5,
+            "track": "K",
+            "part": 2,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 31,
+            "key": "9-2",
+            "legacy_lesson": "week-17-saturday"
+          }
+        ]
+      },
+      {
+        "day": "Saturday",
+        "hours": 2,
+        "steps": [
+          {
+            "title": "Implement RMSNorm Weight Gradient Reduction",
+            "action": "Implement weight-gradient accumulation and reduction for the documented shape family; compare input and weight gradients across boundary shapes.",
+            "evidence": "GPU input and weight gradients pass boundary-shape comparisons.",
+            "activity": 9,
+            "module": 5,
+            "track": "K",
+            "part": 3,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 31,
+            "key": "9-3",
+            "legacy_lesson": "week-17-saturday"
+          },
+          {
+            "title": "Validate Actual GPU Gradient Dtypes",
+            "action": "Run the supported-dtype gradient matrix, recording errors and tolerances separately from high-precision derivative checks; repair demonstrated discrepancies.",
+            "evidence": "Actual GPU input/weight gradient agreement across the declared dtype and shape contract.",
+            "activity": 9,
+            "module": 5,
+            "track": "K",
+            "part": 4,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 31,
+            "key": "9-4",
+            "legacy_lesson": "week-18-monday"
+          }
+        ]
+      },
+      {
+        "day": "Sunday",
+        "hours": 0,
+        "steps": []
+      }
+    ]
+  },
+  {
+    "week": 7,
+    "hours": 7,
+    "modules": [
+      5,
+      6
+    ],
+    "days": [
+      {
+        "day": "Monday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Register the Custom Triton Operator",
+            "action": "Read K5 for the pinned PyTorch version; register RMSNorm forward and its metadata using the supported custom-operator interface.",
+            "evidence": "Registered forward operator executes with documented metadata.",
+            "activity": 10,
+            "module": 5,
+            "track": "K",
+            "part": 1,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 32,
+            "key": "10-1",
+            "legacy_lesson": "week-18-tuesday"
+          }
+        ]
+      },
+      {
+        "day": "Tuesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Connect Autograd and Unsupported Cases",
+            "action": "Register the backward path; add explicit fallback or rejection for unsupported layouts, shapes, or dtypes, then exercise each branch.",
+            "evidence": "Autograd works and unsupported cases fail clearly or use the documented fallback.",
+            "activity": 10,
+            "module": 5,
+            "track": "K",
+            "part": 2,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 32,
+            "key": "10-2",
+            "legacy_lesson": "week-18-wednesday"
+          }
+        ]
+      },
+      {
+        "day": "Wednesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Integrate RMSNorm Into the Decoder",
+            "action": "Replace the decoder's reference RMSNorm through one configuration switch; compare training loss and representative parameter gradients under shared weights.",
+            "evidence": "Decoder training-loss and gradient parity with the reference path.",
+            "activity": 10,
+            "module": 5,
+            "track": "K",
+            "part": 3,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 32,
+            "key": "10-3",
+            "legacy_lesson": "week-18-thursday"
+          }
+        ]
+      },
+      {
+        "day": "Thursday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Profile Integration and Amdahl Limits",
+            "action": "Profile the decoder before and after integration under identical conditions; calculate the maximum expected gain from the original operator share.",
+            "evidence": "Parity gate, before/after profile, and an explained Amdahl calculation.",
+            "activity": 10,
+            "module": 5,
+            "track": "K",
+            "part": 4,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 32,
+            "key": "10-4",
+            "legacy_lesson": "week-18-saturday"
+          }
+        ]
+      },
+      {
+        "day": "Friday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Prepare the Pallas Hopper Environment",
+            "action": "Timebox H100 setup and the official K6 smoke test; record package/backend versions. Preserve installation blockers rather than substituting CPU interpretation.",
+            "evidence": "Actual H100 smoke output and environment manifest, or explicit unresolved blocker.",
+            "activity": 11,
+            "module": 6,
+            "track": "K",
+            "part": 1,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 38,
+            "key": "11-1",
+            "legacy_lesson": "week-21-thursday"
+          }
+        ]
+      },
+      {
+        "day": "Saturday",
+        "hours": 2,
+        "steps": [
+          {
+            "title": "Map Pallas Refs Grids and Memory",
+            "action": "Read the needed K6 sections; trace Refs, launch grids, memory spaces, and synchronization through the working GPU quickstart.",
+            "evidence": "Annotated quickstart explaining memory movement and synchronization.",
+            "activity": 11,
+            "module": 6,
+            "track": "K",
+            "part": 2,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 38,
+            "key": "11-2",
+            "legacy_lesson": "week-21-friday"
+          },
+          {
+            "title": "Port One Row Kernel to Pallas",
+            "action": "Port the existing softmax or RMSNorm forward reference to Pallas for a restricted shape family; run the smallest actual GPU case.",
+            "evidence": "A real H100 Pallas kernel produces the expected small-case output.",
+            "activity": 11,
+            "module": 6,
+            "track": "K",
+            "part": 3,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 38,
+            "key": "11-3",
+            "legacy_lesson": "week-21-saturday"
+          }
+        ]
+      },
+      {
+        "day": "Sunday",
+        "hours": 0,
+        "steps": []
+      }
+    ]
+  },
+  {
+    "week": 8,
+    "hours": 7,
+    "modules": [
+      6
+    ],
+    "days": [
+      {
+        "day": "Monday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Validate the Pallas GPU Kernel",
+            "action": "Compare with JAX across the declared shapes and dtypes; inspect tails and numerical errors. Extend the lab if actual GPU correctness remains blocked.",
+            "evidence": "One actual Pallas GPU kernel agrees with JAX across its supported contract.",
+            "activity": 11,
+            "module": 6,
+            "track": "K",
+            "part": 4,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 38,
+            "key": "11-4",
+            "legacy_lesson": "week-21-saturday"
+          }
+        ]
+      },
+      {
+        "day": "Tuesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Benchmark Pallas Against Jitted JAX",
+            "action": "Measure the existing kernel and jax.jit baseline on the same H100; use block_until_ready and separate compilation from warmed execution.",
+            "evidence": "Matched error/timing table with compile and execute costs separated.",
+            "activity": 12,
+            "module": 6,
+            "track": "K",
+            "part": 1,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 39,
+            "key": "12-1",
+            "legacy_lesson": "week-22-monday"
+          }
+        ]
+      },
+      {
+        "day": "Wednesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Trace Hopper Pipelined Matmul Stages",
+            "action": "Walk through K6's official matmul example; map global-memory transfers, shared-memory buffers, computation, and synchronization without adding a required kernel.",
+            "evidence": "Annotated pipeline identifying stages and buffer lifetimes.",
+            "activity": 12,
+            "module": 6,
+            "track": "K",
+            "part": 2,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 39,
+            "key": "12-2",
+            "legacy_lesson": "week-22-tuesday"
+          }
+        ]
+      },
+      {
+        "day": "Thursday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Study Modern Attention Hardware Tradeoffs",
+            "action": "Read selected FA4/CuTe material in K7; explain how hardware and scheduling choices differ from your restricted attention implementation.",
+            "evidence": "Short comparison tied to code paths and hardware bottlenecks.",
+            "activity": 12,
+            "module": 6,
+            "track": "K",
+            "part": 3,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 39,
+            "key": "12-3",
+            "legacy_lesson": "week-22-wednesday"
+          }
+        ]
+      },
+      {
+        "day": "Friday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Explain Pallas Timing and Staging",
+            "action": "Review the benchmark for asynchronous timing errors; finalize the error table and explain staged memory movement from the official walkthrough.",
+            "evidence": "Validated timing/error table and clear staged-memory explanation.",
+            "activity": 12,
+            "module": 6,
+            "track": "K",
+            "part": 4,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 39,
+            "key": "12-4",
+            "legacy_lesson": "week-22-thursday"
+          }
+        ]
+      },
+      {
+        "day": "Saturday",
+        "hours": 2,
+        "steps": [
+          {
+            "title": "Review differentiation, integration, and Pallas evidence",
+            "action": "Defend the RMSNorm derivative and audit framework integration alongside the actual H100 result.",
+            "evidence": "review-6.md with a gradient derivation, branch table, and separated Pallas compile/execute evidence.",
+            "activity": 206,
+            "source_activity": 206,
+            "module": 6,
+            "track": "R",
+            "part": 1,
+            "total_parts": 1,
+            "hours": 1,
+            "key": "review-6"
+          },
+          {
+            "title": "Repair a blocker or consolidate",
+            "action": "Use the scheduled hour for an unfinished check or targeted retrieval. Finish early when current.",
+            "evidence": "A resolved blocker or minimal reproducer, and a precise next action.",
+            "activity": null,
+            "source_activity": "flex6",
+            "module": 6,
+            "track": "X",
+            "part": 1,
+            "total_parts": 1,
+            "hours": 1,
+            "key": "flex-6"
+          }
+        ]
+      },
+      {
+        "day": "Sunday",
+        "hours": 0,
+        "steps": []
+      }
+    ]
+  },
+  {
+    "week": 9,
+    "hours": 7,
+    "modules": [
+      7
+    ],
+    "days": [
+      {
+        "day": "Monday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Freeze End To End Decoder Measurements",
+            "action": "Specify eager/compiled modes, kernel switch, sequence lengths, prefill/decode cases, precision, and transfer boundaries before collecting results.",
+            "evidence": "Frozen experiment matrix and equivalent model configurations.",
+            "activity": 13,
+            "module": 7,
+            "track": "K",
+            "part": 1,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 45,
+            "key": "13-1",
+            "legacy_lesson": "week-25-tuesday"
+          }
+        ]
+      },
+      {
+        "day": "Tuesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Measure Decoder Prefill and Transfers",
+            "action": "Measure prefill with and without the custom kernel; separate host/device transfer, compilation, cold execution, and warmed execution.",
+            "evidence": "Prefill timings with distinct setup, transfer, and steady-state costs.",
+            "activity": 13,
+            "module": 7,
+            "track": "K",
+            "part": 2,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 45,
+            "key": "13-2",
+            "legacy_lesson": "week-25-wednesday"
+          }
+        ]
+      },
+      {
+        "day": "Wednesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Measure Cached Decode Across Lengths",
+            "action": "Run the same kernel comparison for cached decode across several prompt lengths, using equivalent inputs and repeated synchronized batches.",
+            "evidence": "Decode timing table with variability and unchanged correctness.",
+            "activity": 13,
+            "module": 7,
+            "track": "K",
+            "part": 3,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 45,
+            "key": "13-3",
+            "legacy_lesson": "week-25-thursday"
+          }
+        ]
+      },
+      {
+        "day": "Thursday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Report Whole Model Gains and Regressions",
+            "action": "Check measurement consistency and summarize the complete decoder results; retain slowdowns and explain why isolated-kernel changes may have small effects.",
+            "evidence": "Whole-model results across lengths, including prefill/decode and retained regressions.",
+            "activity": 13,
+            "module": 7,
+            "track": "K",
+            "part": 4,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 45,
+            "key": "13-4",
+            "legacy_lesson": "week-25-friday"
+          }
+        ]
+      },
+      {
+        "day": "Friday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Inspect One Optional Kernel DSL",
+            "action": "Inspect one CuTe/FA4 or Helion example. An optional install/benchmark shares this hour; stop at the limit and document blockers if it fails.",
+            "evidence": "Current-tooling note; optional installation success is not required.",
+            "activity": 14,
+            "module": 7,
+            "track": "K",
+            "part": 1,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 46,
+            "key": "14-1",
+            "legacy_lesson": "week-25-saturday"
+          }
+        ]
+      },
+      {
+        "day": "Saturday",
+        "hours": 2,
+        "steps": [
+          {
+            "title": "Recreate the Main Kernel Environment",
+            "action": "Use the existing environment manifest to prepare a clean reproduction of the main kernel result; identify dependency or command fragility.",
+            "evidence": "Clean environment attempt with exact versions and setup issues.",
+            "activity": 14,
+            "module": 7,
+            "track": "K",
+            "part": 2,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 46,
+            "key": "14-2",
+            "legacy_lesson": "week-25-saturday"
+          },
+          {
+            "title": "Repair Reproduction Commands and Dependencies",
+            "action": "Fix only identified setup fragility and rerun the correctness smoke test; keep the main benchmark configuration unchanged.",
+            "evidence": "Documented commands recreate the validated benchmark configuration.",
+            "activity": 14,
+            "module": 7,
+            "track": "K",
+            "part": 3,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 46,
+            "key": "14-3",
+            "legacy_lesson": "week-26-monday"
+          }
+        ]
+      },
+      {
+        "day": "Sunday",
+        "hours": 0,
+        "steps": []
+      }
+    ]
+  },
+  {
+    "week": 10,
+    "hours": 7,
+    "modules": [
+      7,
+      8
+    ],
+    "days": [
+      {
+        "day": "Monday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Reproduce the Main Kernel Result",
+            "action": "Run the main benchmark from the clean setup; compare errors and timings with recorded results, explaining material differences.",
+            "evidence": "Repeatable benchmark plus current-tooling note and disclosed environment differences.",
+            "activity": 14,
+            "module": 7,
+            "track": "K",
+            "part": 4,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 46,
+            "key": "14-4",
+            "legacy_lesson": "week-26-tuesday"
+          }
+        ]
+      },
+      {
+        "day": "Tuesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Audit Remaining Kernel Measurement Risks",
+            "action": "Inspect existing results for specific noise or correctness gaps; list only the reruns needed and verify common baseline precision settings.",
+            "evidence": "Bounded rerun list tied to concrete unresolved risks.",
+            "activity": 15,
+            "module": 8,
+            "track": "K",
+            "part": 1,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 52,
+            "key": "15-1",
+            "legacy_lesson": "week-28-saturday"
+          }
+        ]
+      },
+      {
+        "day": "Wednesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Resolve Identified Benchmark Noise Gaps",
+            "action": "Execute the justified repeated measurements under consistent conditions; retain raw batches and record machine or thermal variability.",
+            "evidence": "Raw measurements resolve or clearly delimit the listed noise risks.",
+            "activity": 15,
+            "module": 8,
+            "track": "K",
+            "part": 2,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 52,
+            "key": "15-2",
+            "legacy_lesson": "week-29-monday"
+          }
+        ]
+      },
+      {
+        "day": "Thursday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Complete Shape Support and Precision Matrix",
+            "action": "Fill missing entries in the declared shape/dtype contract using focused checks; mark unsupported cases and preserve operation-specific tolerances.",
+            "evidence": "Complete support/error matrix with explicit unsupported cases.",
+            "activity": 15,
+            "module": 8,
+            "track": "K",
+            "part": 3,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 52,
+            "key": "15-3",
+            "legacy_lesson": "week-29-tuesday"
+          }
+        ]
+      },
+      {
+        "day": "Friday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Verify Plotting and Hardware Provenance",
+            "action": "Regenerate plots from saved raw data; confirm hardware manifests, baseline settings, and correctness evidence agree across the report.",
+            "evidence": "Raw data, reproducible plotting command, hardware manifest, and consistent baseline settings.",
+            "activity": 15,
+            "module": 8,
+            "track": "K",
+            "part": 4,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 52,
+            "key": "15-4",
+            "legacy_lesson": "week-29-wednesday"
+          }
+        ]
+      },
+      {
+        "day": "Saturday",
+        "hours": 2,
+        "steps": [
+          {
+            "title": "Draft the Kernel Systems Report",
+            "action": "Write the main result and methodology from existing evidence, including correctness, strong baselines, whole-model impact, and limitations.",
+            "evidence": "Report draft with claims traceable to raw measurements.",
+            "activity": 16,
+            "module": 8,
+            "track": "K",
+            "part": 1,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 53,
+            "key": "16-1",
+            "legacy_lesson": "week-29-thursday"
+          },
+          {
+            "title": "Build a Minimal Reproducer and Focused Fix",
+            "action": "Reduce one observed behavior to an executable case, then prepare a minimal fix or support-boundary test.",
+            "evidence": "Smallest reproducer plus a focused diff or documented limitation check.",
+            "activity": 16,
+            "module": 8,
+            "track": "K",
+            "part": 2,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 53,
+            "key": "16-2",
+            "legacy_lesson": "week-29-friday"
+          }
+        ]
+      },
+      {
+        "day": "Sunday",
+        "hours": 0,
+        "steps": []
+      }
+    ]
+  },
+  {
+    "week": 11,
+    "hours": 7,
+    "modules": [
+      8,
+      9
+    ],
+    "days": [
+      {
+        "day": "Monday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Verify the Regression or Support Boundary",
+            "action": "Test the focused change before and after, or validate the explicitly documented rejection/fallback.",
+            "evidence": "Reproducible behavior and precise before/after or limitation evidence.",
+            "activity": 16,
+            "module": 8,
+            "track": "K",
+            "part": 3,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 53,
+            "key": "16-3",
+            "legacy_lesson": "week-29-saturday"
+          }
+        ]
+      },
+      {
+        "day": "Tuesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Finalize Systems Evidence and Contribution",
+            "action": "Review the report and prepared contribution or internal finding; state supported hardware, measured limitations and the actual observed result.",
+            "evidence": "Systems report and review-ready evidence package with accurate scope.",
+            "activity": 16,
+            "module": 8,
+            "track": "K",
+            "part": 4,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 53,
+            "key": "16-4",
+            "legacy_lesson": "week-29-saturday"
+          }
+        ]
+      },
+      {
+        "day": "Wednesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Repair a blocker or consolidate",
+            "action": "Use the scheduled hour for an unfinished check or targeted retrieval. Finish early when current.",
+            "evidence": "A resolved blocker or minimal reproducer, and a precise next action.",
+            "activity": null,
+            "source_activity": "flex8",
+            "module": 8,
+            "track": "X",
+            "part": 1,
+            "total_parts": 1,
+            "hours": 1,
+            "key": "flex-8"
+          }
+        ]
+      },
+      {
+        "day": "Thursday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Take the independent kernel assessment",
+            "action": "Explain and diagnose a kernel result from first principles without introducing a new implementation.",
+            "evidence": "assessment.md containing a timed explanation, one diagnosis, and an honest competency rubric.",
+            "activity": 301,
+            "source_activity": 301,
+            "module": 9,
+            "track": "F",
+            "part": 1,
+            "total_parts": 1,
+            "hours": 1,
+            "key": "final-1"
+          }
+        ]
+      },
+      {
+        "day": "Friday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Verify the release candidate from a clean checkout",
+            "action": "Reproduce local correctness and figure generation using only the documented repository.",
+            "evidence": "A clean-checkout verification log and a precise list of hardware checks already completed or still pending.",
+            "activity": 302,
+            "source_activity": 302,
+            "module": 9,
+            "track": "F",
+            "part": 1,
+            "total_parts": 1,
+            "hours": 1,
+            "key": "final-2"
+          }
+        ]
+      },
+      {
+        "day": "Saturday",
+        "hours": 2,
+        "steps": [
+          {
+            "title": "Package the kernel portfolio and contribution draft",
+            "action": "Package the engineering portfolio and any legitimate contribution; otherwise document the verified internal finding.",
+            "evidence": "A polished README, systems report, support table, and contribution or internal-reproducer index.",
+            "activity": 303,
+            "source_activity": 303,
+            "module": 9,
+            "track": "F",
+            "part": 1,
+            "total_parts": 1,
+            "hours": 1,
+            "key": "final-3"
+          },
+          {
+            "title": "Release the portfolio and choose the next systems question",
+            "action": "Prepare a shareable release, perform a short demonstration, and select one evidence-driven next experiment.",
+            "evidence": "A release checklist, five-minute demo outline, and a one-page follow-up proposal.",
+            "activity": 304,
+            "source_activity": 304,
+            "module": 9,
+            "track": "F",
+            "part": 1,
+            "total_parts": 1,
+            "hours": 1,
+            "key": "final-4"
+          }
+        ]
+      },
+      {
+        "day": "Sunday",
+        "hours": 0,
+        "steps": []
+      }
+    ]
+  }
+]

@@ -1,0 +1,372 @@
+[
+  {
+    "id": "H1",
+    "title": "ReAct: Synergizing Reasoning and Acting in Language Models",
+    "url": "https://arxiv.org/abs/2210.03629",
+    "kind": "paper",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://arxiv.org/abs/2210.03629",
+    "provenance": "Author-submitted arXiv paper; title and v3 date verified.",
+    "publishedOrRevision": "2023-03-10 (v3)"
+  },
+  {
+    "id": "H2",
+    "title": "Building effective agents",
+    "url": "https://www.anthropic.com/engineering/building-effective-agents",
+    "kind": "blog",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://www.anthropic.com/engineering/building-effective-agents",
+    "provenance": "Anthropic engineering article; use its simple-loop principles, not old product recommendations.",
+    "publishedOrRevision": "2024-12-19"
+  },
+  {
+    "id": "H3",
+    "title": "mini-SWE-agent source and README",
+    "url": "https://github.com/SWE-agent/mini-swe-agent",
+    "kind": "project",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://github.com/SWE-agent/mini-swe-agent",
+    "provenance": "Official SWE-agent organization repository; bash-only interface verified."
+  },
+  {
+    "id": "H3-paper",
+    "title": "SWE-agent: Agent-Computer Interfaces Enable Automated Software Engineering",
+    "url": "https://arxiv.org/abs/2405.15793",
+    "kind": "paper",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://arxiv.org/abs/2405.15793",
+    "provenance": "Author-submitted paper; interface-design study.",
+    "publishedOrRevision": "2024-11-11 (v3)"
+  },
+  {
+    "id": "H4",
+    "title": "Demystifying evals for AI agents",
+    "url": "https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents",
+    "kind": "blog",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents",
+    "provenance": "Anthropic primary engineering article; task/trial/outcome and evaluation design sections verified.",
+    "publishedOrRevision": "2026-01-09"
+  },
+  {
+    "id": "H5",
+    "title": "Effective harnesses for long-running agents",
+    "url": "https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents",
+    "kind": "blog",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents",
+    "provenance": "Anthropic primary engineering article; continuity, progress artifacts, and failure patterns.",
+    "publishedOrRevision": "2025-11-26"
+  },
+  {
+    "id": "H6-tools",
+    "title": "MCP tools specification",
+    "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools",
+    "kind": "documentation",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools",
+    "provenance": "Official protocol specification; current redirect resolved to dated2026-07-28 revision.",
+    "publishedOrRevision": "2026-07-28"
+  },
+  {
+    "id": "H6-sdk",
+    "title": "Official MCP Python SDK",
+    "url": "https://github.com/modelcontextprotocol/python-sdk",
+    "kind": "project",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://github.com/modelcontextprotocol/python-sdk",
+    "provenance": "Official repository; current stable v2 and matching specification explicitly documented."
+  },
+  {
+    "id": "H7-verifier",
+    "title": "Harbor task verifier",
+    "url": "https://docs.harborframework.com/core-concepts/tasks/verifier",
+    "kind": "documentation",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://docs.harborframework.com/core-concepts/tasks/verifier",
+    "provenance": "Official Harbor documentation; concrete verifier contract."
+  },
+  {
+    "id": "H7-results",
+    "title": "Harbor job results",
+    "url": "https://docs.harborframework.com/core-concepts/results/view-job-results",
+    "kind": "documentation",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://docs.harborframework.com/core-concepts/results/view-job-results",
+    "provenance": "Official Harbor documentation; results layout and inspection."
+  },
+  {
+    "id": "H7",
+    "title": "Harbor documentation",
+    "url": "https://docs.harborframework.com/",
+    "kind": "documentation",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://docs.harborframework.com/",
+    "provenance": "Official Harbor docs; optional external infrastructure reference."
+  },
+  {
+    "id": "H8",
+    "title": "Rethinking the Evaluation of Harness Evolution for Agents",
+    "url": "https://arxiv.org/abs/2607.12227",
+    "kind": "paper",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://arxiv.org/abs/2607.12227",
+    "provenance": "Author-submitted arXiv paper; matched-budget/held-out motivation and v2 verified.",
+    "publishedOrRevision": "2026-08-27 (v2)"
+  },
+  {
+    "id": "H9",
+    "title": "Official Anthropic Python SDK",
+    "url": "https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/python",
+    "kind": "documentation",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/python",
+    "provenance": "Official provider documentation; timeout, retries, request IDs, and usage behavior inspected."
+  },
+  {
+    "id": "H9-tools",
+    "title": "Handle provider tool calls",
+    "url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/handle-tool-calls",
+    "kind": "documentation",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/handle-tool-calls",
+    "provenance": "Official provider documentation for tool-call and result handling."
+  },
+  {
+    "id": "H10",
+    "title": "Docker resource constraints",
+    "url": "https://docs.docker.com/engine/containers/resource_constraints/",
+    "kind": "documentation",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://docs.docker.com/engine/containers/resource_constraints/",
+    "provenance": "Official Docker documentation; containers have no resource limits by default."
+  },
+  {
+    "id": "H10-security",
+    "title": "Docker Engine security",
+    "url": "https://docs.docker.com/engine/security/",
+    "kind": "documentation",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://docs.docker.com/engine/security/",
+    "provenance": "Official Docker security model documentation."
+  },
+  {
+    "id": "C5",
+    "title": "Claude API pricing",
+    "url": "https://platform.claude.com/docs/en/about-claude/pricing",
+    "kind": "documentation",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://platform.claude.com/docs/en/about-claude/pricing",
+    "provenance": "Official provider pricing page opened and verified on 2026-09-29. Read live on study day; no cached prices are asserted."
+  },
+  {
+    "id": "H11",
+    "title": "Python task cancellation and timeouts",
+    "url": "https://docs.python.org/3/library/asyncio-task.html",
+    "kind": "documentation",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://docs.python.org/3/library/asyncio-task.html",
+    "provenance": "Python standard-library reference; cancellation and timeout sections verified."
+  },
+  {
+    "id": "H12",
+    "title": "Python pathlib",
+    "url": "https://docs.python.org/3/library/pathlib.html",
+    "kind": "documentation",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://docs.python.org/3/library/pathlib.html",
+    "provenance": "Python standard-library reference; path resolution and ancestry APIs."
+  },
+  {
+    "id": "H13",
+    "title": "Python subprocess management",
+    "url": "https://docs.python.org/3/library/subprocess.html",
+    "kind": "documentation",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://docs.python.org/3/library/subprocess.html",
+    "provenance": "Python standard-library reference; termination, pipes, and cleanup contracts."
+  },
+  {
+    "id": "H14",
+    "title": "Python unittest.mock",
+    "url": "https://docs.python.org/3/library/unittest.mock.html",
+    "kind": "documentation",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://docs.python.org/3/library/unittest.mock.html",
+    "provenance": "Python standard-library reference; scripted side effects and invocation assertions."
+  },
+  {
+    "id": "H15",
+    "title": "Python operating-system interfaces",
+    "url": "https://docs.python.org/3/library/os.html",
+    "kind": "documentation",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://docs.python.org/3/library/os.html",
+    "provenance": "Python standard-library reference; replacement, synchronization, and filesystem operations."
+  },
+  {
+    "id": "H16",
+    "title": "Python JSON encoding and decoding",
+    "url": "https://docs.python.org/3/library/json.html",
+    "kind": "documentation",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://docs.python.org/3/library/json.html",
+    "provenance": "Python standard-library reference; JSON serialization and framing warning."
+  },
+  {
+    "id": "H17",
+    "title": "Parametrize pytest cases",
+    "url": "https://docs.pytest.org/en/stable/how-to/parametrize.html",
+    "kind": "documentation",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://docs.pytest.org/en/stable/how-to/parametrize.html",
+    "provenance": "Official pytest guide; table-driven input/expectation matrices."
+  },
+  {
+    "id": "H18",
+    "title": "Effective context engineering for AI agents",
+    "url": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents",
+    "kind": "blog",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents",
+    "provenance": "Anthropic engineering article; selective context, compaction, and structured notes.",
+    "publishedOrRevision": "2025-09-29"
+  },
+  {
+    "id": "H19",
+    "title": "Writing effective tools for agents",
+    "url": "https://www.anthropic.com/engineering/writing-tools-for-agents",
+    "kind": "blog",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://www.anthropic.com/engineering/writing-tools-for-agents",
+    "provenance": "Anthropic primary engineering article; tool evaluation, response context, and token efficiency.",
+    "publishedOrRevision": "2025-09-11"
+  },
+  {
+    "id": "H20",
+    "title": "SciPy bootstrap reference",
+    "url": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.bootstrap.html",
+    "kind": "documentation",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.bootstrap.html",
+    "provenance": "Official SciPy reference; paired resampling and degenerate-distribution caveats."
+  },
+  {
+    "id": "H21",
+    "title": "Python itertools",
+    "url": "https://docs.python.org/3/library/itertools.html",
+    "kind": "documentation",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://docs.python.org/3/library/itertools.html",
+    "provenance": "Python standard-library reference; Cartesian product for trial manifests."
+  },
+  {
+    "id": "H22",
+    "title": "Temporary test directories in pytest",
+    "url": "https://docs.pytest.org/en/stable/how-to/tmp_path.html",
+    "kind": "documentation",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://docs.pytest.org/en/stable/how-to/tmp_path.html",
+    "provenance": "Official pytest guide; per-test fresh path fixtures."
+  },
+  {
+    "id": "H23",
+    "title": "Monkeypatch modules and environments",
+    "url": "https://docs.pytest.org/en/stable/how-to/monkeypatch.html",
+    "kind": "documentation",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://docs.pytest.org/en/stable/how-to/monkeypatch.html",
+    "provenance": "Official pytest guide; deterministic environment and function substitutions."
+  },
+  {
+    "id": "H24",
+    "title": "Python content hashing",
+    "url": "https://docs.python.org/3/library/hashlib.html",
+    "kind": "documentation",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://docs.python.org/3/library/hashlib.html",
+    "provenance": "Python standard-library reference; content digests for fixture/checkpoint identity."
+  },
+  {
+    "id": "H25",
+    "title": "Python statistics",
+    "url": "https://docs.python.org/3/library/statistics.html",
+    "kind": "documentation",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://docs.python.org/3/library/statistics.html",
+    "provenance": "Python standard-library reference; means, medians, and quantiles."
+  },
+  {
+    "id": "H26",
+    "title": "Python decimal arithmetic",
+    "url": "https://docs.python.org/3/library/decimal.html",
+    "kind": "documentation",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://docs.python.org/3/library/decimal.html",
+    "provenance": "Python standard-library reference; explicit decimal arithmetic for cost ledgers."
+  },
+  {
+    "id": "H27",
+    "title": "Git revision resolution",
+    "url": "https://git-scm.com/docs/git-rev-parse",
+    "kind": "documentation",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://git-scm.com/docs/git-rev-parse",
+    "provenance": "Official Git manual; resolve immutable revisions rather than moving names."
+  },
+  {
+    "id": "H28",
+    "title": "Python SQLite transaction control",
+    "url": "https://docs.python.org/3/library/sqlite3.html",
+    "kind": "documentation",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://docs.python.org/3/library/sqlite3.html",
+    "provenance": "Python standard-library reference; transactions and shared budget reservations."
+  },
+  {
+    "id": "H29",
+    "title": "Python clocks and elapsed time",
+    "url": "https://docs.python.org/3/library/time.html",
+    "kind": "documentation",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://docs.python.org/3/library/time.html",
+    "provenance": "Python standard-library reference; monotonic clock semantics and persistent time caveats."
+  },
+  {
+    "id": "H30",
+    "title": "Python virtual environments",
+    "url": "https://docs.python.org/3/library/venv.html",
+    "kind": "documentation",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://docs.python.org/3/library/venv.html",
+    "provenance": "Python standard-library reference; creating and recreating isolated environments."
+  },
+  {
+    "id": "H31",
+    "title": "Contributing to a project",
+    "url": "https://docs.github.com/en/get-started/exploring-projects-on-github/contributing-to-a-project",
+    "kind": "documentation",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://docs.github.com/en/get-started/exploring-projects-on-github/contributing-to-a-project",
+    "provenance": "Official GitHub guide; contribution preparation and project guidelines."
+  },
+  {
+    "id": "H32",
+    "title": "Install Docker Desktop on Mac",
+    "url": "https://docs.docker.com/desktop/setup/install/mac-install/",
+    "kind": "documentation",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://docs.docker.com/desktop/setup/install/mac-install/",
+    "provenance": "Official Docker setup reference including Apple silicon."
+  },
+  {
+    "id": "HV1",
+    "title": "Building more effective AI agents",
+    "url": "https://www.youtube.com/watch?v=uhJJgc-0iTQ",
+    "kind": "video",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://www.youtube.com/watch?v=uhJJgc-0iTQ",
+    "provenance": "YouTube title verified and official @anthropic-ai channel confirmed in search result/channel listing; no timestamps or full duration asserted.",
+    "youtubeId": "uhJJgc-0iTQ"
+  }
+]

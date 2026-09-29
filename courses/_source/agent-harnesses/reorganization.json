@@ -1,0 +1,1240 @@
+{
+  "dispositions": {
+    "intro-1": {
+      "placement": "day0",
+      "reason": "Repository/environment creation belongs in Day 0.",
+      "section": "setup"
+    },
+    "intro-2": {
+      "placement": "day0",
+      "reason": "Evaluation policy and spending ledger belong in the shared guide.",
+      "section": "study-rules"
+    },
+    "1-1": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "1-2": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "1-3": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "1-4": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "2-1": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "2-2": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "2-3": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "2-4": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "3-1": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "3-2": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "3-3": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "3-4": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "4-1": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "4-2": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "4-3": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "4-4": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "review-2": {
+      "placement": "reference",
+      "reason": "Keep assessment questions and rubric as optional milestone reference, not a scheduled hour.",
+      "section": "assessments"
+    },
+    "flex-2": {
+      "placement": "reference",
+      "reason": "A pacing contingency is not a subject lesson.",
+      "section": "study-rules"
+    },
+    "5-1": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "bridge-provider": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "5-2": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "5-3": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "5-4": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "6-1": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "6-2": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "6-3": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "6-4": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "7-1": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "7-2": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "7-3": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "7-4": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "8-1": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "8-2": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "8-3": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "8-4": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "review-4": {
+      "placement": "reference",
+      "reason": "Keep restart/context assessment as an on-demand milestone reference.",
+      "section": "assessments"
+    },
+    "flex-4": {
+      "placement": "reference",
+      "reason": "Keep catch-up policy in the shared study guide.",
+      "section": "study-rules"
+    },
+    "9-1": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "9-2": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "9-3": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "9-4": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "fixtures-final-a": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "fixtures-final-b": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "fixtures-final-c": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "10-1": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "10-2": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "10-3": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "10-4": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "11-1": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "11-2": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "11-3": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "11-4": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "12-1": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "12-2": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "12-3": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "12-4": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "review-6": {
+      "placement": "reference",
+      "reason": "Move the go/no-go checklist to the shared guide and use it at the final-evaluation gate.",
+      "section": "assessments"
+    },
+    "flex-6": {
+      "placement": "reference",
+      "reason": "Keep catch-up policy in the shared study guide.",
+      "section": "study-rules"
+    },
+    "13-1": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "13-2": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "13-3": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "13-4": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "14-1": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "14-2": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "14-3": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "14-4": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "15-1": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "15-2": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "15-3": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "15-4": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "16-1": {
+      "placement": "reference",
+      "reason": "Report presentation instructions become a reusable template.",
+      "section": "portfolio"
+    },
+    "16-2": {
+      "placement": "reference",
+      "reason": "Documentation of existing commands becomes a reusable reproduction checklist.",
+      "section": "portfolio"
+    },
+    "16-3": {
+      "placement": "reference",
+      "reason": "Packaging existing scenarios into a demonstration is a shared portfolio checklist.",
+      "section": "portfolio"
+    },
+    "16-4": {
+      "placement": "reference",
+      "reason": "Recording and publishing the demonstration is portfolio administration.",
+      "section": "portfolio"
+    },
+    "flex-8": {
+      "placement": "reference",
+      "reason": "Keep catch-up policy in the shared study guide.",
+      "section": "study-rules"
+    },
+    "final-1": {
+      "placement": "reference",
+      "reason": "Evidence index layout belongs with the reusable report template.",
+      "section": "portfolio"
+    },
+    "final-2": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "final-3": {
+      "placement": "scheduled",
+      "reason": "Preserves substantive engineering, experiment construction, or evidence analysis."
+    },
+    "final-4": {
+      "placement": "reference",
+      "reason": "Release checklist and portfolio blurb belong in shared guidance.",
+      "section": "portfolio"
+    }
+  },
+  "lessonResources": {
+    "1-1": [
+      {
+        "id": "H2",
+        "focus": "Agents section: feedback loop and host stopping conditions.",
+        "minutes": 6,
+        "optional": false
+      },
+      {
+        "id": "H1",
+        "focus": "Abstract and approach: actions followed by observations.",
+        "minutes": 4,
+        "optional": false
+      }
+    ],
+    "1-2": [
+      {
+        "id": "H19",
+        "focus": "Tool descriptions and explicit input/output contracts.",
+        "minutes": 6,
+        "optional": false
+      },
+      {
+        "id": "H17",
+        "focus": "One parametrized input/expected-outcome matrix.",
+        "minutes": 4,
+        "optional": false
+      }
+    ],
+    "1-3": [
+      {
+        "id": "H9-tools",
+        "focus": "Tool identifiers and response/result message ordering.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "1-4": [
+      {
+        "id": "H11",
+        "focus": "Timeout context manager; cancellation and cleanup behavior.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "2-1": [
+      {
+        "id": "H12",
+        "focus": "Path.resolve and ancestry checks; symlink behavior.",
+        "minutes": 6,
+        "optional": false
+      },
+      {
+        "id": "H19",
+        "focus": "Tool outputs that return useful bounded evidence.",
+        "minutes": 4,
+        "optional": false
+      }
+    ],
+    "2-2": [
+      {
+        "id": "H19",
+        "focus": "File-edit interfaces and useful response content.",
+        "minutes": 5,
+        "optional": false
+      },
+      {
+        "id": "H29",
+        "focus": "Monotonic elapsed-time measurement.",
+        "minutes": 5,
+        "optional": false
+      }
+    ],
+    "2-3": [
+      {
+        "id": "H4",
+        "focus": "Tasks, outcomes, and objective grader criteria.",
+        "minutes": 6,
+        "optional": false
+      },
+      {
+        "id": "H22",
+        "focus": "Fresh per-test workspace directories.",
+        "minutes": 4,
+        "optional": false
+      }
+    ],
+    "2-4": [
+      {
+        "id": "H14",
+        "focus": "Iterable side_effect and call assertions.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "3-1": [
+      {
+        "id": "H10",
+        "focus": "Memory and CPU limits; inspect effective restrictions.",
+        "minutes": 5,
+        "optional": false
+      },
+      {
+        "id": "H10-security",
+        "focus": "Namespaces, capabilities, and exposed host resources.",
+        "minutes": 5,
+        "optional": false
+      }
+    ],
+    "3-2": [
+      {
+        "id": "H12",
+        "focus": "Resolved paths, parent paths, and is_relative_to limitations.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "3-3": [
+      {
+        "id": "H13",
+        "focus": "Popen termination, wait, and output-buffering caveats.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "3-4": [
+      {
+        "id": "H17",
+        "focus": "Parametrize the supported boundary cases.",
+        "minutes": 5,
+        "optional": false
+      },
+      {
+        "id": "H10-security",
+        "focus": "Compare tested claims with the runtime security scope.",
+        "minutes": 5,
+        "optional": false
+      }
+    ],
+    "4-1": [
+      {
+        "id": "H16",
+        "focus": "Encoding records; why repeated dump calls need framing.",
+        "minutes": 5,
+        "optional": false
+      },
+      {
+        "id": "H4",
+        "focus": "Separate transcripts from verified outcomes.",
+        "minutes": 5,
+        "optional": false
+      }
+    ],
+    "4-2": [
+      {
+        "id": "H14",
+        "focus": "Scripted side effects and verifying ordered calls.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "4-3": [
+      {
+        "id": "H4",
+        "focus": "Concrete success requirements and negative grading controls.",
+        "minutes": 5,
+        "optional": false
+      },
+      {
+        "id": "H17",
+        "focus": "Parametrized control tests with descriptive case IDs.",
+        "minutes": 5,
+        "optional": false
+      }
+    ],
+    "4-4": [
+      {
+        "id": "H4",
+        "focus": "Interpret outcomes alongside transcripts.",
+        "minutes": 5,
+        "optional": false
+      },
+      {
+        "id": "H19",
+        "focus": "Evaluation measurements beyond task accuracy.",
+        "minutes": 5,
+        "optional": false
+      }
+    ],
+    "5-1": [
+      {
+        "id": "H7-verifier",
+        "focus": "Trusted verification runs after candidate execution.",
+        "minutes": 5,
+        "optional": false
+      },
+      {
+        "id": "H22",
+        "focus": "Independent temporary task copies.",
+        "minutes": 5,
+        "optional": false
+      }
+    ],
+    "bridge-provider": [
+      {
+        "id": "H9",
+        "focus": "Client request, retries, timeout, response metadata.",
+        "minutes": 4,
+        "optional": false
+      },
+      {
+        "id": "H9-tools",
+        "focus": "Complete tool-use blocks and matching tool results.",
+        "minutes": 6,
+        "optional": false
+      }
+    ],
+    "5-2": [
+      {
+        "id": "C5",
+        "focus": "Chosen model rates and enabled billable features.",
+        "minutes": 5,
+        "optional": false
+      },
+      {
+        "id": "H9",
+        "focus": "Disable retries; preserve unknown-usage errors.",
+        "minutes": 5,
+        "optional": false
+      }
+    ],
+    "5-3": [
+      {
+        "id": "H3",
+        "focus": "Agent, model, and environment interfaces; bash-only contract.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "5-4": [
+      {
+        "id": "H3",
+        "focus": "Compare the baseline tool interface with your own.",
+        "minutes": 5,
+        "optional": false
+      },
+      {
+        "id": "H8",
+        "focus": "Budget comparability and confounded comparisons.",
+        "minutes": 5,
+        "optional": false
+      }
+    ],
+    "6-1": [
+      {
+        "id": "H12",
+        "focus": "Directory iteration, ordering, and symlink choices.",
+        "minutes": 5,
+        "optional": false
+      },
+      {
+        "id": "H3-paper",
+        "focus": "Agent-computer interface choices for navigation.",
+        "minutes": 5,
+        "optional": false
+      }
+    ],
+    "6-2": [
+      {
+        "id": "H19",
+        "focus": "Response context and token-efficient outputs.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "6-3": [
+      {
+        "id": "H3-paper",
+        "focus": "Interface design experiment and navigation behavior.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "6-4": [
+      {
+        "id": "H19",
+        "focus": "Inspect evaluation traces for tool-use failures.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "7-1": [
+      {
+        "id": "H5",
+        "focus": "Restore working context from progress and repository state.",
+        "minutes": 5,
+        "optional": false
+      },
+      {
+        "id": "H29",
+        "focus": "Monotonic clock scope versus persisted expiry.",
+        "minutes": 5,
+        "optional": false
+      }
+    ],
+    "7-2": [
+      {
+        "id": "H15",
+        "focus": "os.replace and fsync; atomicity versus durability.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "7-3": [
+      {
+        "id": "H24",
+        "focus": "Compute a content digest for three-way reconciliation.",
+        "minutes": 5,
+        "optional": false
+      },
+      {
+        "id": "H5",
+        "focus": "Verify the current environment before continuing.",
+        "minutes": 5,
+        "optional": false
+      }
+    ],
+    "7-4": [
+      {
+        "id": "H23",
+        "focus": "Inject failures at exact function boundaries.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "8-1": [
+      {
+        "id": "H18",
+        "focus": "Compaction and structured notes for long tasks.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "8-2": [
+      {
+        "id": "H18",
+        "focus": "Preserve needed state while compacting.",
+        "minutes": 5,
+        "optional": false
+      },
+      {
+        "id": "H9-tools",
+        "focus": "Keep complete tool-call/result message groups.",
+        "minutes": 5,
+        "optional": false
+      }
+    ],
+    "8-3": [
+      {
+        "id": "H18",
+        "focus": "Context selection as a recurring inference decision.",
+        "minutes": 5,
+        "optional": false
+      },
+      {
+        "id": "H8",
+        "focus": "Shared inference ceilings and charged overhead.",
+        "minutes": 5,
+        "optional": false
+      }
+    ],
+    "8-4": [
+      {
+        "id": "H18",
+        "focus": "Compaction tradeoffs and information loss.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "9-1": [
+      {
+        "id": "H6-tools",
+        "focus": "Discovery, invocation, input schema, and tool result.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "9-2": [
+      {
+        "id": "H6-sdk",
+        "focus": "Minimal server and client examples for installed major version.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "9-3": [
+      {
+        "id": "H6-tools",
+        "focus": "Protocol errors versus tool execution errors.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "9-4": [
+      {
+        "id": "H6-tools",
+        "focus": "Tool security requirements and untrusted annotations.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "fixtures-final-a": [
+      {
+        "id": "H4",
+        "focus": "Task requirements and balanced held-out coverage.",
+        "minutes": 6,
+        "optional": false
+      },
+      {
+        "id": "H22",
+        "focus": "Separate clean directories for reference/no-op controls.",
+        "minutes": 4,
+        "optional": false
+      }
+    ],
+    "fixtures-final-b": [
+      {
+        "id": "H17",
+        "focus": "Parametrize named fixture/control cases.",
+        "minutes": 6,
+        "optional": false
+      },
+      {
+        "id": "H4",
+        "focus": "Grading behavior instead of superficial formatting.",
+        "minutes": 4,
+        "optional": false
+      }
+    ],
+    "fixtures-final-c": [
+      {
+        "id": "H19",
+        "focus": "Evaluation task diversity and verifiable outcomes.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "10-1": [
+      {
+        "id": "H4",
+        "focus": "Validate measurement before evaluating agents.",
+        "minutes": 5,
+        "optional": false
+      },
+      {
+        "id": "H17",
+        "focus": "Explicit control IDs and expected outcomes.",
+        "minutes": 5,
+        "optional": false
+      }
+    ],
+    "10-2": [
+      {
+        "id": "H17",
+        "focus": "Parameter combinations for reference/no-op/broken states.",
+        "minutes": 5,
+        "optional": false
+      },
+      {
+        "id": "H4",
+        "focus": "Graders must distinguish real outcomes.",
+        "minutes": 5,
+        "optional": false
+      }
+    ],
+    "10-3": [
+      {
+        "id": "H24",
+        "focus": "Hash the actual fixture and grader bytes.",
+        "minutes": 5,
+        "optional": false
+      },
+      {
+        "id": "H27",
+        "focus": "Resolve a full commit object identifier.",
+        "minutes": 5,
+        "optional": false
+      }
+    ],
+    "10-4": [
+      {
+        "id": "H17",
+        "focus": "Parametrized suite-level invariant checks.",
+        "minutes": 5,
+        "optional": false
+      },
+      {
+        "id": "H24",
+        "focus": "Compare rebuilt fixture identities.",
+        "minutes": 5,
+        "optional": false
+      }
+    ],
+    "11-1": [
+      {
+        "id": "H9",
+        "focus": "Retry policy, typed API errors, and timeouts.",
+        "minutes": 6,
+        "optional": false
+      },
+      {
+        "id": "H14",
+        "focus": "Script transient and permanent error sequences.",
+        "minutes": 4,
+        "optional": false
+      }
+    ],
+    "11-2": [
+      {
+        "id": "H11",
+        "focus": "Cancellation propagation and try/finally cleanup.",
+        "minutes": 5,
+        "optional": false
+      },
+      {
+        "id": "H13",
+        "focus": "Terminate and reap real child execution.",
+        "minutes": 5,
+        "optional": false
+      }
+    ],
+    "11-3": [
+      {
+        "id": "H5",
+        "focus": "Re-establish actual progress after interruptions.",
+        "minutes": 5,
+        "optional": false
+      },
+      {
+        "id": "H23",
+        "focus": "Inject stale state and an interrupted function call.",
+        "minutes": 5,
+        "optional": false
+      }
+    ],
+    "11-4": [
+      {
+        "id": "H17",
+        "focus": "One executable table of failure expectations.",
+        "minutes": 5,
+        "optional": false
+      },
+      {
+        "id": "H14",
+        "focus": "Assert forbidden additional calls never occur.",
+        "minutes": 5,
+        "optional": false
+      }
+    ],
+    "12-1": [
+      {
+        "id": "H8",
+        "focus": "Held-out feedback boundaries and comparable budgets.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "12-2": [
+      {
+        "id": "H4",
+        "focus": "Per-trial and repeated-trial success measures.",
+        "minutes": 5,
+        "optional": false
+      },
+      {
+        "id": "C5",
+        "focus": "Estimate capped study exposure using current model rates.",
+        "minutes": 5,
+        "optional": false
+      }
+    ],
+    "12-3": [
+      {
+        "id": "H18",
+        "focus": "Identify actual context-policy activation.",
+        "minutes": 5,
+        "optional": false
+      },
+      {
+        "id": "H8",
+        "focus": "Verify the intended intervention under common limits.",
+        "minutes": 5,
+        "optional": false
+      }
+    ],
+    "12-4": [
+      {
+        "id": "H27",
+        "focus": "Resolve code revisions for executable manifests.",
+        "minutes": 5,
+        "optional": false
+      },
+      {
+        "id": "H8",
+        "focus": "Keep final evaluation separate from adaptation.",
+        "minutes": 5,
+        "optional": false
+      }
+    ],
+    "13-1": [
+      {
+        "id": "H21",
+        "focus": "itertools.product for the trial Cartesian product.",
+        "minutes": 5,
+        "optional": false
+      },
+      {
+        "id": "H28",
+        "focus": "Transaction boundaries for a shared reservation ledger.",
+        "minutes": 5,
+        "optional": false
+      }
+    ],
+    "13-2": [
+      {
+        "id": "H9",
+        "focus": "Request IDs, timeout errors, and usage records.",
+        "minutes": 5,
+        "optional": false
+      },
+      {
+        "id": "H4",
+        "focus": "Retain every attempted outcome.",
+        "minutes": 5,
+        "optional": false
+      }
+    ],
+    "13-3": [
+      {
+        "id": "H4",
+        "focus": "Repeated trials measure variability, not best-of cherry-picking.",
+        "minutes": 5,
+        "optional": false
+      },
+      {
+        "id": "H28",
+        "focus": "Commit trial status and reserved budget consistently.",
+        "minutes": 5,
+        "optional": false
+      }
+    ],
+    "13-4": [
+      {
+        "id": "H21",
+        "focus": "Reconstruct expected trial combinations for reconciliation.",
+        "minutes": 5,
+        "optional": false
+      },
+      {
+        "id": "H4",
+        "focus": "Distinguish planned trials from completed outcomes.",
+        "minutes": 5,
+        "optional": false
+      }
+    ],
+    "14-1": [
+      {
+        "id": "H25",
+        "focus": "Means, medians, quantiles, and input assumptions.",
+        "minutes": 5,
+        "optional": false
+      },
+      {
+        "id": "H4",
+        "focus": "State success denominators explicitly.",
+        "minutes": 5,
+        "optional": false
+      }
+    ],
+    "14-2": [
+      {
+        "id": "H19",
+        "focus": "Trace inspection and diagnostic tool-error patterns.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "14-3": [
+      {
+        "id": "H7-results",
+        "focus": "Inspect results from the already-frozen optional pilot.",
+        "minutes": 5,
+        "optional": false
+      },
+      {
+        "id": "H4",
+        "focus": "Private-study failure analysis when the pilot is skipped.",
+        "minutes": 5,
+        "optional": false
+      }
+    ],
+    "14-4": [
+      {
+        "id": "H17",
+        "focus": "Parametrized validation of missing/duplicate result rows.",
+        "minutes": 5,
+        "optional": false
+      },
+      {
+        "id": "H4",
+        "focus": "Keep trial metrics and suite scope explicit.",
+        "minutes": 5,
+        "optional": false
+      }
+    ],
+    "15-1": [
+      {
+        "id": "H7-verifier",
+        "focus": "Verifier inputs and result provenance.",
+        "minutes": 5,
+        "optional": false
+      },
+      {
+        "id": "H4",
+        "focus": "Audit outcome validity, not just determinism.",
+        "minutes": 5,
+        "optional": false
+      }
+    ],
+    "15-2": [
+      {
+        "id": "H26",
+        "focus": "Decimal construction and explicit money rounding.",
+        "minutes": 5,
+        "optional": false
+      },
+      {
+        "id": "C5",
+        "focus": "Usage fields and applicable pricing categories.",
+        "minutes": 5,
+        "optional": false
+      }
+    ],
+    "15-3": [
+      {
+        "id": "H20",
+        "focus": "Paired indices, analysis RNG, and degenerate bootstrap data.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "15-4": [
+      {
+        "id": "H8",
+        "focus": "Limit conclusions to evaluated tasks and budgets.",
+        "minutes": 5,
+        "optional": false
+      },
+      {
+        "id": "H4",
+        "focus": "Separate reliability measures from chosen examples.",
+        "minutes": 5,
+        "optional": false
+      }
+    ],
+    "final-2": [
+      {
+        "id": "H30",
+        "focus": "Recreate an environment rather than copying one.",
+        "minutes": 5,
+        "optional": false
+      },
+      {
+        "id": "H23",
+        "focus": "Isolate environment variables during reproducibility tests.",
+        "minutes": 5,
+        "optional": false
+      }
+    ],
+    "final-3": [
+      {
+        "id": "H31",
+        "focus": "Review contribution guidance and existing issues.",
+        "minutes": 5,
+        "optional": false
+      },
+      {
+        "id": "H17",
+        "focus": "Reduce the regression to one meaningful failing case.",
+        "minutes": 5,
+        "optional": false
+      }
+    ]
+  },
+  "day0": {
+    "title": "Week 1 · Day 0 — Setup and Course Guide",
+    "summary": "Prepare only the tools needed for your first lab, then begin Day 1 with a working FakeModel loop. All setup, review and course-administration material lives here. Later-use checklists are references for their stated milestones, not prerequisites to complete now.",
+    "readyChecks": [
+      "I can run Python and pytest in my course workspace.",
+      "My repository ignores credentials, virtual environments, generated task workspaces and private runtime traces.",
+      "Fake model responses are the default; the first lab makes no paid requests.",
+      "I know the A$250 course ceiling and the development/final-task separation rule."
+    ],
+    "sections": [
+      {
+        "title": "Local repository and Python",
+        "text": "Create agent-harness-lab with harness/, tests/, fixtures/, evals/, docs/, reports/, and scripts/. Create or reuse a Python virtual environment and install pytest. Run a minimal import/JSON smoke test. Ignore credentials, environments, generated workspaces, and private runtime traces. Python and pytest are sufficient for Day 1. Install and pin provider/MCP SDKs from this setup reference before the lessons that actually use them.",
+        "resources": [
+          "H30",
+          "H9",
+          "H6-sdk"
+        ]
+      },
+      {
+        "title": "Execution-runtime readiness",
+        "text": "Before the execution-boundary module, prepare a local container runtime supporting Apple silicon. Follow its official installation instructions and confirm one harmless container starts, record its version and how to stop it. The Day 1 FakeModel loop does not require a container. The actual mounts, permissions, network and resource boundaries are implemented in the course. If installation blocks, save the exact blocker and resolve it before live-code lessons; never replace isolation with an unlabelled host subprocess.",
+        "resources": [
+          "H32",
+          "H10"
+        ]
+      },
+      {
+        "title": "Study, evaluation, and spending conventions",
+        "text": "Read the course outcome, 8 development / 16 final split rule, and budget convention. Create a ledger with A$175 API, A$50 CPU/storage, A$25 contingency within this course’s A$250 allowance. Set fake responses as the default mode. Put report/evidence templates in docs/ without filling future result fields. Sundays are off; weekdays and Saturdays retain their existing time caps.",
+        "resources": [
+          "H4",
+          "C5"
+        ]
+      },
+      {
+        "title": "Setup and optional integrations",
+        "text": "Use this page for environment, SDK, and container readiness before their first use. Record installed versions and reproducible setup commands. A provider API key is only needed for the later bounded live smoke run; keep fake responses as the default.\n\nHarbor is an optional integration. Its installation is not required for the private-task study. If you choose it, reserve up to one separate setup hour here and complete it before the optional comparison; skip the extension if setup remains blocked. The core lesson time is for implementation and measurement.",
+        "resources": [
+          "H30",
+          "H32",
+          "H9",
+          "H6-sdk",
+          "H7"
+        ]
+      },
+      {
+        "title": "Study rhythm and completion policy",
+        "text": "Whenever blocked or planning the next session.\n\nUse 5 minutes retrieval, 10 minutes focused source study, 35 minutes building, 10 minutes checking. Stop at the timebox; a failed prerequisite stays open and shifts later dates. No mandatory catch-up day or Sunday work is added. Record the smallest reproducer and next action. Spending caps and final-set separation apply throughout; never mark a result complete solely because time was spent.",
+        "resources": [
+          "H4",
+          "C5"
+        ]
+      },
+      {
+        "title": "Optional self-assessments and execution gates",
+        "text": "Use these questions after the associated implementation milestone. They are reference material, not prerequisites to understand on Day 0. For each response, award 0 for incorrect, 1 for the key idea, or 2 for the idea plus a concrete consequence. A useful target is 5/6; use the answer to identify the next small repair.\n\nThe technical execution gates remain mandatory within their implementation lessons: demonstrate the execution boundary before live code; reconcile uncertain side effects and preserve budgets before resume; and validate policy activation, matched resources, frozen manifests, and affordability before final paid evaluation.",
+        "resources": [
+          "H4",
+          "H5",
+          "H8"
+        ]
+      },
+      {
+        "title": "Report, demonstration, and release templates",
+        "text": "Populate these templates incrementally from completed work. Leave future-result fields empty. Writing and presentation are reference guidance rather than standalone lesson days.\n\nReport (2–4 pages): question; harness design; the two context conditions; task suite; limits and metrics; audited main results; failure analysis; limitations. Every numerical claim links to an authoritative table or trace and the frozen manifest. A neutral or negative result is a valid outcome.\n\nREADME reproduction path: prerequisites; exact pinned dependency and model versions; setup commands; credential variable names without values; a bounded fake-client or development smoke command; expected output paths and success criteria. Document the full 96-attempt study command separately with its exposure estimate. A smoke run does not reproduce the full statistical result.\n\nEvidence index columns: claim; frozen code/configuration; command; smallest supporting trace or table; limitation. Suggested rows: termination, execution boundary, resume reconciliation, MCP parity, context policies, attempt accounting, cost, uncertainty. Separate development, final, and optional external results.\n\nDemonstration checklist: use existing clean development fixtures for success, restart, and bounded failure; show run ID, decisive event, terminal status, and outcome evidence; label fake responses. A terminal transcript is sufficient.\n\nRelease checklist: verify links and scope, remove credentials and unintended private traces, record a release commit, state the 16-task/two-condition/three-attempt design and actual outcome, and keep follow-up work separate. Publish only under your chosen visibility and license.\n\nContribution checklist: consult the project contribution guide; reduce the problem to a minimal reproducible case; include expected and observed behavior, versions, and a focused regression test. Drafting is sufficient for the course; sending an issue or pull request is optional.",
+        "resources": [
+          "H31",
+          "H27"
+        ]
+      },
+      {
+        "title": "Optional official video",
+        "text": "A broader discussion from Anthropic after you have a working loop. Optional; no invented timestamps and no requirement to watch the full talk within a one-hour lesson.",
+        "resources": [
+          "HV1"
+        ]
+      },
+      {
+        "title": "After events, replay, and development evaluation — optional self-assessment",
+        "text": "After events, replay, and development evaluation. These questions are for that milestone, not initial setup.\n\nQuestions: (1) Why is a path-prefix check insufficient for symlinks? (2) What must an event include to identify one tool attempt? (3) Why must execution replay start from a clean fixture with a new run ID?\n\nAnswer guide: (1) A path that appears inside the root can resolve through a symlink outside it; enforce the supported resolved boundary, including parent paths for writes. (2) Stable run/action identifiers, ordering, arguments, outcomes, and timing/usage fields connect the attempt to evidence. (3) Execution replay is a new execution and may perform the approved local effects again; a fresh fixture prevents duplication in the original workspace and a new ID preserves provenance. Read-only log playback merely displays recorded observations.",
+        "resources": [
+          "H4"
+        ]
+      },
+      {
+        "title": "After persistence and context policies — optional self-assessment",
+        "text": "After persistence and context policies. These questions are for that milestone, not initial setup.\n\nQuestions: (1) Why can an atomic checkpoint still leave an uncertain write? (2) What should a third file hash mean during before/after reconciliation? (3) Which context and accounting constraints must both policies share?\n\nAnswer guide: (1) Checkpoint persistence and the workspace mutation are separate operations, so a crash can occur between them. (2) A hash matching neither before nor intended after indicates conflict or uncertainty; stop for reconciliation rather than overwriting it blindly. (3) Keep model revision, task/constraints, valid call/result pairs, context ceiling, tools, time, and total-token/cost limits matched; charge summarizer calls and latency to the compaction condition.",
+        "resources": [
+          "H5"
+        ]
+      },
+      {
+        "title": "Before the frozen final experiment — optional self-assessment",
+        "text": "Before the frozen final experiment. These questions are for that milestone, not initial setup.\n\nQuestions: (1) Why must the pilot activate both policies? (2) Why are timeouts and budget stops retained? (3) Does MCP compatibility establish tool authorization?\n\nAnswer guide: (1) Without activation, the trial does not exercise the intended difference in memory policy. (2) They are outcomes under the declared budget; excluding them creates a favorable, selected denominator. (3) No. MCP describes capability interaction; trusted host code must still enforce permissions independently of model output.",
+        "resources": [
+          "H8",
+          "H4"
+        ]
+      }
+    ],
+    "initialTimeboxMinutes": 60
+  }
+}

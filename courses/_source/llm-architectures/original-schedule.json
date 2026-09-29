@@ -1,0 +1,1624 @@
+[
+  {
+    "week": 1,
+    "hours": 7,
+    "modules": [
+      0,
+      1
+    ],
+    "days": [
+      {
+        "day": "Monday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Prepare a Reproducible Architecture Workspace",
+            "action": "Set up the repository and CPU environments, then save a framework smoke test.",
+            "evidence": "Versioned environment notes and passing NumPy, PyTorch and JAX CPU computations.",
+            "activity": 101,
+            "source_activity": 101,
+            "module": 0,
+            "track": "I",
+            "part": 1,
+            "total_parts": 1,
+            "hours": 1,
+            "key": "intro-1"
+          }
+        ]
+      },
+      {
+        "day": "Tuesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Build Your Tensor Debugging Toolkit",
+            "action": "Practice shape assertions, deterministic fixtures and error reports on small tensor operations.",
+            "evidence": "Three passing tensor checks and one deliberate failure caught by the tests.",
+            "activity": 102,
+            "source_activity": 102,
+            "module": 0,
+            "track": "I",
+            "part": 1,
+            "total_parts": 1,
+            "hours": 1,
+            "key": "intro-2"
+          }
+        ]
+      },
+      {
+        "day": "Wednesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Diagnose Essential Model Engineering Knowledge",
+            "action": "Attempt the diagnostic closed book; check answers and record specific tensor-shape, numerical-stability, autograd, causality and data-splitting gaps.",
+            "evidence": "Diagnostic answers and a prioritized gap list.",
+            "activity": 1,
+            "module": 1,
+            "track": "A",
+            "part": 1,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 1,
+            "key": "1-1",
+            "legacy_lesson": "week-01-monday"
+          }
+        ]
+      },
+      {
+        "day": "Thursday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Implement Stable Next-Token Loss",
+            "action": "Freeze a tiny token sample and implement numerically stable cross-entropy against a reference; use the environment prepared on Day0.",
+            "evidence": "Fixed sample manifest and matching loss values.",
+            "activity": 1,
+            "module": 1,
+            "track": "A",
+            "part": 2,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 1,
+            "key": "1-2",
+            "legacy_lesson": "week-01-tuesday"
+          }
+        ]
+      },
+      {
+        "day": "Friday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Implement And Check Causal Attention",
+            "action": "Read the relevant A1 section, derive tensor shapes, and implement scaled causal attention with a future-token perturbation test.",
+            "evidence": "Documented shapes and a passing causal-independence test.",
+            "activity": 1,
+            "module": 1,
+            "track": "A",
+            "part": 3,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 1,
+            "key": "1-3",
+            "legacy_lesson": "week-01-wednesday"
+          }
+        ]
+      },
+      {
+        "day": "Saturday",
+        "hours": 2,
+        "steps": [
+          {
+            "title": "Assemble Your First GPT Block",
+            "action": "Combine attention, learned positions, pre-norm and GELU components into a GPT-style block; rerun shape, causality and loss checks.",
+            "evidence": "GPT block passes shape, causality and stable-loss checks.",
+            "activity": 1,
+            "module": 1,
+            "track": "A",
+            "part": 4,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 1,
+            "key": "1-4",
+            "legacy_lesson": "week-01-thursday"
+          },
+          {
+            "title": "Finish The Tiny GPT Model",
+            "action": "Assemble the tiny decoder and output head; verify dimensions and parameter count on the fixed sample.",
+            "evidence": "A complete decoder produces finite token logits.",
+            "activity": 2,
+            "module": 1,
+            "track": "A",
+            "part": 1,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 2,
+            "key": "2-1",
+            "legacy_lesson": "week-01-friday"
+          }
+        ]
+      },
+      {
+        "day": "Sunday",
+        "hours": 0,
+        "steps": []
+      }
+    ]
+  },
+  {
+    "week": 2,
+    "hours": 7,
+    "modules": [
+      1,
+      2
+    ],
+    "days": [
+      {
+        "day": "Monday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Implement A Verified Training Step",
+            "action": "Check a scalar or vector AdamW update by hand; add built-in AdamW, backward and gradient clipping.",
+            "evidence": "Hand calculation agrees with AdamW; training step reduces tiny-batch loss.",
+            "activity": 2,
+            "module": 1,
+            "track": "A",
+            "part": 2,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 2,
+            "key": "2-2",
+            "legacy_lesson": "week-01-saturday"
+          }
+        ]
+      },
+      {
+        "day": "Tuesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Overfit And Sample Tiny Sequences",
+            "action": "Overfit a repeated tiny batch with dropout disabled; implement generation and save the short loss curve and samples.",
+            "evidence": "Tiny-batch loss meets its documented target; samples and curve saved.",
+            "activity": 2,
+            "module": 1,
+            "track": "A",
+            "part": 3,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 2,
+            "key": "2-3",
+            "legacy_lesson": "week-01-saturday"
+          }
+        ]
+      },
+      {
+        "day": "Wednesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Save And Resume Model Training",
+            "action": "Checkpoint model, optimizer, schedule, RNG and data position; compare reload logits and resumed versus uninterrupted training.",
+            "evidence": "Reload reproduces logits; supported deterministic resume reproduces the training trajectory.",
+            "activity": 2,
+            "module": 1,
+            "track": "A",
+            "part": 4,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 2,
+            "key": "2-4",
+            "legacy_lesson": "week-02-monday"
+          }
+        ]
+      },
+      {
+        "day": "Thursday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Replace Normalization And Feedforward Layers",
+            "action": "Read relevant A2 sections and replace LayerNorm/GELU components with RMSNorm and SwiGLU; check shapes and finite gradients.",
+            "evidence": "RMSNorm and SwiGLU have documented shapes and passing smoke checks.",
+            "activity": 3,
+            "module": 2,
+            "track": "A",
+            "part": 1,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 8,
+            "key": "3-1",
+            "legacy_lesson": "week-04-saturday"
+          }
+        ]
+      },
+      {
+        "day": "Friday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Derive And Implement Rotary Positions",
+            "action": "Read A3, derive the rotary construction, and implement RoPE with explicit position offsets.",
+            "evidence": "Position-zero identity and relative-position dot-product tests pass.",
+            "activity": 3,
+            "module": 2,
+            "track": "A",
+            "part": 2,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 8,
+            "key": "3-2",
+            "legacy_lesson": "week-05-monday"
+          }
+        ]
+      },
+      {
+        "day": "Saturday",
+        "hours": 2,
+        "steps": [
+          {
+            "title": "Implement Grouped Query Attention Heads",
+            "action": "Implement GQA with explicit query and KV head counts; compare output with an expanded-KV reference.",
+            "evidence": "Grouped heads match the expanded-KV reference.",
+            "activity": 3,
+            "module": 2,
+            "track": "A",
+            "part": 3,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 8,
+            "key": "3-3",
+            "legacy_lesson": "week-05-tuesday"
+          },
+          {
+            "title": "Validate The Modern Dense Decoder",
+            "action": "Integrate all four changes, rerun causality and tiny-batch checks, and document differences from exact Llama compatibility.",
+            "evidence": "Integrated decoder passes RoPE, GQA and causal correctness gates.",
+            "activity": 3,
+            "module": 2,
+            "track": "A",
+            "part": 4,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 8,
+            "key": "3-4",
+            "legacy_lesson": "week-05-wednesday"
+          }
+        ]
+      },
+      {
+        "day": "Sunday",
+        "hours": 0,
+        "steps": []
+      }
+    ]
+  },
+  {
+    "week": 3,
+    "hours": 7,
+    "modules": [
+      2,
+      3
+    ],
+    "days": [
+      {
+        "day": "Monday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Practice Functional JAX State Handling",
+            "action": "Read targeted A4 sections; exercise pytrees, explicit random keys and pure parameter/state updates on tiny arrays.",
+            "evidence": "Repeatable small examples show explicit parameters, state and random keys.",
+            "activity": 4,
+            "module": 2,
+            "track": "A",
+            "part": 1,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 9,
+            "key": "4-1",
+            "legacy_lesson": "week-05-thursday"
+          }
+        ]
+      },
+      {
+        "day": "Tuesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Apply JAX Transformations To Primitives",
+            "action": "Use grad, vmap and jit on small layer calculations; inspect shapes and numerical outputs.",
+            "evidence": "Small transformation examples run with expected shapes and derivatives.",
+            "activity": 4,
+            "module": 2,
+            "track": "A",
+            "part": 2,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 9,
+            "key": "4-2",
+            "legacy_lesson": "week-05-friday"
+          }
+        ]
+      },
+      {
+        "day": "Wednesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Port Shared Decoder Layer Primitives",
+            "action": "Port normalization, rotary positions, projections and feedforward primitives; initialize both frameworks from shared NumPy arrays.",
+            "evidence": "Shared arrays produce matching primitive forward outputs.",
+            "activity": 4,
+            "module": 2,
+            "track": "A",
+            "part": 3,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 9,
+            "key": "4-3",
+            "legacy_lesson": "week-05-saturday"
+          }
+        ]
+      },
+      {
+        "day": "Thursday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Verify Cross Framework Primitive Gradients",
+            "action": "Compare selected primitive gradients and outputs; resolve layout, epsilon and precision differences within declared tolerances.",
+            "evidence": "PyTorch and JAX primitive output and gradient parity table.",
+            "activity": 4,
+            "module": 2,
+            "track": "A",
+            "part": 4,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 9,
+            "key": "4-4",
+            "legacy_lesson": "week-05-saturday"
+          }
+        ]
+      },
+      {
+        "day": "Friday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Review Decoder Components and Functional JAX",
+            "action": "Retrieve the mechanisms from memory, check them against evidence and plan one bounded repair.",
+            "evidence": "Closed-book answers, a score out of six and a saved repair decision in notes/reviews/decoder-and-jax.md.",
+            "activity": 202,
+            "source_activity": 202,
+            "module": 2,
+            "track": "R",
+            "part": 1,
+            "total_parts": 1,
+            "hours": 1,
+            "key": "review-2"
+          }
+        ]
+      },
+      {
+        "day": "Saturday",
+        "hours": 2,
+        "steps": [
+          {
+            "title": "Repair a blocker or consolidate",
+            "action": "Use the scheduled hour for an unfinished check or targeted retrieval. Finish early when current.",
+            "evidence": "A resolved blocker or minimal reproducer, and a precise next action.",
+            "activity": null,
+            "source_activity": "flex2",
+            "module": 2,
+            "track": "X",
+            "part": 1,
+            "total_parts": 1,
+            "hours": 1,
+            "key": "flex-2"
+          },
+          {
+            "title": "Assemble The Functional JAX Decoder",
+            "action": "Connect the existing JAX primitives into the complete dense decoder with explicit parameter and RNG inputs.",
+            "evidence": "Complete decoder runs on the tiny configuration.",
+            "activity": 5,
+            "module": 3,
+            "track": "A",
+            "part": 1,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 15,
+            "key": "5-1",
+            "legacy_lesson": "week-08-saturday"
+          }
+        ]
+      },
+      {
+        "day": "Sunday",
+        "hours": 0,
+        "steps": []
+      }
+    ]
+  },
+  {
+    "week": 4,
+    "hours": 7,
+    "modules": [
+      3
+    ],
+    "days": [
+      {
+        "day": "Monday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Match Parameter Layouts Across Frameworks",
+            "action": "Define parameter conversion and transfer identical weights; compare intermediate activations and full logits.",
+            "evidence": "Shared weights yield matching full-model logits.",
+            "activity": 5,
+            "module": 3,
+            "track": "A",
+            "part": 2,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 15,
+            "key": "5-2",
+            "legacy_lesson": "week-08-saturday"
+          }
+        ]
+      },
+      {
+        "day": "Tuesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Implement The Functional Training Step",
+            "action": "Add explicit optimizer state and a jitted training step; align loss reduction and optimizer semantics with PyTorch.",
+            "evidence": "Functional training state updates correctly without hidden mutation.",
+            "activity": 5,
+            "module": 3,
+            "track": "A",
+            "part": 3,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 15,
+            "key": "5-3",
+            "legacy_lesson": "week-09-monday"
+          }
+        ]
+      },
+      {
+        "day": "Wednesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Validate Full Model Numerical Parity",
+            "action": "Compare full logits, loss and representative parameter gradients on CPU FP32; document justified operation-specific tolerances.",
+            "evidence": "Full-model logits, loss and representative gradients satisfy the parity gate.",
+            "activity": 5,
+            "module": 3,
+            "track": "A",
+            "part": 4,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 15,
+            "key": "5-4",
+            "legacy_lesson": "week-09-tuesday"
+          }
+        ]
+      },
+      {
+        "day": "Thursday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Design And Implement KV Cache",
+            "action": "Add explicit per-layer KV state and position offsets to the PyTorch decoder, using tiny prompts for debugging.",
+            "evidence": "Incremental decoding updates cache shapes and offsets correctly.",
+            "activity": 6,
+            "module": 3,
+            "track": "A",
+            "part": 1,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 16,
+            "key": "6-1",
+            "legacy_lesson": "week-09-wednesday"
+          }
+        ]
+      },
+      {
+        "day": "Friday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Verify Cached And Full Prefix Logits",
+            "action": "Compare cached next-token logits with full-prefix recomputation across several prompt lengths and nonzero offsets.",
+            "evidence": "Cache and full-prefix logits agree within stated tolerances.",
+            "activity": 6,
+            "module": 3,
+            "track": "A",
+            "part": 2,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 16,
+            "key": "6-2",
+            "legacy_lesson": "week-09-thursday"
+          }
+        ]
+      },
+      {
+        "day": "Saturday",
+        "hours": 2,
+        "steps": [
+          {
+            "title": "Freeze Data And Run Training Pilots",
+            "action": "Freeze the document split and shared token stream; launch bounded training pilots in PyTorch and JAX.",
+            "evidence": "Both frameworks complete short pilots using the frozen split.",
+            "activity": 6,
+            "module": 3,
+            "track": "A",
+            "part": 3,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 16,
+            "key": "6-3",
+            "legacy_lesson": "week-09-friday"
+          },
+          {
+            "title": "Measure Completed Training Work",
+            "action": "Build a synchronized throughput and memory report from the pilot; use it to calculate a bounded two-arm training allowance.",
+            "evidence": "Frozen data split, cache parity and initial throughput/memory ledger recorded.",
+            "activity": 6,
+            "module": 3,
+            "track": "A",
+            "part": 4,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 16,
+            "key": "6-4",
+            "legacy_lesson": "week-09-saturday"
+          }
+        ]
+      },
+      {
+        "day": "Sunday",
+        "hours": 0,
+        "steps": []
+      }
+    ]
+  },
+  {
+    "week": 5,
+    "hours": 7,
+    "modules": [
+      4
+    ],
+    "days": [
+      {
+        "day": "Monday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Derive And Implement Low Rank Updates",
+            "action": "Read A5 and implement LoRA for a linear layer with explicit rank, scaling and frozen base weights.",
+            "evidence": "Trainable parameters match the calculated low-rank count.",
+            "activity": 7,
+            "module": 4,
+            "track": "A",
+            "part": 1,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 22,
+            "key": "7-1",
+            "legacy_lesson": "week-12-thursday"
+          }
+        ]
+      },
+      {
+        "day": "Tuesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Check Initialization And Merge Behavior",
+            "action": "Verify zero-update initialization and implement merging; compare merged and unmerged outputs with identical inputs.",
+            "evidence": "Initialization preserves the base; merged and unmerged outputs agree.",
+            "activity": 7,
+            "module": 4,
+            "track": "A",
+            "part": 2,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 22,
+            "key": "7-2",
+            "legacy_lesson": "week-12-saturday"
+          }
+        ]
+      },
+      {
+        "day": "Wednesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Load The Small Pretrained Decoder",
+            "action": "Read A6; load SmolLM2-360M with its official tokenizer, pinned revision and documented configuration.",
+            "evidence": "Pinned pretrained model and tokenizer produce a baseline output.",
+            "activity": 7,
+            "module": 4,
+            "track": "A",
+            "part": 3,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 22,
+            "key": "7-3",
+            "legacy_lesson": "week-12-saturday"
+          }
+        ]
+      },
+      {
+        "day": "Thursday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Integrate And Validate LoRA Adapters",
+            "action": "Attach adapters to selected linear layers; verify frozen base gradients, trainable count and merged/unmerged model logits.",
+            "evidence": "Base stays frozen; trainable count and merge-logit equivalence pass.",
+            "activity": 7,
+            "module": 4,
+            "track": "A",
+            "part": 4,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 22,
+            "key": "7-4",
+            "legacy_lesson": "week-13-monday"
+          }
+        ]
+      },
+      {
+        "day": "Friday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Generate And Check Structured Data",
+            "action": "Generate 300 training, 50 validation and 100 held-out examples with separated template/entity families; manually spot-check labels.",
+            "evidence": "Split manifest and checked labels document family separation.",
+            "activity": 8,
+            "module": 4,
+            "track": "A",
+            "part": 1,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 23,
+            "key": "8-1",
+            "legacy_lesson": "week-13-tuesday"
+          }
+        ]
+      },
+      {
+        "day": "Saturday",
+        "hours": 2,
+        "steps": [
+          {
+            "title": "Prepare Masked SFT And Baseline",
+            "action": "Build prompt-token masking and task graders; measure baseline syntax validity and task accuracy on the held-out set.",
+            "evidence": "Mask checks pass; baseline validity and accuracy saved.",
+            "activity": 8,
+            "module": 4,
+            "track": "A",
+            "part": 2,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 23,
+            "key": "8-2",
+            "legacy_lesson": "week-13-wednesday"
+          },
+          {
+            "title": "Run The Bounded Fine Tuning Experiment",
+            "action": "Train the LoRA adapters on the small structured task; inspect training and validation behavior and save the learning curve.",
+            "evidence": "Adapter checkpoint and training/validation curve recorded.",
+            "activity": 8,
+            "module": 4,
+            "track": "A",
+            "part": 3,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 23,
+            "key": "8-3",
+            "legacy_lesson": "week-13-thursday"
+          }
+        ]
+      },
+      {
+        "day": "Sunday",
+        "hours": 0,
+        "steps": []
+      }
+    ]
+  },
+  {
+    "week": 6,
+    "hours": 7,
+    "modules": [
+      4,
+      5
+    ],
+    "days": [
+      {
+        "day": "Monday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Evaluate Structured Task Improvement Honestly",
+            "action": "Run the frozen held-out evaluation after SFT; compare validity and task accuracy, and document synthetic-data limitations.",
+            "evidence": "Before/after held-out metrics, learning curve and limitations recorded.",
+            "activity": 8,
+            "module": 4,
+            "track": "A",
+            "part": 4,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 23,
+            "key": "8-4",
+            "legacy_lesson": "week-13-friday"
+          }
+        ]
+      },
+      {
+        "day": "Tuesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Review Cache Correctness and Adaptation",
+            "action": "Retrieve the mechanisms from memory, check them against evidence and plan one bounded repair.",
+            "evidence": "Closed-book answers, a score out of six and a saved repair decision in notes/reviews/cache-and-adaptation.md.",
+            "activity": 204,
+            "source_activity": 204,
+            "module": 4,
+            "track": "R",
+            "part": 1,
+            "total_parts": 1,
+            "hours": 1,
+            "key": "review-4"
+          }
+        ]
+      },
+      {
+        "day": "Wednesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Repair a blocker or consolidate",
+            "action": "Use the scheduled hour for an unfinished check or targeted retrieval. Finish early when current.",
+            "evidence": "A resolved blocker or minimal reproducer, and a precise next action.",
+            "activity": null,
+            "source_activity": "flex4",
+            "module": 4,
+            "track": "X",
+            "part": 1,
+            "total_parts": 1,
+            "hours": 1,
+            "key": "flex-4"
+          }
+        ]
+      },
+      {
+        "day": "Thursday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Specify Sparse Expert Routing Shapes",
+            "action": "Read A7 selectively; define four experts, top-2 routing, tensor shapes and total versus active parameter counts.",
+            "evidence": "Dimensioned design and parameter accounting recorded.",
+            "activity": 9,
+            "module": 5,
+            "track": "A",
+            "part": 1,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 29,
+            "key": "9-1",
+            "legacy_lesson": "week-16-wednesday"
+          }
+        ]
+      },
+      {
+        "day": "Friday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Implement The Explicit MoE Forward",
+            "action": "Implement the four-expert top-2 layer with explicit loops and weighted expert outputs on tiny tensors.",
+            "evidence": "Forward runs with documented routing and output shapes.",
+            "activity": 9,
+            "module": 5,
+            "track": "A",
+            "part": 2,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 29,
+            "key": "9-2",
+            "legacy_lesson": "week-16-thursday"
+          }
+        ]
+      },
+      {
+        "day": "Saturday",
+        "hours": 2,
+        "steps": [
+          {
+            "title": "Build A Dense Masked Reference",
+            "action": "Build the dense masked reference and compare forward outputs plus input and parameter gradients.",
+            "evidence": "MoE output and gradients match the reference.",
+            "activity": 9,
+            "module": 5,
+            "track": "A",
+            "part": 3,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 29,
+            "key": "9-3",
+            "legacy_lesson": "week-16-saturday"
+          },
+          {
+            "title": "Inspect Routing And Validate Sparse Experts",
+            "action": "Log expert routing counts on ordinary and skewed inputs; rerun equality checks and explain utilization and active parameters.",
+            "evidence": "Reference equality passes; skewed routing and parameter accounting are visible.",
+            "activity": 9,
+            "module": 5,
+            "track": "A",
+            "part": 4,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 29,
+            "key": "9-4",
+            "legacy_lesson": "week-16-saturday"
+          }
+        ]
+      },
+      {
+        "day": "Sunday",
+        "hours": 0,
+        "steps": []
+      }
+    ]
+  },
+  {
+    "week": 7,
+    "hours": 7,
+    "modules": [
+      5,
+      6
+    ],
+    "days": [
+      {
+        "day": "Monday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Trace MLA Projection Tensor Dimensions",
+            "action": "Read the relevant A8 equations and reference code; label projection, latent and positional tensor dimensions.",
+            "evidence": "Dimensioned MLA projection trace recorded.",
+            "activity": 10,
+            "module": 5,
+            "track": "A",
+            "part": 1,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 30,
+            "key": "10-1",
+            "legacy_lesson": "week-17-monday"
+          }
+        ]
+      },
+      {
+        "day": "Tuesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Follow Latent And Positional Cache State",
+            "action": "Trace what is cached for each generated token and how latent content and positional components contribute to attention.",
+            "evidence": "Cache-state walkthrough distinguishes content and position components.",
+            "activity": 10,
+            "module": 5,
+            "track": "A",
+            "part": 2,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 30,
+            "key": "10-2",
+            "legacy_lesson": "week-17-tuesday"
+          }
+        ]
+      },
+      {
+        "day": "Wednesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Compare MLA And GQA Memory",
+            "action": "Choose a concrete configuration and derive MLA and GQA cache bytes; distinguish cached state from model weights.",
+            "evidence": "Worked cache-memory comparison with explicit configuration and units.",
+            "activity": 10,
+            "module": 5,
+            "track": "A",
+            "part": 3,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 30,
+            "key": "10-3",
+            "legacy_lesson": "week-17-wednesday"
+          }
+        ]
+      },
+      {
+        "day": "Thursday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Explain Compression And MLA Differences",
+            "action": "Write the architecture note linking dimensions, cache equations and code; explain why a naive low-rank KV projection is insufficient.",
+            "evidence": "Architecture note includes dimensions, cache accounting and the naive-compression distinction.",
+            "activity": 10,
+            "module": 5,
+            "track": "A",
+            "part": 4,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 30,
+            "key": "10-4",
+            "legacy_lesson": "week-17-thursday"
+          }
+        ]
+      },
+      {
+        "day": "Friday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Read The Hybrid Attention Structure",
+            "action": "Read targeted A9 sections and identify recurrent and global-attention components in the hybrid design.",
+            "evidence": "Component map identifies recurrent state and global attention.",
+            "activity": 11,
+            "module": 6,
+            "track": "A",
+            "part": 1,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 36,
+            "key": "11-1",
+            "legacy_lesson": "week-20-tuesday"
+          }
+        ]
+      },
+      {
+        "day": "Saturday",
+        "hours": 2,
+        "steps": [
+          {
+            "title": "Trace A Single Recurrent Update",
+            "action": "Follow one token through Gated DeltaNet equations or reference code, labeling every input and state dimension.",
+            "evidence": "Dimensioned one-token recurrence walkthrough recorded.",
+            "activity": 11,
+            "module": 6,
+            "track": "A",
+            "part": 2,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 36,
+            "key": "11-2",
+            "legacy_lesson": "week-20-wednesday"
+          },
+          {
+            "title": "Compare State And Cache Scaling",
+            "action": "Derive persistent recurrent-state storage and contrast it with growing KV storage at specified sequence lengths.",
+            "evidence": "Explicit state-versus-cache scaling comparison.",
+            "activity": 11,
+            "module": 6,
+            "track": "A",
+            "part": 3,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 36,
+            "key": "11-3",
+            "legacy_lesson": "week-20-thursday"
+          }
+        ]
+      },
+      {
+        "day": "Sunday",
+        "hours": 0,
+        "steps": []
+      }
+    ]
+  },
+  {
+    "week": 8,
+    "hours": 7,
+    "modules": [
+      6
+    ],
+    "days": [
+      {
+        "day": "Monday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Explain The Hybrid Design Tradeoffs",
+            "action": "Finish the dimensioned recurrence walkthrough and explain hybrid trade-offs, labeling any code trace separately; implement a tiny recurrence only if core work already passes.",
+            "evidence": "Dimensioned recurrence walkthrough and persistent-state comparison complete, with implementation depth labeled.",
+            "activity": 11,
+            "module": 6,
+            "track": "A",
+            "part": 4,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 36,
+            "key": "11-4",
+            "legacy_lesson": "week-20-saturday"
+          }
+        ]
+      },
+      {
+        "day": "Tuesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Map Gemma Components Against Your Decoder",
+            "action": "Read relevant A10 sections and map attention, cache, routing and positional choices against the implemented dense model.",
+            "evidence": "Attributed Gemma component comparison with explicit knowledge depth.",
+            "activity": 12,
+            "module": 6,
+            "track": "A",
+            "part": 1,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 37,
+            "key": "12-1",
+            "legacy_lesson": "week-20-saturday"
+          }
+        ]
+      },
+      {
+        "day": "Wednesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Map DeepSeek Components Against Your Decoder",
+            "action": "Read relevant A11 sections and add attention, cache, routing, position and training choices to the comparison.",
+            "evidence": "Attributed DeepSeek component comparison with explicit knowledge depth.",
+            "activity": 12,
+            "module": 6,
+            "track": "A",
+            "part": 2,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 37,
+            "key": "12-2",
+            "legacy_lesson": "week-21-monday"
+          }
+        ]
+      },
+      {
+        "day": "Thursday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Survey Post Training And Multimodal Interfaces",
+            "action": "Use targeted A1 material to survey DPO, GRPO and multimodal interfaces; connect each to its required inputs and objectives.",
+            "evidence": "Concise survey distinguishes objectives and interface changes.",
+            "activity": 12,
+            "module": 6,
+            "track": "A",
+            "part": 3,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 37,
+            "key": "12-3",
+            "legacy_lesson": "week-21-tuesday"
+          }
+        ]
+      },
+      {
+        "day": "Friday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Complete The Architecture Comparison Note",
+            "action": "Consolidate the two-page comparison; label implemented knowledge, traced code and paper-only understanding, with links supporting architectural claims.",
+            "evidence": "Two-page component map clearly separates the three depths of understanding.",
+            "activity": 12,
+            "module": 6,
+            "track": "A",
+            "part": 4,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 37,
+            "key": "12-4",
+            "legacy_lesson": "week-21-wednesday"
+          }
+        ]
+      },
+      {
+        "day": "Saturday",
+        "hours": 2,
+        "steps": [
+          {
+            "title": "Review Sparse Experts and Persistent State",
+            "action": "Retrieve the mechanisms from memory, check them against evidence and plan one bounded repair.",
+            "evidence": "Closed-book answers, a score out of six and a saved repair decision in notes/reviews/sparse-and-hybrid.md.",
+            "activity": 206,
+            "source_activity": 206,
+            "module": 6,
+            "track": "R",
+            "part": 1,
+            "total_parts": 1,
+            "hours": 1,
+            "key": "review-6"
+          },
+          {
+            "title": "Repair a blocker or consolidate",
+            "action": "Use the scheduled hour for an unfinished check or targeted retrieval. Finish early when current.",
+            "evidence": "A resolved blocker or minimal reproducer, and a precise next action.",
+            "activity": null,
+            "source_activity": "flex6",
+            "module": 6,
+            "track": "X",
+            "part": 1,
+            "total_parts": 1,
+            "hours": 1,
+            "key": "flex-6"
+          }
+        ]
+      },
+      {
+        "day": "Sunday",
+        "hours": 0,
+        "steps": []
+      }
+    ]
+  },
+  {
+    "week": 9,
+    "hours": 7,
+    "modules": [
+      7
+    ],
+    "days": [
+      {
+        "day": "Monday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Specify A Matched Attention Comparison",
+            "action": "Define GQA and MHA configurations with the same model width, query-head count, head dimension, layers and token shapes; record changed K/V projection widths, parameter counts, precision and measurement protocol.",
+            "evidence": "Comparison configuration explicitly states shared settings and parameter differences.",
+            "activity": 13,
+            "module": 7,
+            "track": "A",
+            "part": 1,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 43,
+            "key": "13-1",
+            "legacy_lesson": "week-23-saturday"
+          }
+        ]
+      },
+      {
+        "day": "Tuesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Validate Attention And Cache Accounting",
+            "action": "Run correctness checks for both configurations and calculate KV bytes at the chosen prompt lengths.",
+            "evidence": "Correctness gates pass and cache-byte calculations are recorded.",
+            "activity": 13,
+            "module": 7,
+            "track": "A",
+            "part": 2,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 43,
+            "key": "13-2",
+            "legacy_lesson": "week-24-monday"
+          }
+        ]
+      },
+      {
+        "day": "Wednesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Measure Prefill And Decode Separately",
+            "action": "Run synchronized inference measurements with controlled inputs and warm-up, reporting prefill separately from cached decode.",
+            "evidence": "Raw prefill/decode timings and hardware settings saved.",
+            "activity": 13,
+            "module": 7,
+            "track": "A",
+            "part": 3,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 43,
+            "key": "13-3",
+            "legacy_lesson": "week-24-tuesday"
+          }
+        ]
+      },
+      {
+        "day": "Thursday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Interpret The GQA Versus MHA Study",
+            "action": "Summarize cache bytes and inference timings; discuss parameter differences and explain why these measurements establish no quality equivalence.",
+            "evidence": "Matched study reports correctness, memory, prefill, decode and qualified conclusions.",
+            "activity": 13,
+            "module": 7,
+            "track": "A",
+            "part": 4,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 43,
+            "key": "13-4",
+            "legacy_lesson": "week-24-wednesday"
+          }
+        ]
+      },
+      {
+        "day": "Friday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Build a Controlled Training Experiment",
+            "action": "Create executable baseline and ablation configurations, verify hard stopping conditions and test the launcher on a tiny fixture.",
+            "evidence": "Baseline and ablation differ in one declared choice.",
+            "activity": 14,
+            "module": 7,
+            "track": "A",
+            "part": 1,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 44,
+            "key": "14-1",
+            "legacy_lesson": "week-24-thursday"
+          }
+        ]
+      },
+      {
+        "day": "Saturday",
+        "hours": 2,
+        "steps": [
+          {
+            "title": "Run And Inspect The Baseline",
+            "action": "Finish the bounded baseline at the model size and token allowance supported by your pilot; inspect checkpoints and collect training/validation curves within that frozen budget.",
+            "evidence": "Baseline checkpoint and curves record exact consumed tokens.",
+            "activity": 14,
+            "module": 7,
+            "track": "A",
+            "part": 2,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 44,
+            "key": "14-2",
+            "legacy_lesson": "week-24-saturday"
+          },
+          {
+            "title": "Run The Matched Training Ablation",
+            "action": "Finish the ablation using matched data order and token budget; collect comparable curves and sample generations.",
+            "evidence": "Ablation results retain matched data order and token budget.",
+            "activity": 14,
+            "module": 7,
+            "track": "A",
+            "part": 3,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 44,
+            "key": "14-3",
+            "legacy_lesson": "week-24-saturday"
+          }
+        ]
+      },
+      {
+        "day": "Sunday",
+        "hours": 0,
+        "steps": []
+      }
+    ]
+  },
+  {
+    "week": 10,
+    "hours": 7,
+    "modules": [
+      7,
+      8
+    ],
+    "days": [
+      {
+        "day": "Monday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Compare Curves And State Limitations",
+            "action": "Compare baseline and ablation curves and samples; record exact token counts, configuration and limits of the available seeds.",
+            "evidence": "Training/validation curves, samples, token budget and seed limitations documented.",
+            "activity": 14,
+            "module": 7,
+            "track": "A",
+            "part": 4,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 44,
+            "key": "14-4",
+            "legacy_lesson": "week-25-monday"
+          }
+        ]
+      },
+      {
+        "day": "Tuesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Audit Architecture Reproduction Inputs",
+            "action": "Check data and tokenizer revisions, checkpoint metadata and parameter conversion assumptions against the reproduction instructions.",
+            "evidence": "Input manifest identifies all revisions and required artifacts.",
+            "activity": 15,
+            "module": 8,
+            "track": "A",
+            "part": 1,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 50,
+            "key": "15-1",
+            "legacy_lesson": "week-27-friday"
+          }
+        ]
+      },
+      {
+        "day": "Wednesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Prepare A Clean Architecture Environment",
+            "action": "Create the documented clean environment and run the architecture smoke command; record setup failures with their exact fixes.",
+            "evidence": "Clean environment can start the documented smoke run.",
+            "activity": 15,
+            "module": 8,
+            "track": "A",
+            "part": 2,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 50,
+            "key": "15-2",
+            "legacy_lesson": "week-27-saturday"
+          }
+        ]
+      },
+      {
+        "day": "Thursday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Automate Tiny Training and Numerical Parity",
+            "action": "Implement one executable command that produces a fresh tiny training curve and shared-weight PyTorch/JAX parity results.",
+            "evidence": "An executable reproduction command writes fresh training/parity outputs with source and configuration metadata.",
+            "activity": 15,
+            "module": 8,
+            "track": "A",
+            "part": 3,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 50,
+            "key": "15-3",
+            "legacy_lesson": "week-27-saturday"
+          }
+        ]
+      },
+      {
+        "day": "Friday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Test Reproduction Failure Handling",
+            "action": "Inject missing input, invalid configuration and a failed parity subprocess; make the reproduction command fail clearly, then restore and run the valid path.",
+            "evidence": "Invalid-input and failed-child tests return nonzero status; the restored valid command regenerates fresh evidence.",
+            "activity": 15,
+            "module": 8,
+            "track": "A",
+            "part": 4,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 50,
+            "key": "15-4",
+            "legacy_lesson": "week-28-monday"
+          }
+        ]
+      },
+      {
+        "day": "Saturday",
+        "hours": 2,
+        "steps": [
+          {
+            "title": "Draft Model And Data Cards",
+            "action": "Document implemented architecture, data provenance, tokenization, model size, training configuration and intended limitations.",
+            "evidence": "Accurate model and data card drafts.",
+            "activity": 16,
+            "module": 8,
+            "track": "A",
+            "part": 1,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 51,
+            "key": "16-1",
+            "legacy_lesson": "week-28-tuesday"
+          },
+          {
+            "title": "Write The Architecture Results Report",
+            "action": "Explain parity, training and inference results using measured evidence; include limitations and reproduction commands.",
+            "evidence": "Architecture report contains clear results, limitations and exact commands.",
+            "activity": 16,
+            "module": 8,
+            "track": "A",
+            "part": 2,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 51,
+            "key": "16-2",
+            "legacy_lesson": "week-28-wednesday"
+          }
+        ]
+      },
+      {
+        "day": "Sunday",
+        "hours": 0,
+        "steps": []
+      }
+    ]
+  },
+  {
+    "week": 11,
+    "hours": 7,
+    "modules": [
+      8,
+      9
+    ],
+    "days": [
+      {
+        "day": "Monday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Connect Equations And Diagrams To Code",
+            "action": "Add only diagrams and equations that explain implemented mechanisms; identify omitted features and why they remained outside scope.",
+            "evidence": "Report maps key equations and diagrams to code and states omissions.",
+            "activity": 16,
+            "module": 8,
+            "track": "A",
+            "part": 3,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 51,
+            "key": "16-3",
+            "legacy_lesson": "week-28-thursday"
+          }
+        ]
+      },
+      {
+        "day": "Tuesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Record And Check Your Technical Explanation",
+            "action": "Record a five-to-ten-minute architecture explanation; audit the report and cards for accurate claims against code and measurements.",
+            "evidence": "Final report, model/data cards and recorded explanation agree with implementation evidence.",
+            "activity": 16,
+            "module": 8,
+            "track": "A",
+            "part": 4,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 51,
+            "key": "16-4",
+            "legacy_lesson": "week-28-saturday"
+          }
+        ]
+      },
+      {
+        "day": "Wednesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Repair a blocker or consolidate",
+            "action": "Use the scheduled hour for an unfinished check or targeted retrieval. Finish early when current.",
+            "evidence": "A resolved blocker or minimal reproducer, and a precise next action.",
+            "activity": null,
+            "source_activity": "flex8",
+            "module": 8,
+            "track": "X",
+            "part": 1,
+            "total_parts": 1,
+            "hours": 1,
+            "key": "flex-8"
+          }
+        ]
+      },
+      {
+        "day": "Thursday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Defend the Decoder From First Principles",
+            "action": "Complete an architecture-only oral and written assessment against your implementation.",
+            "evidence": "A scored defense with equations, code pointers and one repaired explanation.",
+            "activity": 301,
+            "source_activity": 301,
+            "module": 9,
+            "track": "F",
+            "part": 1,
+            "total_parts": 1,
+            "hours": 1,
+            "key": "final-1"
+          }
+        ]
+      },
+      {
+        "day": "Friday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Test the Reviewer Experience",
+            "action": "Run the documented smoke path from a fresh clone and repair one reproducibility failure.",
+            "evidence": "A fresh-clone transcript, generated outputs and a final prerequisite checklist.",
+            "activity": 302,
+            "source_activity": 302,
+            "module": 9,
+            "track": "F",
+            "part": 1,
+            "total_parts": 1,
+            "hours": 1,
+            "key": "final-2"
+          }
+        ]
+      },
+      {
+        "day": "Saturday",
+        "hours": 2,
+        "steps": [
+          {
+            "title": "Prepare a Small Upstream Contribution",
+            "action": "Prepare a focused contribution for a real observed friction, or a verified compatibility note if no current upstream issue remains.",
+            "evidence": "A minimal reproducer and contribution draft, or a versioned compatibility/limitation note with runnable evidence.",
+            "activity": 303,
+            "source_activity": 303,
+            "module": 9,
+            "track": "F",
+            "part": 1,
+            "total_parts": 1,
+            "hours": 1,
+            "key": "final-3"
+          },
+          {
+            "title": "Assemble the Architecture Portfolio Release",
+            "action": "Audit the finished repository and assemble a reviewer-friendly release candidate.",
+            "evidence": "A versioned portfolio index with reproducible results, accurate claims and a final completion decision.",
+            "activity": 304,
+            "source_activity": 304,
+            "module": 9,
+            "track": "F",
+            "part": 1,
+            "total_parts": 1,
+            "hours": 1,
+            "key": "final-4"
+          }
+        ]
+      },
+      {
+        "day": "Sunday",
+        "hours": 0,
+        "steps": []
+      }
+    ]
+  }
+]

@@ -1,0 +1,136 @@
+{
+  "name": "kernel",
+  "directory": "gpu-kernel-course",
+  "title": "GPU Kernels & Optimization",
+  "tagline": "CUDA · Triton · PyTorch · JAX/Pallas",
+  "description": "Write correct GPU kernels, measure them fairly, and explain their effect on end-to-end model performance.",
+  "color": "#146349",
+  "pale": "#eaf5ef",
+  "symbol": "K",
+  "url": "https://blueblazin.github.io/courses/gpu-kernels/",
+  "budget": 450,
+  "standard": "Kernel correctness and measurement",
+  "moduleTitles": [
+    "GPU execution and trustworthy measurements",
+    "Stable reductions in Triton",
+    "Tiled matrix multiplication and epilogues",
+    "Online softmax and restricted attention",
+    "Differentiable kernels and PyTorch integration",
+    "Pallas and staged GPU computation",
+    "Whole-model performance and clean reproduction",
+    "Systems reporting and upstream contribution"
+  ],
+  "prerequisites": [
+    "Comfortable Python, NumPy-style tensor indexing, Git, and a shell.",
+    "Basic PyTorch operations and autograd; willingness to refresh matrix multiplication and derivatives.",
+    "Ability to read small C/C++ examples; CUDA expertise is not assumed.",
+    "A local CPU development environment plus access to rented NVIDIA GPUs; no other course or pretrained model is required."
+  ],
+  "outcomes": [
+    "Write and validate small CUDA C++ and Triton kernels with explicit shape, dtype, layout, and numerical contracts.",
+    "Implement stable softmax, RMSNorm forward/backward, tiled matmul, and a deliberately restricted causal-attention forward.",
+    "Register a differentiable PyTorch operator and measure its impact in a supplied decoder fixture.",
+    "Run an actual Pallas Mosaic GPU kernel on compatible H100 hardware and compare against JAX with correct synchronization.",
+    "Publish reproducible correctness, microbenchmark, and whole-model results, including regressions and limitations.",
+    "Prepare a focused upstream patch, regression test, or documentation correction for a real observed issue; if none is found, publish an honest internal reproducer and limitation analysis."
+  ],
+  "project": {
+    "title": "Kernel Lab: correct operators, measured systems results",
+    "description": "An independent GPU engineering repository spanning CUDA, Triton, PyTorch integration, and Pallas, with a supplied tiny decoder workload and a reproducible systems report.",
+    "requirements": [
+      "Keep a shape/dtype/layout/precision contract and edge-case tests for every advertised custom operator.",
+      "Provide raw repeated timings, pinned hardware/software manifests, synchronized timing boundaries, and eager/compiled framework baselines.",
+      "Show actual supported-dtype gradients and decoder-level parity for custom RMSNorm; CPU gradcheck alone is insufficient.",
+      "Include actual H100 Pallas evidence, or label that requirement incomplete if hardware execution remains blocked.",
+      "Measure model-level prefill and cached decode using deterministic fixture weights; do not claim trained-model quality or frontier-scale speedups.",
+      "Package reproducible scripts, a focused report, clean-checkout evidence, and a legitimate contribution draft where a real issue was found."
+    ]
+  },
+  "fixtureContract": {
+    "path": "fixtures/decoder.py",
+    "requirements": [
+      "Small configurable PyTorch causal decoder with embedding, dense causal attention, RMSNorm, and MLP; CPU/CUDA execution.",
+      "Export inspectable dense causal-attention and FP32-accumulating RMSNorm reference functions.",
+      "Expose norm_factory(width, eps), returning an nn.Module with a length-width weight parameter and forward(x); this module can call a registered rmsnorm(x, weight, eps) implementation after flattening leading dimensions to rows.",
+      "Provide deterministic synthetic tokens/targets and initialization/state-dict save instructions; no trained checkpoint dependency.",
+      "Provide an inference KV-cache path with explicit reset, absolute query/key causal positions, and a CPU full-sequence-versus-cached logit parity smoke.",
+      "Document tiny dimensions fitting the restricted RMSNorm contract and the exact CPU smoke command."
+    ]
+  },
+  "audit": {
+    "kernelLessonCount": 64,
+    "changedLessonKeys": [
+      "3-1",
+      "3-2",
+      "11-1",
+      "24-1",
+      "24-3",
+      "32-3",
+      "38-1",
+      "45-1",
+      "45-2",
+      "45-3"
+    ],
+    "crossCourseDependenciesRemoved": [
+      "Handwritten GPT or architecture-course decoder prerequisite",
+      "Architecture-course RMSNorm and dense-attention reference prerequisite",
+      "Previously trained checkpoint prerequisite",
+      "Architecture-course cache implementation and parity tests prerequisite",
+      "Combined-course shared compute ledger wording"
+    ],
+    "pacing": "64 core lab hours + 2 onboarding + 3 reviews + 4 final + 4 flex = 77 hours across 11 seven-hour weeks; Sundays off."
+  },
+  "track": "K",
+  "companions": [
+    {
+      "title": "LLM Architectures",
+      "url": "https://blueblazin.github.io/courses/llm-architectures/"
+    },
+    {
+      "title": "Agent Harness Engineering",
+      "url": "https://blueblazin.github.io/courses/agent-harnesses/"
+    }
+  ],
+  "modules": {
+    "1": "GPU execution and trustworthy measurements",
+    "2": "Stable reductions in Triton",
+    "3": "Tiled matrix multiplication and epilogues",
+    "4": "Online softmax and restricted attention",
+    "5": "Differentiable kernels and PyTorch integration",
+    "6": "Pallas and staged GPU computation",
+    "7": "Whole-model performance and clean reproduction",
+    "8": "Systems reporting and upstream contribution",
+    "0": "Orientation & setup",
+    "9": "Independent assessment & portfolio"
+  },
+  "setup": [
+    "Create a dedicated repository with fixtures/, kernels/, tests/, benchmarks/, results/ and reports/. The other courses are not prerequisites.",
+    "Download the supplied decoder fixture into fixtures/decoder.py. It provides untrained deterministic weights, reference operations, replaceable RMSNorm and a KV-cache path; no architecture-course checkpoint is required.",
+    "Prepare CPU reference checks on the M1 Max. Use Linux NVIDIA hardware for CUDA/Triton, and the documented H100 setup for the required Pallas/Mosaic work.",
+    "CUDA extension builds require the CUDA toolkit including nvcc, a compatible host C++ compiler and Ninja. A PyTorch CUDA wheel alone does not supply the compiler toolchain.",
+    "Install local PyTorch from the [official selector](https://pytorch.org/get-started/locally/) for the CPU fixture. Build the remote JAX/CUDA environment from the [official installation guide](https://docs.jax.dev/en/latest/installation.html), pinning versions compatible with the Pallas backend you actually test."
+  ],
+  "compute": "Develop reference code and prepare input manifests on the M1 Max. CUDA and Triton require remote Linux NVIDIA hardware; default to RTX 4090. Reserve short H100 sessions for the required Pallas/Mosaic lessons, using the pinned tutorial-compatible stack. Budget A$300 for 4090 or justified A100 use, A$75 for H100, A$25 for storage/transfers and A$50 for variation.",
+  "assessment": "\nEvery substantive experiment note should contain the question, falsifiable prediction, baseline, changed variable, data/task IDs, exact commit/configuration, hardware/dtype, correctness criteria, result, cost, confounds, and next experiment. Save machine-readable results alongside the note.\n\n| Criterion | Weight |\n|---|---:|\n| Correctness and reliable failure handling | 30% |\n| Fair evaluation and measurement | 25% |\n| Mechanistic explanation | 20% |\n| Reproducibility and documentation | 15% |\n| Useful independent extension or contribution | 10% |\n\nCorrectness is a gate. An honestly rejected hypothesis can earn full experiment marks.\n\nPrepare one report of about 2–4 pages, or equivalent Markdown, for this course. Include a clear result, a limitation, raw evidence and a command that reproduces a smaller version. Use the Day 0 assessment and portfolio checklists after the relevant practical work. Technical reproduction remains part of the hands-on sequence where scheduled.\n",
+  "standards": "\nSpecify exactly which shapes, strides, dtypes, masks, and gradients each operator supports. Test zeros, repeated values, extreme finite logits, random seeds, tile boundaries, and non-power-of-two tails. Test non-contiguous inputs only if supported; otherwise reject them or fall back. Define all-masked-row behavior explicitly if the interface permits such inputs.\n\nUse FP32 references and small FP64 CPU derivative checks where appropriate. Mixed-precision tolerances depend on the operation, reduction length, and accumulation dtype; there is no universal BF16 threshold. Validate actual GPU gradients against a reference at supported dtypes. Check memory/race behavior with supported tooling when necessary and record any environment restriction.\n\nFreeze a shape matrix before tuning, for example row widths 127/128/129/768/1024/4096, several row counts, GEMM dimensions on both sides of a tile boundary, and attention lengths 63/64/65/256/1024. Separate supported correctness tests from performance shapes. Keep a few shapes untouched until the final performance run.\n\nCompare custom code against both eager and compiled framework code. For attention and matmul, also compare against SDPA and optimized library matmul. Set dropout, causal convention, TF32/matmul precision, layout, and dtype consistently. A speedup only against an avoidably poor reference is insufficient.\n\nWarm up compilation and autotuning, use resident inputs, synchronize correctly, and time repeated runs. Report median and variability across at least three independent timing batches. Keep cold compile/setup costs separate. JAX needs `block_until_ready()`; CUDA work needs appropriate events/synchronization. Record thermal/shared-machine noise. Never benchmark competing candidates concurrently on one GPU.\n\nThe required FlashAttention lab is a restricted forward implementation explaining IO avoidance and online normalization. Production features, general backward, every mask type, and every head dimension are not required. The differentiable integration requirement is satisfied by RMSNorm. If the broad attention kernel exceeds its timebox, narrow to a restricted Triton forward, such as one head dimension and bounded lengths. If that still does not work, extend the schedule instead of claiming GPU completion.\n\nA useful systems report explains where the kernel wins, where it loses, and whether it affects model throughput. No fixed speedup percentage is a graduation requirement. Correct negative results count.\n\n",
+  "resourceIds": [
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "K1",
+    "K2",
+    "K3",
+    "K4",
+    "K5",
+    "K6",
+    "K7",
+    "K8",
+    "P1",
+    "P2",
+    "P3",
+    "P4"
+  ],
+  "slug": "gpu-kernels",
+  "basePath": "/courses/gpu-kernels"
+}

@@ -1,0 +1,323 @@
+[
+  {
+    "id": 1,
+    "module": 1,
+    "track": "A",
+    "hours": 4,
+    "work": "Complete the diagnostic during the first scheduled step; carry unresolved gaps into the following steps or flex time. Set up the repo and fixed tokenizer/data sample. Implement stable cross-entropy, causal attention, and a GPT-style block. Read A1 selectively.",
+    "evidence": "Shapes documented; future-token perturbation cannot alter earlier logits; stable loss matches a reference",
+    "title": "Diagnostic and Your First GPT Block",
+    "resources": [
+      "A1"
+    ],
+    "source_id": 1
+  },
+  {
+    "id": 2,
+    "module": 1,
+    "track": "A",
+    "hours": 4,
+    "work": "Finish a tiny GPT-2-style model, AdamW train step, gradient clipping, generation, and checkpoint/resume. Use built-in AdamW after verifying a scalar/vector update by hand.",
+    "evidence": "Overfit a repeated tiny batch; save/reload reproduces logits; short loss curve and generated samples",
+    "title": "Train and Checkpoint a Tiny GPT",
+    "resources": [
+      "A1",
+      "A13"
+    ],
+    "source_id": 2
+  },
+  {
+    "id": 3,
+    "module": 2,
+    "track": "A",
+    "hours": 4,
+    "work": "Evolve the PyTorch model to RMSNorm, RoPE, SwiGLU, and GQA. Use Llama as the conceptual reference, not an exact compatibility claim. Read A2/A3.",
+    "evidence": "Tests for RoPE identity at position zero and relative-position dot products; grouped heads agree with an expanded-KV reference",
+    "title": "Build a Modern Llama Style Decoder",
+    "resources": [
+      "A2",
+      "A3"
+    ],
+    "source_id": 8
+  },
+  {
+    "id": 4,
+    "module": 2,
+    "track": "A",
+    "hours": 4,
+    "work": "Learn JAX pytrees, explicit random keys, `grad`, `vmap`, `jit`, and pure train-step state. Port the same layer primitives. Read A4.",
+    "evidence": "Shared NumPy parameter arrays yield matching PyTorch/JAX primitive outputs and selected gradients",
+    "title": "Port Model Primitives to Functional JAX",
+    "resources": [
+      "A4"
+    ],
+    "source_id": 9
+  },
+  {
+    "id": 5,
+    "module": 3,
+    "track": "A",
+    "hours": 4,
+    "work": "Assemble the complete Llama-style JAX decoder and functional training step. Match tensor layouts and optimizer semantics with PyTorch.",
+    "evidence": "Tiny-model full logits, loss, and representative parameter gradients match on CPU FP32",
+    "title": "Complete and Validate the JAX Decoder",
+    "resources": [
+      "A4"
+    ],
+    "source_id": 15
+  },
+  {
+    "id": 6,
+    "module": 3,
+    "track": "A",
+    "hours": 4,
+    "work": "Add KV caching to the PyTorch decoder and compare with full-prefix recomputation. Run short shared-data training pilots in both frameworks; choose PyTorch for the longer run.",
+    "evidence": "Cache/full logits agree across several prompt lengths; initial throughput/memory ledger and frozen data split",
+    "title": "Add KV Caching and Training Pilots",
+    "resources": [
+      "A2",
+      "A3",
+      "A4"
+    ],
+    "source_id": 16
+  },
+  {
+    "id": 7,
+    "module": 4,
+    "track": "A",
+    "hours": 4,
+    "work": "Implement LoRA on linear layers; verify the zero-update initialization and merged/unmerged equivalence. Load a small pretrained dense model, default SmolLM2-360M, using its official tokenizer and revision. Read A5/A6.",
+    "evidence": "Base weights stay frozen; trainable count is correct; merge preserves logits within stated tolerance",
+    "title": "Implement LoRA and Load Pretrained Weights",
+    "resources": [
+      "A5",
+      "A6"
+    ],
+    "source_id": 22
+  },
+  {
+    "id": 8,
+    "module": 4,
+    "track": "A",
+    "hours": 4,
+    "work": "Run a small SFT experiment on structured extraction or tool-call formatting. Programmatically generate 300 train, 50 validation, and 100 held-out examples with separated template/entity families; manually spot-check labels and mask prompt tokens.",
+    "evidence": "Before/after validity and task accuracy on held-out data; learning curve and explicit limitations of synthetic data",
+    "title": "Fine Tune for a Structured Task",
+    "resources": [
+      "A5",
+      "A6"
+    ],
+    "source_id": 23
+  },
+  {
+    "id": 9,
+    "module": 5,
+    "track": "A",
+    "hours": 4,
+    "work": "Implement a tiny four-expert top-2 MoE layer in PyTorch, initially with explicit loops. Log routing counts and distinguish total/active parameters. Read A7.",
+    "evidence": "Output and gradients agree with a dense masked reference; skewed routing is visible",
+    "title": "Implement a Tiny Sparse Expert Layer",
+    "resources": [
+      "A7"
+    ],
+    "source_id": 29
+  },
+  {
+    "id": 10,
+    "module": 5,
+    "track": "A",
+    "hours": 4,
+    "work": "Study MLA using DeepSeek-V2/V3 and compare it with GQA. Trace the latent cache and positional component; derive memory for a specified configuration. Read A8.",
+    "evidence": "One architecture note with tensor dimensions, cache accounting, and why naive compression differs from MLA",
+    "title": "Trace MLA and Derive Cache Memory",
+    "resources": [
+      "A8"
+    ],
+    "source_id": 30
+  },
+  {
+    "id": 11,
+    "module": 6,
+    "track": "A",
+    "hours": 4,
+    "work": "Study Gated DeltaNet and Qwen3.5's hybrid design. Trace one token's state update and contrast persistent state with a growing KV cache. Read A9.",
+    "evidence": "Dimensioned recurrence walkthrough with paper-only versus code-traced depth labeled; optional tiny recurrence implementation only if core work is complete",
+    "title": "Trace Hybrid Recurrence and Persistent State",
+    "resources": [
+      "A9"
+    ],
+    "optionalResources": [],
+    "scopeNote": "A tiny recurrence implementation is optional after core work is complete.",
+    "source_id": 36
+  },
+  {
+    "id": 12,
+    "module": 6,
+    "track": "A",
+    "hours": 4,
+    "work": "Compare Gemma 4 and DeepSeek-V4 with your dense model. Build a component map covering attention/cache, expert routing, positional design, and training choices. Read A10/A11 selectively; survey DPO/GRPO and multimodal interfaces via A1.",
+    "evidence": "Two-page comparison separating implemented knowledge, traced code, and paper-only understanding",
+    "title": "Map Current Architectures Against Your Decoder",
+    "resources": [
+      "A10",
+      "A11",
+      "A1"
+    ],
+    "optionalResources": [
+      "A5"
+    ],
+    "scopeNote": "DPO/GRPO and multimodal interfaces are survey material, not additional required implementations.",
+    "source_id": 37
+  },
+  {
+    "id": 13,
+    "module": 7,
+    "track": "A",
+    "hours": 4,
+    "work": "Run a matched GQA-versus-MHA inference study with fixed model width, query-head count, head dimension, layer count and input shapes. Record the changed K/V projection widths and parameter counts. Report cache bytes, prefill and decode.",
+    "evidence": "Correctness first; no quality-equivalence claim from inference measurements alone",
+    "title": "Measure GQA and MHA Inference Behavior",
+    "resources": [
+      "A3"
+    ],
+    "source_id": 43
+  },
+  {
+    "id": 14,
+    "module": 7,
+    "track": "A",
+    "hours": 4,
+    "work": "Finish the pilot-sized, bounded model training run and one modest ablation, such as AdamW weight decay. Use 30–60M parameters only if affordable; a smaller model is valid. Match data order and training-token budget.",
+    "evidence": "Training/validation curves, sample generations, exact token budget, and stated seed limitations",
+    "title": "Complete Small Model Training and Ablation",
+    "resources": [
+      "A1",
+      "A12"
+    ],
+    "source_id": 44
+  },
+  {
+    "id": 15,
+    "module": 8,
+    "track": "A",
+    "hours": 4,
+    "work": "Reproduce the architecture smoke run from a clean environment; audit data/tokenizer versions, parameter conversion, and checkpoints.",
+    "evidence": "One command regenerates a small learning curve and parity results",
+    "title": "Reproduce Architecture Training and Parity Results",
+    "resources": [],
+    "source_id": 50
+  },
+  {
+    "id": 16,
+    "module": 8,
+    "track": "A",
+    "hours": 4,
+    "work": "Write the architecture report and record a 5–10 minute explanation. Include what remained unimplemented and why.",
+    "evidence": "Clear model/data cards, accurate claims, diagrams/equations tied to code",
+    "title": "Write and Explain the Architecture Report",
+    "resources": [],
+    "source_id": 51
+  },
+  {
+    "id": 101,
+    "module": 0,
+    "track": "I",
+    "hours": 1,
+    "title": "Prepare a Reproducible Architecture Workspace",
+    "work": "Set up the repository and CPU environments, then save a framework smoke test.",
+    "evidence": "Versioned environment notes and passing NumPy, PyTorch and JAX CPU computations.",
+    "resources": [
+      "A4"
+    ]
+  },
+  {
+    "id": 102,
+    "module": 0,
+    "track": "I",
+    "hours": 1,
+    "title": "Build Your Tensor Debugging Toolkit",
+    "work": "Practice shape assertions, deterministic fixtures and error reports on small tensor operations.",
+    "evidence": "Three passing tensor checks and one deliberate failure caught by the tests.",
+    "resources": []
+  },
+  {
+    "id": 202,
+    "module": 2,
+    "track": "R",
+    "hours": 1,
+    "title": "Review Decoder Components and Functional JAX",
+    "work": "Retrieve the mechanisms from memory, check them against evidence and plan one bounded repair.",
+    "evidence": "Closed-book answers, a score out of six and a saved repair decision in notes/reviews/decoder-and-jax.md.",
+    "resources": [
+      "A2",
+      "A4"
+    ]
+  },
+  {
+    "id": 204,
+    "module": 4,
+    "track": "R",
+    "hours": 1,
+    "title": "Review Cache Correctness and Adaptation",
+    "work": "Retrieve the mechanisms from memory, check them against evidence and plan one bounded repair.",
+    "evidence": "Closed-book answers, a score out of six and a saved repair decision in notes/reviews/cache-and-adaptation.md.",
+    "resources": [
+      "A3",
+      "A5"
+    ]
+  },
+  {
+    "id": 206,
+    "module": 6,
+    "track": "R",
+    "hours": 1,
+    "title": "Review Sparse Experts and Persistent State",
+    "work": "Retrieve the mechanisms from memory, check them against evidence and plan one bounded repair.",
+    "evidence": "Closed-book answers, a score out of six and a saved repair decision in notes/reviews/sparse-and-hybrid.md.",
+    "resources": [
+      "A7",
+      "A8",
+      "A9"
+    ]
+  },
+  {
+    "id": 301,
+    "module": 9,
+    "track": "F",
+    "hours": 1,
+    "title": "Defend the Decoder From First Principles",
+    "work": "Complete an architecture-only oral and written assessment against your implementation.",
+    "evidence": "A scored defense with equations, code pointers and one repaired explanation.",
+    "resources": []
+  },
+  {
+    "id": 302,
+    "module": 9,
+    "track": "F",
+    "hours": 1,
+    "title": "Test the Reviewer Experience",
+    "work": "Run the documented smoke path from a fresh clone and repair one reproducibility failure.",
+    "evidence": "A fresh-clone transcript, generated outputs and a final prerequisite checklist.",
+    "resources": []
+  },
+  {
+    "id": 303,
+    "module": 9,
+    "track": "F",
+    "hours": 1,
+    "title": "Prepare a Small Upstream Contribution",
+    "work": "Prepare a focused contribution for a real observed friction, or a verified compatibility note if no current upstream issue remains.",
+    "evidence": "A minimal reproducer and contribution draft, or a versioned compatibility/limitation note with runnable evidence.",
+    "resources": []
+  },
+  {
+    "id": 304,
+    "module": 9,
+    "track": "F",
+    "hours": 1,
+    "title": "Assemble the Architecture Portfolio Release",
+    "work": "Audit the finished repository and assemble a reviewer-friendly release candidate.",
+    "evidence": "A versioned portfolio index with reproducible results, accurate claims and a final completion decision.",
+    "resources": []
+  }
+]

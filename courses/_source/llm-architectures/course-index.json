@@ -1,0 +1,777 @@
+[
+  {
+    "id": "a-day0",
+    "week": 1,
+    "day": "Day 0",
+    "minutes": 0,
+    "day0": true,
+    "url": "/courses/llm-architectures/week-01/day-00/",
+    "title": "Day 0 · Setup & course handbook",
+    "checks": [
+      "day0-a-1",
+      "day0-a-2",
+      "day0-a-3",
+      "day0-a-4"
+    ],
+    "track": "A"
+  },
+  {
+    "id": "a-week-01-day-01",
+    "week": 1,
+    "day": "Monday",
+    "dayNumber": 1,
+    "minutes": 60,
+    "url": "/courses/llm-architectures/week-01/day-01/",
+    "title": "Implement Stable Next-Token Loss",
+    "checks": [
+      "a1-p2-c1",
+      "a1-p2-c2",
+      "a1-p2-c3"
+    ],
+    "track": "A"
+  },
+  {
+    "id": "a-week-01-day-02",
+    "week": 1,
+    "day": "Tuesday",
+    "dayNumber": 2,
+    "minutes": 60,
+    "url": "/courses/llm-architectures/week-01/day-02/",
+    "title": "Implement And Check Causal Attention",
+    "checks": [
+      "a1-p3-c1",
+      "a1-p3-c2",
+      "a1-p3-c3"
+    ],
+    "track": "A"
+  },
+  {
+    "id": "a-week-01-day-03",
+    "week": 1,
+    "day": "Wednesday",
+    "dayNumber": 3,
+    "minutes": 60,
+    "url": "/courses/llm-architectures/week-01/day-03/",
+    "title": "Assemble Your First GPT Block",
+    "checks": [
+      "a1-p4-c1",
+      "a1-p4-c2",
+      "a1-p4-c3"
+    ],
+    "track": "A"
+  },
+  {
+    "id": "a-week-01-day-04",
+    "week": 1,
+    "day": "Thursday",
+    "dayNumber": 4,
+    "minutes": 60,
+    "url": "/courses/llm-architectures/week-01/day-04/",
+    "title": "Finish The Tiny GPT Model",
+    "checks": [
+      "a2-p1-c1",
+      "a2-p1-c2",
+      "a2-p1-c3"
+    ],
+    "track": "A"
+  },
+  {
+    "id": "a-week-01-day-05",
+    "week": 1,
+    "day": "Friday",
+    "dayNumber": 5,
+    "minutes": 60,
+    "url": "/courses/llm-architectures/week-01/day-05/",
+    "title": "Implement A Verified Training Step",
+    "checks": [
+      "a2-p2-c1",
+      "a2-p2-c2",
+      "a2-p2-c3"
+    ],
+    "track": "A"
+  },
+  {
+    "id": "a-week-01-day-06",
+    "week": 1,
+    "day": "Saturday",
+    "dayNumber": 6,
+    "minutes": 120,
+    "url": "/courses/llm-architectures/week-01/day-06/",
+    "title": "Overfit And Sample Tiny Sequences + Save And Resume Model Training",
+    "checks": [
+      "a2-p3-c1",
+      "a2-p3-c2",
+      "a2-p3-c3",
+      "a2-p4-c1",
+      "a2-p4-c2",
+      "a2-p4-c3"
+    ],
+    "track": "A"
+  },
+  {
+    "id": "a-week-02-day-01",
+    "week": 2,
+    "day": "Monday",
+    "dayNumber": 1,
+    "minutes": 60,
+    "url": "/courses/llm-architectures/week-02/day-01/",
+    "title": "Replace Normalization And Feedforward Layers",
+    "checks": [
+      "a8-p1-c1",
+      "a8-p1-c2",
+      "a8-p1-c3"
+    ],
+    "track": "A"
+  },
+  {
+    "id": "a-week-02-day-02",
+    "week": 2,
+    "day": "Tuesday",
+    "dayNumber": 2,
+    "minutes": 60,
+    "url": "/courses/llm-architectures/week-02/day-02/",
+    "title": "Derive And Implement Rotary Positions",
+    "checks": [
+      "a8-p2-c1",
+      "a8-p2-c2",
+      "a8-p2-c3"
+    ],
+    "track": "A"
+  },
+  {
+    "id": "a-week-02-day-03",
+    "week": 2,
+    "day": "Wednesday",
+    "dayNumber": 3,
+    "minutes": 60,
+    "url": "/courses/llm-architectures/week-02/day-03/",
+    "title": "Implement Grouped Query Attention Heads",
+    "checks": [
+      "a8-p3-c1",
+      "a8-p3-c2",
+      "a8-p3-c3"
+    ],
+    "track": "A"
+  },
+  {
+    "id": "a-week-02-day-04",
+    "week": 2,
+    "day": "Thursday",
+    "dayNumber": 4,
+    "minutes": 60,
+    "url": "/courses/llm-architectures/week-02/day-04/",
+    "title": "Validate The Modern Dense Decoder",
+    "checks": [
+      "a8-p4-c1",
+      "a8-p4-c2",
+      "a8-p4-c3"
+    ],
+    "track": "A"
+  },
+  {
+    "id": "a-week-02-day-05",
+    "week": 2,
+    "day": "Friday",
+    "dayNumber": 5,
+    "minutes": 60,
+    "url": "/courses/llm-architectures/week-02/day-05/",
+    "title": "Practice Functional JAX State Handling",
+    "checks": [
+      "a9-p1-c1",
+      "a9-p1-c2",
+      "a9-p1-c3"
+    ],
+    "track": "A"
+  },
+  {
+    "id": "a-week-02-day-06",
+    "week": 2,
+    "day": "Saturday",
+    "dayNumber": 6,
+    "minutes": 120,
+    "url": "/courses/llm-architectures/week-02/day-06/",
+    "title": "Apply JAX Transformations To Primitives + Port Shared Decoder Layer Primitives",
+    "checks": [
+      "a9-p2-c1",
+      "a9-p2-c2",
+      "a9-p2-c3",
+      "a9-p3-c1",
+      "a9-p3-c2",
+      "a9-p3-c3"
+    ],
+    "track": "A"
+  },
+  {
+    "id": "a-week-03-day-01",
+    "week": 3,
+    "day": "Monday",
+    "dayNumber": 1,
+    "minutes": 60,
+    "url": "/courses/llm-architectures/week-03/day-01/",
+    "title": "Verify Cross Framework Primitive Gradients",
+    "checks": [
+      "a9-p4-c1",
+      "a9-p4-c2",
+      "a9-p4-c3"
+    ],
+    "track": "A"
+  },
+  {
+    "id": "a-week-03-day-02",
+    "week": 3,
+    "day": "Tuesday",
+    "dayNumber": 2,
+    "minutes": 60,
+    "url": "/courses/llm-architectures/week-03/day-02/",
+    "title": "Assemble The Functional JAX Decoder",
+    "checks": [
+      "a15-p1-c1",
+      "a15-p1-c2",
+      "a15-p1-c3"
+    ],
+    "track": "A"
+  },
+  {
+    "id": "a-week-03-day-03",
+    "week": 3,
+    "day": "Wednesday",
+    "dayNumber": 3,
+    "minutes": 60,
+    "url": "/courses/llm-architectures/week-03/day-03/",
+    "title": "Match Parameter Layouts Across Frameworks",
+    "checks": [
+      "a15-p2-c1",
+      "a15-p2-c2",
+      "a15-p2-c3"
+    ],
+    "track": "A"
+  },
+  {
+    "id": "a-week-03-day-04",
+    "week": 3,
+    "day": "Thursday",
+    "dayNumber": 4,
+    "minutes": 60,
+    "url": "/courses/llm-architectures/week-03/day-04/",
+    "title": "Implement The Functional Training Step",
+    "checks": [
+      "a15-p3-c1",
+      "a15-p3-c2",
+      "a15-p3-c3"
+    ],
+    "track": "A"
+  },
+  {
+    "id": "a-week-03-day-05",
+    "week": 3,
+    "day": "Friday",
+    "dayNumber": 5,
+    "minutes": 60,
+    "url": "/courses/llm-architectures/week-03/day-05/",
+    "title": "Validate Full Model Numerical Parity",
+    "checks": [
+      "a15-p4-c1",
+      "a15-p4-c2",
+      "a15-p4-c3"
+    ],
+    "track": "A"
+  },
+  {
+    "id": "a-week-03-day-06",
+    "week": 3,
+    "day": "Saturday",
+    "dayNumber": 6,
+    "minutes": 120,
+    "url": "/courses/llm-architectures/week-03/day-06/",
+    "title": "Design And Implement KV Cache + Verify Cached And Full Prefix Logits",
+    "checks": [
+      "a16-p1-c1",
+      "a16-p1-c2",
+      "a16-p1-c3",
+      "a16-p2-c1",
+      "a16-p2-c2",
+      "a16-p2-c3"
+    ],
+    "track": "A"
+  },
+  {
+    "id": "a-week-04-day-01",
+    "week": 4,
+    "day": "Monday",
+    "dayNumber": 1,
+    "minutes": 60,
+    "url": "/courses/llm-architectures/week-04/day-01/",
+    "title": "Freeze Data And Run Training Pilots",
+    "checks": [
+      "a16-p3-c1",
+      "a16-p3-c2",
+      "a16-p3-c3"
+    ],
+    "track": "A"
+  },
+  {
+    "id": "a-week-04-day-02",
+    "week": 4,
+    "day": "Tuesday",
+    "dayNumber": 2,
+    "minutes": 60,
+    "url": "/courses/llm-architectures/week-04/day-02/",
+    "title": "Measure Completed Training Work",
+    "checks": [
+      "a16-p4-c1",
+      "a16-p4-c2",
+      "a16-p4-c3"
+    ],
+    "track": "A"
+  },
+  {
+    "id": "a-week-04-day-03",
+    "week": 4,
+    "day": "Wednesday",
+    "dayNumber": 3,
+    "minutes": 60,
+    "url": "/courses/llm-architectures/week-04/day-03/",
+    "title": "Derive And Implement Low Rank Updates",
+    "checks": [
+      "a22-p1-c1",
+      "a22-p1-c2",
+      "a22-p1-c3"
+    ],
+    "track": "A"
+  },
+  {
+    "id": "a-week-04-day-04",
+    "week": 4,
+    "day": "Thursday",
+    "dayNumber": 4,
+    "minutes": 60,
+    "url": "/courses/llm-architectures/week-04/day-04/",
+    "title": "Check Initialization And Merge Behavior",
+    "checks": [
+      "a22-p2-c1",
+      "a22-p2-c2",
+      "a22-p2-c3"
+    ],
+    "track": "A"
+  },
+  {
+    "id": "a-week-04-day-05",
+    "week": 4,
+    "day": "Friday",
+    "dayNumber": 5,
+    "minutes": 60,
+    "url": "/courses/llm-architectures/week-04/day-05/",
+    "title": "Load The Small Pretrained Decoder",
+    "checks": [
+      "a22-p3-c1",
+      "a22-p3-c2",
+      "a22-p3-c3"
+    ],
+    "track": "A"
+  },
+  {
+    "id": "a-week-04-day-06",
+    "week": 4,
+    "day": "Saturday",
+    "dayNumber": 6,
+    "minutes": 120,
+    "url": "/courses/llm-architectures/week-04/day-06/",
+    "title": "Integrate And Validate LoRA Adapters + Generate And Check Structured Data",
+    "checks": [
+      "a22-p4-c1",
+      "a22-p4-c2",
+      "a22-p4-c3",
+      "a23-p1-c1",
+      "a23-p1-c2",
+      "a23-p1-c3"
+    ],
+    "track": "A"
+  },
+  {
+    "id": "a-week-05-day-01",
+    "week": 5,
+    "day": "Monday",
+    "dayNumber": 1,
+    "minutes": 60,
+    "url": "/courses/llm-architectures/week-05/day-01/",
+    "title": "Prepare Masked SFT And Baseline",
+    "checks": [
+      "a23-p2-c1",
+      "a23-p2-c2",
+      "a23-p2-c3"
+    ],
+    "track": "A"
+  },
+  {
+    "id": "a-week-05-day-02",
+    "week": 5,
+    "day": "Tuesday",
+    "dayNumber": 2,
+    "minutes": 60,
+    "url": "/courses/llm-architectures/week-05/day-02/",
+    "title": "Run The Bounded Fine Tuning Experiment",
+    "checks": [
+      "a23-p3-c1",
+      "a23-p3-c2",
+      "a23-p3-c3"
+    ],
+    "track": "A"
+  },
+  {
+    "id": "a-week-05-day-03",
+    "week": 5,
+    "day": "Wednesday",
+    "dayNumber": 3,
+    "minutes": 60,
+    "url": "/courses/llm-architectures/week-05/day-03/",
+    "title": "Evaluate Structured Task Improvement Honestly",
+    "checks": [
+      "a23-p4-c1",
+      "a23-p4-c2",
+      "a23-p4-c3"
+    ],
+    "track": "A"
+  },
+  {
+    "id": "a-week-05-day-04",
+    "week": 5,
+    "day": "Thursday",
+    "dayNumber": 4,
+    "minutes": 60,
+    "url": "/courses/llm-architectures/week-05/day-04/",
+    "title": "Specify Sparse Expert Routing Shapes",
+    "checks": [
+      "a29-p1-c1",
+      "a29-p1-c2",
+      "a29-p1-c3"
+    ],
+    "track": "A"
+  },
+  {
+    "id": "a-week-05-day-05",
+    "week": 5,
+    "day": "Friday",
+    "dayNumber": 5,
+    "minutes": 60,
+    "url": "/courses/llm-architectures/week-05/day-05/",
+    "title": "Implement The Explicit MoE Forward",
+    "checks": [
+      "a29-p2-c1",
+      "a29-p2-c2",
+      "a29-p2-c3"
+    ],
+    "track": "A"
+  },
+  {
+    "id": "a-week-05-day-06",
+    "week": 5,
+    "day": "Saturday",
+    "dayNumber": 6,
+    "minutes": 120,
+    "url": "/courses/llm-architectures/week-05/day-06/",
+    "title": "Build A Dense Masked Reference + Inspect Routing And Validate Sparse Experts",
+    "checks": [
+      "a29-p3-c1",
+      "a29-p3-c2",
+      "a29-p3-c3",
+      "a29-p4-c1",
+      "a29-p4-c2",
+      "a29-p4-c3"
+    ],
+    "track": "A"
+  },
+  {
+    "id": "a-week-06-day-01",
+    "week": 6,
+    "day": "Monday",
+    "dayNumber": 1,
+    "minutes": 60,
+    "url": "/courses/llm-architectures/week-06/day-01/",
+    "title": "Trace MLA Projection Tensor Dimensions",
+    "checks": [
+      "a30-p1-c1",
+      "a30-p1-c2",
+      "a30-p1-c3"
+    ],
+    "track": "A"
+  },
+  {
+    "id": "a-week-06-day-02",
+    "week": 6,
+    "day": "Tuesday",
+    "dayNumber": 2,
+    "minutes": 60,
+    "url": "/courses/llm-architectures/week-06/day-02/",
+    "title": "Follow Latent And Positional Cache State",
+    "checks": [
+      "a30-p2-c1",
+      "a30-p2-c2",
+      "a30-p2-c3"
+    ],
+    "track": "A"
+  },
+  {
+    "id": "a-week-06-day-03",
+    "week": 6,
+    "day": "Wednesday",
+    "dayNumber": 3,
+    "minutes": 60,
+    "url": "/courses/llm-architectures/week-06/day-03/",
+    "title": "Compare MLA And GQA Memory",
+    "checks": [
+      "a30-p3-c1",
+      "a30-p3-c2",
+      "a30-p3-c3"
+    ],
+    "track": "A"
+  },
+  {
+    "id": "a-week-06-day-04",
+    "week": 6,
+    "day": "Thursday",
+    "dayNumber": 4,
+    "minutes": 60,
+    "url": "/courses/llm-architectures/week-06/day-04/",
+    "title": "Explain Compression And MLA Differences",
+    "checks": [
+      "a30-p4-c1",
+      "a30-p4-c2",
+      "a30-p4-c3"
+    ],
+    "track": "A"
+  },
+  {
+    "id": "a-week-06-day-05",
+    "week": 6,
+    "day": "Friday",
+    "dayNumber": 5,
+    "minutes": 60,
+    "url": "/courses/llm-architectures/week-06/day-05/",
+    "title": "Read The Hybrid Attention Structure",
+    "checks": [
+      "a36-p1-c1",
+      "a36-p1-c2",
+      "a36-p1-c3"
+    ],
+    "track": "A"
+  },
+  {
+    "id": "a-week-06-day-06",
+    "week": 6,
+    "day": "Saturday",
+    "dayNumber": 6,
+    "minutes": 120,
+    "url": "/courses/llm-architectures/week-06/day-06/",
+    "title": "Trace A Single Recurrent Update + Compare State And Cache Scaling",
+    "checks": [
+      "a36-p2-c1",
+      "a36-p2-c2",
+      "a36-p2-c3",
+      "a36-p3-c1",
+      "a36-p3-c2",
+      "a36-p3-c3"
+    ],
+    "track": "A"
+  },
+  {
+    "id": "a-week-07-day-01",
+    "week": 7,
+    "day": "Monday",
+    "dayNumber": 1,
+    "minutes": 60,
+    "url": "/courses/llm-architectures/week-07/day-01/",
+    "title": "Explain The Hybrid Design Tradeoffs",
+    "checks": [
+      "a36-p4-c1",
+      "a36-p4-c2",
+      "a36-p4-c3"
+    ],
+    "track": "A"
+  },
+  {
+    "id": "a-week-07-day-02",
+    "week": 7,
+    "day": "Tuesday",
+    "dayNumber": 2,
+    "minutes": 60,
+    "url": "/courses/llm-architectures/week-07/day-02/",
+    "title": "Map Gemma Components Against Your Decoder",
+    "checks": [
+      "a37-p1-c1",
+      "a37-p1-c2",
+      "a37-p1-c3"
+    ],
+    "track": "A"
+  },
+  {
+    "id": "a-week-07-day-03",
+    "week": 7,
+    "day": "Wednesday",
+    "dayNumber": 3,
+    "minutes": 60,
+    "url": "/courses/llm-architectures/week-07/day-03/",
+    "title": "Map DeepSeek Components Against Your Decoder",
+    "checks": [
+      "a37-p2-c1",
+      "a37-p2-c2",
+      "a37-p2-c3"
+    ],
+    "track": "A"
+  },
+  {
+    "id": "a-week-07-day-04",
+    "week": 7,
+    "day": "Thursday",
+    "dayNumber": 4,
+    "minutes": 60,
+    "url": "/courses/llm-architectures/week-07/day-04/",
+    "title": "Survey Post Training And Multimodal Interfaces",
+    "checks": [
+      "a37-p3-c1",
+      "a37-p3-c2",
+      "a37-p3-c3"
+    ],
+    "track": "A"
+  },
+  {
+    "id": "a-week-07-day-05",
+    "week": 7,
+    "day": "Friday",
+    "dayNumber": 5,
+    "minutes": 60,
+    "url": "/courses/llm-architectures/week-07/day-05/",
+    "title": "Specify A Matched Attention Comparison",
+    "checks": [
+      "a43-p1-c1",
+      "a43-p1-c2",
+      "a43-p1-c3"
+    ],
+    "track": "A"
+  },
+  {
+    "id": "a-week-07-day-06",
+    "week": 7,
+    "day": "Saturday",
+    "dayNumber": 6,
+    "minutes": 120,
+    "url": "/courses/llm-architectures/week-07/day-06/",
+    "title": "Validate Attention And Cache Accounting + Measure Prefill And Decode Separately",
+    "checks": [
+      "a43-p2-c1",
+      "a43-p2-c2",
+      "a43-p2-c3",
+      "a43-p3-c1",
+      "a43-p3-c2",
+      "a43-p3-c3"
+    ],
+    "track": "A"
+  },
+  {
+    "id": "a-week-08-day-01",
+    "week": 8,
+    "day": "Monday",
+    "dayNumber": 1,
+    "minutes": 60,
+    "url": "/courses/llm-architectures/week-08/day-01/",
+    "title": "Interpret The GQA Versus MHA Study",
+    "checks": [
+      "a43-p4-c1",
+      "a43-p4-c2",
+      "a43-p4-c3"
+    ],
+    "track": "A"
+  },
+  {
+    "id": "a-week-08-day-02",
+    "week": 8,
+    "day": "Tuesday",
+    "dayNumber": 2,
+    "minutes": 60,
+    "url": "/courses/llm-architectures/week-08/day-02/",
+    "title": "Build a Controlled Training Experiment",
+    "checks": [
+      "a44-p1-c1",
+      "a44-p1-c2",
+      "a44-p1-c3"
+    ],
+    "track": "A"
+  },
+  {
+    "id": "a-week-08-day-03",
+    "week": 8,
+    "day": "Wednesday",
+    "dayNumber": 3,
+    "minutes": 60,
+    "url": "/courses/llm-architectures/week-08/day-03/",
+    "title": "Run And Inspect The Baseline",
+    "checks": [
+      "a44-p2-c1",
+      "a44-p2-c2",
+      "a44-p2-c3"
+    ],
+    "track": "A"
+  },
+  {
+    "id": "a-week-08-day-04",
+    "week": 8,
+    "day": "Thursday",
+    "dayNumber": 4,
+    "minutes": 60,
+    "url": "/courses/llm-architectures/week-08/day-04/",
+    "title": "Run The Matched Training Ablation",
+    "checks": [
+      "a44-p3-c1",
+      "a44-p3-c2",
+      "a44-p3-c3"
+    ],
+    "track": "A"
+  },
+  {
+    "id": "a-week-08-day-05",
+    "week": 8,
+    "day": "Friday",
+    "dayNumber": 5,
+    "minutes": 60,
+    "url": "/courses/llm-architectures/week-08/day-05/",
+    "title": "Compare Curves And State Limitations",
+    "checks": [
+      "a44-p4-c1",
+      "a44-p4-c2",
+      "a44-p4-c3"
+    ],
+    "track": "A"
+  },
+  {
+    "id": "a-week-08-day-06",
+    "week": 8,
+    "day": "Saturday",
+    "dayNumber": 6,
+    "minutes": 120,
+    "url": "/courses/llm-architectures/week-08/day-06/",
+    "title": "Automate Tiny Training and Numerical Parity + Test Reproduction Failure Handling",
+    "checks": [
+      "a50-p3-c1",
+      "a50-p3-c2",
+      "a50-p3-c3",
+      "a50-p4-c1",
+      "a50-p4-c2",
+      "a50-p4-c3"
+    ],
+    "track": "A"
+  },
+  {
+    "id": "a-week-09-day-01",
+    "week": 9,
+    "day": "Monday",
+    "dayNumber": 1,
+    "minutes": 60,
+    "url": "/courses/llm-architectures/week-09/day-01/",
+    "title": "Prepare a Small Upstream Contribution",
+    "checks": [
+      "a303-p1-c1",
+      "a303-p1-c2",
+      "a303-p1-c3"
+    ],
+    "track": "A"
+  }
+]

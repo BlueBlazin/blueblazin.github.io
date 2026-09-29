@@ -1,0 +1,106 @@
+{
+  "name": "architecture",
+  "directory": "modern-llm-course",
+  "title": "LLM Architectures",
+  "tagline": "PyTorch · JAX · Training & adaptation",
+  "description": "Implement, train, and explain modern language models, from GPT-style decoders to sparse and recurrent architectures.",
+  "color": "#952c3e",
+  "pale": "#fbf0f2",
+  "symbol": "L",
+  "url": "https://blueblazin.github.io/courses/llm-architectures/",
+  "budget": 300,
+  "standard": "Architecture correctness and training",
+  "moduleTitles": [
+    "GPT-style Decoders and Training",
+    "Modern Decoder Components and JAX",
+    "Cross-Framework Parity and KV Caches",
+    "Pretrained Models and Low-Rank Adaptation",
+    "Sparse Experts and Latent Attention",
+    "Hybrid Recurrence and Current Architectures",
+    "Controlled Inference and Training Experiments",
+    "Reproduction and Technical Communication"
+  ],
+  "prerequisites": [
+    "Comfortable writing and debugging Python and NumPy programs.",
+    "Previous exposure to neural networks, backpropagation and PyTorch; the opening sessions refresh implementation habits.",
+    "Matrix multiplication, vector calculus and elementary probability at an undergraduate level.",
+    "An M1 Max MacBook or another machine able to run tiny PyTorch/JAX CPU examples; no NVIDIA GPU is needed to begin."
+  ],
+  "outcomes": [
+    "Implement and train a GPT-style and a Llama-style educational decoder with explicit correctness tests.",
+    "Port the decoder to functional JAX and demonstrate logits, loss and selected-gradient parity with PyTorch.",
+    "Implement KV caching, GQA, LoRA and a small top-2 expert layer, distinguishing mathematical correctness from performance.",
+    "Trace MLA and hybrid recurrent architectures with dimensioned state and memory accounting.",
+    "Run bounded training, adaptation and inference experiments with controlled data, budgets and honest limitations.",
+    "Produce a reproducible GitHub portfolio and a focused upstream contribution draft, or a verified compatibility note when no current issue is found."
+  ],
+  "project": {
+    "title": "A Reproducible Decoder Laboratory",
+    "description": "Build an educational language-model laboratory with independent PyTorch and JAX implementations, carefully tested architectural extensions and a small set of controlled experiments. A reviewer can run the CPU smoke demonstration before inspecting the deeper training and inference evidence.",
+    "requirements": [
+      "Tiny GPT-style and modern decoder implementations with causality, stable-loss and checkpoint tests.",
+      "Shared-weight PyTorch/JAX logits, loss and representative-gradient parity.",
+      "Cache/full-prefix equivalence, a matched GQA/MHA study and explicit cache-byte accounting.",
+      "A LoRA structured-task experiment with frozen base weights, merge checks and held-out outcomes.",
+      "A four-expert top-2 teaching MoE with output/gradient parity and routing diagnostics.",
+      "A bounded small-model training comparison, with equal-token interpretation and seed limitations.",
+      "Architecture notes that label implemented, code-traced and paper-only understanding.",
+      "One-command CPU smoke run, model/data cards, technical report, short explanation and evidence-backed contribution draft or compatibility note."
+    ]
+  },
+  "track": "A",
+  "companions": [
+    {
+      "title": "GPU Kernels & Optimization",
+      "url": "https://blueblazin.github.io/courses/gpu-kernels/"
+    },
+    {
+      "title": "Agent Harness Engineering",
+      "url": "https://blueblazin.github.io/courses/agent-harnesses/"
+    }
+  ],
+  "modules": {
+    "1": "GPT-style Decoders and Training",
+    "2": "Modern Decoder Components and JAX",
+    "3": "Cross-Framework Parity and KV Caches",
+    "4": "Pretrained Models and Low-Rank Adaptation",
+    "5": "Sparse Experts and Latent Attention",
+    "6": "Hybrid Recurrence and Current Architectures",
+    "7": "Controlled Inference and Training Experiments",
+    "8": "Reproduction and Technical Communication",
+    "0": "Orientation & setup",
+    "9": "Independent assessment & portfolio"
+  },
+  "setup": [
+    "Create a dedicated repository with model/, tests/, data/, notes/, experiments/, results/ and reports/. The other courses are not prerequisites.",
+    "Use the M1 Max CPU for references and PyTorch/JAX parity. PyTorch MPS can handle supported local experiments; JAX CPU is the local baseline.",
+    "Pin working environments, data/model revisions and seeds. Begin with tiny shapes and a fixed tokenizer; add paid runs only after a bounded pilot.",
+    "Use the official [PyTorch installation selector](https://pytorch.org/get-started/locally/) and [JAX installation guide](https://docs.jax.dev/en/latest/installation.html) for separate pinned environments. Start JAX on CPU on the M1 Max; NVIDIA-specific work runs remotely."
+  ],
+  "compute": "Use your M1 Max for small CPU references, PyTorch/JAX parity, data checks and supported MPS experiments. Rent a Linux RTX 4090 only for bounded training or inference measurements; move to an A100 only after a memory pilot shows the need. This course does not require H100. Reserve A$220 for GPU time, A$30 for storage/transfers and A$50 for price, tax and currency variation.",
+  "assessment": "\nEvery substantive experiment note should contain the question, falsifiable prediction, baseline, changed variable, data/task IDs, exact commit/configuration, hardware/dtype, correctness criteria, result, cost, confounds, and next experiment. Save machine-readable results alongside the note.\n\n| Criterion | Weight |\n|---|---:|\n| Correctness and reliable failure handling | 30% |\n| Fair evaluation and measurement | 25% |\n| Mechanistic explanation | 20% |\n| Reproducibility and documentation | 15% |\n| Useful independent extension or contribution | 10% |\n\nCorrectness is a gate. An honestly rejected hypothesis can earn full experiment marks.\n\nPrepare one report of about 2–4 pages, or equivalent Markdown, for this course. Include a clear result, a limitation, raw evidence and a command that reproduces a smaller version. Use the Day 0 assessment and portfolio checklists after the relevant practical work. Technical reproduction remains part of the hands-on sequence where scheduled.\n",
+  "standards": "\nUse a tiny configuration for debugging: 2 layers, width 128, a small number of heads, sequence length 32–128. For the main learning run, consider 30–60 million parameters and sequence length 256–512 only if the pilot supports them; a smaller model and token allowance are valid when needed to finish both comparison arms within the available time and budget. Use a fixed tokenizer and a modest, documented TinyStories subset. The parameter count includes embeddings; calculate it rather than trusting a nickname. A 100–300M-token training allowance is a starting ceiling, not a guarantee of useful language quality. A 5–10-minute GPU pilot determines actual tokens/second, peak memory, and the affordable run length. [A12]\n\nUse a deterministic document split before packing/tokenization, with EOS boundaries and a documented cross-document attention policy. For these small labs, keep examples separate or mask boundaries to avoid accidental cross-document leakage. Never split overlapping chunks of the same document across train and validation. Record licenses and model/data revisions. TinyStories is a teaching distribution, not evidence of general coding or reasoning ability.\n\nMust-pass tests:\n\n- Changing token t+1 cannot affect outputs through position t.\n- A very small repeated training batch can be strongly overfit with dropout disabled; choose a realistic threshold for that batch, such as cross-entropy below 0.2, and diagnose failures.\n- Shared PyTorch/JAX parameters produce matching tiny-model outputs, loss, and gradients. Start FP32 CPU checks around `atol=1e-5, rtol=1e-4`; justify operation-specific changes rather than blindly loosening tolerances. Account for layout, epsilon, precision, and random-number differences.\n- Cache-based next-token logits match full-prefix recomputation, including nonzero position offsets. Do not compare sampled text as the primary equality test.\n- Resume includes optimizer, schedule, RNG, and data position, not only model weights. Compare resumed and uninterrupted trajectories under the same supported deterministic setup.\n- LoRA keeps the base frozen, excludes prompt tokens from the intended SFT loss, and evaluates task correctness separately from syntax validity.\n\nFor GQA cache accounting, use `2 × B × L × T × n_kv_heads × head_dim × bytes_per_element`. The factor two is K and V. For standard dense attention scores, memory is proportional to `B × n_query_heads × T × T`. Distinguish model weights, optimizer state, activations, and KV state when explaining memory. Derive an architecture-specific formula for MLA or a recurrent model rather than reusing GQA's formula.\n\nJAX requirements are substantive: a complete functional decoder, explicit parameter/optimizer/RNG state, a jitted train step, shared-weight parity, and a short training run. You need not duplicate every expensive experiment in both frameworks. The scheduled exercises cover `grad`, `vmap` and `jit`. `lax.scan` is an optional control-flow extension after the required work passes; using Flax later is also optional, not a prerequisite for this course.\n\n",
+  "resourceIds": [
+    "A1",
+    "A10",
+    "A11",
+    "A12",
+    "A13",
+    "A2",
+    "A3",
+    "A4",
+    "A5",
+    "A6",
+    "A7",
+    "A8",
+    "A9",
+    "C1",
+    "C4",
+    "P1",
+    "P2",
+    "P3",
+    "P4"
+  ],
+  "slug": "llm-architectures",
+  "basePath": "/courses/llm-architectures"
+}

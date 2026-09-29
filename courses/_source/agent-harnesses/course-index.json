@@ -1,0 +1,900 @@
+[
+  {
+    "id": "h-day0",
+    "week": 1,
+    "day": "Day 0",
+    "minutes": 0,
+    "day0": true,
+    "url": "/courses/agent-harnesses/week-01/day-00/",
+    "title": "Day 0 · Setup & course handbook",
+    "checks": [
+      "day0-h-1",
+      "day0-h-2",
+      "day0-h-3",
+      "day0-h-4"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-01-day-01",
+    "week": 1,
+    "day": "Monday",
+    "dayNumber": 1,
+    "minutes": 60,
+    "url": "/courses/agent-harnesses/week-01/day-01/",
+    "title": "Build the First Bounded Agent Loop",
+    "checks": [
+      "a5-p1-c1",
+      "a5-p1-c2",
+      "a5-p1-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-01-day-02",
+    "week": 1,
+    "day": "Tuesday",
+    "dayNumber": 2,
+    "minutes": 60,
+    "url": "/courses/agent-harnesses/week-01/day-02/",
+    "title": "Validate Typed Tool Call Arguments",
+    "checks": [
+      "a5-p2-c1",
+      "a5-p2-c2",
+      "a5-p2-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-01-day-03",
+    "week": 1,
+    "day": "Wednesday",
+    "dayNumber": 3,
+    "minutes": 60,
+    "url": "/courses/agent-harnesses/week-01/day-03/",
+    "title": "Connect Tool Results To Messages",
+    "checks": [
+      "a5-p3-c1",
+      "a5-p3-c2",
+      "a5-p3-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-01-day-04",
+    "week": 1,
+    "day": "Thursday",
+    "dayNumber": 4,
+    "minutes": 60,
+    "url": "/courses/agent-harnesses/week-01/day-04/",
+    "title": "Verify Every Loop Stopping Condition",
+    "checks": [
+      "a5-p4-c1",
+      "a5-p4-c2",
+      "a5-p4-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-01-day-05",
+    "week": 1,
+    "day": "Friday",
+    "dayNumber": 5,
+    "minutes": 60,
+    "url": "/courses/agent-harnesses/week-01/day-05/",
+    "title": "Build Confined Workspace Read Tools",
+    "checks": [
+      "a6-p1-c1",
+      "a6-p1-c2",
+      "a6-p1-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-01-day-06",
+    "week": 1,
+    "day": "Saturday",
+    "dayNumber": 6,
+    "minutes": 120,
+    "url": "/courses/agent-harnesses/week-01/day-06/",
+    "title": "Add Writes And Structured Traces + Outline Tasks And Build Fixtures",
+    "checks": [
+      "a6-p2-c1",
+      "a6-p2-c2",
+      "a6-p2-c3",
+      "a6-p3-c1",
+      "a6-p3-c2",
+      "a6-p3-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-02-day-01",
+    "week": 2,
+    "day": "Monday",
+    "dayNumber": 1,
+    "minutes": 60,
+    "url": "/courses/agent-harnesses/week-02/day-01/",
+    "title": "Run Three Fixtures End To End",
+    "checks": [
+      "a6-p4-c1",
+      "a6-p4-c2",
+      "a6-p4-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-02-day-02",
+    "week": 2,
+    "day": "Tuesday",
+    "dayNumber": 2,
+    "minutes": 60,
+    "url": "/courses/agent-harnesses/week-02/day-02/",
+    "title": "Isolate Task Processes And Credentials",
+    "checks": [
+      "a12-p1-c1",
+      "a12-p1-c2",
+      "a12-p1-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-02-day-03",
+    "week": 2,
+    "day": "Wednesday",
+    "dayNumber": 3,
+    "minutes": 60,
+    "url": "/courses/agent-harnesses/week-02/day-03/",
+    "title": "Enforce Paths And Tool Authorization",
+    "checks": [
+      "a12-p2-c1",
+      "a12-p2-c2",
+      "a12-p2-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-02-day-04",
+    "week": 2,
+    "day": "Thursday",
+    "dayNumber": 4,
+    "minutes": 60,
+    "url": "/courses/agent-harnesses/week-02/day-04/",
+    "title": "Bound Process Time And Output",
+    "checks": [
+      "a12-p3-c1",
+      "a12-p3-c2",
+      "a12-p3-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-02-day-05",
+    "week": 2,
+    "day": "Friday",
+    "dayNumber": 5,
+    "minutes": 60,
+    "url": "/courses/agent-harnesses/week-02/day-05/",
+    "title": "Verify The Execution Boundary Matrix",
+    "checks": [
+      "a12-p4-c1",
+      "a12-p4-c2",
+      "a12-p4-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-02-day-06",
+    "week": 2,
+    "day": "Saturday",
+    "dayNumber": 6,
+    "minutes": 120,
+    "url": "/courses/agent-harnesses/week-02/day-06/",
+    "title": "Record Events With Stable Identifiers + Replay Mock Runs And Inspect Traces",
+    "checks": [
+      "a13-p1-c1",
+      "a13-p1-c2",
+      "a13-p1-c3",
+      "a13-p2-c1",
+      "a13-p2-c2",
+      "a13-p2-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-03-day-01",
+    "week": 3,
+    "day": "Monday",
+    "dayNumber": 1,
+    "minutes": 60,
+    "url": "/courses/agent-harnesses/week-03/day-01/",
+    "title": "Complete Eight Development Task Fixtures",
+    "checks": [
+      "a13-p3-c1",
+      "a13-p3-c2",
+      "a13-p3-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-03-day-02",
+    "week": 3,
+    "day": "Tuesday",
+    "dayNumber": 2,
+    "minutes": 60,
+    "url": "/courses/agent-harnesses/week-03/day-02/",
+    "title": "Run And Summarize Development Results",
+    "checks": [
+      "a13-p4-c1",
+      "a13-p4-c2",
+      "a13-p4-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-03-day-03",
+    "week": 3,
+    "day": "Wednesday",
+    "dayNumber": 3,
+    "minutes": 60,
+    "url": "/courses/agent-harnesses/week-03/day-03/",
+    "title": "Build Clean Workspace Outcome Evaluation",
+    "checks": [
+      "a19-p1-c1",
+      "a19-p1-c2",
+      "a19-p1-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-03-day-04",
+    "week": 3,
+    "day": "Thursday",
+    "dayNumber": 4,
+    "minutes": 60,
+    "url": "/courses/agent-harnesses/week-03/day-04/",
+    "title": "Implement the Provider Message Adapter",
+    "checks": [
+      "a107-p1-c1",
+      "a107-p1-c2",
+      "a107-p1-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-03-day-05",
+    "week": 3,
+    "day": "Friday",
+    "dayNumber": 5,
+    "minutes": 60,
+    "url": "/courses/agent-harnesses/week-03/day-05/",
+    "title": "Enforce Budgets and Verify the Live Adapter",
+    "checks": [
+      "a19-p2-c1",
+      "a19-p2-c2",
+      "a19-p2-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-03-day-06",
+    "week": 3,
+    "day": "Saturday",
+    "dayNumber": 6,
+    "minutes": 120,
+    "url": "/courses/agent-harnesses/week-03/day-06/",
+    "title": "Integrate and Inspect the Baseline Harness + Compare Two Systems Under Declared Limits",
+    "checks": [
+      "a19-p3-c1",
+      "a19-p3-c2",
+      "a19-p3-c3",
+      "a19-p4-c1",
+      "a19-p4-c2",
+      "a19-p4-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-04-day-01",
+    "week": 4,
+    "day": "Monday",
+    "dayNumber": 1,
+    "minutes": 60,
+    "url": "/courses/agent-harnesses/week-04/day-01/",
+    "title": "Implement Bounded Repository File Listing",
+    "checks": [
+      "a20-p1-c1",
+      "a20-p1-c2",
+      "a20-p1-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-04-day-02",
+    "week": 4,
+    "day": "Tuesday",
+    "dayNumber": 2,
+    "minutes": 60,
+    "url": "/courses/agent-harnesses/week-04/day-02/",
+    "title": "Combine Search With Selected File Reads",
+    "checks": [
+      "a20-p2-c1",
+      "a20-p2-c2",
+      "a20-p2-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-04-day-03",
+    "week": 4,
+    "day": "Wednesday",
+    "dayNumber": 3,
+    "minutes": 60,
+    "url": "/courses/agent-harnesses/week-04/day-03/",
+    "title": "Compare One Context Selection Policy",
+    "checks": [
+      "a20-p3-c1",
+      "a20-p3-c2",
+      "a20-p3-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-04-day-04",
+    "week": 4,
+    "day": "Thursday",
+    "dayNumber": 4,
+    "minutes": 60,
+    "url": "/courses/agent-harnesses/week-04/day-04/",
+    "title": "Explain Lost Evidence And Outcomes",
+    "checks": [
+      "a20-p4-c1",
+      "a20-p4-c2",
+      "a20-p4-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-04-day-05",
+    "week": 4,
+    "day": "Friday",
+    "dayNumber": 5,
+    "minutes": 60,
+    "url": "/courses/agent-harnesses/week-04/day-05/",
+    "title": "Define Durable Agent Run State",
+    "checks": [
+      "a26-p1-c1",
+      "a26-p1-c2",
+      "a26-p1-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-04-day-06",
+    "week": 4,
+    "day": "Saturday",
+    "dayNumber": 6,
+    "minutes": 120,
+    "url": "/courses/agent-harnesses/week-04/day-06/",
+    "title": "Persist Checkpoints Around Tool Actions + Resume And Reconcile Uncertain Actions",
+    "checks": [
+      "a26-p2-c1",
+      "a26-p2-c2",
+      "a26-p2-c3",
+      "a26-p3-c1",
+      "a26-p3-c2",
+      "a26-p3-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-05-day-01",
+    "week": 5,
+    "day": "Monday",
+    "dayNumber": 1,
+    "minutes": 60,
+    "url": "/courses/agent-harnesses/week-05/day-01/",
+    "title": "Interrupt And Verify Mutation Handling",
+    "checks": [
+      "a26-p4-c1",
+      "a26-p4-c2",
+      "a26-p4-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-05-day-02",
+    "week": 5,
+    "day": "Tuesday",
+    "dayNumber": 2,
+    "minutes": 60,
+    "url": "/courses/agent-harnesses/week-05/day-02/",
+    "title": "Define The Compacted Context Record",
+    "checks": [
+      "a27-p1-c1",
+      "a27-p1-c2",
+      "a27-p1-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-05-day-03",
+    "week": 5,
+    "day": "Wednesday",
+    "dayNumber": 3,
+    "minutes": 60,
+    "url": "/courses/agent-harnesses/week-05/day-03/",
+    "title": "Implement Evidence Preserving Context Compaction",
+    "checks": [
+      "a27-p2-c1",
+      "a27-p2-c2",
+      "a27-p2-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-05-day-04",
+    "week": 5,
+    "day": "Thursday",
+    "dayNumber": 4,
+    "minutes": 60,
+    "url": "/courses/agent-harnesses/week-05/day-04/",
+    "title": "Run The Bounded Recent History Baseline",
+    "checks": [
+      "a27-p3-c1",
+      "a27-p3-c2",
+      "a27-p3-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-05-day-05",
+    "week": 5,
+    "day": "Friday",
+    "dayNumber": 5,
+    "minutes": 60,
+    "url": "/courses/agent-harnesses/week-05/day-05/",
+    "title": "Inspect Compaction Information Loss Cases",
+    "checks": [
+      "a27-p4-c1",
+      "a27-p4-c2",
+      "a27-p4-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-05-day-06",
+    "week": 5,
+    "day": "Saturday",
+    "dayNumber": 6,
+    "minutes": 120,
+    "url": "/courses/agent-harnesses/week-05/day-06/",
+    "title": "Trace The Official MCP Tool Interface + Expose One Existing Workspace Tool",
+    "checks": [
+      "a33-p1-c1",
+      "a33-p1-c2",
+      "a33-p1-c3",
+      "a33-p2-c1",
+      "a33-p2-c2",
+      "a33-p2-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-06-day-01",
+    "week": 6,
+    "day": "Monday",
+    "dayNumber": 1,
+    "minutes": 60,
+    "url": "/courses/agent-harnesses/week-06/day-01/",
+    "title": "Compare Direct And Protocol Invocations",
+    "checks": [
+      "a33-p3-c1",
+      "a33-p3-c2",
+      "a33-p3-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-06-day-02",
+    "week": 6,
+    "day": "Tuesday",
+    "dayNumber": 2,
+    "minutes": 60,
+    "url": "/courses/agent-harnesses/week-06/day-02/",
+    "title": "Verify Protocol And Permission Boundaries",
+    "checks": [
+      "a33-p4-c1",
+      "a33-p4-c2",
+      "a33-p4-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-06-day-03",
+    "week": 6,
+    "day": "Wednesday",
+    "dayNumber": 3,
+    "minutes": 60,
+    "url": "/courses/agent-harnesses/week-06/day-03/",
+    "title": "Author Final Tasks 01–04",
+    "checks": [
+      "a108-p1-c1",
+      "a108-p1-c2",
+      "a108-p1-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-06-day-04",
+    "week": 6,
+    "day": "Thursday",
+    "dayNumber": 4,
+    "minutes": 60,
+    "url": "/courses/agent-harnesses/week-06/day-04/",
+    "title": "Author Final Tasks 05–08",
+    "checks": [
+      "a109-p1-c1",
+      "a109-p1-c2",
+      "a109-p1-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-06-day-05",
+    "week": 6,
+    "day": "Friday",
+    "dayNumber": 5,
+    "minutes": 60,
+    "url": "/courses/agent-harnesses/week-06/day-05/",
+    "title": "Author Final Tasks 09–12",
+    "checks": [
+      "a110-p1-c1",
+      "a110-p1-c2",
+      "a110-p1-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-06-day-06",
+    "week": 6,
+    "day": "Saturday",
+    "dayNumber": 6,
+    "minutes": 120,
+    "url": "/courses/agent-harnesses/week-06/day-06/",
+    "title": "Finish the Last Four Final Task Fixtures + Verify Reference And Broken Controls",
+    "checks": [
+      "a34-p1-c1",
+      "a34-p1-c2",
+      "a34-p1-c3",
+      "a34-p2-c1",
+      "a34-p2-c2",
+      "a34-p2-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-07-day-01",
+    "week": 7,
+    "day": "Monday",
+    "dayNumber": 1,
+    "minutes": 60,
+    "url": "/courses/agent-harnesses/week-07/day-01/",
+    "title": "Build the Frozen Task Manifest",
+    "checks": [
+      "a34-p3-c1",
+      "a34-p3-c2",
+      "a34-p3-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-07-day-02",
+    "week": 7,
+    "day": "Tuesday",
+    "dayNumber": 2,
+    "minutes": 60,
+    "url": "/courses/agent-harnesses/week-07/day-02/",
+    "title": "Validate Task and Grader Invariants",
+    "checks": [
+      "a34-p4-c1",
+      "a34-p4-c2",
+      "a34-p4-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-07-day-03",
+    "week": 7,
+    "day": "Wednesday",
+    "dayNumber": 3,
+    "minutes": 60,
+    "url": "/courses/agent-harnesses/week-07/day-03/",
+    "title": "Inject Model Timeout And Rate Limits",
+    "checks": [
+      "a40-p1-c1",
+      "a40-p1-c2",
+      "a40-p1-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-07-day-04",
+    "week": 7,
+    "day": "Thursday",
+    "dayNumber": 4,
+    "minutes": 60,
+    "url": "/courses/agent-harnesses/week-07/day-04/",
+    "title": "Exercise Malformed Calls And Tool Crashes",
+    "checks": [
+      "a40-p2-c1",
+      "a40-p2-c2",
+      "a40-p2-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-07-day-05",
+    "week": 7,
+    "day": "Friday",
+    "dayNumber": 5,
+    "minutes": 60,
+    "url": "/courses/agent-harnesses/week-07/day-05/",
+    "title": "Recover From Stale Summaries And Restarts",
+    "checks": [
+      "a40-p3-c1",
+      "a40-p3-c2",
+      "a40-p3-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-07-day-06",
+    "week": 7,
+    "day": "Saturday",
+    "dayNumber": 6,
+    "minutes": 120,
+    "url": "/courses/agent-harnesses/week-07/day-06/",
+    "title": "Verify The Complete Recovery Failure Matrix + Predeclare The Matched Harness Hypothesis",
+    "checks": [
+      "a40-p4-c1",
+      "a40-p4-c2",
+      "a40-p4-c3",
+      "a41-p1-c1",
+      "a41-p1-c2",
+      "a41-p1-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-08-day-01",
+    "week": 8,
+    "day": "Monday",
+    "dayNumber": 1,
+    "minutes": 60,
+    "url": "/courses/agent-harnesses/week-08/day-01/",
+    "title": "Freeze Metrics Splits And Cost Estimates",
+    "checks": [
+      "a41-p2-c1",
+      "a41-p2-c2",
+      "a41-p2-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-08-day-02",
+    "week": 8,
+    "day": "Tuesday",
+    "dayNumber": 2,
+    "minutes": 60,
+    "url": "/courses/agent-harnesses/week-08/day-02/",
+    "title": "Pilot Both Policies At Context Ceiling",
+    "checks": [
+      "a41-p3-c1",
+      "a41-p3-c2",
+      "a41-p3-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-08-day-03",
+    "week": 8,
+    "day": "Wednesday",
+    "dayNumber": 3,
+    "minutes": 60,
+    "url": "/courses/agent-harnesses/week-08/day-03/",
+    "title": "Implement the Experiment Manifest Loader",
+    "checks": [
+      "a41-p4-c1",
+      "a41-p4-c2",
+      "a41-p4-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-08-day-04",
+    "week": 8,
+    "day": "Thursday",
+    "dayNumber": 4,
+    "minutes": 60,
+    "url": "/courses/agent-harnesses/week-08/day-04/",
+    "title": "Verify Evaluation Manifest And Trial Accounting",
+    "checks": [
+      "a47-p1-c1",
+      "a47-p1-c2",
+      "a47-p1-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-08-day-05",
+    "week": 8,
+    "day": "Friday",
+    "dayNumber": 5,
+    "minutes": 60,
+    "url": "/courses/agent-harnesses/week-08/day-05/",
+    "title": "Launch The First Matched Trial Round",
+    "checks": [
+      "a47-p2-c1",
+      "a47-p2-c2",
+      "a47-p2-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-08-day-06",
+    "week": 8,
+    "day": "Saturday",
+    "dayNumber": 6,
+    "minutes": 120,
+    "url": "/courses/agent-harnesses/week-08/day-06/",
+    "title": "Launch The Second Matched Trial Round + Complete Trials and Verify Outcome Accounting",
+    "checks": [
+      "a47-p3-c1",
+      "a47-p3-c2",
+      "a47-p3-c3",
+      "a47-p4-c1",
+      "a47-p4-c2",
+      "a47-p4-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-09-day-01",
+    "week": 9,
+    "day": "Monday",
+    "dayNumber": 1,
+    "minutes": 60,
+    "url": "/courses/agent-harnesses/week-09/day-01/",
+    "title": "Group Private Suite Failures And Costs",
+    "checks": [
+      "a48-p1-c1",
+      "a48-p1-c2",
+      "a48-p1-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-09-day-02",
+    "week": 9,
+    "day": "Tuesday",
+    "dayNumber": 2,
+    "minutes": 60,
+    "url": "/courses/agent-harnesses/week-09/day-02/",
+    "title": "Inspect Representative Private Task Failure Traces",
+    "checks": [
+      "a48-p2-c1",
+      "a48-p2-c2",
+      "a48-p2-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-09-day-03",
+    "week": 9,
+    "day": "Wednesday",
+    "dayNumber": 3,
+    "minutes": 60,
+    "url": "/courses/agent-harnesses/week-09/day-03/",
+    "title": "Run The Optional Frozen External Pilot",
+    "checks": [
+      "a48-p3-c1",
+      "a48-p3-c2",
+      "a48-p3-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-09-day-04",
+    "week": 9,
+    "day": "Thursday",
+    "dayNumber": 4,
+    "minutes": 60,
+    "url": "/courses/agent-harnesses/week-09/day-04/",
+    "title": "Validate Evaluation Result Tables",
+    "checks": [
+      "a48-p4-c1",
+      "a48-p4-c2",
+      "a48-p4-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-09-day-05",
+    "week": 9,
+    "day": "Friday",
+    "dayNumber": 5,
+    "minutes": 60,
+    "url": "/courses/agent-harnesses/week-09/day-05/",
+    "title": "Audit Outcome Graders Against Saved Evidence",
+    "checks": [
+      "a54-p1-c1",
+      "a54-p1-c2",
+      "a54-p1-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-09-day-06",
+    "week": 9,
+    "day": "Saturday",
+    "dayNumber": 6,
+    "minutes": 120,
+    "url": "/courses/agent-harnesses/week-09/day-06/",
+    "title": "Reconcile Run Budgets And Actual Charges + Calculate Uncertainty Across Paired Task Results",
+    "checks": [
+      "a54-p2-c1",
+      "a54-p2-c2",
+      "a54-p2-c3",
+      "a54-p3-c1",
+      "a54-p3-c2",
+      "a54-p3-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-10-day-01",
+    "week": 10,
+    "day": "Monday",
+    "dayNumber": 1,
+    "minutes": 60,
+    "url": "/courses/agent-harnesses/week-10/day-01/",
+    "title": "Generate Claims From Audited Evidence",
+    "checks": [
+      "a54-p4-c1",
+      "a54-p4-c2",
+      "a54-p4-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-10-day-02",
+    "week": 10,
+    "day": "Tuesday",
+    "dayNumber": 2,
+    "minutes": 60,
+    "url": "/courses/agent-harnesses/week-10/day-02/",
+    "title": "Test Reproduction From a Clean Environment",
+    "checks": [
+      "a302-p1-c1",
+      "a302-p1-c2",
+      "a302-p1-c3"
+    ],
+    "track": "H"
+  },
+  {
+    "id": "h-week-10-day-03",
+    "week": 10,
+    "day": "Wednesday",
+    "dayNumber": 3,
+    "minutes": 60,
+    "url": "/courses/agent-harnesses/week-10/day-03/",
+    "title": "Build a Minimal Upstream Regression Case",
+    "checks": [
+      "a303-p1-c1",
+      "a303-p1-c2",
+      "a303-p1-c3"
+    ],
+    "track": "H"
+  }
+]

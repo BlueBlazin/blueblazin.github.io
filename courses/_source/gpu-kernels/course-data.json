@@ -1,0 +1,58 @@
+{
+  "weeks": {
+    "week1": {
+      "title": "GPU execution and trustworthy measurements",
+      "summary": ""
+    },
+    "week2": {
+      "title": "Stable reductions in Triton",
+      "summary": ""
+    },
+    "week3": {
+      "title": "Tiled matrix multiplication and epilogues",
+      "summary": ""
+    },
+    "week4": {
+      "title": "Online softmax and restricted attention",
+      "summary": ""
+    },
+    "week5": {
+      "title": "Differentiable kernels and PyTorch integration",
+      "summary": ""
+    },
+    "week6": {
+      "title": "Pallas and staged GPU computation",
+      "summary": ""
+    },
+    "week7": {
+      "title": "Whole-model performance and clean reproduction",
+      "summary": ""
+    },
+    "week8": {
+      "title": "Systems reporting and upstream contribution",
+      "summary": ""
+    },
+    "week0": {
+      "title": "Orientation & setup",
+      "summary": ""
+    },
+    "final": {
+      "title": "Independent assessment & portfolio",
+      "summary": ""
+    }
+  },
+  "projects": [
+    {
+      "title": "Kernel Lab: correct operators, measured systems results",
+      "description": "An independent GPU engineering repository spanning CUDA, Triton, PyTorch integration, and Pallas, with a supplied tiny decoder workload and a reproducible systems report.",
+      "requirements": [
+        "Keep a shape/dtype/layout/precision contract and edge-case tests for every advertised custom operator.",
+        "Provide raw repeated timings, pinned hardware/software manifests, synchronized timing boundaries, and eager/compiled framework baselines.",
+        "Show actual supported-dtype gradients and decoder-level parity for custom RMSNorm; CPU gradcheck alone is insufficient.",
+        "Include actual H100 Pallas evidence, or label that requirement incomplete if hardware execution remains blocked.",
+        "Measure model-level prefill and cached decode using deterministic fixture weights; do not claim trained-model quality or frontier-scale speedups.",
+        "Package reproducible scripts, a focused report, clean-checkout evidence, and a legitimate contribution draft where a real issue was found."
+      ]
+    }
+  ]
+}

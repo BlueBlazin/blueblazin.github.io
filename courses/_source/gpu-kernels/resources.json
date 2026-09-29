@@ -1,0 +1,231 @@
+[
+  {
+    "id": "KR01",
+    "title": "CUDA C++ Best Practices Guide",
+    "url": "https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html",
+    "kind": "documentation",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html",
+    "provenance": "NVIDIA official guide"
+  },
+  {
+    "id": "KR02",
+    "title": "Triton: Vector Addition",
+    "url": "https://triton-lang.org/main/getting-started/tutorials/01-vector-add.html",
+    "kind": "tutorial",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://triton-lang.org/main/getting-started/tutorials/01-vector-add.html",
+    "provenance": "Triton official tutorial"
+  },
+  {
+    "id": "KR03",
+    "title": "Triton: Fused Softmax",
+    "url": "https://triton-lang.org/main/getting-started/tutorials/02-fused-softmax.html",
+    "kind": "tutorial",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://triton-lang.org/main/getting-started/tutorials/02-fused-softmax.html",
+    "provenance": "Triton official tutorial"
+  },
+  {
+    "id": "KR04",
+    "title": "Triton: Matrix Multiplication",
+    "url": "https://triton-lang.org/main/getting-started/tutorials/03-matrix-multiplication.html",
+    "kind": "tutorial",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://triton-lang.org/main/getting-started/tutorials/03-matrix-multiplication.html",
+    "provenance": "Triton official tutorial"
+  },
+  {
+    "id": "KR05",
+    "title": "Triton normalization tutorial source",
+    "url": "https://github.com/triton-lang/triton/blob/main/python/tutorials/05-layer-norm.py",
+    "kind": "code",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://github.com/triton-lang/triton/blob/main/python/tutorials/05-layer-norm.py",
+    "provenance": "Triton official repository",
+    "notes": "The rendered documentation page returned503 twice; the official source is accessible. It implements LayerNorm. Borrow reduction mechanics, not mean subtraction or its unchanged derivative, for RMSNorm."
+  },
+  {
+    "id": "KR06",
+    "title": "Triton: Fused Attention",
+    "url": "https://triton-lang.org/main/getting-started/tutorials/06-fused-attention.html",
+    "kind": "tutorial",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://triton-lang.org/main/getting-started/tutorials/06-fused-attention.html",
+    "provenance": "Triton official tutorial",
+    "notes": "Read only the forward dataflow for this course. Current production tutorial includes descriptors and hardware-specific features beyond the restricted learner implementation."
+  },
+  {
+    "id": "KR07",
+    "title": "Custom C++ and CUDA Operators",
+    "url": "https://docs.pytorch.org/tutorials/advanced/cpp_custom_ops.html",
+    "kind": "tutorial",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://docs.pytorch.org/tutorials/advanced/cpp_custom_ops.html",
+    "provenance": "PyTorch official tutorial"
+  },
+  {
+    "id": "KR08",
+    "title": "PyTorch Profiler",
+    "url": "https://docs.pytorch.org/tutorials/recipes/recipes/profiler_recipe.html",
+    "kind": "tutorial",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://docs.pytorch.org/tutorials/recipes/recipes/profiler_recipe.html",
+    "provenance": "PyTorch official recipe"
+  },
+  {
+    "id": "KR09",
+    "title": "Root Mean Square Layer Normalization",
+    "url": "https://arxiv.org/abs/1910.07467",
+    "kind": "paper",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://arxiv.org/abs/1910.07467",
+    "provenance": "Original RMSNorm paper, Biao Zhang and Rico Sennrich"
+  },
+  {
+    "id": "KR10",
+    "title": "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness",
+    "url": "https://arxiv.org/abs/2205.14135",
+    "kind": "paper",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://arxiv.org/abs/2205.14135",
+    "provenance": "Original FlashAttention authors",
+    "publishedOn": "2022-05-27"
+  },
+  {
+    "id": "KR11",
+    "title": "Using User-Defined Triton Kernels with torch.compile",
+    "url": "https://docs.pytorch.org/tutorials/recipes/torch_compile_user_defined_triton_kernel_tutorial.html",
+    "kind": "tutorial",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://docs.pytorch.org/tutorials/recipes/torch_compile_user_defined_triton_kernel_tutorial.html",
+    "provenance": "PyTorch official recipe"
+  },
+  {
+    "id": "KR12",
+    "title": "Pallas GPU quickstart",
+    "url": "https://docs.jax.dev/en/latest/pallas/gpu/quickstart.html",
+    "kind": "tutorial",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://docs.jax.dev/en/latest/pallas/gpu/quickstart.html",
+    "provenance": "JAX official documentation"
+  },
+  {
+    "id": "KR13",
+    "title": "Mosaic GPU Pipelining",
+    "url": "https://docs.jax.dev/en/latest/pallas/gpu/pipelining.html",
+    "kind": "tutorial",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://docs.jax.dev/en/latest/pallas/gpu/pipelining.html",
+    "provenance": "JAX official documentation"
+  },
+  {
+    "id": "KR14",
+    "title": "Benchmarking JAX code",
+    "url": "https://docs.jax.dev/en/latest/benchmarking.html",
+    "kind": "documentation",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://docs.jax.dev/en/latest/benchmarking.html",
+    "provenance": "JAX official documentation"
+  },
+  {
+    "id": "KR15",
+    "title": "FlashAttention-4 engineering article",
+    "url": "https://www.together.ai/blog/flashattention-4",
+    "kind": "blog",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://www.together.ai/blog/flashattention-4",
+    "provenance": "Article by the FlashAttention-4 authors",
+    "publishedOn": "2026-03-05"
+  },
+  {
+    "id": "KR16",
+    "title": "CuTe DSL Quick Start Guide",
+    "url": "https://docs.nvidia.com/cutlass/latest/media/docs/pythonDSL/quick_start.html",
+    "kind": "documentation",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://docs.nvidia.com/cutlass/latest/media/docs/pythonDSL/quick_start.html",
+    "provenance": "NVIDIA CUTLASS official documentation"
+  },
+  {
+    "id": "KR17",
+    "title": "PyTorch numerical accuracy",
+    "url": "https://docs.pytorch.org/docs/2.14/notes/numerical_accuracy.html",
+    "kind": "documentation",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://docs.pytorch.org/docs/2.14/notes/numerical_accuracy.html",
+    "provenance": "PyTorch official documentation"
+  },
+  {
+    "id": "KR18",
+    "title": "PyTorch scaled_dot_product_attention",
+    "url": "https://docs.pytorch.org/docs/2.14/generated/torch.nn.functional.scaled_dot_product_attention.html",
+    "kind": "documentation",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://docs.pytorch.org/docs/2.14/generated/torch.nn.functional.scaled_dot_product_attention.html",
+    "provenance": "PyTorch official API reference"
+  },
+  {
+    "id": "KR19",
+    "title": "torch.compile API and dynamic-shape behavior",
+    "url": "https://docs.pytorch.org/docs/2.14/generated/torch.compile.html",
+    "kind": "documentation",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://docs.pytorch.org/docs/2.14/generated/torch.compile.html",
+    "provenance": "PyTorch official API reference"
+  },
+  {
+    "id": "KR20",
+    "title": "PyTorch inference_mode",
+    "url": "https://docs.pytorch.org/docs/2.14/generated/torch.autograd.grad_mode.inference_mode.html",
+    "kind": "documentation",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://docs.pytorch.org/docs/2.14/generated/torch.autograd.grad_mode.inference_mode.html",
+    "provenance": "PyTorch official API reference"
+  },
+  {
+    "id": "KV01",
+    "title": "GPU MODE Lecture 1: How to profile CUDA kernels in PyTorch",
+    "url": "https://www.youtube.com/watch?v=LuhJEEJQgUM",
+    "kind": "video",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://github.com/gpu-mode/lectures",
+    "provenance": "GPU MODE publisher channel; official gpu-mode/lectures lists Mark Saroufim and lecture 001 materials",
+    "youtubeId": "LuhJEEJQgUM",
+    "verification": "Primary YouTube search metadata and the publisher lecture repository confirm title/channel/ID. Playback and chapter timestamps were not inspected."
+  },
+  {
+    "id": "KV02",
+    "title": "GPU MODE Lecture 3: Getting Started With CUDA for Python Programmers",
+    "url": "https://www.youtube.com/watch?v=4sgKnKbR-WE",
+    "kind": "video",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://github.com/gpu-mode/lectures",
+    "provenance": "GPU MODE publisher channel; official lecture repository lists Jeremy Howard and lecture 003 materials",
+    "youtubeId": "4sgKnKbR-WE",
+    "verification": "Primary YouTube search metadata and the publisher lecture repository confirm title/channel/ID. Playback and chapter timestamps were not inspected."
+  },
+  {
+    "id": "KV03",
+    "title": "GPU MODE Lecture 14: Practitioner's Guide to Triton",
+    "url": "https://www.youtube.com/watch?v=DdTsX6DQk24",
+    "kind": "video",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://github.com/gpu-mode/lectures",
+    "provenance": "GPU MODE publisher channel; official repository lists Umer Adil,2024-04-13",
+    "youtubeId": "DdTsX6DQk24",
+    "verification": "Primary YouTube search metadata and the publisher lecture repository confirm title/channel/ID. Playback and chapter timestamps were not inspected.",
+    "publishedOn": "2024-04-13"
+  },
+  {
+    "id": "KV04",
+    "title": "GPU MODE Lecture 8: CUDA Performance Checklist",
+    "url": "https://www.youtube.com/watch?v=SGhfUhlowB4",
+    "kind": "video",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://github.com/gpu-mode/lectures",
+    "provenance": "GPU MODE publisher channel; official lecture repository lists Mark Saroufim and lecture 008 materials",
+    "youtubeId": "SGhfUhlowB4",
+    "verification": "Primary YouTube search metadata and the publisher lecture repository confirm title/channel/ID. Playback and chapter timestamps were not inspected."
+  }
+]

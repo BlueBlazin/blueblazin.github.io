@@ -1,0 +1,370 @@
+[
+  {
+    "id": 1,
+    "module": 1,
+    "track": "H",
+    "hours": 4,
+    "work": "Build a raw model/tool loop with an explicit state machine, typed tool arguments, max steps, terminal result, and fake deterministic model responses. Read H1/H2.",
+    "evidence": "Unit scenarios for successful tool use, malformed call, exception, timeout, and step-budget exhaustion",
+    "title": "Build the Model and Tool Loop",
+    "resources": [
+      "H1",
+      "H2"
+    ],
+    "source_id": 5
+  },
+  {
+    "id": 2,
+    "module": 1,
+    "track": "H",
+    "hours": 4,
+    "work": "Add read/search/write tools confined to a disposable workspace; mock command execution until Activity 3 isolation. Outline a 24-task suite (8 development, 16 final) and build the first 3 development fixtures.",
+    "evidence": "First 3 development tasks run end-to-end; full traces include tool calls, outcomes, time, and cost",
+    "title": "Add Workspace Tools and Task Fixtures",
+    "resources": [
+      "H2"
+    ],
+    "source_id": 6
+  },
+  {
+    "id": 3,
+    "module": 2,
+    "track": "H",
+    "hours": 4,
+    "work": "Introduce fresh-process/container execution, timeouts, output caps, workspace boundaries, and host-side tool authorization. Keep credentials outside task environments.",
+    "evidence": "Automated tests for path traversal/symlinks, infinite process, excessive output, and unauthorized network/tool requests",
+    "title": "Enforce Tool and Process Execution Boundaries",
+    "resources": [],
+    "source_id": 12
+  },
+  {
+    "id": 4,
+    "module": 2,
+    "track": "H",
+    "hours": 4,
+    "work": "Implement append-only events, stable run IDs, failure categories, and mock-model replay. Complete the 8 development fixtures; verify their reference solutions and broken/no-op controls, then run the development suite.",
+    "evidence": "A small development report and a trace viewer or readable CLI; no final-task result inspection",
+    "title": "Record Events and Evaluate Development Tasks",
+    "resources": [
+      "H4"
+    ],
+    "source_id": 13
+  },
+  {
+    "id": 5,
+    "module": 3,
+    "track": "H",
+    "hours": 4,
+    "work": "Build the shared evaluator, connect a pinned provider through the added adapter bridge, and enforce pre-request budgets. Compare the typed-tool harness with pinned mini-SWE-agent on two development tasks as a descriptive systems pilot; disclose prompt/tool differences. Read H3/H4/H9.",
+    "evidence": "Both systems run from one command with recorded common model/task/resource constraints and explicit interface differences; no causal context-policy claim.",
+    "title": "Build the Evaluator and Compare Baselines",
+    "resources": [
+      "H3",
+      "H4",
+      "H9"
+    ],
+    "source_id": 19
+  },
+  {
+    "id": 6,
+    "module": 3,
+    "track": "H",
+    "hours": 4,
+    "work": "Implement bounded repository navigation using file listing, exact search, selected reads, and output truncation. Test one context-selection policy on development tasks.",
+    "evidence": "At least one controlled experiment and a written account of where retrieval lost necessary evidence",
+    "title": "Experiment With Bounded Repository Navigation",
+    "resources": [
+      "H3"
+    ],
+    "source_id": 20
+  },
+  {
+    "id": 7,
+    "module": 4,
+    "track": "H",
+    "hours": 4,
+    "work": "Persist model messages, tool outcomes, workspace version, and run state. Implement resume semantics; uncertain mutating actions require reconciliation instead of blind replay. Read H5.",
+    "evidence": "Interrupt before/after a tool action, restart, and demonstrate that edits are not duplicated silently",
+    "title": "Persist Agent State and Implement Resume",
+    "resources": [
+      "H5"
+    ],
+    "source_id": 26
+  },
+  {
+    "id": 8,
+    "module": 4,
+    "track": "H",
+    "hours": 4,
+    "work": "Implement one context-compaction policy retaining objective, decisions, evidence pointers, changed files, and pending actions. Contrast it with a bounded recent-history baseline on development tasks.",
+    "evidence": "Explicit compaction budget and a failure case where summarization dropped essential information",
+    "title": "Compare Context Compaction With Recent History",
+    "resources": [
+      "H5"
+    ],
+    "source_id": 27
+  },
+  {
+    "id": 9,
+    "module": 5,
+    "track": "H",
+    "hours": 4,
+    "work": "Expose one existing read/search tool through the official MCP SDK. Compare this adapter with direct function invocation. Read H6.",
+    "evidence": "Same functional outcome; capability/permission check still occurs outside model output; protocol smoke test",
+    "title": "Expose One Existing Tool Through MCP",
+    "resources": [
+      "H6"
+    ],
+    "source_id": 33
+  },
+  {
+    "id": 10,
+    "module": 5,
+    "track": "H",
+    "hours": 4,
+    "work": "After the three added fixture-authoring hours produce twelve final tasks, complete the last four and validate all sixteen with reference/no-op/broken controls. Freeze the24-task manifest without agent calls. Optional Harbor setup remains bounded by the existing scheduled hour.",
+    "evidence": "All 24 task IDs, fixtures, and graders frozen; optional external revisions recorded before final results",
+    "title": "Freeze Final Tasks and Verify Graders",
+    "resources": [
+      "H4"
+    ],
+    "optionalResources": [
+      "H7"
+    ],
+    "scopeNote": "Harbor setup and a frozen ten-task external benchmark subset are optional; cap setup at one scheduled hour.",
+    "source_id": 34
+  },
+  {
+    "id": 11,
+    "module": 6,
+    "track": "H",
+    "hours": 4,
+    "work": "Inject failures: model timeout, rate limit, malformed arguments, tool crash, stale summary, and restart. Test retry/cancellation and bounded recovery.",
+    "evidence": "Recovery tests distinguish transient failures from permanent errors and uncertain side effects",
+    "title": "Inject Agent Failures and Test Recovery",
+    "resources": [
+      "H5"
+    ],
+    "source_id": 40
+  },
+  {
+    "id": 12,
+    "module": 6,
+    "track": "H",
+    "hours": 4,
+    "work": "Freeze the final hypothesis: recent-history baseline versus evidence-preserving compaction, same model and budgets. Predeclare metrics/task splits and run a development pilot that actually reaches the shared context ceiling and activates both policies. Read H8.",
+    "evidence": "Written experiment plan, cost estimate, frozen harness commits, and no final-set-driven prompt tuning",
+    "title": "Freeze the Matched Budget Harness Experiment",
+    "resources": [
+      "H8",
+      "H4"
+    ],
+    "source_id": 41
+  },
+  {
+    "id": 13,
+    "module": 7,
+    "track": "H",
+    "hours": 4,
+    "work": "Evaluate the 16 final private tasks for two harness conditions and three trials per condition, subject to per-trial limits. Use deterministic outcome graders.",
+    "evidence": "96 attempted trials, with failures/timeouts included; raw traces and per-task outcome table",
+    "title": "Run the Held Out Harness Evaluation",
+    "resources": [
+      "H4",
+      "H8"
+    ],
+    "source_id": 47
+  },
+  {
+    "id": 14,
+    "module": 7,
+    "track": "H",
+    "hours": 4,
+    "work": "Analyze required private-suite failures and costs. Optionally run the frozen 10-task external subset once per condition if setup and budget gates passed.",
+    "evidence": "Required private-study analysis; if run, 20 external trials labeled as a small-subset pilot, not a leaderboard score",
+    "title": "Analyze Private Suite Failures and Costs",
+    "resources": [
+      "H4",
+      "H8"
+    ],
+    "optionalResources": [
+      "H7"
+    ],
+    "scopeNote": "The twenty-trial external pilot is optional and runs only if setup and budget gates passed.",
+    "source_id": 48
+  },
+  {
+    "id": 15,
+    "module": 8,
+    "track": "H",
+    "hours": 4,
+    "work": "Audit outcome grading and budget accounting. Calculate uncertainty summaries; examine representative successes and failures without retuning the frozen result.",
+    "evidence": "Per-task clustered analysis and a limitations section; follow-up ideas separated from reported experiment",
+    "title": "Audit Grading Budgets and Evaluation Uncertainty",
+    "resources": [
+      "H4",
+      "H8"
+    ],
+    "source_id": 54
+  },
+  {
+    "id": 16,
+    "module": 8,
+    "track": "H",
+    "hours": 4,
+    "work": "Write the harness report and demo restart, a successful task, and a safely terminated failure.",
+    "evidence": "Reproducible commands, example traces, cost table, and one concise demonstration",
+    "title": "Write the Harness Report and Demonstration",
+    "resources": [],
+    "source_id": 55
+  },
+  {
+    "id": 101,
+    "module": 0,
+    "track": "I",
+    "hours": 1,
+    "title": "Prepare the Standalone Harness Repository",
+    "work": "Create an independent Python repository, verify the local environment, and record a reproducible development workflow.",
+    "evidence": "A clean repository, passing environment smoke check, and versioned setup notes.",
+    "resources": [
+      "H2"
+    ]
+  },
+  {
+    "id": 102,
+    "module": 0,
+    "track": "I",
+    "hours": 1,
+    "title": "Set the Evaluation and Spending Ground Rules",
+    "work": "Create an evaluation notebook defining outcomes, development boundaries, and the course spending ledger before experiments begin.",
+    "evidence": "An evaluation charter with a worked grading example, the 8/16 split rule, and an API spending plan.",
+    "resources": [
+      "H4"
+    ]
+  },
+  {
+    "id": 202,
+    "module": 2,
+    "track": "R",
+    "hours": 1,
+    "title": "Assessment: Boundaries, Events, and Development Evaluation",
+    "work": "Complete a closed-book boundary assessment and demonstrate that recorded outcomes match actual tool effects.",
+    "evidence": "A scored six-point assessment, one boundary trace, and a repaired or explicitly blocked gate.",
+    "resources": [
+      "H4"
+    ]
+  },
+  {
+    "id": 204,
+    "module": 4,
+    "track": "R",
+    "hours": 1,
+    "title": "Assessment: Resume and Context Policies",
+    "work": "Test an interrupted mutation and compare two valid context payloads under one declared ceiling.",
+    "evidence": "A scored six-point assessment plus a restart trace and a matched-context comparison.",
+    "resources": [
+      "H5"
+    ]
+  },
+  {
+    "id": 206,
+    "module": 6,
+    "track": "R",
+    "hours": 1,
+    "title": "Assessment: Authorize the Frozen Experiment",
+    "work": "Audit the final manifest and development pilot before permitting any held-out agent evaluation.",
+    "evidence": "A scored six-point assessment and an explicit go/no-go record for the 96-attempt study.",
+    "resources": [
+      "H8",
+      "H4"
+    ]
+  },
+  {
+    "id": 301,
+    "module": 9,
+    "track": "F",
+    "hours": 1,
+    "title": "Assemble the Evidence Index",
+    "work": "Connect each portfolio claim to frozen code, experiment records, and the smallest supporting artifact.",
+    "evidence": "A release evidence index with every headline claim traceable to a specific artifact.",
+    "resources": []
+  },
+  {
+    "id": 302,
+    "module": 9,
+    "track": "F",
+    "hours": 1,
+    "title": "Run a Clean Checkout Reproduction",
+    "work": "Use only the README in a fresh environment to reproduce a cheap deterministic demonstration and inspect the saved study.",
+    "evidence": "A clean-checkout reproduction log with setup gaps corrected and paid reruns clearly separated.",
+    "resources": []
+  },
+  {
+    "id": 303,
+    "module": 9,
+    "track": "F",
+    "hours": 1,
+    "title": "Prepare One Small External Contribution",
+    "work": "Turn one verified dependency or documentation issue into a minimal, reproducible contribution draft.",
+    "evidence": "A focused issue or patch draft with a reproducer, or a documented no-issue finding and useful local clarification.",
+    "resources": []
+  },
+  {
+    "id": 304,
+    "module": 9,
+    "track": "F",
+    "hours": 1,
+    "title": "Finish the Standalone Portfolio Release",
+    "work": "Create a concise project entry, audit release contents, and identify the next experiment without changing the reported result.",
+    "evidence": "A reviewable release candidate with a README entry point, evidence links, and one bounded follow-up proposal.",
+    "resources": []
+  },
+  {
+    "id": 107,
+    "module": 3,
+    "track": "H",
+    "hours": 1,
+    "title": "Implement the Provider Message Adapter",
+    "work": "Connect the raw loop to one pinned provider SDK using offline response fixtures before enabling paid requests.",
+    "evidence": "A tested adapter preserves tool IDs, content blocks, stop reasons, and usage without making live calls.",
+    "resources": [
+      "H9"
+    ]
+  },
+  {
+    "id": 108,
+    "module": 5,
+    "track": "H",
+    "hours": 1,
+    "title": "Author Final Tasks 01–04",
+    "work": "Prepare four final-task specifications with genuinely distinct behaviors, using the existing fixture/grader template.",
+    "evidence": "Four new final fixtures (final-01 through final-04) with reference-pass/no-op-fail controls and recorded task families.",
+    "resources": [
+      "H4"
+    ]
+  },
+  {
+    "id": 109,
+    "module": 5,
+    "track": "H",
+    "hours": 1,
+    "title": "Author Final Tasks 05–08",
+    "work": "Author four more final fixtures and verify their reference/no-op controls without agent runs.",
+    "evidence": "Four new final fixtures (final-05 through final-08) with reference-pass/no-op-fail controls and recorded task families.",
+    "resources": [
+      "H4"
+    ]
+  },
+  {
+    "id": 110,
+    "module": 5,
+    "track": "H",
+    "hours": 1,
+    "title": "Author Final Tasks 09–12",
+    "work": "Author four final fixtures, checking both solvability and separation from development feedback.",
+    "evidence": "Four new final fixtures (final-09 through final-12) with reference-pass/no-op-fail controls and recorded task families.",
+    "resources": [
+      "H4"
+    ]
+  }
+]

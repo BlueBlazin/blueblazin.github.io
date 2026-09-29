@@ -1,0 +1,1076 @@
+{
+  "dispositions": {
+    "1-1": {
+      "placement": "day0",
+      "reason": "Setup or refresher material belongs in optional readiness before Day1; keep it available but do not allocate a regular course day.",
+      "section": "optional-readiness-diagnostic"
+    },
+    "1-2": {
+      "placement": "scheduled",
+      "reason": "Substantive implementation, experiment, mathematical trace, or technical analysis; retain the existing step ID and prerequisite order."
+    },
+    "1-3": {
+      "placement": "scheduled",
+      "reason": "Substantive implementation, experiment, mathematical trace, or technical analysis; retain the existing step ID and prerequisite order."
+    },
+    "1-4": {
+      "placement": "scheduled",
+      "reason": "Substantive implementation, experiment, mathematical trace, or technical analysis; retain the existing step ID and prerequisite order."
+    },
+    "2-1": {
+      "placement": "scheduled",
+      "reason": "Substantive implementation, experiment, mathematical trace, or technical analysis; retain the existing step ID and prerequisite order."
+    },
+    "2-2": {
+      "placement": "scheduled",
+      "reason": "Substantive implementation, experiment, mathematical trace, or technical analysis; retain the existing step ID and prerequisite order."
+    },
+    "2-3": {
+      "placement": "scheduled",
+      "reason": "Substantive implementation, experiment, mathematical trace, or technical analysis; retain the existing step ID and prerequisite order."
+    },
+    "2-4": {
+      "placement": "scheduled",
+      "reason": "Substantive implementation, experiment, mathematical trace, or technical analysis; retain the existing step ID and prerequisite order."
+    },
+    "3-1": {
+      "placement": "scheduled",
+      "reason": "Substantive implementation, experiment, mathematical trace, or technical analysis; retain the existing step ID and prerequisite order."
+    },
+    "3-2": {
+      "placement": "scheduled",
+      "reason": "Substantive implementation, experiment, mathematical trace, or technical analysis; retain the existing step ID and prerequisite order."
+    },
+    "3-3": {
+      "placement": "scheduled",
+      "reason": "Substantive implementation, experiment, mathematical trace, or technical analysis; retain the existing step ID and prerequisite order."
+    },
+    "3-4": {
+      "placement": "scheduled",
+      "reason": "Substantive implementation, experiment, mathematical trace, or technical analysis; retain the existing step ID and prerequisite order."
+    },
+    "4-1": {
+      "placement": "scheduled",
+      "reason": "Substantive implementation, experiment, mathematical trace, or technical analysis; retain the existing step ID and prerequisite order."
+    },
+    "4-2": {
+      "placement": "scheduled",
+      "reason": "Substantive implementation, experiment, mathematical trace, or technical analysis; retain the existing step ID and prerequisite order."
+    },
+    "4-3": {
+      "placement": "scheduled",
+      "reason": "Substantive implementation, experiment, mathematical trace, or technical analysis; retain the existing step ID and prerequisite order."
+    },
+    "4-4": {
+      "placement": "scheduled",
+      "reason": "Substantive implementation, experiment, mathematical trace, or technical analysis; retain the existing step ID and prerequisite order."
+    },
+    "5-1": {
+      "placement": "scheduled",
+      "reason": "Substantive implementation, experiment, mathematical trace, or technical analysis; retain the existing step ID and prerequisite order."
+    },
+    "5-2": {
+      "placement": "scheduled",
+      "reason": "Substantive implementation, experiment, mathematical trace, or technical analysis; retain the existing step ID and prerequisite order."
+    },
+    "5-3": {
+      "placement": "scheduled",
+      "reason": "Substantive implementation, experiment, mathematical trace, or technical analysis; retain the existing step ID and prerequisite order."
+    },
+    "5-4": {
+      "placement": "scheduled",
+      "reason": "Substantive implementation, experiment, mathematical trace, or technical analysis; retain the existing step ID and prerequisite order."
+    },
+    "6-1": {
+      "placement": "scheduled",
+      "reason": "Substantive implementation, experiment, mathematical trace, or technical analysis; retain the existing step ID and prerequisite order."
+    },
+    "6-2": {
+      "placement": "scheduled",
+      "reason": "Substantive implementation, experiment, mathematical trace, or technical analysis; retain the existing step ID and prerequisite order."
+    },
+    "6-3": {
+      "placement": "scheduled",
+      "reason": "Substantive implementation, experiment, mathematical trace, or technical analysis; retain the existing step ID and prerequisite order."
+    },
+    "6-4": {
+      "placement": "scheduled",
+      "reason": "Retain technical code/measurement work; move generic setup, documentation templates and administration to Day0 references."
+    },
+    "7-1": {
+      "placement": "scheduled",
+      "reason": "Substantive implementation, experiment, mathematical trace, or technical analysis; retain the existing step ID and prerequisite order."
+    },
+    "7-2": {
+      "placement": "scheduled",
+      "reason": "Substantive implementation, experiment, mathematical trace, or technical analysis; retain the existing step ID and prerequisite order."
+    },
+    "7-3": {
+      "placement": "scheduled",
+      "reason": "Substantive implementation, experiment, mathematical trace, or technical analysis; retain the existing step ID and prerequisite order."
+    },
+    "7-4": {
+      "placement": "scheduled",
+      "reason": "Substantive implementation, experiment, mathematical trace, or technical analysis; retain the existing step ID and prerequisite order."
+    },
+    "8-1": {
+      "placement": "scheduled",
+      "reason": "Substantive implementation, experiment, mathematical trace, or technical analysis; retain the existing step ID and prerequisite order."
+    },
+    "8-2": {
+      "placement": "scheduled",
+      "reason": "Substantive implementation, experiment, mathematical trace, or technical analysis; retain the existing step ID and prerequisite order."
+    },
+    "8-3": {
+      "placement": "scheduled",
+      "reason": "Substantive implementation, experiment, mathematical trace, or technical analysis; retain the existing step ID and prerequisite order."
+    },
+    "8-4": {
+      "placement": "scheduled",
+      "reason": "Substantive implementation, experiment, mathematical trace, or technical analysis; retain the existing step ID and prerequisite order."
+    },
+    "9-1": {
+      "placement": "scheduled",
+      "reason": "Substantive implementation, experiment, mathematical trace, or technical analysis; retain the existing step ID and prerequisite order."
+    },
+    "9-2": {
+      "placement": "scheduled",
+      "reason": "Substantive implementation, experiment, mathematical trace, or technical analysis; retain the existing step ID and prerequisite order."
+    },
+    "9-3": {
+      "placement": "scheduled",
+      "reason": "Substantive implementation, experiment, mathematical trace, or technical analysis; retain the existing step ID and prerequisite order."
+    },
+    "9-4": {
+      "placement": "scheduled",
+      "reason": "Substantive implementation, experiment, mathematical trace, or technical analysis; retain the existing step ID and prerequisite order."
+    },
+    "10-1": {
+      "placement": "scheduled",
+      "reason": "Substantive implementation, experiment, mathematical trace, or technical analysis; retain the existing step ID and prerequisite order."
+    },
+    "10-2": {
+      "placement": "scheduled",
+      "reason": "Substantive implementation, experiment, mathematical trace, or technical analysis; retain the existing step ID and prerequisite order."
+    },
+    "10-3": {
+      "placement": "scheduled",
+      "reason": "Substantive implementation, experiment, mathematical trace, or technical analysis; retain the existing step ID and prerequisite order."
+    },
+    "10-4": {
+      "placement": "scheduled",
+      "reason": "Substantive implementation, experiment, mathematical trace, or technical analysis; retain the existing step ID and prerequisite order."
+    },
+    "11-1": {
+      "placement": "scheduled",
+      "reason": "Substantive implementation, experiment, mathematical trace, or technical analysis; retain the existing step ID and prerequisite order."
+    },
+    "11-2": {
+      "placement": "scheduled",
+      "reason": "Substantive implementation, experiment, mathematical trace, or technical analysis; retain the existing step ID and prerequisite order."
+    },
+    "11-3": {
+      "placement": "scheduled",
+      "reason": "Substantive implementation, experiment, mathematical trace, or technical analysis; retain the existing step ID and prerequisite order."
+    },
+    "11-4": {
+      "placement": "scheduled",
+      "reason": "Substantive implementation, experiment, mathematical trace, or technical analysis; retain the existing step ID and prerequisite order."
+    },
+    "12-1": {
+      "placement": "scheduled",
+      "reason": "Substantive implementation, experiment, mathematical trace, or technical analysis; retain the existing step ID and prerequisite order."
+    },
+    "12-2": {
+      "placement": "scheduled",
+      "reason": "Substantive implementation, experiment, mathematical trace, or technical analysis; retain the existing step ID and prerequisite order."
+    },
+    "12-3": {
+      "placement": "scheduled",
+      "reason": "Substantive implementation, experiment, mathematical trace, or technical analysis; retain the existing step ID and prerequisite order."
+    },
+    "12-4": {
+      "placement": "reference",
+      "reason": "Standalone review, planning template or presentation/admin task. Link from Day0 for use when the relevant artifacts exist; do not ask the learner to produce future results on Day0.",
+      "section": "architecture-comparison-checkpoint"
+    },
+    "13-1": {
+      "placement": "scheduled",
+      "reason": "Substantive implementation, experiment, mathematical trace, or technical analysis; retain the existing step ID and prerequisite order."
+    },
+    "13-2": {
+      "placement": "scheduled",
+      "reason": "Substantive implementation, experiment, mathematical trace, or technical analysis; retain the existing step ID and prerequisite order."
+    },
+    "13-3": {
+      "placement": "scheduled",
+      "reason": "Substantive implementation, experiment, mathematical trace, or technical analysis; retain the existing step ID and prerequisite order."
+    },
+    "13-4": {
+      "placement": "scheduled",
+      "reason": "Substantive implementation, experiment, mathematical trace, or technical analysis; retain the existing step ID and prerequisite order."
+    },
+    "14-1": {
+      "placement": "scheduled",
+      "reason": "Retain technical code/measurement work; move generic setup, documentation templates and administration to Day0 references."
+    },
+    "14-2": {
+      "placement": "scheduled",
+      "reason": "Substantive implementation, experiment, mathematical trace, or technical analysis; retain the existing step ID and prerequisite order."
+    },
+    "14-3": {
+      "placement": "scheduled",
+      "reason": "Substantive implementation, experiment, mathematical trace, or technical analysis; retain the existing step ID and prerequisite order."
+    },
+    "14-4": {
+      "placement": "scheduled",
+      "reason": "Substantive implementation, experiment, mathematical trace, or technical analysis; retain the existing step ID and prerequisite order."
+    },
+    "15-1": {
+      "placement": "reference",
+      "reason": "Standalone review, planning template or presentation/admin task. Link from Day0 for use when the relevant artifacts exist; do not ask the learner to produce future results on Day0.",
+      "section": "reproduction-template"
+    },
+    "15-2": {
+      "placement": "reference",
+      "reason": "Standalone review, planning template or presentation/admin task. Link from Day0 for use when the relevant artifacts exist; do not ask the learner to produce future results on Day0.",
+      "section": "reproduction-template"
+    },
+    "15-3": {
+      "placement": "scheduled",
+      "reason": "Retain technical code/measurement work; move generic setup, documentation templates and administration to Day0 references."
+    },
+    "15-4": {
+      "placement": "scheduled",
+      "reason": "Retain technical code/measurement work; move generic setup, documentation templates and administration to Day0 references."
+    },
+    "16-1": {
+      "placement": "reference",
+      "reason": "Standalone review, planning template or presentation/admin task. Link from Day0 for use when the relevant artifacts exist; do not ask the learner to produce future results on Day0.",
+      "section": "portfolio-guide"
+    },
+    "16-2": {
+      "placement": "reference",
+      "reason": "Standalone review, planning template or presentation/admin task. Link from Day0 for use when the relevant artifacts exist; do not ask the learner to produce future results on Day0.",
+      "section": "portfolio-guide"
+    },
+    "16-3": {
+      "placement": "reference",
+      "reason": "Standalone review, planning template or presentation/admin task. Link from Day0 for use when the relevant artifacts exist; do not ask the learner to produce future results on Day0.",
+      "section": "portfolio-guide"
+    },
+    "16-4": {
+      "placement": "reference",
+      "reason": "Standalone review, planning template or presentation/admin task. Link from Day0 for use when the relevant artifacts exist; do not ask the learner to produce future results on Day0.",
+      "section": "portfolio-guide"
+    },
+    "intro-1": {
+      "placement": "day0",
+      "reason": "Setup or refresher material belongs in optional readiness before Day1; keep it available but do not allocate a regular course day.",
+      "section": "environment-and-workspace"
+    },
+    "intro-2": {
+      "placement": "day0",
+      "reason": "Setup or refresher material belongs in optional readiness before Day1; keep it available but do not allocate a regular course day.",
+      "section": "optional-tensor-refresher"
+    },
+    "review-2": {
+      "placement": "reference",
+      "reason": "Standalone review, planning template or presentation/admin task. Link from Day0 for use when the relevant artifacts exist; do not ask the learner to produce future results on Day0.",
+      "section": "self-assessment"
+    },
+    "flex-2": {
+      "placement": "reference",
+      "reason": "Standalone review, planning template or presentation/admin task. Link from Day0 for use when the relevant artifacts exist; do not ask the learner to produce future results on Day0.",
+      "section": "when-stuck"
+    },
+    "review-4": {
+      "placement": "reference",
+      "reason": "Standalone review, planning template or presentation/admin task. Link from Day0 for use when the relevant artifacts exist; do not ask the learner to produce future results on Day0.",
+      "section": "self-assessment"
+    },
+    "flex-4": {
+      "placement": "reference",
+      "reason": "Standalone review, planning template or presentation/admin task. Link from Day0 for use when the relevant artifacts exist; do not ask the learner to produce future results on Day0.",
+      "section": "when-stuck"
+    },
+    "review-6": {
+      "placement": "reference",
+      "reason": "Standalone review, planning template or presentation/admin task. Link from Day0 for use when the relevant artifacts exist; do not ask the learner to produce future results on Day0.",
+      "section": "self-assessment"
+    },
+    "flex-6": {
+      "placement": "reference",
+      "reason": "Standalone review, planning template or presentation/admin task. Link from Day0 for use when the relevant artifacts exist; do not ask the learner to produce future results on Day0.",
+      "section": "when-stuck"
+    },
+    "flex-8": {
+      "placement": "reference",
+      "reason": "Standalone review, planning template or presentation/admin task. Link from Day0 for use when the relevant artifacts exist; do not ask the learner to produce future results on Day0.",
+      "section": "when-stuck"
+    },
+    "final-1": {
+      "placement": "reference",
+      "reason": "Standalone review, planning template or presentation/admin task. Link from Day0 for use when the relevant artifacts exist; do not ask the learner to produce future results on Day0.",
+      "section": "self-assessment"
+    },
+    "final-2": {
+      "placement": "reference",
+      "reason": "Standalone review, planning template or presentation/admin task. Link from Day0 for use when the relevant artifacts exist; do not ask the learner to produce future results on Day0.",
+      "section": "reviewer-checklist"
+    },
+    "final-3": {
+      "placement": "scheduled",
+      "reason": "Substantive implementation, experiment, mathematical trace, or technical analysis; retain the existing step ID and prerequisite order."
+    },
+    "final-4": {
+      "placement": "reference",
+      "reason": "Standalone review, planning template or presentation/admin task. Link from Day0 for use when the relevant artifacts exist; do not ask the learner to produce future results on Day0.",
+      "section": "portfolio-guide"
+    }
+  },
+  "lessonResources": {
+    "1-2": [
+      {
+        "id": "AR01",
+        "focus": "Cross-entropy/log-sum-exp derivation only; skip tokenizer construction.",
+        "minutes": 6,
+        "optional": false
+      },
+      {
+        "id": "AR02",
+        "focus": "Input/target shapes and reduction for the reference loss.",
+        "minutes": 4,
+        "optional": false
+      }
+    ],
+    "1-3": [
+      {
+        "id": "AR01",
+        "focus": "Scaled dot-product attention and causal masking; derive the shape before looking at reference code.",
+        "minutes": 10,
+        "optional": false
+      },
+      {
+        "id": "AV01",
+        "focus": "Use the video chapter on a single self-attention head; watch at most ten minutes, then return to your own shape/mask implementation. The ten-minute reading block; do not add it to the hour.",
+        "minutes": 10,
+        "optional": true,
+        "alternativeToReading": true,
+        "embed": true
+      }
+    ],
+    "1-4": [
+      {
+        "id": "AR03",
+        "focus": "Block.forward and MLP.forward only, after drafting the residual equations.",
+        "minutes": 10,
+        "optional": false
+      },
+      {
+        "id": "AV01",
+        "focus": "Use the chapter selector for residual connections and layer normalization; watch at most ten minutes instead of reading model.py. The ten-minute reading block.",
+        "minutes": 10,
+        "optional": true,
+        "alternativeToReading": true,
+        "embed": true
+      }
+    ],
+    "2-1": [
+      {
+        "id": "AR03",
+        "focus": "GPT.__init__ and forward: embedding, block stack, final norm and tied output head.",
+        "minutes": 10,
+        "optional": false
+      },
+      {
+        "id": "AV01",
+        "focus": "Use the complete-transformer assembly chapter as a ten-minute alternative to the source-code reading. The ten-minute reading block.",
+        "minutes": 10,
+        "optional": true,
+        "alternativeToReading": true,
+        "embed": true
+      }
+    ],
+    "2-2": [
+      {
+        "id": "AR04",
+        "focus": "AdamW update equation and epsilon/weight-decay arguments; calculate the first step.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "2-3": [
+      {
+        "id": "AR03",
+        "focus": "generate: final-position logits, cropping and token append; use the course stopping rule.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "2-4": [
+      {
+        "id": "AR05",
+        "focus": "Saving & Loading a General Checkpoint; distinguish model and optimizer state.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "3-1": [
+      {
+        "id": "AR01",
+        "focus": "RMSNorm and SwiGLU component formulas and parameter shapes only.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "3-2": [
+      {
+        "id": "AR07",
+        "focus": "Rotary construction and relative-position inner-product identity.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "3-3": [
+      {
+        "id": "AR08",
+        "focus": "Method and attention-group diagram; MHA/GQA/MQA head sharing.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "3-4": [
+      {
+        "id": "AR06",
+        "focus": "Architecture discussion: compare normalization, feedforward and attention choices, not benchmark results.",
+        "minutes": 6,
+        "optional": false
+      },
+      {
+        "id": "AR08",
+        "focus": "Query/KV head assignment used by the integrated model.",
+        "minutes": 4,
+        "optional": false
+      }
+    ],
+    "4-1": [
+      {
+        "id": "AR09",
+        "focus": "Nested parameter trees and tree_map examples.",
+        "minutes": 5,
+        "optional": false
+      },
+      {
+        "id": "AR10",
+        "focus": "Explicit keys and splitting; read the key-reuse example.",
+        "minutes": 5,
+        "optional": false
+      }
+    ],
+    "4-2": [
+      {
+        "id": "AR12",
+        "focus": "grad over a scalar function.",
+        "minutes": 4,
+        "optional": false
+      },
+      {
+        "id": "AR11",
+        "focus": "vmap mapped batch axes.",
+        "minutes": 3,
+        "optional": false
+      },
+      {
+        "id": "AR13",
+        "focus": "jit tracing and cache reuse for unchanged shapes.",
+        "minutes": 3,
+        "optional": false
+      }
+    ],
+    "4-3": [
+      {
+        "id": "AR09",
+        "focus": "Tree leaves and mapping across parameter structures; apply to your NumPy conversion map.",
+        "minutes": 5,
+        "optional": false
+      },
+      {
+        "id": "AR01",
+        "focus": "RMSNorm/SwiGLU formulas used as the framework-independent contract.",
+        "minutes": 5,
+        "optional": false
+      }
+    ],
+    "4-4": [
+      {
+        "id": "AR12",
+        "focus": "Differentiating nested parameters and checking gradients.",
+        "minutes": 6,
+        "optional": false
+      },
+      {
+        "id": "AR15",
+        "focus": "Floating-point tolerances and error accumulation.",
+        "minutes": 4,
+        "optional": false
+      }
+    ],
+    "5-1": [
+      {
+        "id": "AR14",
+        "focus": "Explicit parameters/state in a pure model function.",
+        "minutes": 6,
+        "optional": false
+      },
+      {
+        "id": "AR09",
+        "focus": "A parameter tree whose leaves have the intended dimensions.",
+        "minutes": 4,
+        "optional": false
+      }
+    ],
+    "5-2": [
+      {
+        "id": "AR09",
+        "focus": "Matching tree structure and mapping leaves; check layouts independently.",
+        "minutes": 5,
+        "optional": false
+      },
+      {
+        "id": "AR26",
+        "focus": "assert_close semantics for shapes, dtype and tolerance.",
+        "minutes": 5,
+        "optional": false
+      }
+    ],
+    "5-3": [
+      {
+        "id": "AR14",
+        "focus": "A simple training loop returning updated explicit state.",
+        "minutes": 6,
+        "optional": false
+      },
+      {
+        "id": "AR04",
+        "focus": "Cross-check epsilon, decay and first-step AdamW arithmetic.",
+        "minutes": 4,
+        "optional": false
+      }
+    ],
+    "5-4": [
+      {
+        "id": "AR15",
+        "focus": "Batched versus sliced floating-point behavior and near-zero comparisons.",
+        "minutes": 5,
+        "optional": false
+      },
+      {
+        "id": "AR26",
+        "focus": "assert_close reporting and tolerance rules.",
+        "minutes": 5,
+        "optional": false
+      }
+    ],
+    "6-1": [
+      {
+        "id": "AR16",
+        "focus": "Cache growth, attention-mask length and cache-position semantics.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "6-2": [
+      {
+        "id": "AR16",
+        "focus": "Iterative generation with an explicit cache; audit position and mask alignment.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "6-3": [
+      {
+        "id": "AR17",
+        "focus": "Dataset source, available splits and license; freeze a small subset.",
+        "minutes": 6,
+        "optional": false
+      },
+      {
+        "id": "AR18",
+        "focus": "Warm-up and block_until_ready when timing JAX.",
+        "minutes": 4,
+        "optional": false
+      }
+    ],
+    "6-4": [
+      {
+        "id": "AR18",
+        "focus": "Separate compilation, transfer and steady-state completed work.",
+        "minutes": 6,
+        "optional": false
+      },
+      {
+        "id": "AR34",
+        "focus": "Warm-up and synchronization pitfalls; use your small timing helper.",
+        "minutes": 4,
+        "optional": false
+      }
+    ],
+    "7-1": [
+      {
+        "id": "AR19",
+        "focus": "Low-rank parametrization and scaling; derive factor dimensions.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "7-2": [
+      {
+        "id": "AR19",
+        "focus": "Zero-update initialization and inference merge interpretation.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "7-3": [
+      {
+        "id": "AR20",
+        "focus": "How to use, base versus instruct, tokenizer and configuration; pin a revision.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "7-4": [
+      {
+        "id": "AR21",
+        "focus": "Llama projection/module configuration and causal-model interface.",
+        "minutes": 5,
+        "optional": false
+      },
+      {
+        "id": "AR19",
+        "focus": "Adapter target selection and frozen-base interpretation.",
+        "minutes": 5,
+        "optional": false
+      }
+    ],
+    "8-1": [
+      {
+        "id": "AR22",
+        "focus": "properties, required, and additionalProperties for the exact extraction schema.",
+        "minutes": 6,
+        "optional": false
+      },
+      {
+        "id": "AR17",
+        "focus": "Use the dataset-card pattern to record provenance and split choices for your generated data.",
+        "minutes": 4,
+        "optional": false
+      }
+    ],
+    "8-2": [
+      {
+        "id": "AR21",
+        "focus": "LlamaForCausalLM labels and ignore-index semantics.",
+        "minutes": 5,
+        "optional": false
+      },
+      {
+        "id": "AR23",
+        "focus": "Decoder-only generation output: isolate newly generated tokens and control decoding.",
+        "minutes": 5,
+        "optional": false
+      }
+    ],
+    "8-3": [
+      {
+        "id": "AR19",
+        "focus": "Frozen-base adaptation and what the trainable intervention includes.",
+        "minutes": 5,
+        "optional": false
+      },
+      {
+        "id": "AR05",
+        "focus": "Save/reload model and optimizer state; adapt the checkpoint contract to your adapters.",
+        "minutes": 5,
+        "optional": false
+      }
+    ],
+    "8-4": [
+      {
+        "id": "AR24",
+        "focus": "Counts versus normalized accuracy; apply exact-field grading without adding a library dependency.",
+        "minutes": 5,
+        "optional": false
+      },
+      {
+        "id": "AR22",
+        "focus": "Required fields and extra-property handling in your validity metric.",
+        "minutes": 5,
+        "optional": false
+      }
+    ],
+    "9-1": [
+      {
+        "id": "AR25",
+        "focus": "Architecture/routing definition; contrast routed and shared experts with the simpler toy.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "9-2": [
+      {
+        "id": "AR25",
+        "focus": "Weighted routed-expert sum; keep the course top-2 normalization fixed.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "9-3": [
+      {
+        "id": "AR26",
+        "focus": "assert_close for output and gradient comparisons, including useful failure messages.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "9-4": [
+      {
+        "id": "AR25",
+        "focus": "Routing and load balance motivation; counts are not evidence of expert specialization.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "10-1": [
+      {
+        "id": "AR27",
+        "focus": "Sections 2.1.2 and 2.1.3: content latent and positional projections.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "10-2": [
+      {
+        "id": "AR27",
+        "focus": "Sections 2.1.2 and 2.1.3: inference absorption and the retained positional key.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "10-3": [
+      {
+        "id": "AR27",
+        "focus": "Section 2.1.4: cache representations and their accounting assumptions.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "10-4": [
+      {
+        "id": "AR27",
+        "focus": "Sections 2.1.2–2.1.4: check the specific compression and cache claims in your derivation.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "11-1": [
+      {
+        "id": "AR28",
+        "focus": "Model Overview: exact 0.8B layer layout, head counts and recurrent/attention components.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "11-2": [
+      {
+        "id": "AR29",
+        "focus": "Section 3.1, equation 10: decay and delta correction; trace one token.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "11-3": [
+      {
+        "id": "AR28",
+        "focus": "Model Overview dimensions; distinguish illustrative state arithmetic from actual model dimensions.",
+        "minutes": 5,
+        "optional": false
+      },
+      {
+        "id": "AR29",
+        "focus": "Section 3.4: mixer components and any state beyond the recurrent matrix.",
+        "minutes": 5,
+        "optional": false
+      }
+    ],
+    "11-4": [
+      {
+        "id": "AR29",
+        "focus": "Sections 3.3–3.4: recurrent decode versus parallel training and hybrid composition.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "12-1": [
+      {
+        "id": "AR30",
+        "focus": "Model architecture for ONE named variant; record supported attention/cache/routing details.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "12-2": [
+      {
+        "id": "AR31",
+        "focus": "Architecture section: CSA/HCA, retained state and routing; compare mechanisms rather than scores.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "12-3": [
+      {
+        "id": "AR32",
+        "focus": "DPO objective and preference-pair inputs, not the full derivation.",
+        "minutes": 3,
+        "optional": false
+      },
+      {
+        "id": "AR33",
+        "focus": "GRPO description: sampled groups, rewards and group-relative baseline.",
+        "minutes": 4,
+        "optional": false
+      },
+      {
+        "id": "AR30",
+        "focus": "Multimodal inputs and architecture interface for the chosen variant.",
+        "minutes": 3,
+        "optional": false
+      }
+    ],
+    "13-1": [
+      {
+        "id": "AR08",
+        "focus": "Grouped head count and changed K/V projection dimensions.",
+        "minutes": 4,
+        "optional": false
+      },
+      {
+        "id": "AR34",
+        "focus": "Benchmark scope, warm-up and synchronization before coding the paired timing helper.",
+        "minutes": 6,
+        "optional": false
+      }
+    ],
+    "13-2": [
+      {
+        "id": "AR16",
+        "focus": "Retained cache dimensions and capacity versus used positions.",
+        "minutes": 5,
+        "optional": false
+      },
+      {
+        "id": "AR26",
+        "focus": "Numerical assertions that gate the experiment before timing.",
+        "minutes": 5,
+        "optional": false
+      }
+    ],
+    "13-3": [
+      {
+        "id": "AR34",
+        "focus": "Warm-up, synchronized timing, repeated measurements and excluding setup.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "13-4": [
+      {
+        "id": "AR34",
+        "focus": "Measurement variability and comparing equivalent work.",
+        "minutes": 5,
+        "optional": false
+      },
+      {
+        "id": "AR35",
+        "focus": "Explicit Axes and labels for prefill/decode comparison plots.",
+        "minutes": 5,
+        "optional": false
+      }
+    ],
+    "14-1": [
+      {
+        "id": "AR36",
+        "focus": "Sources of randomness and deterministic reproduction controls.",
+        "minutes": 6,
+        "optional": false
+      },
+      {
+        "id": "AR04",
+        "focus": "The one AdamW weight-decay setting varied by the ablation.",
+        "minutes": 4,
+        "optional": false
+      }
+    ],
+    "14-2": [
+      {
+        "id": "AR05",
+        "focus": "Saving & Loading a General Checkpoint: resumption state.",
+        "minutes": 6,
+        "optional": false
+      },
+      {
+        "id": "AR17",
+        "focus": "Verify unchanged data split and provenance before interpreting validation.",
+        "minutes": 4,
+        "optional": false
+      }
+    ],
+    "14-3": [
+      {
+        "id": "AR36",
+        "focus": "Random generators and deterministic settings; seeds alone do not freeze data order.",
+        "minutes": 6,
+        "optional": false
+      },
+      {
+        "id": "AR05",
+        "focus": "Restoring the common initial state rather than trained baseline weights.",
+        "minutes": 4,
+        "optional": false
+      }
+    ],
+    "14-4": [
+      {
+        "id": "AR35",
+        "focus": "Plotting multiple series on explicit axes, with labels and legends.",
+        "minutes": 5,
+        "optional": false
+      },
+      {
+        "id": "AR17",
+        "focus": "Dataset scope and provenance to bound the learning-curve conclusion.",
+        "minutes": 5,
+        "optional": false
+      }
+    ],
+    "15-3": [
+      {
+        "id": "AR37",
+        "focus": "subprocess.run with check=True and explicit arguments for the tiny training/parity commands.",
+        "minutes": 5,
+        "optional": false
+      },
+      {
+        "id": "AR26",
+        "focus": "Assertions and nonzero failures for the automated parity gate.",
+        "minutes": 5,
+        "optional": false
+      }
+    ],
+    "15-4": [
+      {
+        "id": "AR37",
+        "focus": "check, timeout and CalledProcessError: preserve child-process failure.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "final-3": [
+      {
+        "id": "AR38",
+        "focus": "Contribution workflow, regression tests and scope; follow the actual target repository guide if different.",
+        "minutes": 10,
+        "optional": false
+      }
+    ]
+  },
+  "day0": {
+    "summary": "Do only the readiness work you need, then start Day1 by implementing stable next-token loss. Setup, review questions and portfolio instructions are collected here so they do not interrupt the technical sequence. The later-use sections are reference checklists, not work to complete before learning.",
+    "readyChecks": [
+      "Create or reuse an isolated Python environment; verify NumPy and PyTorch on CPU. Prepare JAX CPU in the same environment only if versions are compatible, otherwise document a separate environment.",
+      "Create or reuse model/, tests/, data/, notes/, experiments/, results/ and reports/. Keep model downloads, generated datasets, checkpoints and credentials out of Git.",
+      "Run fixed 2×3 and 3×2 matrix multiplication and an autograd smoke calculation; reuse existing evidence if it already passes.",
+      "Read the one-page study rhythm, budget cap and save-at-the-hour policy. Install no GPU stack and rent no hardware to begin."
+    ],
+    "skipRule": "If the environment, repository and smoke checks already work, mark readiness complete and go directly to Day1. The diagnostic and tensor refresher are optional aids, not an entrance exam.",
+    "timebox": "Use up to one hour as needed; typically much less for an already working environment. If installation blocks, resolve readiness before starting Day1, with no Sunday catch-up requirement.",
+    "sections": [
+      {
+        "title": "Environment and repository",
+        "text": "Create or reuse isolated CPU environments and the course directories. Record versions and keep downloaded models, generated data and credentials outside committed code. Skip this section if the existing environment already passes.",
+        "resources": [
+          "AR39",
+          "AR40"
+        ]
+      },
+      {
+        "title": "Optional tensor and diagnostic refresher",
+        "text": "Use the relocated intro-2 tensor checks or1-1 diagnostic only when a prerequisite feels rusty. These are optional readiness tools, not compulsory prerequisite reports.",
+        "resources": [
+          "AR26"
+        ]
+      },
+      {
+        "title": "Optional concept checkpoints",
+        "text": "Preview the checkpoint list only; skip questions whose material has not been learned. Use an individual question when its mechanism has been implemented; the final defense belongs after the experiments. No new scheduled review days.",
+        "resources": [],
+        "sourceKeys": [
+          "1-1",
+          "review-2",
+          "review-4",
+          "review-6",
+          "final-1"
+        ]
+      },
+      {
+        "title": "When a check fails",
+        "text": "Read the four-step stop/save/debug/continue policy; do not manufacture a blocker. As needed inside the current session; save a minimal failure and pause dependent work rather than scheduling Sunday catch-up.",
+        "resources": [],
+        "sourceKeys": [
+          "flex-2",
+          "flex-4",
+          "flex-6",
+          "flex-8"
+        ]
+      },
+      {
+        "title": "Architecture comparison template",
+        "text": "Preview the implemented/code-traced/paper-only legend; leave evidence cells blank. Use after the architecture tracing lessons to consolidate the existing comparisons.",
+        "resources": [],
+        "sourceKeys": [
+          "12-4"
+        ]
+      },
+      {
+        "title": "Reproducible input and environment template",
+        "text": "Create the empty manifest and environment convention, not a fake final checkpoint inventory. Record artifacts as they are produced; use the clean-run instructions when the executable smoke command exists.",
+        "resources": [],
+        "sourceKeys": [
+          "15-1",
+          "15-2"
+        ]
+      },
+      {
+        "title": "Portfolio cards, report, explanation and release guide",
+        "text": "Preview the expected evidence and save the templates. Final reports, recordings and release tags cannot be completed before the project exists. Fill from completed code and measurements; required truthfulness/correctness standards remain visible.",
+        "resources": [],
+        "sourceKeys": [
+          "16-1",
+          "16-2",
+          "16-3",
+          "16-4",
+          "final-4"
+        ]
+      },
+      {
+        "title": "Reviewer experience checklist",
+        "text": "Read what a reviewer should be able to run; no fresh final clone exists yet. After the executable reproduction command exists, use this checklist as a reference; it is not another mandatory class day.",
+        "resources": [],
+        "sourceKeys": [
+          "final-2"
+        ]
+      }
+    ]
+  }
+}

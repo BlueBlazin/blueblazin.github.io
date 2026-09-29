@@ -1,0 +1,59 @@
+{
+  "weeks": {
+    "week1": {
+      "title": "Agent Loops and Workspace Tools",
+      "summary": ""
+    },
+    "week2": {
+      "title": "Execution Boundaries and Event Logs",
+      "summary": ""
+    },
+    "week3": {
+      "title": "Outcome Evaluation and Repository Navigation",
+      "summary": ""
+    },
+    "week4": {
+      "title": "Persistence and Context Policies",
+      "summary": ""
+    },
+    "week5": {
+      "title": "MCP Interoperability and Task Freeze",
+      "summary": ""
+    },
+    "week6": {
+      "title": "Recovery and Experiment Design",
+      "summary": ""
+    },
+    "week7": {
+      "title": "Held-Out Evaluation and Failure Analysis",
+      "summary": ""
+    },
+    "week8": {
+      "title": "Audits, Uncertainty, and Technical Reporting",
+      "summary": ""
+    },
+    "week0": {
+      "title": "Orientation & setup",
+      "summary": ""
+    },
+    "final": {
+      "title": "Independent assessment & portfolio",
+      "summary": ""
+    }
+  },
+  "projects": [
+    {
+      "title": "A Budgeted Coding-Agent Harness",
+      "description": "An independent Python harness with observable tools, restart recovery, context policies, and a controlled empirical study. The portfolio combines an inspectable implementation with evidence about how bounded recent history compares with evidence-preserving compaction.",
+      "requirements": [
+        "A raw loop with explicit terminal states, validated tools, enforced limits, and deterministic fake-model tests.",
+        "Controlled disposable execution, permission checks, failure injection, append-only events, and supported resume reconciliation.",
+        "A 24-task private suite: eight development tasks and sixteen final tasks, with reference/no-op/broken grader controls.",
+        "A frozen 16 × 2 × 3 = 96-attempt study comparing context policies with one pinned model, matched tools/budgets, inclusive overhead, and every failure retained.",
+        "An MCP adapter and direct/protocol parity tests preserving host authorization.",
+        "A technical report with paired per-task outcomes, honest uncertainty, cost tables, reproducible commands, and a success/restart/bounded-failure demo.",
+        "A clean-checkout verification path, evidence index, and minimal external contribution draft or verified compatibility finding."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,730 @@
+[
+  {
+    "id": "k-day0",
+    "week": 1,
+    "day": "Day 0",
+    "minutes": 0,
+    "day0": true,
+    "url": "/courses/gpu-kernels/week-01/day-00/",
+    "title": "Day 0 · Setup & course handbook",
+    "checks": [
+      "day0-k-1",
+      "day0-k-2",
+      "day0-k-3",
+      "day0-k-4",
+      "day0-k-5"
+    ],
+    "track": "K"
+  },
+  {
+    "id": "k-week-01-day-01",
+    "week": 1,
+    "day": "Monday",
+    "dayNumber": 1,
+    "minutes": 60,
+    "url": "/courses/gpu-kernels/week-01/day-01/",
+    "title": "Model GPU Indexing and Memory Traffic Locally",
+    "checks": [
+      "a3-p1-c1",
+      "a3-p1-c2",
+      "a3-p1-c3"
+    ],
+    "track": "K"
+  },
+  {
+    "id": "k-week-01-day-02",
+    "week": 1,
+    "day": "Tuesday",
+    "dayNumber": 2,
+    "minutes": 60,
+    "url": "/courses/gpu-kernels/week-01/day-02/",
+    "title": "Build Reliable GPU Timing Utilities",
+    "checks": [
+      "a3-p3-c1",
+      "a3-p3-c2",
+      "a3-p3-c3"
+    ],
+    "track": "K"
+  },
+  {
+    "id": "k-week-01-day-03",
+    "week": 1,
+    "day": "Wednesday",
+    "dayNumber": 3,
+    "minutes": 60,
+    "url": "/courses/gpu-kernels/week-01/day-03/",
+    "title": "Profile and Explain Dominant Operations",
+    "checks": [
+      "a3-p4-c1",
+      "a3-p4-c2",
+      "a3-p4-c3"
+    ],
+    "track": "K"
+  },
+  {
+    "id": "k-week-01-day-04",
+    "week": 1,
+    "day": "Thursday",
+    "dayNumber": 4,
+    "minutes": 60,
+    "url": "/courses/gpu-kernels/week-01/day-04/",
+    "title": "Write CUDA Vector Addition Indexing",
+    "checks": [
+      "a4-p1-c1",
+      "a4-p1-c2",
+      "a4-p1-c3"
+    ],
+    "track": "K"
+  },
+  {
+    "id": "k-week-01-day-05",
+    "week": 1,
+    "day": "Friday",
+    "dayNumber": 5,
+    "minutes": 60,
+    "url": "/courses/gpu-kernels/week-01/day-05/",
+    "title": "Validate CUDA Boundaries and Timing",
+    "checks": [
+      "a4-p2-c1",
+      "a4-p2-c2",
+      "a4-p2-c3"
+    ],
+    "track": "K"
+  },
+  {
+    "id": "k-week-01-day-06",
+    "week": 1,
+    "day": "Saturday",
+    "dayNumber": 6,
+    "minutes": 120,
+    "url": "/courses/gpu-kernels/week-01/day-06/",
+    "title": "Implement Triton Vector Addition Masks + Compare Both Vector Addition Implementations",
+    "checks": [
+      "a4-p3-c1",
+      "a4-p3-c2",
+      "a4-p3-c3",
+      "a4-p4-c1",
+      "a4-p4-c2",
+      "a4-p4-c3"
+    ],
+    "track": "K"
+  },
+  {
+    "id": "k-week-02-day-01",
+    "week": 2,
+    "day": "Monday",
+    "dayNumber": 1,
+    "minutes": 60,
+    "url": "/courses/gpu-kernels/week-02/day-01/",
+    "title": "Derive Stable Row Softmax",
+    "checks": [
+      "a10-p1-c1",
+      "a10-p1-c2",
+      "a10-p1-c3"
+    ],
+    "track": "K"
+  },
+  {
+    "id": "k-week-02-day-02",
+    "week": 2,
+    "day": "Tuesday",
+    "dayNumber": 2,
+    "minutes": 60,
+    "url": "/courses/gpu-kernels/week-02/day-02/",
+    "title": "Implement Triton Softmax Reductions",
+    "checks": [
+      "a10-p2-c1",
+      "a10-p2-c2",
+      "a10-p2-c3"
+    ],
+    "track": "K"
+  },
+  {
+    "id": "k-week-02-day-03",
+    "week": 2,
+    "day": "Wednesday",
+    "dayNumber": 3,
+    "minutes": 60,
+    "url": "/courses/gpu-kernels/week-02/day-03/",
+    "title": "Handle Softmax Tails and Extremes",
+    "checks": [
+      "a10-p3-c1",
+      "a10-p3-c2",
+      "a10-p3-c3"
+    ],
+    "track": "K"
+  },
+  {
+    "id": "k-week-02-day-04",
+    "week": 2,
+    "day": "Thursday",
+    "dayNumber": 4,
+    "minutes": 60,
+    "url": "/courses/gpu-kernels/week-02/day-04/",
+    "title": "Benchmark Softmax Against Both Baselines",
+    "checks": [
+      "a10-p4-c1",
+      "a10-p4-c2",
+      "a10-p4-c3"
+    ],
+    "track": "K"
+  },
+  {
+    "id": "k-week-02-day-05",
+    "week": 2,
+    "day": "Friday",
+    "dayNumber": 5,
+    "minutes": 60,
+    "url": "/courses/gpu-kernels/week-02/day-05/",
+    "title": "Specify RMSNorm Precision and Shapes",
+    "checks": [
+      "a11-p1-c1",
+      "a11-p1-c2",
+      "a11-p1-c3"
+    ],
+    "track": "K"
+  },
+  {
+    "id": "k-week-02-day-06",
+    "week": 2,
+    "day": "Saturday",
+    "dayNumber": 6,
+    "minutes": 120,
+    "url": "/courses/gpu-kernels/week-02/day-06/",
+    "title": "Implement Triton RMSNorm Forward + Validate RMSNorm Across Row Shapes",
+    "checks": [
+      "a11-p2-c1",
+      "a11-p2-c2",
+      "a11-p2-c3",
+      "a11-p3-c1",
+      "a11-p3-c2",
+      "a11-p3-c3"
+    ],
+    "track": "K"
+  },
+  {
+    "id": "k-week-03-day-01",
+    "week": 3,
+    "day": "Monday",
+    "dayNumber": 1,
+    "minutes": 60,
+    "url": "/courses/gpu-kernels/week-03/day-01/",
+    "title": "Measure RMSNorm Wins and Losses",
+    "checks": [
+      "a11-p4-c1",
+      "a11-p4-c2",
+      "a11-p4-c3"
+    ],
+    "track": "K"
+  },
+  {
+    "id": "k-week-03-day-02",
+    "week": 3,
+    "day": "Tuesday",
+    "dayNumber": 2,
+    "minutes": 60,
+    "url": "/courses/gpu-kernels/week-03/day-02/",
+    "title": "Derive Tiled Matrix Multiplication",
+    "checks": [
+      "a17-p1-c1",
+      "a17-p1-c2",
+      "a17-p1-c3"
+    ],
+    "track": "K"
+  },
+  {
+    "id": "k-week-03-day-03",
+    "week": 3,
+    "day": "Wednesday",
+    "dayNumber": 3,
+    "minutes": 60,
+    "url": "/courses/gpu-kernels/week-03/day-03/",
+    "title": "Implement Triton Matmul Tile Loop",
+    "checks": [
+      "a17-p2-c1",
+      "a17-p2-c2",
+      "a17-p2-c3"
+    ],
+    "track": "K"
+  },
+  {
+    "id": "k-week-03-day-04",
+    "week": 3,
+    "day": "Thursday",
+    "dayNumber": 4,
+    "minutes": 60,
+    "url": "/courses/gpu-kernels/week-03/day-04/",
+    "title": "Support Matmul Boundaries and Strides",
+    "checks": [
+      "a17-p3-c1",
+      "a17-p3-c2",
+      "a17-p3-c3"
+    ],
+    "track": "K"
+  },
+  {
+    "id": "k-week-03-day-05",
+    "week": 3,
+    "day": "Friday",
+    "dayNumber": 5,
+    "minutes": 60,
+    "url": "/courses/gpu-kernels/week-03/day-05/",
+    "title": "Validate Tensor Core Matmul Precision",
+    "checks": [
+      "a17-p4-c1",
+      "a17-p4-c2",
+      "a17-p4-c3"
+    ],
+    "track": "K"
+  },
+  {
+    "id": "k-week-03-day-06",
+    "week": 3,
+    "day": "Saturday",
+    "dayNumber": 6,
+    "minutes": 120,
+    "url": "/courses/gpu-kernels/week-03/day-06/",
+    "title": "Freeze Matmul Tuning and Baselines + Measure Tile Reuse and Occupancy",
+    "checks": [
+      "a18-p1-c1",
+      "a18-p1-c2",
+      "a18-p1-c3",
+      "a18-p2-c1",
+      "a18-p2-c2",
+      "a18-p2-c3"
+    ],
+    "track": "K"
+  },
+  {
+    "id": "k-week-04-day-01",
+    "week": 4,
+    "day": "Monday",
+    "dayNumber": 1,
+    "minutes": 60,
+    "url": "/courses/gpu-kernels/week-04/day-01/",
+    "title": "Fuse One Matmul Output Epilogue",
+    "checks": [
+      "a18-p3-c1",
+      "a18-p3-c2",
+      "a18-p3-c3"
+    ],
+    "track": "K"
+  },
+  {
+    "id": "k-week-04-day-02",
+    "week": 4,
+    "day": "Tuesday",
+    "dayNumber": 2,
+    "minutes": 60,
+    "url": "/courses/gpu-kernels/week-04/day-02/",
+    "title": "Explain Matmul Performance Tradeoffs Clearly",
+    "checks": [
+      "a18-p4-c1",
+      "a18-p4-c2",
+      "a18-p4-c3"
+    ],
+    "track": "K"
+  },
+  {
+    "id": "k-week-04-day-03",
+    "week": 4,
+    "day": "Wednesday",
+    "dayNumber": 3,
+    "minutes": 60,
+    "url": "/courses/gpu-kernels/week-04/day-03/",
+    "title": "Derive Online Softmax State Updates",
+    "checks": [
+      "a24-p1-c1",
+      "a24-p1-c2",
+      "a24-p1-c3"
+    ],
+    "track": "K"
+  },
+  {
+    "id": "k-week-04-day-04",
+    "week": 4,
+    "day": "Thursday",
+    "dayNumber": 4,
+    "minutes": 60,
+    "url": "/courses/gpu-kernels/week-04/day-04/",
+    "title": "Verify Online Softmax Tile Merges",
+    "checks": [
+      "a24-p2-c1",
+      "a24-p2-c2",
+      "a24-p2-c3"
+    ],
+    "track": "K"
+  },
+  {
+    "id": "k-week-04-day-05",
+    "week": 4,
+    "day": "Friday",
+    "dayNumber": 5,
+    "minutes": 60,
+    "url": "/courses/gpu-kernels/week-04/day-05/",
+    "title": "Implement Blockwise Causal Attention Reference",
+    "checks": [
+      "a24-p3-c1",
+      "a24-p3-c2",
+      "a24-p3-c3"
+    ],
+    "track": "K"
+  },
+  {
+    "id": "k-week-04-day-06",
+    "week": 4,
+    "day": "Saturday",
+    "dayNumber": 6,
+    "minutes": 120,
+    "url": "/courses/gpu-kernels/week-04/day-06/",
+    "title": "Validate Attention Recurrence and Memory + Specify Restricted Triton Attention Forward",
+    "checks": [
+      "a24-p4-c1",
+      "a24-p4-c2",
+      "a24-p4-c3",
+      "a25-p1-c1",
+      "a25-p1-c2",
+      "a25-p1-c3"
+    ],
+    "track": "K"
+  },
+  {
+    "id": "k-week-05-day-01",
+    "week": 5,
+    "day": "Monday",
+    "dayNumber": 1,
+    "minutes": 60,
+    "url": "/courses/gpu-kernels/week-05/day-01/",
+    "title": "Implement Attention Tiles and Online State",
+    "checks": [
+      "a25-p2-c1",
+      "a25-p2-c2",
+      "a25-p2-c3"
+    ],
+    "track": "K"
+  },
+  {
+    "id": "k-week-05-day-02",
+    "week": 5,
+    "day": "Tuesday",
+    "dayNumber": 2,
+    "minutes": 60,
+    "url": "/courses/gpu-kernels/week-05/day-02/",
+    "title": "Validate Attention Causality and Tails",
+    "checks": [
+      "a25-p3-c1",
+      "a25-p3-c2",
+      "a25-p3-c3"
+    ],
+    "track": "K"
+  },
+  {
+    "id": "k-week-05-day-03",
+    "week": 5,
+    "day": "Wednesday",
+    "dayNumber": 3,
+    "minutes": 60,
+    "url": "/courses/gpu-kernels/week-05/day-03/",
+    "title": "Benchmark Restricted Attention Forward Correctness",
+    "checks": [
+      "a25-p4-c1",
+      "a25-p4-c2",
+      "a25-p4-c3"
+    ],
+    "track": "K"
+  },
+  {
+    "id": "k-week-05-day-04",
+    "week": 5,
+    "day": "Thursday",
+    "dayNumber": 4,
+    "minutes": 60,
+    "url": "/courses/gpu-kernels/week-05/day-04/",
+    "title": "Derive RMSNorm Input and Weight Gradients",
+    "checks": [
+      "a31-p1-c1",
+      "a31-p1-c2",
+      "a31-p1-c3"
+    ],
+    "track": "K"
+  },
+  {
+    "id": "k-week-05-day-05",
+    "week": 5,
+    "day": "Friday",
+    "dayNumber": 5,
+    "minutes": 60,
+    "url": "/courses/gpu-kernels/week-05/day-05/",
+    "title": "Implement RMSNorm Input Gradient Kernel",
+    "checks": [
+      "a31-p2-c1",
+      "a31-p2-c2",
+      "a31-p2-c3"
+    ],
+    "track": "K"
+  },
+  {
+    "id": "k-week-05-day-06",
+    "week": 5,
+    "day": "Saturday",
+    "dayNumber": 6,
+    "minutes": 120,
+    "url": "/courses/gpu-kernels/week-05/day-06/",
+    "title": "Implement RMSNorm Weight Gradient Reduction + Validate Actual GPU Gradient Dtypes",
+    "checks": [
+      "a31-p3-c1",
+      "a31-p3-c2",
+      "a31-p3-c3",
+      "a31-p4-c1",
+      "a31-p4-c2",
+      "a31-p4-c3"
+    ],
+    "track": "K"
+  },
+  {
+    "id": "k-week-06-day-01",
+    "week": 6,
+    "day": "Monday",
+    "dayNumber": 1,
+    "minutes": 60,
+    "url": "/courses/gpu-kernels/week-06/day-01/",
+    "title": "Register the Custom Triton Operator",
+    "checks": [
+      "a32-p1-c1",
+      "a32-p1-c2",
+      "a32-p1-c3"
+    ],
+    "track": "K"
+  },
+  {
+    "id": "k-week-06-day-02",
+    "week": 6,
+    "day": "Tuesday",
+    "dayNumber": 2,
+    "minutes": 60,
+    "url": "/courses/gpu-kernels/week-06/day-02/",
+    "title": "Connect Autograd and Unsupported Cases",
+    "checks": [
+      "a32-p2-c1",
+      "a32-p2-c2",
+      "a32-p2-c3"
+    ],
+    "track": "K"
+  },
+  {
+    "id": "k-week-06-day-03",
+    "week": 6,
+    "day": "Wednesday",
+    "dayNumber": 3,
+    "minutes": 60,
+    "url": "/courses/gpu-kernels/week-06/day-03/",
+    "title": "Integrate RMSNorm Into the Decoder",
+    "checks": [
+      "a32-p3-c1",
+      "a32-p3-c2",
+      "a32-p3-c3"
+    ],
+    "track": "K"
+  },
+  {
+    "id": "k-week-06-day-04",
+    "week": 6,
+    "day": "Thursday",
+    "dayNumber": 4,
+    "minutes": 60,
+    "url": "/courses/gpu-kernels/week-06/day-04/",
+    "title": "Profile Integration and Amdahl Limits",
+    "checks": [
+      "a32-p4-c1",
+      "a32-p4-c2",
+      "a32-p4-c3"
+    ],
+    "track": "K"
+  },
+  {
+    "id": "k-week-06-day-05",
+    "week": 6,
+    "day": "Friday",
+    "dayNumber": 5,
+    "minutes": 60,
+    "url": "/courses/gpu-kernels/week-06/day-05/",
+    "title": "Map Pallas Refs Grids and Memory",
+    "checks": [
+      "a38-p2-c1",
+      "a38-p2-c2",
+      "a38-p2-c3"
+    ],
+    "track": "K"
+  },
+  {
+    "id": "k-week-06-day-06",
+    "week": 6,
+    "day": "Saturday",
+    "dayNumber": 6,
+    "minutes": 120,
+    "url": "/courses/gpu-kernels/week-06/day-06/",
+    "title": "Port One Row Kernel to Pallas + Validate the Pallas GPU Kernel",
+    "checks": [
+      "a38-p3-c1",
+      "a38-p3-c2",
+      "a38-p3-c3",
+      "a38-p4-c1",
+      "a38-p4-c2",
+      "a38-p4-c3"
+    ],
+    "track": "K"
+  },
+  {
+    "id": "k-week-07-day-01",
+    "week": 7,
+    "day": "Monday",
+    "dayNumber": 1,
+    "minutes": 60,
+    "url": "/courses/gpu-kernels/week-07/day-01/",
+    "title": "Benchmark Pallas Against Jitted JAX",
+    "checks": [
+      "a39-p1-c1",
+      "a39-p1-c2",
+      "a39-p1-c3"
+    ],
+    "track": "K"
+  },
+  {
+    "id": "k-week-07-day-02",
+    "week": 7,
+    "day": "Tuesday",
+    "dayNumber": 2,
+    "minutes": 60,
+    "url": "/courses/gpu-kernels/week-07/day-02/",
+    "title": "Trace Hopper Pipelined Matmul Stages",
+    "checks": [
+      "a39-p2-c1",
+      "a39-p2-c2",
+      "a39-p2-c3"
+    ],
+    "track": "K"
+  },
+  {
+    "id": "k-week-07-day-03",
+    "week": 7,
+    "day": "Wednesday",
+    "dayNumber": 3,
+    "minutes": 60,
+    "url": "/courses/gpu-kernels/week-07/day-03/",
+    "title": "Study Modern Attention Hardware Tradeoffs",
+    "checks": [
+      "a39-p3-c1",
+      "a39-p3-c2",
+      "a39-p3-c3"
+    ],
+    "track": "K"
+  },
+  {
+    "id": "k-week-07-day-04",
+    "week": 7,
+    "day": "Thursday",
+    "dayNumber": 4,
+    "minutes": 60,
+    "url": "/courses/gpu-kernels/week-07/day-04/",
+    "title": "Freeze End To End Decoder Measurements",
+    "checks": [
+      "a45-p1-c1",
+      "a45-p1-c2",
+      "a45-p1-c3"
+    ],
+    "track": "K"
+  },
+  {
+    "id": "k-week-07-day-05",
+    "week": 7,
+    "day": "Friday",
+    "dayNumber": 5,
+    "minutes": 60,
+    "url": "/courses/gpu-kernels/week-07/day-05/",
+    "title": "Measure Decoder Prefill and Transfers",
+    "checks": [
+      "a45-p2-c1",
+      "a45-p2-c2",
+      "a45-p2-c3"
+    ],
+    "track": "K"
+  },
+  {
+    "id": "k-week-07-day-06",
+    "week": 7,
+    "day": "Saturday",
+    "dayNumber": 6,
+    "minutes": 120,
+    "url": "/courses/gpu-kernels/week-07/day-06/",
+    "title": "Measure Cached Decode Across Lengths + Report Whole Model Gains and Regressions",
+    "checks": [
+      "a45-p3-c1",
+      "a45-p3-c2",
+      "a45-p3-c3",
+      "a45-p4-c1",
+      "a45-p4-c2",
+      "a45-p4-c3"
+    ],
+    "track": "K"
+  },
+  {
+    "id": "k-week-08-day-01",
+    "week": 8,
+    "day": "Monday",
+    "dayNumber": 1,
+    "minutes": 60,
+    "url": "/courses/gpu-kernels/week-08/day-01/",
+    "title": "Inspect One Optional Kernel DSL",
+    "checks": [
+      "a46-p1-c1",
+      "a46-p1-c2",
+      "a46-p1-c3"
+    ],
+    "track": "K"
+  },
+  {
+    "id": "k-week-08-day-02",
+    "week": 8,
+    "day": "Tuesday",
+    "dayNumber": 2,
+    "minutes": 60,
+    "url": "/courses/gpu-kernels/week-08/day-02/",
+    "title": "Reproduce the Main Kernel Result",
+    "checks": [
+      "a46-p4-c1",
+      "a46-p4-c2",
+      "a46-p4-c3"
+    ],
+    "track": "K"
+  },
+  {
+    "id": "k-week-08-day-03",
+    "week": 8,
+    "day": "Wednesday",
+    "dayNumber": 3,
+    "minutes": 60,
+    "url": "/courses/gpu-kernels/week-08/day-03/",
+    "title": "Build a Minimal Reproducer and Focused Fix",
+    "checks": [
+      "a53-p2-c1",
+      "a53-p2-c2",
+      "a53-p2-c3"
+    ],
+    "track": "K"
+  },
+  {
+    "id": "k-week-08-day-04",
+    "week": 8,
+    "day": "Thursday",
+    "dayNumber": 4,
+    "minutes": 60,
+    "url": "/courses/gpu-kernels/week-08/day-04/",
+    "title": "Verify the Regression or Support Boundary",
+    "checks": [
+      "a53-p3-c1",
+      "a53-p3-c2",
+      "a53-p3-c3"
+    ],
+    "track": "K"
+  }
+]

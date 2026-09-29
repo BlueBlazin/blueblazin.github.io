@@ -1,0 +1,60 @@
+{
+  "weeks": {
+    "week1": {
+      "title": "GPT-style Decoders and Training",
+      "summary": ""
+    },
+    "week2": {
+      "title": "Modern Decoder Components and JAX",
+      "summary": ""
+    },
+    "week3": {
+      "title": "Cross-Framework Parity and KV Caches",
+      "summary": ""
+    },
+    "week4": {
+      "title": "Pretrained Models and Low-Rank Adaptation",
+      "summary": ""
+    },
+    "week5": {
+      "title": "Sparse Experts and Latent Attention",
+      "summary": ""
+    },
+    "week6": {
+      "title": "Hybrid Recurrence and Current Architectures",
+      "summary": ""
+    },
+    "week7": {
+      "title": "Controlled Inference and Training Experiments",
+      "summary": ""
+    },
+    "week8": {
+      "title": "Reproduction and Technical Communication",
+      "summary": ""
+    },
+    "week0": {
+      "title": "Orientation & setup",
+      "summary": ""
+    },
+    "final": {
+      "title": "Independent assessment & portfolio",
+      "summary": ""
+    }
+  },
+  "projects": [
+    {
+      "title": "A Reproducible Decoder Laboratory",
+      "description": "Build an educational language-model laboratory with independent PyTorch and JAX implementations, carefully tested architectural extensions and a small set of controlled experiments. A reviewer can run the CPU smoke demonstration before inspecting the deeper training and inference evidence.",
+      "requirements": [
+        "Tiny GPT-style and modern decoder implementations with causality, stable-loss and checkpoint tests.",
+        "Shared-weight PyTorch/JAX logits, loss and representative-gradient parity.",
+        "Cache/full-prefix equivalence, a matched GQA/MHA study and explicit cache-byte accounting.",
+        "A LoRA structured-task experiment with frozen base weights, merge checks and held-out outcomes.",
+        "A four-expert top-2 teaching MoE with output/gradient parity and routing diagnostics.",
+        "A bounded small-model training comparison, with equal-token interpretation and seed limitations.",
+        "Architecture notes that label implemented, code-traced and paper-only understanding.",
+        "One-command CPU smoke run, model/data cards, technical report, short explanation and contribution draft."
+      ]
+    }
+  ]
+}

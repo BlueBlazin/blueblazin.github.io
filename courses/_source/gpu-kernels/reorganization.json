@@ -1,0 +1,926 @@
+{
+  "dispositions": {
+    "intro-1": {
+      "placement": "day0",
+      "reason": "Standalone setup, review, contingency, audit or packaging. Preserve as a common reference rather than a numbered technical day.",
+      "section": "Local environment and fixture",
+      "useWhen": "Before your first fixture-based lab; the first local shape exercise can begin without it."
+    },
+    "intro-2": {
+      "placement": "day0",
+      "reason": "Standalone setup, review, contingency, audit or packaging. Preserve as a common reference rather than a numbered technical day.",
+      "section": "Environment and budget reference",
+      "useWhen": "Read the plan at the start; rent only at an actual hardware-dependent lab."
+    },
+    "1-1": {
+      "placement": "scheduled",
+      "reason": "Substantive derivation, implementation, numerical validation, profiling, benchmarking, technical source analysis or a focused code/reproducer change."
+    },
+    "1-2": {
+      "placement": "day0",
+      "reason": "Standalone setup, review, contingency, audit or packaging. Preserve as a common reference rather than a numbered technical day.",
+      "section": "NVIDIA readiness checkpoint",
+      "useWhen": "Immediately before 1-3, the first CUDA measurement; do not rent during Day0 just to leave it idle."
+    },
+    "1-3": {
+      "placement": "scheduled",
+      "reason": "Substantive derivation, implementation, numerical validation, profiling, benchmarking, technical source analysis or a focused code/reproducer change."
+    },
+    "1-4": {
+      "placement": "scheduled",
+      "reason": "Substantive derivation, implementation, numerical validation, profiling, benchmarking, technical source analysis or a focused code/reproducer change."
+    },
+    "2-1": {
+      "placement": "scheduled",
+      "reason": "Substantive derivation, implementation, numerical validation, profiling, benchmarking, technical source analysis or a focused code/reproducer change."
+    },
+    "2-2": {
+      "placement": "scheduled",
+      "reason": "Substantive derivation, implementation, numerical validation, profiling, benchmarking, technical source analysis or a focused code/reproducer change."
+    },
+    "2-3": {
+      "placement": "scheduled",
+      "reason": "Substantive derivation, implementation, numerical validation, profiling, benchmarking, technical source analysis or a focused code/reproducer change."
+    },
+    "2-4": {
+      "placement": "scheduled",
+      "reason": "Substantive derivation, implementation, numerical validation, profiling, benchmarking, technical source analysis or a focused code/reproducer change."
+    },
+    "3-1": {
+      "placement": "scheduled",
+      "reason": "Substantive derivation, implementation, numerical validation, profiling, benchmarking, technical source analysis or a focused code/reproducer change."
+    },
+    "3-2": {
+      "placement": "scheduled",
+      "reason": "Substantive derivation, implementation, numerical validation, profiling, benchmarking, technical source analysis or a focused code/reproducer change."
+    },
+    "3-3": {
+      "placement": "scheduled",
+      "reason": "Substantive derivation, implementation, numerical validation, profiling, benchmarking, technical source analysis or a focused code/reproducer change."
+    },
+    "3-4": {
+      "placement": "scheduled",
+      "reason": "Substantive derivation, implementation, numerical validation, profiling, benchmarking, technical source analysis or a focused code/reproducer change."
+    },
+    "4-1": {
+      "placement": "scheduled",
+      "reason": "Substantive derivation, implementation, numerical validation, profiling, benchmarking, technical source analysis or a focused code/reproducer change."
+    },
+    "4-2": {
+      "placement": "scheduled",
+      "reason": "Substantive derivation, implementation, numerical validation, profiling, benchmarking, technical source analysis or a focused code/reproducer change."
+    },
+    "4-3": {
+      "placement": "scheduled",
+      "reason": "Substantive derivation, implementation, numerical validation, profiling, benchmarking, technical source analysis or a focused code/reproducer change."
+    },
+    "4-4": {
+      "placement": "scheduled",
+      "reason": "Substantive derivation, implementation, numerical validation, profiling, benchmarking, technical source analysis or a focused code/reproducer change."
+    },
+    "review-2": {
+      "placement": "reference",
+      "reason": "Standalone setup, review, contingency, audit or packaging. Preserve as a common reference rather than a numbered technical day.",
+      "section": "Optional reductions checkpoint",
+      "useWhen": "After 4-4; available from Day0 and the associated lab links."
+    },
+    "flex-2": {
+      "placement": "reference",
+      "reason": "Standalone setup, review, contingency, audit or packaging. Preserve as a common reference rather than a numbered technical day.",
+      "section": "When stuck",
+      "useWhen": "Use the next available study slot for a real blocker; the calendar shifts."
+    },
+    "5-1": {
+      "placement": "scheduled",
+      "reason": "Substantive derivation, implementation, numerical validation, profiling, benchmarking, technical source analysis or a focused code/reproducer change."
+    },
+    "5-2": {
+      "placement": "scheduled",
+      "reason": "Substantive derivation, implementation, numerical validation, profiling, benchmarking, technical source analysis or a focused code/reproducer change."
+    },
+    "5-3": {
+      "placement": "scheduled",
+      "reason": "Substantive derivation, implementation, numerical validation, profiling, benchmarking, technical source analysis or a focused code/reproducer change."
+    },
+    "5-4": {
+      "placement": "scheduled",
+      "reason": "Substantive derivation, implementation, numerical validation, profiling, benchmarking, technical source analysis or a focused code/reproducer change."
+    },
+    "6-1": {
+      "placement": "scheduled",
+      "reason": "Substantive derivation, implementation, numerical validation, profiling, benchmarking, technical source analysis or a focused code/reproducer change."
+    },
+    "6-2": {
+      "placement": "scheduled",
+      "reason": "Substantive derivation, implementation, numerical validation, profiling, benchmarking, technical source analysis or a focused code/reproducer change."
+    },
+    "6-3": {
+      "placement": "scheduled",
+      "reason": "Substantive derivation, implementation, numerical validation, profiling, benchmarking, technical source analysis or a focused code/reproducer change."
+    },
+    "6-4": {
+      "placement": "scheduled",
+      "reason": "Substantive derivation, implementation, numerical validation, profiling, benchmarking, technical source analysis or a focused code/reproducer change."
+    },
+    "7-1": {
+      "placement": "scheduled",
+      "reason": "Substantive derivation, implementation, numerical validation, profiling, benchmarking, technical source analysis or a focused code/reproducer change."
+    },
+    "7-2": {
+      "placement": "scheduled",
+      "reason": "Substantive derivation, implementation, numerical validation, profiling, benchmarking, technical source analysis or a focused code/reproducer change."
+    },
+    "7-3": {
+      "placement": "scheduled",
+      "reason": "Substantive derivation, implementation, numerical validation, profiling, benchmarking, technical source analysis or a focused code/reproducer change."
+    },
+    "7-4": {
+      "placement": "scheduled",
+      "reason": "Substantive derivation, implementation, numerical validation, profiling, benchmarking, technical source analysis or a focused code/reproducer change."
+    },
+    "8-1": {
+      "placement": "scheduled",
+      "reason": "Substantive derivation, implementation, numerical validation, profiling, benchmarking, technical source analysis or a focused code/reproducer change."
+    },
+    "8-2": {
+      "placement": "scheduled",
+      "reason": "Substantive derivation, implementation, numerical validation, profiling, benchmarking, technical source analysis or a focused code/reproducer change."
+    },
+    "8-3": {
+      "placement": "scheduled",
+      "reason": "Substantive derivation, implementation, numerical validation, profiling, benchmarking, technical source analysis or a focused code/reproducer change."
+    },
+    "8-4": {
+      "placement": "scheduled",
+      "reason": "Substantive derivation, implementation, numerical validation, profiling, benchmarking, technical source analysis or a focused code/reproducer change."
+    },
+    "review-4": {
+      "placement": "reference",
+      "reason": "Standalone setup, review, contingency, audit or packaging. Preserve as a common reference rather than a numbered technical day.",
+      "section": "Optional attention checkpoint",
+      "useWhen": "After 8-4; available from Day0 and the associated lab links."
+    },
+    "flex-4": {
+      "placement": "reference",
+      "reason": "Standalone setup, review, contingency, audit or packaging. Preserve as a common reference rather than a numbered technical day.",
+      "section": "When stuck",
+      "useWhen": "Use the next available study slot for a real blocker; the calendar shifts."
+    },
+    "9-1": {
+      "placement": "scheduled",
+      "reason": "Substantive derivation, implementation, numerical validation, profiling, benchmarking, technical source analysis or a focused code/reproducer change."
+    },
+    "9-2": {
+      "placement": "scheduled",
+      "reason": "Substantive derivation, implementation, numerical validation, profiling, benchmarking, technical source analysis or a focused code/reproducer change."
+    },
+    "9-3": {
+      "placement": "scheduled",
+      "reason": "Substantive derivation, implementation, numerical validation, profiling, benchmarking, technical source analysis or a focused code/reproducer change."
+    },
+    "9-4": {
+      "placement": "scheduled",
+      "reason": "Substantive derivation, implementation, numerical validation, profiling, benchmarking, technical source analysis or a focused code/reproducer change."
+    },
+    "10-1": {
+      "placement": "scheduled",
+      "reason": "Substantive derivation, implementation, numerical validation, profiling, benchmarking, technical source analysis or a focused code/reproducer change."
+    },
+    "10-2": {
+      "placement": "scheduled",
+      "reason": "Substantive derivation, implementation, numerical validation, profiling, benchmarking, technical source analysis or a focused code/reproducer change."
+    },
+    "10-3": {
+      "placement": "scheduled",
+      "reason": "Substantive derivation, implementation, numerical validation, profiling, benchmarking, technical source analysis or a focused code/reproducer change."
+    },
+    "10-4": {
+      "placement": "scheduled",
+      "reason": "Substantive derivation, implementation, numerical validation, profiling, benchmarking, technical source analysis or a focused code/reproducer change."
+    },
+    "11-1": {
+      "placement": "day0",
+      "reason": "Standalone setup, review, contingency, audit or packaging. Preserve as a common reference rather than a numbered technical day.",
+      "section": "H100 readiness checkpoint",
+      "useWhen": "Immediately before 11-3; study 11-2 locally beforehand."
+    },
+    "11-2": {
+      "placement": "scheduled",
+      "reason": "Substantive derivation, implementation, numerical validation, profiling, benchmarking, technical source analysis or a focused code/reproducer change."
+    },
+    "11-3": {
+      "placement": "scheduled",
+      "reason": "Substantive derivation, implementation, numerical validation, profiling, benchmarking, technical source analysis or a focused code/reproducer change."
+    },
+    "11-4": {
+      "placement": "scheduled",
+      "reason": "Substantive derivation, implementation, numerical validation, profiling, benchmarking, technical source analysis or a focused code/reproducer change."
+    },
+    "12-1": {
+      "placement": "scheduled",
+      "reason": "Substantive derivation, implementation, numerical validation, profiling, benchmarking, technical source analysis or a focused code/reproducer change."
+    },
+    "12-2": {
+      "placement": "scheduled",
+      "reason": "Substantive derivation, implementation, numerical validation, profiling, benchmarking, technical source analysis or a focused code/reproducer change."
+    },
+    "12-3": {
+      "placement": "scheduled",
+      "reason": "Substantive derivation, implementation, numerical validation, profiling, benchmarking, technical source analysis or a focused code/reproducer change."
+    },
+    "12-4": {
+      "placement": "reference",
+      "reason": "Standalone setup, review, contingency, audit or packaging. Preserve as a common reference rather than a numbered technical day.",
+      "section": "Measurement audit checklist",
+      "useWhen": "After the Pallas measurements exist, when a timing issue needs investigation."
+    },
+    "review-6": {
+      "placement": "reference",
+      "reason": "Standalone setup, review, contingency, audit or packaging. Preserve as a common reference rather than a numbered technical day.",
+      "section": "Optional integration/Pallas checkpoint",
+      "useWhen": "After 12-3; do not require a future result during setup."
+    },
+    "flex-6": {
+      "placement": "reference",
+      "reason": "Standalone setup, review, contingency, audit or packaging. Preserve as a common reference rather than a numbered technical day.",
+      "section": "When stuck",
+      "useWhen": "Use the next available study slot for a real blocker; the calendar shifts."
+    },
+    "13-1": {
+      "placement": "scheduled",
+      "reason": "Substantive derivation, implementation, numerical validation, profiling, benchmarking, technical source analysis or a focused code/reproducer change."
+    },
+    "13-2": {
+      "placement": "scheduled",
+      "reason": "Substantive derivation, implementation, numerical validation, profiling, benchmarking, technical source analysis or a focused code/reproducer change."
+    },
+    "13-3": {
+      "placement": "scheduled",
+      "reason": "Substantive derivation, implementation, numerical validation, profiling, benchmarking, technical source analysis or a focused code/reproducer change."
+    },
+    "13-4": {
+      "placement": "scheduled",
+      "reason": "Substantive derivation, implementation, numerical validation, profiling, benchmarking, technical source analysis or a focused code/reproducer change."
+    },
+    "14-1": {
+      "placement": "scheduled",
+      "reason": "Substantive derivation, implementation, numerical validation, profiling, benchmarking, technical source analysis or a focused code/reproducer change."
+    },
+    "14-2": {
+      "placement": "day0",
+      "reason": "Standalone setup, review, contingency, audit or packaging. Preserve as a common reference rather than a numbered technical day.",
+      "section": "Clean-environment reproduction recipe",
+      "useWhen": "After 13-4 and before 14-4; there is no experiment to reproduce on the first day."
+    },
+    "14-3": {
+      "placement": "reference",
+      "reason": "Standalone setup, review, contingency, audit or packaging. Preserve as a common reference rather than a numbered technical day.",
+      "section": "Repairing a demonstrated setup defect",
+      "useWhen": "Only if the clean-environment recipe fails; do not claim the future setup is already verified."
+    },
+    "14-4": {
+      "placement": "scheduled",
+      "reason": "Substantive derivation, implementation, numerical validation, profiling, benchmarking, technical source analysis or a focused code/reproducer change."
+    },
+    "15-1": {
+      "placement": "reference",
+      "reason": "Standalone setup, review, contingency, audit or packaging. Preserve as a common reference rather than a numbered technical day.",
+      "section": "Targeted measurement audit",
+      "useWhen": "After the main kernel results exist, and only when evidence is incomplete."
+    },
+    "15-2": {
+      "placement": "reference",
+      "reason": "Standalone setup, review, contingency, audit or packaging. Preserve as a common reference rather than a numbered technical day.",
+      "section": "Resolving a noisy result",
+      "useWhen": "Only if the audit names a concrete uncertain measurement; not an extra mandatory rerun day."
+    },
+    "15-3": {
+      "placement": "reference",
+      "reason": "Standalone setup, review, contingency, audit or packaging. Preserve as a common reference rather than a numbered technical day.",
+      "section": "Support and precision checklist",
+      "useWhen": "Maintain during each operator lab, then consult before sharing the repository."
+    },
+    "15-4": {
+      "placement": "reference",
+      "reason": "Standalone setup, review, contingency, audit or packaging. Preserve as a common reference rather than a numbered technical day.",
+      "section": "Figure and provenance checklist",
+      "useWhen": "When figures and measured results exist; do not assign final plot regeneration in Day0."
+    },
+    "16-1": {
+      "placement": "reference",
+      "reason": "Standalone setup, review, contingency, audit or packaging. Preserve as a common reference rather than a numbered technical day.",
+      "section": "Systems report template",
+      "useWhen": "After technical results exist. Use existing experiment notes; no separate calendar day."
+    },
+    "16-2": {
+      "placement": "scheduled",
+      "reason": "Substantive derivation, implementation, numerical validation, profiling, benchmarking, technical source analysis or a focused code/reproducer change."
+    },
+    "16-3": {
+      "placement": "scheduled",
+      "reason": "Substantive derivation, implementation, numerical validation, profiling, benchmarking, technical source analysis or a focused code/reproducer change."
+    },
+    "16-4": {
+      "placement": "reference",
+      "reason": "Standalone setup, review, contingency, audit or packaging. Preserve as a common reference rather than a numbered technical day.",
+      "section": "Report and contribution review checklist",
+      "useWhen": "After 16-3 and after drafting a report, when ready to share."
+    },
+    "flex-8": {
+      "placement": "reference",
+      "reason": "Standalone setup, review, contingency, audit or packaging. Preserve as a common reference rather than a numbered technical day.",
+      "section": "When stuck",
+      "useWhen": "Use the next available study slot for a real blocker; the calendar shifts."
+    },
+    "final-1": {
+      "placement": "reference",
+      "reason": "Standalone setup, review, contingency, audit or packaging. Preserve as a common reference rather than a numbered technical day.",
+      "section": "Optional independent assessment",
+      "useWhen": "After the labs. Preserve as a self-test, outside the technical calendar."
+    },
+    "final-2": {
+      "placement": "reference",
+      "reason": "Standalone setup, review, contingency, audit or packaging. Preserve as a common reference rather than a numbered technical day.",
+      "section": "Release verification checklist",
+      "useWhen": "At release time, using previously executed GPU evidence and current local checks."
+    },
+    "final-3": {
+      "placement": "reference",
+      "reason": "Standalone setup, review, contingency, audit or packaging. Preserve as a common reference rather than a numbered technical day.",
+      "section": "Portfolio packaging checklist",
+      "useWhen": "After the systems experiments and contribution/reproducer exist."
+    },
+    "final-4": {
+      "placement": "reference",
+      "reason": "Standalone setup, review, contingency, audit or packaging. Preserve as a common reference rather than a numbered technical day.",
+      "section": "Publication and next-project checklist",
+      "useWhen": "When the learner chooses to publish; no invented mandatory publication day."
+    }
+  },
+  "lessonResources": {
+    "1-1": [
+      {
+        "id": "KR01",
+        "focus": "Execution model, memory hierarchy, and arithmetic intensity.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "1-3": [
+      {
+        "id": "KR01",
+        "focus": "GPU timing and synchronization; effective versus measured bandwidth.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "1-4": [
+      {
+        "id": "KR08",
+        "focus": "Recording shapes and reading operator self-time tables.",
+        "minutes": 10,
+        "optional": false
+      },
+      {
+        "id": "KV01",
+        "focus": "Alternative to required reading; use at most 10 minutes, not an extra lecture. Profiling a small PyTorch operation and interpreting a trace.",
+        "minutes": 10,
+        "optional": true,
+        "alternative": true
+      }
+    ],
+    "2-1": [
+      {
+        "id": "KR07",
+        "focus": "The CUDA kernel, wrapper validation and current-stream launch.",
+        "minutes": 10,
+        "optional": false
+      },
+      {
+        "id": "KV02",
+        "focus": "Alternative to required reading; use at most 10 minutes, not an extra lecture. Connecting a small CUDA operation to Python.",
+        "minutes": 10,
+        "optional": true,
+        "alternative": true
+      }
+    ],
+    "2-2": [
+      {
+        "id": "KR02",
+        "focus": "Bounds masks and the example output comparison; apply them to CUDA.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "2-3": [
+      {
+        "id": "KR02",
+        "focus": "program_id, arange, masked loads and stores.",
+        "minutes": 10,
+        "optional": false
+      },
+      {
+        "id": "KV03",
+        "focus": "Alternative to required reading; use at most 10 minutes, not an extra lecture. Triton program blocks and indexing; compare the accompanying notebook.",
+        "minutes": 10,
+        "optional": true,
+        "alternative": true
+      }
+    ],
+    "2-4": [
+      {
+        "id": "KR02",
+        "focus": "Benchmark function, allocation boundaries and the payload-byte calculation.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "3-1": [
+      {
+        "id": "KR03",
+        "focus": "Stable softmax expression and intermediate memory traffic.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "3-2": [
+      {
+        "id": "KR03",
+        "focus": "Compute Kernel: row pointers, padding, max and sum.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "3-3": [
+      {
+        "id": "KR03",
+        "focus": "Unit Test: irregular rows and columns; trace your own tail masks.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "3-4": [
+      {
+        "id": "KR03",
+        "focus": "Benchmark: distinguish explicit composition from torch.softmax.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "4-1": [
+      {
+        "id": "KR09",
+        "focus": "RMSNorm definition; distinguish RMS scaling from mean centering.",
+        "minutes": 6,
+        "optional": false
+      },
+      {
+        "id": "KR05",
+        "focus": "Forward row-reduction implementation; omit LayerNorm mean subtraction.",
+        "minutes": 4,
+        "optional": false
+      }
+    ],
+    "4-2": [
+      {
+        "id": "KR05",
+        "focus": "Masked row loads, FP32 reduction and affine weights.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "4-3": [
+      {
+        "id": "KR17",
+        "focus": "Extremal values and floating-point error; choose operation-specific tolerances.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "4-4": [
+      {
+        "id": "KR05",
+        "focus": "Normalization benchmark and input-shape choices; adapt to RMSNorm.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "5-1": [
+      {
+        "id": "KR04",
+        "focus": "Blocked algorithm and Pointer Arithmetic.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "5-2": [
+      {
+        "id": "KR04",
+        "focus": "Matmul K loop, accumulator and final store.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "5-3": [
+      {
+        "id": "KR04",
+        "focus": "Load/store boundary treatment and stride arguments.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "5-4": [
+      {
+        "id": "KR17",
+        "focus": "TF32 and reduced-precision reductions; record your chosen controls.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "6-1": [
+      {
+        "id": "KR04",
+        "focus": "Autotune configurations; choose a small fixed subset.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "6-2": [
+      {
+        "id": "KR01",
+        "focus": "Occupancy and resource tradeoffs; infer only what you measured.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "6-3": [
+      {
+        "id": "KR04",
+        "focus": "Transformation of the accumulator before final output casting.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "6-4": [
+      {
+        "id": "KR04",
+        "focus": "Benchmark structure; compare equal plain or fused workloads.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "7-1": [
+      {
+        "id": "KR10",
+        "focus": "Tiling and online normalization; derive the running-state merge.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "7-2": [
+      {
+        "id": "KR10",
+        "focus": "The online-state rescaling operation; work a late-maximum example.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "7-3": [
+      {
+        "id": "KR06",
+        "focus": "Forward loop: per-query state and diagonal causal mask.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "7-4": [
+      {
+        "id": "KR10",
+        "focus": "IO-aware memory accounting; distinguish tiles from full scores.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "8-1": [
+      {
+        "id": "KR06",
+        "focus": "Forward input layout and state ownership; skip backward.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "8-2": [
+      {
+        "id": "KR06",
+        "focus": "Forward recurrence and exp2 score-scale convention.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "8-3": [
+      {
+        "id": "KR06",
+        "focus": "Forward causal masking; independently add your documented tail behavior.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "8-4": [
+      {
+        "id": "KR18",
+        "focus": "dropout_p, is_causal and backend selection; match your reference.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "9-1": [
+      {
+        "id": "KR09",
+        "focus": "RMSNorm equation; derive its gradient rather than copying LayerNorm.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "9-2": [
+      {
+        "id": "KR05",
+        "focus": "Backward row reductions; remove LayerNorm-specific centering terms.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "9-3": [
+      {
+        "id": "KR05",
+        "focus": "Shared-parameter gradient partials and final reduction.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "9-4": [
+      {
+        "id": "KR17",
+        "focus": "Finite-input overflow and reduced-precision numerical limits.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "10-1": [
+      {
+        "id": "KR11",
+        "focus": "Wrapping Triton kernels with triton_op and wrap_triton.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "10-2": [
+      {
+        "id": "KR11",
+        "focus": "Adding training support; wrap backward Triton calls as operators.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "10-3": [
+      {
+        "id": "KR11",
+        "focus": "Autograd composition and forward/backward operator boundaries.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "10-4": [
+      {
+        "id": "KR01",
+        "focus": "Application-level performance and Amdahl’s law.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "11-2": [
+      {
+        "id": "KR12",
+        "focus": "Programming model, GPU memory spaces, and parallel grids.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "11-3": [
+      {
+        "id": "KR12",
+        "focus": "Your first kernel and grid examples; adapt one familiar reduction.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "11-4": [
+      {
+        "id": "KR12",
+        "focus": "The exact GPU example and its supported shapes; compare actual output.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "12-1": [
+      {
+        "id": "KR14",
+        "focus": "Compilation, data transfer, and block_until_ready timing boundaries.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "12-2": [
+      {
+        "id": "KR13",
+        "focus": "Hopper matmul example: stage buffers, waits, and final drain.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "12-3": [
+      {
+        "id": "KR15",
+        "focus": "Hardware bottleneck changes and the proposed forward pipeline.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "13-1": [
+      {
+        "id": "KR19",
+        "focus": "dynamic, guard failure and graph breaks.",
+        "minutes": 6,
+        "optional": false
+      },
+      {
+        "id": "KR20",
+        "focus": "Inference context versus model evaluation mode.",
+        "minutes": 4,
+        "optional": false
+      }
+    ],
+    "13-2": [
+      {
+        "id": "KR08",
+        "focus": "Profiler use for the matched prefill workload.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "13-3": [
+      {
+        "id": "KR19",
+        "focus": "Shape-driven recompilation; inspect growing-cache decode traces.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "13-4": [
+      {
+        "id": "KR01",
+        "focus": "Whole-application performance: use paired model-level results.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "14-1": [
+      {
+        "id": "KR16",
+        "focus": "One small CuTe DSL example and its hardware requirements.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "14-4": [
+      {
+        "id": "KR01",
+        "focus": "Matched timing boundaries and measurement variability.",
+        "minutes": 10,
+        "optional": false
+      },
+      {
+        "id": "KV04",
+        "focus": "Alternative to required reading; use at most 10 minutes, not an extra lecture. Performance-checking methodology for the one reproduced case.",
+        "minutes": 10,
+        "optional": true,
+        "alternative": true
+      }
+    ],
+    "16-2": [
+      {
+        "id": "KR07",
+        "focus": "Testing operator correctness; adapt a minimal case to your observed issue.",
+        "minutes": 10,
+        "optional": false
+      }
+    ],
+    "16-3": [
+      {
+        "id": "KR17",
+        "focus": "Numerical semantics relevant to the failing case; avoid tolerance-only fixes.",
+        "minutes": 10,
+        "optional": false
+      }
+    ]
+  },
+  "day0": {
+    "summary": "One setup and course-operations page, with start-now tasks and clearly marked later-use references. Do not attempt future experiments or finish every checklist before Day1. First technical lab runs locally with Python; rent GPUs only before the actual CUDA/Triton or Pallas work.",
+    "readyChecks": [
+      "I can run a Python script on my M1 Max.",
+      "I have a working folder or repository for the local first lab.",
+      "I know which NVIDIA and H100 readiness checkpoints will be needed later.",
+      "I know the A$450 kernel allowance is part of the combined A$1,000 ceiling.",
+      "I understand that later reviews and release checklists are references to use when their results exist."
+    ],
+    "sections": [
+      {
+        "title": "Start here:local tools and fixture",
+        "text": "At the beginning. Set a sustainable schedule, create the repository, and prepare the local Python/PyTorch fixture when needed. If Python already works, you can begin Day1 immediately. Keep the A$450 kernel ceiling inside the A$1,000 combined ceiling.",
+        "resources": [
+          "KR08"
+        ],
+        "sourceKeys": [
+          "intro-1",
+          "intro-2"
+        ]
+      },
+      {
+        "title": "Before the first NVIDIA lab",
+        "text": "Immediately before 1-3. Choose and record a compatible image, verify CUDA/Triton and nvcc/compiler/Ninja for the CUDA extension, run the smoke, export evidence and stop billing when finished. Do not rent hardware merely to read this section.",
+        "resources": [
+          "KR07",
+          "KR01"
+        ],
+        "sourceKeys": [
+          "1-2"
+        ]
+      },
+      {
+        "title": "Before the first Pallas GPU lab",
+        "text": "Immediately before 11-3. Use the official current-compatible H100/Mosaic path. Execute the minimal actual-device smoke before porting the row kernel. Source study11-2 can happen locally first.",
+        "resources": [
+          "KR12"
+        ],
+        "sourceKeys": [
+          "11-1"
+        ]
+      },
+      {
+        "title": "Clean-environment recipe",
+        "text": "After13-4, before 14-4. Rebuild only the environment and existing benchmark needed for the reproduction experiment. Later experiment artifacts are prerequisites, not Day0 deliverables.",
+        "resources": [
+          "KR01"
+        ],
+        "sourceKeys": [
+          "14-2",
+          "14-3"
+        ]
+      },
+      {
+        "title": "Measurement and understanding checklists",
+        "text": "At the corresponding technical milestones. Use on demand to diagnose a real evidence gap. No numbered review days, no mandatory rerun of already sound results, and no claims of having future measurements during setup.",
+        "resources": [
+          "KR01"
+        ],
+        "sourceKeys": [
+          "review-2",
+          "review-4",
+          "review-6",
+          "12-4",
+          "15-1",
+          "15-2",
+          "15-3",
+          "15-4",
+          "final-1"
+        ]
+      },
+      {
+        "title": "When something blocks progress",
+        "text": "As needed. Save the smallest reproducer and use the next study slot. Shift dependent lessons rather than filling Sundays or scheduling fixed filler days.",
+        "resources": [
+          "KR17"
+        ],
+        "sourceKeys": [
+          "flex-2",
+          "flex-4",
+          "flex-6",
+          "flex-8"
+        ]
+      },
+      {
+        "title": "Report, release and contribution guide",
+        "text": "After substantive technical artifacts exist. Use the report template and release checklist when ready. Retain honest limits and negative results. Publishing is the learner’s choice. These are common references, not fake Day0 accomplishments.",
+        "resources": [
+          "KR11"
+        ],
+        "sourceKeys": [
+          "16-1",
+          "16-4",
+          "final-2",
+          "final-3",
+          "final-4"
+        ]
+      }
+    ]
+  }
+}

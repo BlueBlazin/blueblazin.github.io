@@ -1,0 +1,330 @@
+[
+  {
+    "id": 1,
+    "module": 1,
+    "track": "K",
+    "hours": 4,
+    "work": "Read the GPU execution/memory model. Profile the model on a short 4090 session, estimate FLOPs/bytes, and build synchronized timing utilities; keep any MPS measurements separate. Read K1/K2.",
+    "evidence": "A table identifying the three dominant operations and likely bottlenecks",
+    "title": "Profile the Decoder on GPU",
+    "resources": [
+      "K1",
+      "K2"
+    ],
+    "source_id": 3
+  },
+  {
+    "id": 2,
+    "module": 1,
+    "track": "K",
+    "hours": 4,
+    "work": "On a short 4090 session, write minimal CUDA C++ vector add using a small wrapper, then Triton vector add. Handle tail masking. Read K3.",
+    "evidence": "Both agree with PyTorch for ordinary and non-multiple lengths; compilation excluded from steady-state timing",
+    "title": "Write CUDA and Triton Vector Addition",
+    "resources": [
+      "K3",
+      "K2"
+    ],
+    "source_id": 4
+  },
+  {
+    "id": 3,
+    "module": 2,
+    "track": "K",
+    "hours": 4,
+    "work": "Derive and write stable row softmax in Triton. Compare unfused PyTorch, compiled PyTorch, and the custom kernel. Read K3.",
+    "evidence": "Correct tails and extreme-logit cases; bytes-moved estimate and benchmark across fixed shapes",
+    "title": "Implement Stable Fused Softmax in Triton",
+    "resources": [
+      "K3"
+    ],
+    "source_id": 10
+  },
+  {
+    "id": 4,
+    "module": 2,
+    "track": "K",
+    "hours": 4,
+    "work": "Write RMSNorm forward in Triton with FP32 accumulation; measure multiple row widths and row counts.",
+    "evidence": "Error table and a supported-shape contract; measured wins and losses against both baselines",
+    "title": "Implement and Benchmark Triton RMSNorm",
+    "resources": [
+      "K3"
+    ],
+    "source_id": 11
+  },
+  {
+    "id": 5,
+    "module": 3,
+    "track": "K",
+    "hours": 4,
+    "work": "Write tiled Triton matmul: block indices, strides, tail masks, FP32 accumulators, tensor-core path. Read K3.",
+    "evidence": "Random and boundary-shape comparisons to a controlled-precision matmul reference",
+    "title": "Build a Tiled Triton Matrix Multiplication",
+    "resources": [
+      "K3"
+    ],
+    "source_id": 17
+  },
+  {
+    "id": 6,
+    "module": 3,
+    "track": "K",
+    "hours": 4,
+    "work": "Tune a small predefined tile search and add a bias or activation epilogue. Compare against `torch.matmul` and compiled composition.",
+    "evidence": "Median timings, variability, and an explanation of reuse/occupancy trade-offs; no requirement to beat cuBLAS",
+    "title": "Tune Matrix Tiles and Fused Epilogues",
+    "resources": [
+      "K2",
+      "K3"
+    ],
+    "source_id": 18
+  },
+  {
+    "id": 7,
+    "module": 4,
+    "track": "K",
+    "hours": 4,
+    "work": "Derive online softmax and write a blockwise PyTorch attention reference that does not store the full score matrix. Read K4.",
+    "evidence": "Same output as dense causal attention on small tests; recurrence and memory accounting explained",
+    "title": "Derive Online Softmax and Blockwise Attention",
+    "resources": [
+      "K4"
+    ],
+    "source_id": 24
+  },
+  {
+    "id": 8,
+    "module": 4,
+    "track": "K",
+    "hours": 4,
+    "work": "Translate the forward pass into Triton for a restricted, documented shape family. Compare with dense attention and SDPA.",
+    "evidence": "Causal/tail tests, no NaNs on supported inputs, peak-memory and latency measurements; backward remains optional",
+    "title": "Implement Restricted Attention Forward in Triton",
+    "resources": [
+      "K3",
+      "K4"
+    ],
+    "optionalResources": [],
+    "scopeNote": "Full attention backward remains optional.",
+    "source_id": 25
+  },
+  {
+    "id": 9,
+    "module": 5,
+    "track": "K",
+    "hours": 4,
+    "work": "Derive RMSNorm backward and implement its supported GPU gradient path. Validate a high-precision reference, then actual supported-dtype outputs/gradients.",
+    "evidence": "Input and weight-gradient agreement; no claim that FP64 reference gradcheck alone validates a BF16 kernel",
+    "title": "Derive and Implement RMSNorm GPU Gradients",
+    "resources": [
+      "K3"
+    ],
+    "source_id": 31
+  },
+  {
+    "id": 10,
+    "module": 5,
+    "track": "K",
+    "hours": 4,
+    "work": "Register the operator using current PyTorch custom Triton integration guidance. Add fallback/rejection for unsupported cases and insert it into the decoder. Read K5.",
+    "evidence": "Training-loss/gradient parity and before/after end-to-end profile; Amdahl calculation",
+    "title": "Integrate a Differentiable Custom PyTorch Operator",
+    "resources": [
+      "K5"
+    ],
+    "source_id": 32
+  },
+  {
+    "id": 11,
+    "module": 6,
+    "track": "K",
+    "hours": 4,
+    "work": "On H100, follow the Pallas Mosaic GPU quickstart. Learn Refs, grids, memory spaces, and synchronization; port your row softmax or RMSNorm forward. Read K6.",
+    "evidence": "One actual GPU Pallas kernel agrees with JAX; CPU interpretation alone does not complete this lab",
+    "title": "Implement a Pallas Kernel on H100",
+    "resources": [
+      "K6"
+    ],
+    "source_id": 38
+  },
+  {
+    "id": 12,
+    "module": 6,
+    "track": "K",
+    "hours": 4,
+    "work": "Benchmark against `jax.jit` on the same H100 with `block_until_ready()`. Walk through the official Hopper pipelined matmul linked in K6; read FA4/CuTe differences. Read K6/K7.",
+    "evidence": "Timing/error table, compile vs execute separation, and explanation of staged memory movement",
+    "title": "Benchmark Pallas and Study Pipelined Matmul",
+    "resources": [
+      "K6",
+      "K7"
+    ],
+    "source_id": 39
+  },
+  {
+    "id": 13,
+    "module": 7,
+    "track": "K",
+    "hours": 4,
+    "work": "Measure eager/compiled decoder performance with and without your kernel. Separate prefill and decode, warm/cold execution, and device transfer.",
+    "evidence": "Whole-model results across several sequence lengths; performance regressions retained in the report",
+    "title": "Measure Custom Kernels Inside the Decoder",
+    "resources": [
+      "K5",
+      "K2"
+    ],
+    "source_id": 45
+  },
+  {
+    "id": 14,
+    "module": 7,
+    "track": "K",
+    "hours": 4,
+    "work": "Inspect CuTe DSL/FA4 or Helion on one example. Use the rest of the session to reproduce the main kernel result from a clean environment and fix fragile setup.",
+    "evidence": "Current-tooling note plus a repeatable benchmark; skip optional installation after a one-hour failure budget",
+    "title": "Inspect Current Tooling and Reproduce Benchmarks",
+    "resources": [
+      "K7"
+    ],
+    "optionalResources": [
+      "K8"
+    ],
+    "scopeNote": "Alternative tooling and installation are bounded exploration; skip optional installation after one hour of failure.",
+    "source_id": 46
+  },
+  {
+    "id": 15,
+    "module": 8,
+    "track": "K",
+    "hours": 4,
+    "work": "Re-run only the benchmarks necessary to resolve identified noise/correctness risks. Complete the shape-support and precision matrix.",
+    "evidence": "Raw data, plotting command, hardware manifest, and consistent baseline settings",
+    "title": "Resolve Benchmark Risks and Document Precision",
+    "resources": [],
+    "source_id": 52
+  },
+  {
+    "id": 16,
+    "module": 8,
+    "track": "K",
+    "hours": 4,
+    "work": "Write the systems report and prepare a small tested upstream patch, regression test, or reproducible benchmark correction for a real issue. If no legitimate upstream candidate was found, produce a verified internal reproducer and limitation analysis instead.",
+    "evidence": "Systems report plus a review-ready contribution for a real issue, or a verified internal reproducer and limitation analysis clearly labeled as such.",
+    "title": "Write Systems Results and Prepare Contribution",
+    "resources": [],
+    "source_id": 53
+  },
+  {
+    "id": 101,
+    "module": 0,
+    "track": "I",
+    "hours": 1,
+    "title": "Set up the independent kernel lab",
+    "work": "Create the kernel-course repository, run the supplied CPU decoder fixture, and map the tensors you will optimize.",
+    "evidence": "A local CPU smoke, fixed configuration and random state dict, and one dimensioned decoder diagram.",
+    "resources": [
+      "K1"
+    ]
+  },
+  {
+    "id": 102,
+    "module": 0,
+    "track": "I",
+    "hours": 1,
+    "title": "Freeze environments, measurement rules, and spending limits",
+    "work": "Write the local/NVIDIA/H100 environment plan and a bounded measurement contract before renting a GPU.",
+    "evidence": "reports/kernels/environment-plan.md and a spending ledger with a shutdown checklist.",
+    "resources": [
+      "K2",
+      "K6"
+    ]
+  },
+  {
+    "id": 202,
+    "module": 2,
+    "track": "R",
+    "hours": 1,
+    "title": "Review execution, reductions, and benchmark validity",
+    "work": "Audit vector add, softmax, and RMSNorm using a closed-book explanation and one targeted numerical check.",
+    "evidence": "review-2.md with a memory diagram, masked-row example, and an honest benchmark audit.",
+    "resources": [
+      "K2",
+      "K3"
+    ]
+  },
+  {
+    "id": 204,
+    "module": 4,
+    "track": "R",
+    "hours": 1,
+    "title": "Review tiled matmul and online attention",
+    "work": "Reconstruct a tile and online-softmax merge, then audit one causal boundary case.",
+    "evidence": "review-4.md with dimensioned tile addresses, a worked merge, and a supported-shape audit.",
+    "resources": [
+      "K3",
+      "K4"
+    ]
+  },
+  {
+    "id": 206,
+    "module": 6,
+    "track": "R",
+    "hours": 1,
+    "title": "Review differentiation, integration, and Pallas evidence",
+    "work": "Defend the RMSNorm derivative and audit framework integration alongside the actual H100 result.",
+    "evidence": "review-6.md with a gradient derivation, branch table, and separated Pallas compile/execute evidence.",
+    "resources": [
+      "K5",
+      "K6"
+    ]
+  },
+  {
+    "id": 301,
+    "module": 9,
+    "track": "F",
+    "hours": 1,
+    "title": "Take the independent kernel assessment",
+    "work": "Explain and diagnose a kernel result from first principles without introducing a new implementation.",
+    "evidence": "assessment.md containing a timed explanation, one diagnosis, and an honest competency rubric.",
+    "resources": [
+      "K2"
+    ]
+  },
+  {
+    "id": 302,
+    "module": 9,
+    "track": "F",
+    "hours": 1,
+    "title": "Verify the release candidate from a clean checkout",
+    "work": "Reproduce local correctness and figure generation using only the documented repository.",
+    "evidence": "A clean-checkout verification log and a precise list of hardware checks already completed or still pending.",
+    "resources": [
+      "K2"
+    ]
+  },
+  {
+    "id": 303,
+    "module": 9,
+    "track": "F",
+    "hours": 1,
+    "title": "Package the kernel portfolio and contribution draft",
+    "work": "Package the engineering portfolio and any legitimate contribution; otherwise document the verified internal finding.",
+    "evidence": "A polished README, systems report, support table, and contribution or internal-reproducer index.",
+    "resources": [
+      "K2"
+    ]
+  },
+  {
+    "id": 304,
+    "module": 9,
+    "track": "F",
+    "hours": 1,
+    "title": "Release the portfolio and choose the next systems question",
+    "work": "Prepare a shareable release, perform a short demonstration, and select one evidence-driven next experiment.",
+    "evidence": "A release checklist, five-minute demo outline, and a one-page follow-up proposal.",
+    "resources": [
+      "K2"
+    ]
+  }
+]

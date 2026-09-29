@@ -1,0 +1,1425 @@
+[
+  {
+    "week": 1,
+    "hours": 7,
+    "modules": [
+      1
+    ],
+    "days": [
+      {
+        "day": "Monday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Build the First Bounded Agent Loop",
+            "action": "Implement a tiny FakeModel loop with explicit terminal state and a response cap; test normal completion and exhaustion.",
+            "evidence": "Working loop plus successful and capped transcript tests.",
+            "activity": 1,
+            "module": 1,
+            "track": "H",
+            "part": 1,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 5,
+            "key": "1-1",
+            "legacy_lesson": "week-03-thursday"
+          }
+        ]
+      },
+      {
+        "day": "Tuesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Validate Typed Tool Call Arguments",
+            "action": "Implement typed arguments and deterministic fake model responses for one tool; reject malformed calls before execution.",
+            "evidence": "Valid and malformed tool-call fixtures.",
+            "activity": 1,
+            "module": 1,
+            "track": "H",
+            "part": 2,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 5,
+            "key": "1-2",
+            "legacy_lesson": "week-03-friday"
+          }
+        ]
+      },
+      {
+        "day": "Wednesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Connect Tool Results To Messages",
+            "action": "Implement model/tool transitions, terminal results, and exception propagation using deterministic responses.",
+            "evidence": "Successful tool scenario and exception trace.",
+            "activity": 1,
+            "module": 1,
+            "track": "H",
+            "part": 3,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 5,
+            "key": "1-3",
+            "legacy_lesson": "week-03-saturday"
+          }
+        ]
+      },
+      {
+        "day": "Thursday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Verify Every Loop Stopping Condition",
+            "action": "Add timeout and step-budget handling; run success, malformed-call, exception, timeout, and exhaustion scenarios.",
+            "evidence": "All five deterministic scenarios pass.",
+            "activity": 1,
+            "module": 1,
+            "track": "H",
+            "part": 4,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 5,
+            "key": "1-4",
+            "legacy_lesson": "week-03-saturday"
+          }
+        ]
+      },
+      {
+        "day": "Friday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Build Confined Workspace Read Tools",
+            "action": "Implement read and exact-search tools scoped to a disposable workspace; keep command execution mocked.",
+            "evidence": "Read/search results remain inside the workspace.",
+            "activity": 2,
+            "module": 1,
+            "track": "H",
+            "part": 1,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 6,
+            "key": "2-1",
+            "legacy_lesson": "week-04-monday"
+          }
+        ]
+      },
+      {
+        "day": "Saturday",
+        "hours": 2,
+        "steps": [
+          {
+            "title": "Add Writes And Structured Traces",
+            "action": "Implement workspace writes and record tool calls, outcomes, elapsed time, and actual or mocked cost.",
+            "evidence": "Readable trace from a read/write scenario.",
+            "activity": 2,
+            "module": 1,
+            "track": "H",
+            "part": 2,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 6,
+            "key": "2-2",
+            "legacy_lesson": "week-04-tuesday"
+          },
+          {
+            "title": "Outline Tasks And Build Fixtures",
+            "action": "Outline 24 task IDs with eight development and sixteen final tasks; build the first three development fixtures.",
+            "evidence": "Task manifest and three reproducible fixtures.",
+            "activity": 2,
+            "module": 1,
+            "track": "H",
+            "part": 3,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 6,
+            "key": "2-3",
+            "legacy_lesson": "week-04-wednesday"
+          }
+        ]
+      },
+      {
+        "day": "Sunday",
+        "hours": 0,
+        "steps": []
+      }
+    ]
+  },
+  {
+    "week": 2,
+    "hours": 7,
+    "modules": [
+      1,
+      2
+    ],
+    "days": [
+      {
+        "day": "Monday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Run Three Fixtures End To End",
+            "action": "Run the first three development tasks through the harness; repair fixture or tool failures and inspect complete traces.",
+            "evidence": "Three complete runs with outcome, time, and cost.",
+            "activity": 2,
+            "module": 1,
+            "track": "H",
+            "part": 4,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 6,
+            "key": "2-4",
+            "legacy_lesson": "week-04-thursday"
+          }
+        ]
+      },
+      {
+        "day": "Tuesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Isolate Task Processes And Credentials",
+            "action": "Introduce fresh-process or container execution with a disposable workspace and credentials retained outside the task environment.",
+            "evidence": "Task execution cannot read host credentials.",
+            "activity": 3,
+            "module": 2,
+            "track": "H",
+            "part": 1,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 12,
+            "key": "3-1",
+            "legacy_lesson": "week-07-wednesday"
+          }
+        ]
+      },
+      {
+        "day": "Wednesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Enforce Paths And Tool Authorization",
+            "action": "Implement host-side tool authorization and workspace path resolution; reject traversal, escaping symlinks, and unauthorized network/tool requests.",
+            "evidence": "Boundary rejection cases pass.",
+            "activity": 3,
+            "module": 2,
+            "track": "H",
+            "part": 2,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 12,
+            "key": "3-2",
+            "legacy_lesson": "week-07-thursday"
+          }
+        ]
+      },
+      {
+        "day": "Thursday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Bound Process Time And Output",
+            "action": "Add wall-time cancellation and output limits; exercise an infinite process and excessive-output fixture.",
+            "evidence": "Both processes stop within documented limits.",
+            "activity": 3,
+            "module": 2,
+            "track": "H",
+            "part": 3,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 12,
+            "key": "3-3",
+            "legacy_lesson": "week-07-friday"
+          }
+        ]
+      },
+      {
+        "day": "Friday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Verify The Execution Boundary Matrix",
+            "action": "Run all path, symlink, timeout, output, and unauthorized-request checks; document the supported execution boundary.",
+            "evidence": "Automated boundary matrix passes.",
+            "activity": 3,
+            "module": 2,
+            "track": "H",
+            "part": 4,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 12,
+            "key": "3-4",
+            "legacy_lesson": "week-07-saturday"
+          }
+        ]
+      },
+      {
+        "day": "Saturday",
+        "hours": 2,
+        "steps": [
+          {
+            "title": "Record Events With Stable Identifiers",
+            "action": "Implement append-only events, stable run IDs, and explicit failure categories; read H4 on verified outcomes.",
+            "evidence": "One run produces an ordered event log.",
+            "activity": 4,
+            "module": 2,
+            "track": "H",
+            "part": 1,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 13,
+            "key": "4-1",
+            "legacy_lesson": "week-07-saturday"
+          },
+          {
+            "title": "Replay Mock Runs And Inspect Traces",
+            "action": "Implement mock-model replay and a readable CLI or trace viewer; compare replayed tool decisions with the original trace.",
+            "evidence": "Deterministic replay and readable inspection.",
+            "activity": 4,
+            "module": 2,
+            "track": "H",
+            "part": 2,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 13,
+            "key": "4-2",
+            "legacy_lesson": "week-08-monday"
+          }
+        ]
+      },
+      {
+        "day": "Sunday",
+        "hours": 0,
+        "steps": []
+      }
+    ]
+  },
+  {
+    "week": 3,
+    "hours": 7,
+    "modules": [
+      2,
+      3
+    ],
+    "days": [
+      {
+        "day": "Monday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Complete Eight Development Task Fixtures",
+            "action": "Finish the remaining five development fixtures and verify every reference solution plus broken/no-op controls.",
+            "evidence": "Eight fixtures reject broken/no-op solutions.",
+            "activity": 4,
+            "module": 2,
+            "track": "H",
+            "part": 3,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 13,
+            "key": "4-3",
+            "legacy_lesson": "week-08-tuesday"
+          }
+        ]
+      },
+      {
+        "day": "Tuesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Run And Summarize Development Results",
+            "action": "Run all eight development tasks, categorize failures, and write a small report without inspecting final-task agent results.",
+            "evidence": "Development report links outcomes to traces.",
+            "activity": 4,
+            "module": 2,
+            "track": "H",
+            "part": 4,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 13,
+            "key": "4-4",
+            "legacy_lesson": "week-08-wednesday"
+          }
+        ]
+      },
+      {
+        "day": "Wednesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Build Clean Workspace Outcome Evaluation",
+            "action": "Read H3/H4 selectively; implement clean task workspaces and deterministic outcome checks in the evaluator.",
+            "evidence": "Reference and no-op runs produce expected grades.",
+            "activity": 5,
+            "module": 3,
+            "track": "H",
+            "part": 1,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 19,
+            "key": "5-1",
+            "legacy_lesson": "week-11-tuesday"
+          }
+        ]
+      },
+      {
+        "day": "Thursday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Implement the Provider Message Adapter",
+            "action": "Connect the raw loop to one pinned provider SDK using offline response fixtures before enabling paid requests.",
+            "evidence": "A tested adapter preserves tool IDs, content blocks, stop reasons, and usage without making live calls.",
+            "activity": 107,
+            "source_activity": 107,
+            "module": 3,
+            "track": "H",
+            "part": 1,
+            "total_parts": 1,
+            "hours": 1,
+            "key": "bridge-provider"
+          }
+        ]
+      },
+      {
+        "day": "Friday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Enforce Budgets and Verify the Live Adapter",
+            "action": "Reserve before each request, retain unknown usage, disable hidden retries, and complete one bounded live smoke loop.",
+            "evidence": "Fake budget enforcement tests and a bounded provider smoke trace, or explicit live blocker.",
+            "activity": 5,
+            "module": 3,
+            "track": "H",
+            "part": 2,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 19,
+            "key": "5-2",
+            "legacy_lesson": "week-11-wednesday"
+          }
+        ]
+      },
+      {
+        "day": "Saturday",
+        "hours": 2,
+        "steps": [
+          {
+            "title": "Integrate and Inspect the Baseline Harness",
+            "action": "Connect pinned mini-SWE-agent to the evaluator; match feasible model/resource limits and document tool/prompt differences.",
+            "evidence": "Runnable baseline adapter and an honest comparison-conditions table.",
+            "activity": 5,
+            "module": 3,
+            "track": "H",
+            "part": 3,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 19,
+            "key": "5-3",
+            "legacy_lesson": "week-11-thursday"
+          },
+          {
+            "title": "Compare Two Systems Under Declared Limits",
+            "action": "Run a descriptive two-task development pilot, preserving interface differences and every attempted outcome.",
+            "evidence": "One command emits both system tables with common limits and disclosed confounds.",
+            "activity": 5,
+            "module": 3,
+            "track": "H",
+            "part": 4,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 19,
+            "key": "5-4",
+            "legacy_lesson": "week-11-friday"
+          }
+        ]
+      },
+      {
+        "day": "Sunday",
+        "hours": 0,
+        "steps": []
+      }
+    ]
+  },
+  {
+    "week": 4,
+    "hours": 7,
+    "modules": [
+      3,
+      4
+    ],
+    "days": [
+      {
+        "day": "Monday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Implement Bounded Repository File Listing",
+            "action": "Add file listing with explicit limits and deterministic ordering; choose development tasks requiring repository navigation.",
+            "evidence": "Bounded listings on selected repositories.",
+            "activity": 6,
+            "module": 3,
+            "track": "H",
+            "part": 1,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 20,
+            "key": "6-1",
+            "legacy_lesson": "week-11-saturday"
+          }
+        ]
+      },
+      {
+        "day": "Tuesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Combine Search With Selected File Reads",
+            "action": "Connect exact search and selected reads with output truncation; record when potentially relevant content was omitted.",
+            "evidence": "Navigation traces show truncation and selected evidence.",
+            "activity": 6,
+            "module": 3,
+            "track": "H",
+            "part": 2,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 20,
+            "key": "6-2",
+            "legacy_lesson": "week-11-saturday"
+          }
+        ]
+      },
+      {
+        "day": "Wednesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Compare One Context Selection Policy",
+            "action": "Run one context-selection policy against the existing approach on fixed development tasks using matched model and budgets.",
+            "evidence": "Controlled development comparison.",
+            "activity": 6,
+            "module": 3,
+            "track": "H",
+            "part": 3,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 20,
+            "key": "6-3",
+            "legacy_lesson": "week-12-monday"
+          }
+        ]
+      },
+      {
+        "day": "Thursday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Explain Lost Evidence And Outcomes",
+            "action": "Inspect successful and failed traces; identify where retrieval lost necessary evidence and relate that loss to verified task outcomes.",
+            "evidence": "Written evidence-loss analysis linked to traces.",
+            "activity": 6,
+            "module": 3,
+            "track": "H",
+            "part": 4,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 20,
+            "key": "6-4",
+            "legacy_lesson": "week-12-tuesday"
+          }
+        ]
+      },
+      {
+        "day": "Friday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Define Durable Agent Run State",
+            "action": "Read H5 selectively; define persisted messages, tool outcomes, workspace version, and run-state fields.",
+            "evidence": "State schema covers each required field.",
+            "activity": 7,
+            "module": 4,
+            "track": "H",
+            "part": 1,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 26,
+            "key": "7-1",
+            "legacy_lesson": "week-15-monday"
+          }
+        ]
+      },
+      {
+        "day": "Saturday",
+        "hours": 2,
+        "steps": [
+          {
+            "title": "Persist Checkpoints Around Tool Actions",
+            "action": "Write and reload checkpoints before and after tool actions; record enough action state to distinguish completion from uncertainty.",
+            "evidence": "Reloaded state matches messages and workspace version.",
+            "activity": 7,
+            "module": 4,
+            "track": "H",
+            "part": 2,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 26,
+            "key": "7-2",
+            "legacy_lesson": "week-15-tuesday"
+          },
+          {
+            "title": "Resume And Reconcile Uncertain Actions",
+            "action": "Implement restart transitions; reconcile uncertain mutating actions against workspace state before deciding whether execution is safe.",
+            "evidence": "Resume trace documents a reconciled mutation.",
+            "activity": 7,
+            "module": 4,
+            "track": "H",
+            "part": 3,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 26,
+            "key": "7-3",
+            "legacy_lesson": "week-15-wednesday"
+          }
+        ]
+      },
+      {
+        "day": "Sunday",
+        "hours": 0,
+        "steps": []
+      }
+    ]
+  },
+  {
+    "week": 5,
+    "hours": 7,
+    "modules": [
+      4,
+      5
+    ],
+    "days": [
+      {
+        "day": "Monday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Interrupt And Verify Mutation Handling",
+            "action": "Interrupt immediately before and after a tool action, restart both cases, and verify edits are not silently duplicated.",
+            "evidence": "Both interruption scenarios pass without duplicate edits.",
+            "activity": 7,
+            "module": 4,
+            "track": "H",
+            "part": 4,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 26,
+            "key": "7-4",
+            "legacy_lesson": "week-15-thursday"
+          }
+        ]
+      },
+      {
+        "day": "Tuesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Define The Compacted Context Record",
+            "action": "Read H5 selectively; specify objective, decisions, evidence pointers, changed files, and pending actions with an explicit compaction budget.",
+            "evidence": "Compaction schema and token budget.",
+            "activity": 8,
+            "module": 4,
+            "track": "H",
+            "part": 1,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 27,
+            "key": "8-1",
+            "legacy_lesson": "week-15-friday"
+          }
+        ]
+      },
+      {
+        "day": "Wednesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Implement Evidence Preserving Context Compaction",
+            "action": "Implement the compacted record and its insertion into subsequent model context; check that retained evidence pointers remain resolvable.",
+            "evidence": "Compacted example retains all required fields.",
+            "activity": 8,
+            "module": 4,
+            "track": "H",
+            "part": 2,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 27,
+            "key": "8-2",
+            "legacy_lesson": "week-15-saturday"
+          }
+        ]
+      },
+      {
+        "day": "Thursday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Run The Bounded Recent History Baseline",
+            "action": "Implement bounded recent-history selection and compare both policies on fixed development tasks under matched budgets.",
+            "evidence": "Matched development traces for both policies.",
+            "activity": 8,
+            "module": 4,
+            "track": "H",
+            "part": 3,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 27,
+            "key": "8-3",
+            "legacy_lesson": "week-15-saturday"
+          }
+        ]
+      },
+      {
+        "day": "Friday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Inspect Compaction Information Loss Cases",
+            "action": "Inspect policy traces and produce a concrete case where summarization drops essential information; document its consequence.",
+            "evidence": "Explicit budget plus documented information-loss failure.",
+            "activity": 8,
+            "module": 4,
+            "track": "H",
+            "part": 4,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 27,
+            "key": "8-4",
+            "legacy_lesson": "week-16-monday"
+          }
+        ]
+      },
+      {
+        "day": "Saturday",
+        "hours": 2,
+        "steps": [
+          {
+            "title": "Trace The Official MCP Tool Interface",
+            "action": "Read H6 selectively; map one existing read/search tool's arguments and result onto the official SDK interface.",
+            "evidence": "Adapter mapping preserves the existing tool contract.",
+            "activity": 9,
+            "module": 5,
+            "track": "H",
+            "part": 1,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 33,
+            "key": "9-1",
+            "legacy_lesson": "week-18-saturday"
+          },
+          {
+            "title": "Expose One Existing Workspace Tool",
+            "action": "Implement the MCP adapter for that existing tool, retaining host-side permission checks.",
+            "evidence": "MCP tool responds to a valid request.",
+            "activity": 9,
+            "module": 5,
+            "track": "H",
+            "part": 2,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 33,
+            "key": "9-2",
+            "legacy_lesson": "week-19-monday"
+          }
+        ]
+      },
+      {
+        "day": "Sunday",
+        "hours": 0,
+        "steps": []
+      }
+    ]
+  },
+  {
+    "week": 6,
+    "hours": 7,
+    "modules": [
+      5
+    ],
+    "days": [
+      {
+        "day": "Monday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Compare Direct And Protocol Invocations",
+            "action": "Run identical authorized and unauthorized inputs through direct invocation and the MCP adapter.",
+            "evidence": "Both paths return equivalent outcomes and rejections.",
+            "activity": 9,
+            "module": 5,
+            "track": "H",
+            "part": 3,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 33,
+            "key": "9-3",
+            "legacy_lesson": "week-19-tuesday"
+          }
+        ]
+      },
+      {
+        "day": "Tuesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Verify Protocol And Permission Boundaries",
+            "action": "Run the protocol smoke test and confirm permission decisions occur outside model output for both invocation paths.",
+            "evidence": "Smoke test passes with external permission enforcement.",
+            "activity": 9,
+            "module": 5,
+            "track": "H",
+            "part": 4,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 33,
+            "key": "9-4",
+            "legacy_lesson": "week-19-wednesday"
+          }
+        ]
+      },
+      {
+        "day": "Wednesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Author Final Tasks 01–04",
+            "action": "Prepare four final-task specifications with genuinely distinct behaviors, using the existing fixture/grader template.",
+            "evidence": "Four new final fixtures (final-01 through final-04) with reference-pass/no-op-fail controls and recorded task families.",
+            "activity": 108,
+            "source_activity": 108,
+            "module": 5,
+            "track": "H",
+            "part": 1,
+            "total_parts": 1,
+            "hours": 1,
+            "key": "fixtures-final-a"
+          }
+        ]
+      },
+      {
+        "day": "Thursday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Author Final Tasks 05–08",
+            "action": "Author four more final fixtures and verify their reference/no-op controls without agent runs.",
+            "evidence": "Four new final fixtures (final-05 through final-08) with reference-pass/no-op-fail controls and recorded task families.",
+            "activity": 109,
+            "source_activity": 109,
+            "module": 5,
+            "track": "H",
+            "part": 1,
+            "total_parts": 1,
+            "hours": 1,
+            "key": "fixtures-final-b"
+          }
+        ]
+      },
+      {
+        "day": "Friday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Author Final Tasks 09–12",
+            "action": "Author four final fixtures, checking both solvability and separation from development feedback.",
+            "evidence": "Four new final fixtures (final-09 through final-12) with reference-pass/no-op-fail controls and recorded task families.",
+            "activity": 110,
+            "source_activity": 110,
+            "module": 5,
+            "track": "H",
+            "part": 1,
+            "total_parts": 1,
+            "hours": 1,
+            "key": "fixtures-final-c"
+          }
+        ]
+      },
+      {
+        "day": "Saturday",
+        "hours": 2,
+        "steps": [
+          {
+            "title": "Finish the Last Four Final Task Fixtures",
+            "action": "Create final-13 through final-16 after the three dedicated authoring batches; instantiate all sixteen without model calls.",
+            "evidence": "Sixteen fixtures, each with a stated outcome and reference/no-op controls.",
+            "activity": 10,
+            "module": 5,
+            "track": "H",
+            "part": 1,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 34,
+            "key": "10-1",
+            "legacy_lesson": "week-19-thursday"
+          },
+          {
+            "title": "Verify Reference And Broken Controls",
+            "action": "Check reference solutions and broken/no-op controls for all final fixtures; repair invalid graders without inspecting agent performance.",
+            "evidence": "Final graders accept references and reject controls.",
+            "activity": 10,
+            "module": 5,
+            "track": "H",
+            "part": 2,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 34,
+            "key": "10-2",
+            "legacy_lesson": "week-19-friday"
+          }
+        ]
+      },
+      {
+        "day": "Sunday",
+        "hours": 0,
+        "steps": []
+      }
+    ]
+  },
+  {
+    "week": 7,
+    "hours": 7,
+    "modules": [
+      5,
+      6
+    ],
+    "days": [
+      {
+        "day": "Monday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Build the Frozen Task Manifest",
+            "action": "Implement a manifest builder that hashes task and grader fixtures and records the development/final split.",
+            "evidence": "Frozen 24-task manifest plus a mutation check that changes its identity.",
+            "activity": 10,
+            "module": 5,
+            "track": "H",
+            "part": 3,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 34,
+            "key": "10-3",
+            "legacy_lesson": "week-19-saturday"
+          }
+        ]
+      },
+      {
+        "day": "Tuesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Validate Task and Grader Invariants",
+            "action": "Implement a model-free validator for task IDs, splits, fixture hashes, and grader references; prove malformed inputs fail.",
+            "evidence": "Passing manifest validation and four negative regression tests.",
+            "activity": 10,
+            "module": 5,
+            "track": "H",
+            "part": 4,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 34,
+            "key": "10-4",
+            "legacy_lesson": "week-19-saturday"
+          }
+        ]
+      },
+      {
+        "day": "Wednesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Inject Model Timeout And Rate Limits",
+            "action": "Add controlled model-timeout and rate-limit failures; verify bounded retries distinguish retryable failures from permanent errors.",
+            "evidence": "Retry tests stop within configured budgets.",
+            "activity": 11,
+            "module": 6,
+            "track": "H",
+            "part": 1,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 40,
+            "key": "11-1",
+            "legacy_lesson": "week-22-friday"
+          }
+        ]
+      },
+      {
+        "day": "Thursday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Exercise Malformed Calls And Tool Crashes",
+            "action": "Inject malformed arguments and tool crashes; check failure categories, cancellation, and terminal outcomes.",
+            "evidence": "Invalid calls and crashes produce bounded outcomes.",
+            "activity": 11,
+            "module": 6,
+            "track": "H",
+            "part": 2,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 40,
+            "key": "11-2",
+            "legacy_lesson": "week-22-saturday"
+          }
+        ]
+      },
+      {
+        "day": "Friday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Recover From Stale Summaries And Restarts",
+            "action": "Inject a stale summary and process restart; verify recovery uses persisted evidence and reconciles uncertain side effects.",
+            "evidence": "Recovery traces expose stale or uncertain state.",
+            "activity": 11,
+            "module": 6,
+            "track": "H",
+            "part": 3,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 40,
+            "key": "11-3",
+            "legacy_lesson": "week-22-saturday"
+          }
+        ]
+      },
+      {
+        "day": "Saturday",
+        "hours": 2,
+        "steps": [
+          {
+            "title": "Verify The Complete Recovery Failure Matrix",
+            "action": "Run every injected failure case and inspect retry, cancellation, budget, and side-effect handling.",
+            "evidence": "Failure matrix distinguishes transient, permanent, and uncertain cases.",
+            "activity": 11,
+            "module": 6,
+            "track": "H",
+            "part": 4,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 40,
+            "key": "11-4",
+            "legacy_lesson": "week-23-monday"
+          },
+          {
+            "title": "Predeclare The Matched Harness Hypothesis",
+            "action": "Read H8/H4 selectively; state the recent-history versus evidence-preserving compaction hypothesis and fixed model, tools, and budgets.",
+            "evidence": "Written hypothesis and matched-condition specification.",
+            "activity": 12,
+            "module": 6,
+            "track": "H",
+            "part": 1,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 41,
+            "key": "12-1",
+            "legacy_lesson": "week-23-tuesday"
+          }
+        ]
+      },
+      {
+        "day": "Sunday",
+        "hours": 0,
+        "steps": []
+      }
+    ]
+  },
+  {
+    "week": 8,
+    "hours": 7,
+    "modules": [
+      6,
+      7
+    ],
+    "days": [
+      {
+        "day": "Monday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Freeze Metrics Splits And Cost Estimates",
+            "action": "Record outcome metrics, task splits, three repeats per condition, uncertainty approach, and estimated costs before final runs.",
+            "evidence": "Evaluation plan and affordable cost estimate.",
+            "activity": 12,
+            "module": 6,
+            "track": "H",
+            "part": 2,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 41,
+            "key": "12-2",
+            "legacy_lesson": "week-23-wednesday"
+          }
+        ]
+      },
+      {
+        "day": "Tuesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Pilot Both Policies At Context Ceiling",
+            "action": "Run development tasks that reach the shared context ceiling; verify each context policy activates under the same model and budgets.",
+            "evidence": "Pilot traces show both policies activating.",
+            "activity": 12,
+            "module": 6,
+            "track": "H",
+            "part": 3,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 41,
+            "key": "12-3",
+            "legacy_lesson": "week-23-thursday"
+          }
+        ]
+      },
+      {
+        "day": "Wednesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Implement the Experiment Manifest Loader",
+            "action": "Validate and load a frozen experiment manifest, rejecting missing or mismatched configuration and unvalidated policies.",
+            "evidence": "Valid manifest load plus rejected malformed configuration cases.",
+            "activity": 12,
+            "module": 6,
+            "track": "H",
+            "part": 4,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 41,
+            "key": "12-4",
+            "legacy_lesson": "week-23-friday"
+          }
+        ]
+      },
+      {
+        "day": "Thursday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Verify Evaluation Manifest And Trial Accounting",
+            "action": "Verify frozen model, commits, graders, budgets, sixteen tasks, two conditions, and three repeats; prepare the 96-trial manifest.",
+            "evidence": "Manifest contains exactly 96 scheduled trials.",
+            "activity": 13,
+            "module": 7,
+            "track": "H",
+            "part": 1,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 47,
+            "key": "13-1",
+            "legacy_lesson": "week-26-wednesday"
+          }
+        ]
+      },
+      {
+        "day": "Friday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Launch The First Matched Trial Round",
+            "action": "Launch one repeat across sixteen tasks and both conditions; check budget enforcement and trace capture without tuning the frozen harness.",
+            "evidence": "First 32 attempted trials are recorded.",
+            "activity": 13,
+            "module": 7,
+            "track": "H",
+            "part": 2,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 47,
+            "key": "13-2",
+            "legacy_lesson": "week-26-thursday"
+          }
+        ]
+      },
+      {
+        "day": "Saturday",
+        "hours": 2,
+        "steps": [
+          {
+            "title": "Launch The Second Matched Trial Round",
+            "action": "Launch the second repeat for both conditions; retain failures and timeouts with deterministic grades and actual usage.",
+            "evidence": "Next 32 attempted trials retain all outcomes.",
+            "activity": 13,
+            "module": 7,
+            "track": "H",
+            "part": 3,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 47,
+            "key": "13-3",
+            "legacy_lesson": "week-26-friday"
+          },
+          {
+            "title": "Complete Trials and Verify Outcome Accounting",
+            "action": "Launch the third repeat if the budget allows; reconcile all96 planned rows with attempted, running, terminal, or unattempted status.",
+            "evidence": "An evidence-linked96-row manifest with complete attempted accounting or an explicit predeclared budget shortfall.",
+            "activity": 13,
+            "module": 7,
+            "track": "H",
+            "part": 4,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 47,
+            "key": "13-4",
+            "legacy_lesson": "week-26-saturday"
+          }
+        ]
+      },
+      {
+        "day": "Sunday",
+        "hours": 0,
+        "steps": []
+      }
+    ]
+  },
+  {
+    "week": 9,
+    "hours": 7,
+    "modules": [
+      7,
+      8
+    ],
+    "days": [
+      {
+        "day": "Monday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Group Private Suite Failures And Costs",
+            "action": "Group all private-study attempts by task, condition, failure category, time, and cost; retain truncated runs as failures.",
+            "evidence": "Private-suite outcome and cost tables.",
+            "activity": 14,
+            "module": 7,
+            "track": "H",
+            "part": 1,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 48,
+            "key": "14-1",
+            "legacy_lesson": "week-26-saturday"
+          }
+        ]
+      },
+      {
+        "day": "Tuesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Inspect Representative Private Task Failure Traces",
+            "action": "Inspect representative failures to explain policy behavior and evidence loss without modifying the frozen result.",
+            "evidence": "Trace-linked private-study failure analysis.",
+            "activity": 14,
+            "module": 7,
+            "track": "H",
+            "part": 2,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 48,
+            "key": "14-2",
+            "legacy_lesson": "week-27-monday"
+          }
+        ]
+      },
+      {
+        "day": "Wednesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Run The Optional Frozen External Pilot",
+            "action": "Only if setup and budget gates passed, launch twenty external trials; otherwise deepen the required private-study analysis.",
+            "evidence": "Twenty external attempts or documented skip.",
+            "activity": 14,
+            "module": 7,
+            "track": "H",
+            "part": 3,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 48,
+            "key": "14-3",
+            "legacy_lesson": "week-27-tuesday"
+          }
+        ]
+      },
+      {
+        "day": "Thursday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Validate Evaluation Result Tables",
+            "action": "Join results against the frozen manifest and detect duplicate, missing, mislabelled, or malformed trial records.",
+            "evidence": "Audited private-task result table and negative input tests.",
+            "activity": 14,
+            "module": 7,
+            "track": "H",
+            "part": 4,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 48,
+            "key": "14-4",
+            "legacy_lesson": "week-27-wednesday"
+          }
+        ]
+      },
+      {
+        "day": "Friday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Audit Outcome Graders Against Saved Evidence",
+            "action": "Read H4/H8 selectively; inspect saved task outcomes against deterministic grades and representative success/failure traces.",
+            "evidence": "Grading audit with discrepancies explicitly recorded.",
+            "activity": 15,
+            "module": 8,
+            "track": "H",
+            "part": 1,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 54,
+            "key": "15-1",
+            "legacy_lesson": "week-30-monday"
+          }
+        ]
+      },
+      {
+        "day": "Saturday",
+        "hours": 2,
+        "steps": [
+          {
+            "title": "Reconcile Run Budgets And Actual Charges",
+            "action": "Audit model usage, retries, budget reservations, actual charges, and stopped runs against reported per-trial costs.",
+            "evidence": "Reconciled cost and budget accounting.",
+            "activity": 15,
+            "module": 8,
+            "track": "H",
+            "part": 2,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 54,
+            "key": "15-2",
+            "legacy_lesson": "week-30-tuesday"
+          },
+          {
+            "title": "Calculate Uncertainty Across Paired Task Results",
+            "action": "Calculate uncertainty summaries that preserve task grouping and repeated trials; state the small-suite limitations.",
+            "evidence": "Per-task clustered analysis and uncertainty summary.",
+            "activity": 15,
+            "module": 8,
+            "track": "H",
+            "part": 3,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 54,
+            "key": "15-3",
+            "legacy_lesson": "week-30-wednesday"
+          }
+        ]
+      },
+      {
+        "day": "Sunday",
+        "hours": 0,
+        "steps": []
+      }
+    ]
+  },
+  {
+    "week": 10,
+    "hours": 3,
+    "modules": [
+      8,
+      9
+    ],
+    "days": [
+      {
+        "day": "Monday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Generate Claims From Audited Evidence",
+            "action": "Generate a compact findings table from validated records with explicit numerators, denominators, and uncertainty.",
+            "evidence": "Tested findings generator, one supported claim, and a follow-up hypothesis.",
+            "activity": 15,
+            "module": 8,
+            "track": "H",
+            "part": 4,
+            "total_parts": 4,
+            "hours": 1,
+            "source_activity": 54,
+            "key": "15-4",
+            "legacy_lesson": "week-30-thursday"
+          }
+        ]
+      },
+      {
+        "day": "Tuesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Test Reproduction From a Clean Environment",
+            "action": "Implement a fresh-environment reproduction smoke check for the loop, resume, and failure cases; audit saved evaluation statuses without new paid runs.",
+            "evidence": "Clean-environment smoke output and an intentional missing-dependency failure.",
+            "activity": 302,
+            "source_activity": 302,
+            "module": 9,
+            "track": "F",
+            "part": 1,
+            "total_parts": 1,
+            "hours": 1,
+            "key": "final-2"
+          }
+        ]
+      },
+      {
+        "day": "Wednesday",
+        "hours": 1,
+        "steps": [
+          {
+            "title": "Build a Minimal Upstream Regression Case",
+            "action": "Reduce one integration problem encountered during the course to a minimal reproducer or regression test against the relevant project.",
+            "evidence": "Small reproducible case, expected behavior, and a tested fix or precise issue draft.",
+            "activity": 303,
+            "source_activity": 303,
+            "module": 9,
+            "track": "F",
+            "part": 1,
+            "total_parts": 1,
+            "hours": 1,
+            "key": "final-3"
+          }
+        ]
+      },
+      {
+        "day": "Thursday",
+        "hours": 0,
+        "steps": []
+      },
+      {
+        "day": "Friday",
+        "hours": 0,
+        "steps": []
+      },
+      {
+        "day": "Saturday",
+        "hours": 0,
+        "steps": []
+      },
+      {
+        "day": "Sunday",
+        "hours": 0,
+        "steps": []
+      }
+    ]
+  }
+]

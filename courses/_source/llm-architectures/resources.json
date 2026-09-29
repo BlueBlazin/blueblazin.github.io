@@ -1,0 +1,377 @@
+[
+  {
+    "id": "AR01",
+    "title": "CS336 Assignment 1: transformer implementation handout",
+    "url": "https://github.com/stanford-cs336/assignment1-basics/blob/main/cs336_assignment1_basics.pdf",
+    "kind": "handout",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://github.com/stanford-cs336/assignment1-basics/blob/main/cs336_assignment1_basics.pdf",
+    "publisher": "Stanford CS336",
+    "notes": "Use only named components, not the full assignment. Repository README retains an earlier offering label."
+  },
+  {
+    "id": "AR02",
+    "title": "PyTorch cross_entropy reference",
+    "url": "https://docs.pytorch.org/docs/stable/generated/torch.nn.functional.cross_entropy.html",
+    "kind": "documentation",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://docs.pytorch.org/docs/stable/generated/torch.nn.functional.cross_entropy.html",
+    "publisher": "PyTorch"
+  },
+  {
+    "id": "AR03",
+    "title": "nanoGPT model.py",
+    "url": "https://github.com/karpathy/nanoGPT/blob/master/model.py",
+    "kind": "reference-code",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://github.com/karpathy/nanoGPT/blob/master/model.py",
+    "publisher": "Andrej Karpathy",
+    "notes": "Read only after an unaided implementation attempt. Record inspected commit locally."
+  },
+  {
+    "id": "AR04",
+    "title": "PyTorch AdamW reference",
+    "url": "https://docs.pytorch.org/docs/stable/generated/torch.optim.AdamW.html",
+    "kind": "documentation",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://docs.pytorch.org/docs/stable/generated/torch.optim.AdamW.html",
+    "publisher": "PyTorch"
+  },
+  {
+    "id": "AR05",
+    "title": "Saving and Loading Models",
+    "url": "https://docs.pytorch.org/tutorials/beginner/saving_loading_models.html",
+    "kind": "tutorial",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://docs.pytorch.org/tutorials/beginner/saving_loading_models.html",
+    "publisher": "PyTorch"
+  },
+  {
+    "id": "AR06",
+    "title": "The Llama 3 Herd of Models",
+    "url": "https://arxiv.org/abs/2407.21783",
+    "kind": "paper",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://arxiv.org/abs/2407.21783",
+    "publisher": "Meta Llama authors"
+  },
+  {
+    "id": "AR07",
+    "title": "RoFormer: Enhanced Transformer with Rotary Position Embedding",
+    "url": "https://arxiv.org/abs/2104.09864",
+    "kind": "paper",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://arxiv.org/abs/2104.09864",
+    "publisher": "RoFormer authors"
+  },
+  {
+    "id": "AR08",
+    "title": "GQA: Training Generalized Multi-Query Transformer Models",
+    "url": "https://arxiv.org/abs/2305.13245",
+    "kind": "paper",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://arxiv.org/abs/2305.13245",
+    "publisher": "GQA authors"
+  },
+  {
+    "id": "AR09",
+    "title": "JAX pytrees",
+    "url": "https://docs.jax.dev/en/latest/pytrees.html",
+    "kind": "documentation",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://docs.jax.dev/en/latest/pytrees.html",
+    "publisher": "JAX"
+  },
+  {
+    "id": "AR10",
+    "title": "JAX pseudorandom numbers",
+    "url": "https://docs.jax.dev/en/latest/random-numbers.html",
+    "kind": "documentation",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://docs.jax.dev/en/latest/random-numbers.html",
+    "publisher": "JAX"
+  },
+  {
+    "id": "AR11",
+    "title": "JAX automatic vectorization",
+    "url": "https://docs.jax.dev/en/latest/automatic-vectorization.html",
+    "kind": "documentation",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://docs.jax.dev/en/latest/automatic-vectorization.html",
+    "publisher": "JAX"
+  },
+  {
+    "id": "AR12",
+    "title": "JAX automatic differentiation",
+    "url": "https://docs.jax.dev/en/latest/automatic-differentiation.html",
+    "kind": "documentation",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://docs.jax.dev/en/latest/automatic-differentiation.html",
+    "publisher": "JAX"
+  },
+  {
+    "id": "AR13",
+    "title": "JAX just-in-time compilation",
+    "url": "https://docs.jax.dev/en/latest/jit-compilation.html",
+    "kind": "documentation",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://docs.jax.dev/en/latest/jit-compilation.html",
+    "publisher": "JAX"
+  },
+  {
+    "id": "AR14",
+    "title": "JAX stateful computations: explicit functional state",
+    "url": "https://docs.jax.dev/en/latest/stateful-computations.html",
+    "kind": "tutorial",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://docs.jax.dev/en/latest/stateful-computations.html",
+    "publisher": "JAX",
+    "notes": "Prefer the explicit-return-state example for this course; the current Training Cookbook also covers newer Ref-based mutation."
+  },
+  {
+    "id": "AR15",
+    "title": "PyTorch numerical accuracy",
+    "url": "https://docs.pytorch.org/docs/stable/notes/numerical_accuracy.html",
+    "kind": "documentation",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://docs.pytorch.org/docs/stable/notes/numerical_accuracy.html",
+    "publisher": "PyTorch"
+  },
+  {
+    "id": "AR16",
+    "title": "How KV caching works",
+    "url": "https://huggingface.co/docs/transformers/main/en/cache_explanation",
+    "kind": "tutorial",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://huggingface.co/docs/transformers/main/en/cache_explanation",
+    "publisher": "Hugging Face Transformers"
+  },
+  {
+    "id": "AR17",
+    "title": "TinyStories dataset card",
+    "url": "https://huggingface.co/datasets/roneneldan/TinyStories",
+    "kind": "dataset-card",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://huggingface.co/datasets/roneneldan/TinyStories",
+    "publisher": "Ronen Eldan and Yuanzhi Li"
+  },
+  {
+    "id": "AR18",
+    "title": "Benchmarking JAX code",
+    "url": "https://docs.jax.dev/en/latest/benchmarking.html",
+    "kind": "tutorial",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://docs.jax.dev/en/latest/benchmarking.html",
+    "publisher": "JAX"
+  },
+  {
+    "id": "AR19",
+    "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+    "url": "https://arxiv.org/abs/2106.09685",
+    "kind": "paper",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://arxiv.org/abs/2106.09685",
+    "publisher": "LoRA authors"
+  },
+  {
+    "id": "AR20",
+    "title": "SmolLM2-360M official model card",
+    "url": "https://huggingface.co/HuggingFaceTB/SmolLM2-360M",
+    "kind": "model-card",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://huggingface.co/HuggingFaceTB/SmolLM2-360M",
+    "publisher": "Hugging Face SmolLM team"
+  },
+  {
+    "id": "AR21",
+    "title": "Transformers Llama model and causal-loss interface",
+    "url": "https://huggingface.co/docs/transformers/main/en/model_doc/llama",
+    "kind": "documentation",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://huggingface.co/docs/transformers/main/en/model_doc/llama",
+    "publisher": "Hugging Face Transformers"
+  },
+  {
+    "id": "AR22",
+    "title": "JSON Schema: object constraints",
+    "url": "https://json-schema.org/understanding-json-schema/reference/object",
+    "kind": "documentation",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://json-schema.org/understanding-json-schema/reference/object",
+    "publisher": "JSON Schema project"
+  },
+  {
+    "id": "AR23",
+    "title": "Transformers text-generation guide",
+    "url": "https://huggingface.co/docs/transformers/main/en/llm_tutorial",
+    "kind": "tutorial",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://huggingface.co/docs/transformers/main/en/llm_tutorial",
+    "publisher": "Hugging Face Transformers"
+  },
+  {
+    "id": "AR24",
+    "title": "Accuracy score: counts and proportions",
+    "url": "https://scikit-learn.org/stable/modules/generated/sklearn.metrics.accuracy_score.html",
+    "kind": "documentation",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://scikit-learn.org/stable/modules/generated/sklearn.metrics.accuracy_score.html",
+    "publisher": "scikit-learn",
+    "notes": "Read the metric definition; installing scikit-learn is not required for a simple exact-match counter."
+  },
+  {
+    "id": "AR25",
+    "title": "DeepSeekMoE",
+    "url": "https://arxiv.org/abs/2401.06066",
+    "kind": "paper",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://arxiv.org/abs/2401.06066",
+    "publisher": "DeepSeek-AI authors"
+  },
+  {
+    "id": "AR26",
+    "title": "PyTorch testing assertions",
+    "url": "https://docs.pytorch.org/docs/stable/testing.html",
+    "kind": "documentation",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://docs.pytorch.org/docs/stable/testing.html",
+    "publisher": "PyTorch"
+  },
+  {
+    "id": "AR27",
+    "title": "DeepSeek-V2: MLA architecture",
+    "url": "https://arxiv.org/html/2405.04434v5",
+    "kind": "paper",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://arxiv.org/html/2405.04434v5",
+    "publisher": "DeepSeek-AI authors"
+  },
+  {
+    "id": "AR28",
+    "title": "Qwen3.5-0.8B-Base official configuration overview",
+    "url": "https://huggingface.co/Qwen/Qwen3.5-0.8B-Base",
+    "kind": "model-card",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://huggingface.co/Qwen/Qwen3.5-0.8B-Base",
+    "publisher": "Qwen team"
+  },
+  {
+    "id": "AR29",
+    "title": "Gated Delta Networks",
+    "url": "https://arxiv.org/html/2412.06464v3",
+    "kind": "paper",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://arxiv.org/html/2412.06464v3",
+    "publisher": "Songlin Yang, Jan Kautz and Ali Hatamizadeh"
+  },
+  {
+    "id": "AR30",
+    "title": "Gemma 4 official model card",
+    "url": "https://ai.google.dev/gemma/docs/core/model_card_4",
+    "kind": "model-card",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://ai.google.dev/gemma/docs/core/model_card_4",
+    "publisher": "Google"
+  },
+  {
+    "id": "AR31",
+    "title": "DeepSeek-V4 technical report",
+    "url": "https://arxiv.org/abs/2606.19348",
+    "kind": "paper",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://arxiv.org/abs/2606.19348",
+    "publisher": "DeepSeek-AI authors"
+  },
+  {
+    "id": "AR32",
+    "title": "Direct Preference Optimization",
+    "url": "https://arxiv.org/abs/2305.18290",
+    "kind": "paper",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://arxiv.org/abs/2305.18290",
+    "publisher": "DPO authors"
+  },
+  {
+    "id": "AR33",
+    "title": "DeepSeekMath: Group Relative Policy Optimization",
+    "url": "https://arxiv.org/abs/2402.03300",
+    "kind": "paper",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://arxiv.org/abs/2402.03300",
+    "publisher": "DeepSeekMath authors"
+  },
+  {
+    "id": "AR34",
+    "title": "PyTorch benchmark tutorial",
+    "url": "https://docs.pytorch.org/tutorials/recipes/recipes/benchmark.html",
+    "kind": "tutorial",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://docs.pytorch.org/tutorials/recipes/recipes/benchmark.html",
+    "publisher": "PyTorch"
+  },
+  {
+    "id": "AR35",
+    "title": "Matplotlib quick start",
+    "url": "https://matplotlib.org/stable/users/explain/quick_start.html",
+    "kind": "documentation",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://matplotlib.org/stable/users/explain/quick_start.html",
+    "publisher": "Matplotlib"
+  },
+  {
+    "id": "AR36",
+    "title": "PyTorch reproducibility notes",
+    "url": "https://docs.pytorch.org/docs/stable/notes/randomness.html",
+    "kind": "documentation",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://docs.pytorch.org/docs/stable/notes/randomness.html",
+    "publisher": "PyTorch"
+  },
+  {
+    "id": "AR37",
+    "title": "Python subprocess.run: check and timeout",
+    "url": "https://docs.python.org/3/library/subprocess.html",
+    "kind": "documentation",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://docs.python.org/3/library/subprocess.html",
+    "publisher": "Python"
+  },
+  {
+    "id": "AR38",
+    "title": "Contributing to JAX",
+    "url": "https://docs.jax.dev/en/latest/contributing.html",
+    "kind": "contribution-guide",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://docs.jax.dev/en/latest/contributing.html",
+    "publisher": "JAX"
+  },
+  {
+    "id": "AR39",
+    "title": "PyTorch local installation",
+    "url": "https://pytorch.org/get-started/locally/",
+    "kind": "setup",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://pytorch.org/get-started/locally/",
+    "publisher": "PyTorch"
+  },
+  {
+    "id": "AR40",
+    "title": "JAX installation",
+    "url": "https://docs.jax.dev/en/latest/installation.html",
+    "kind": "setup",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://docs.jax.dev/en/latest/installation.html",
+    "publisher": "JAX"
+  },
+  {
+    "id": "AV01",
+    "title": "Let's build GPT: from scratch, in code, spelled out",
+    "url": "https://www.youtube.com/watch?v=kCc8FmEb1nY",
+    "kind": "video",
+    "verifiedDate": "2026-09-29",
+    "provenanceUrl": "https://karpathy.ai/zero-to-hero.html",
+    "publisher": "Andrej Karpathy",
+    "youtubeId": "kCc8FmEb1nY",
+    "notes": "First-party creator course links to this exact video. Whole video is about 1h56m; assigned use is at most ten minutes INSTEAD OF reading, never the full video as extra homework. Chapter timestamps were not independently verified, so none are fabricated."
+  }
+]

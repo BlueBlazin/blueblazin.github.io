@@ -1,0 +1,101 @@
+{
+  "name": "harness",
+  "directory": "agent-harness-course",
+  "title": "Agent Harness Engineering",
+  "tagline": "Tools · State · Boundaries · Evaluation",
+  "description": "Build a bounded, observable, resumable agent harness and test its behavior with controlled experiments.",
+  "color": "#5b4190",
+  "pale": "#f1edf8",
+  "symbol": "A",
+  "url": "https://blueblazin.github.io/courses/agent-harnesses/",
+  "budget": 250,
+  "standard": "Agent evaluation and execution",
+  "moduleTitles": [
+    "Agent Loops and Workspace Tools",
+    "Execution Boundaries and Event Logs",
+    "Outcome Evaluation and Repository Navigation",
+    "Persistence and Context Policies",
+    "MCP Interoperability and Task Freeze",
+    "Recovery and Experiment Design",
+    "Held-Out Evaluation and Failure Analysis",
+    "Audits, Uncertainty, and Technical Reporting"
+  ],
+  "prerequisites": [
+    "Comfort writing and testing Python programs, using Git, and reading JSON.",
+    "Basic familiarity with HTTP APIs and language-model messages; no model-training experience is required.",
+    "A local Python environment on the M1 Max and willingness to use a local container runtime for controlled execution tests.",
+    "No architecture course, kernel course, NVIDIA GPU, or trained model is required."
+  ],
+  "outcomes": [
+    "Implement and explain a bounded model/tool loop with typed arguments and host-owned authorization.",
+    "Build observable execution boundaries, append-only events, deterministic replay, and scoped restart reconciliation.",
+    "Evaluate context selection and compaction using valid message units and inclusive resource accounting.",
+    "Expose one existing tool through MCP without bypassing its permission checks.",
+    "Conduct a frozen 96-attempt, matched-budget comparison on sixteen held-out tasks and report task-grouped uncertainty.",
+    "Publish a reproducible harness project with focused demonstrations, raw-result provenance, costs, limitations, and a small contribution draft."
+  ],
+  "project": {
+    "title": "A Budgeted Coding-Agent Harness",
+    "description": "An independent Python harness with observable tools, restart recovery, context policies, and a controlled empirical study. The portfolio combines an inspectable implementation with evidence about how bounded recent history compares with evidence-preserving compaction.",
+    "requirements": [
+      "A raw loop with explicit terminal states, validated tools, enforced limits, and deterministic fake-model tests.",
+      "Controlled disposable execution, permission checks, failure injection, append-only events, and supported resume reconciliation.",
+      "A 24-task private suite: eight development tasks and sixteen final tasks, with reference/no-op/broken grader controls.",
+      "A frozen 16 × 2 × 3 = 96-attempt study comparing context policies with one pinned model, matched tools/budgets, inclusive overhead, and every failure retained.",
+      "An MCP adapter and direct/protocol parity tests preserving host authorization.",
+      "A technical report with paired per-task outcomes, honest uncertainty, cost tables, reproducible commands, and a success/restart/bounded-failure demo.",
+      "A clean-checkout verification path, evidence index, and minimal external contribution draft or verified compatibility finding."
+    ]
+  },
+  "track": "H",
+  "companions": [
+    {
+      "title": "LLM Architectures",
+      "url": "https://blueblazin.github.io/courses/llm-architectures/"
+    },
+    {
+      "title": "GPU Kernels & Optimization",
+      "url": "https://blueblazin.github.io/courses/gpu-kernels/"
+    }
+  ],
+  "modules": {
+    "1": "Agent Loops and Workspace Tools",
+    "2": "Execution Boundaries and Event Logs",
+    "3": "Outcome Evaluation and Repository Navigation",
+    "4": "Persistence and Context Policies",
+    "5": "MCP Interoperability and Task Freeze",
+    "6": "Recovery and Experiment Design",
+    "7": "Held-Out Evaluation and Failure Analysis",
+    "8": "Audits, Uncertainty, and Technical Reporting",
+    "0": "Orientation & setup",
+    "9": "Independent assessment & portfolio"
+  },
+  "setup": [
+    "Create a dedicated repository with harness/, tools/, fixtures/, tests/, evals/, traces/ and reports/. The other courses are not prerequisites.",
+    "Start with deterministic fake-model responses. Add a pinned pretrained model API only when the lesson requires it; training a language model is outside this course.",
+    "Keep agent-writable workspaces disposable and separate from credentials, evaluator code and expected results. Run model-generated commands and dynamic candidate-code grading in configured containers with explicit limits; a plain subprocess alone is not isolation.",
+    "Track model revision, configuration, all assigned trials and paid usage. Keep development feedback separate from the frozen final evaluation."
+  ],
+  "compute": "Use the M1 Max for harness development and deterministic tests. No rented GPU is required. Budget A$175 for model API experiments, A$50 for isolated CPU environments/storage and A$25 for price, tax and currency variation. Use explicit per-run request, token, time and monetary caps before launching paid trials.",
+  "assessment": "\nEvery substantive experiment note should contain the question, falsifiable prediction, baseline, changed variable, data/task IDs, exact commit/configuration, hardware/dtype, correctness criteria, result, cost, confounds, and next experiment. Save machine-readable results alongside the note.\n\n| Criterion | Weight |\n|---|---:|\n| Correctness and reliable failure handling | 30% |\n| Fair evaluation and measurement | 25% |\n| Mechanistic explanation | 20% |\n| Reproducibility and documentation | 15% |\n| Useful independent extension or contribution | 10% |\n\nCorrectness is a gate. An honestly rejected hypothesis can earn full experiment marks.\n\nPrepare one report of about 2–4 pages, or equivalent Markdown, for this course. Include a clear result, a limitation, raw evidence and a command that reproduces a smaller version. Use the Day 0 assessment and portfolio checklists after the relevant practical work. Technical reproduction remains part of the hands-on sequence where scheduled.\n",
+  "standards": "\nUse a capable pinned pretrained API model for harness research. Keep your raw loop small enough to explain. The core state consists of the task, model/tool messages, selected context, run metadata, tool outcomes, budget state, and terminal result. SDKs may handle transport; your code should own control flow and evaluation.\n\nThe task environment is disposable and isolated from your personal working files. A container is one execution boundary, not a universal security guarantee. Keep secrets, evaluator logic, expected answers, and final outcome checks outside agent-writable paths. A host-owned grader must not import agent-modified modules into the host; run candidate code inside the bounded grading environment and inspect inert outputs from the host. Tools enforce authorization in code; a prompt saying “be safe” is not enforcement. Scope the course to benign coding/data tasks. Reconcile uncertain side effects after a crash; exactly-once execution cannot be assumed simply because a log exists.\n\nFor the private suite, author 24 small tasks in categories such as bug fixing, adding a tested feature, repairing a data-processing script, and changing an experiment configuration. Write outcome checks before agent runs. For every task, require a known-correct reference solution to pass and the original broken or no-op state to fail. Check external tasks with their provided oracle/no-op controls where available; otherwise document the equivalent validation. Split task families where practical so the final set is not a renamed copy of development tasks. You will know the authored tasks, so call this a held-out development split, not a blind independent benchmark. Do not use final outcomes to tune prompts or policies.\n\nMain experiment: 16 final tasks × 2 conditions × 3 trials = 96 attempted trials. A trial that times out, hits its cost cap, or cannot recover is a failure under that budget. Use the same model revision, tools, task snapshots, and limits; the changed variable is context policy. Both policies preserve the original task/constraints and valid tool-call/result pairs under the same context ceiling. Charge summarizer calls, tokens, and latency to the compaction condition. Report how often the policy activates; if the development pilot never reaches the ceiling, redesign development tasks or choose another measured intervention before freezing. Report success counts/rates, all-trials-success where useful, median/p90 time, tokens/cost per task, and failure categories. Do not convert three tries into an inflated single-try success figure.\n\nLabel infrastructure failures separately from task failures, while including both in overall end-to-end completion. Use paired per-task comparisons and, if giving intervals, resample tasks rather than treating all repeated trials as independent tasks. Sixteen tasks is small; the result is a pilot, not a broad reliability claim. Describe model stochasticity and infrastructure noise. If the API does not expose deterministic seeds, say so and use repeated trials without pretending they are seed-controlled.\n\nThe external 10-task subset is optional and helps expose integration problems and unfamiliar task distributions. Its optional installation/setup budget is one scheduled hour; if it fails, finish the private study and document the infrastructure limitation. Pin the benchmark version actually used; do not call a subset score an official Terminal-Bench or SWE-bench result. Public benchmark contamination cannot be ruled out. Only one run per condition means this external comparison is descriptive. If infrastructure fails for a task, report it; do not silently replace it after seeing results.\n\nMCP demonstrates interoperability. It does not supply an agent loop, memory policy, authorization design, or evaluation methodology. Multi-agent systems, vector databases, and automatic harness evolution are optional experiments after the single-agent baseline is trustworthy. [H3–H8]\n\n\nPre-request budget reservations include all enabled billable work and remain reserved when usage is uncertain. The global study dispatcher reserves against shared remaining funds before launching each request, so concurrent trials cannot each spend the same apparent balance. Start with concurrency one; use transactional reservation updates before adding parallel execution.\n",
+  "resourceIds": [
+    "C5",
+    "H1",
+    "H2",
+    "H3",
+    "H4",
+    "H5",
+    "H6",
+    "H7",
+    "H8",
+    "P1",
+    "P2",
+    "P3",
+    "P4",
+    "H9",
+    "H10"
+  ],
+  "slug": "agent-harnesses",
+  "basePath": "/courses/agent-harnesses"
+}
