@@ -1,27 +1,21 @@
 {
-  "title": "Practical AI courses",
-  "description": "Independent, hands-on courses in language models, GPU programming, and agent engineering. Build working systems, test your understanding, and leave with a reproducible portfolio.",
+  "title": "Courses",
+  "description": "Hands-on courses in LLM architectures, GPU kernels, and agent harnesses.",
   "courses": [
     {
       "slug": "llm-architectures",
-      "focus": "Understand the model",
-      "topics": ["PyTorch & JAX", "GPT & Llama", "LoRA & MoE"],
-      "outcome": "A decoder laboratory with PyTorch/JAX parity, architectural extensions, and controlled training experiments.",
-      "icon": "layers"
+      "description": "Implement and train language models in PyTorch and JAX.",
+      "cover": "llm-architectures.webp"
     },
     {
       "slug": "gpu-kernels",
-      "focus": "Understand the machine",
-      "topics": ["CUDA & Triton", "Profiling", "JAX / Pallas"],
-      "outcome": "A kernel library with correctness tests, reproducible benchmarks, and measurements inside a decoder workload.",
-      "icon": "chip"
+      "description": "Write and benchmark kernels in CUDA, Triton, and Pallas.",
+      "cover": "gpu-kernels.webp"
     },
     {
       "slug": "agent-harnesses",
-      "focus": "Build the surrounding system",
-      "topics": ["Tool use & MCP", "State & recovery", "Evaluation"],
-      "outcome": "A budgeted coding-agent harness with restart recovery, tool boundaries, and a controlled evaluation study.",
-      "icon": "nodes"
+      "description": "Build agents with tools, persistent state, and evaluation.",
+      "cover": "agent-harnesses.webp"
     }
   ]
 }
