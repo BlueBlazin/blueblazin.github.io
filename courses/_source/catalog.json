@@ -1,0 +1,27 @@
+{
+  "title": "Practical AI courses",
+  "description": "Independent, hands-on courses in language models, GPU programming, and agent engineering. Build working systems, test your understanding, and leave with a reproducible portfolio.",
+  "courses": [
+    {
+      "slug": "llm-architectures",
+      "focus": "Understand the model",
+      "topics": ["PyTorch & JAX", "GPT & Llama", "LoRA & MoE"],
+      "outcome": "A decoder laboratory with PyTorch/JAX parity, architectural extensions, and controlled training experiments.",
+      "icon": "layers"
+    },
+    {
+      "slug": "gpu-kernels",
+      "focus": "Understand the machine",
+      "topics": ["CUDA & Triton", "Profiling", "JAX / Pallas"],
+      "outcome": "A kernel library with correctness tests, reproducible benchmarks, and measurements inside a decoder workload.",
+      "icon": "chip"
+    },
+    {
+      "slug": "agent-harnesses",
+      "focus": "Build the surrounding system",
+      "topics": ["Tool use & MCP", "State & recovery", "Evaluation"],
+      "outcome": "A budgeted coding-agent harness with restart recovery, tool boundaries, and a controlled evaluation study.",
+      "icon": "nodes"
+    }
+  ]
+}

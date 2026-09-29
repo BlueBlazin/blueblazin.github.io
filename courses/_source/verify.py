@@ -21,6 +21,12 @@ class Doc(HTMLParser):
   if not self.stack or self.stack[-1]!=tag:self.errors.append(('unbalanced',tag,self.stack[-4:]));return
   self.stack.pop()
 docs={};pages={};totalhours=0;resources=set();videoids=set();nlessons=0
+for file in WEB.iterdir():
+ if not file.is_file():continue
+ url='/'+file.relative_to(REPO).as_posix();pages[url]=file
+ if file.name=='index.html':pages[url.removesuffix('index.html')]=file
+ if file.suffix=='.html':
+  d=Doc();d.feed(file.read_text());assert not d.errors,(file,d.errors[:5]);assert not d.stack,(file,d.stack);docs[file]=d
 for folder in WEB.iterdir():
  if not folder.is_dir() or folder.name.startswith('_'):continue
  for file in folder.rglob('*'):

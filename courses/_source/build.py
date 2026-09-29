@@ -1,12 +1,17 @@
-"""Build three independent, dependency-free static courses for GitHub Pages."""
+"""Build independent static courses and their directory for GitHub Pages."""
 from pathlib import Path
 from urllib.parse import quote,urlsplit
 from html import escape as E
 import json,re,shutil
+from catalog import build_catalog
 ROOT=Path(__file__).parent
 OUTPUT=ROOT.parent
-SLUGS=['llm-architectures','gpu-kernels','agent-harnesses']
+CATALOG=json.loads((ROOT/'catalog.json').read_text())
+SLUGS=[entry['slug'] for entry in CATALOG['courses']]
+assert len(SLUGS)==len(set(SLUGS)), 'Duplicate catalog course'
 CONFIGS={s:json.loads((ROOT/s/'course-config.json').read_text()) for s in SLUGS}
+assert len({cfg['track'] for cfg in CONFIGS.values()})==len(CONFIGS), 'Each course needs a unique progress track ID'
+assert all(cfg['slug']==s and cfg['basePath']=='/courses/'+s for s,cfg in CONFIGS.items()), 'Course paths must match catalog slugs'
 URLS={v['track']:v['url'] for v in CONFIGS.values()}
 
 def inline(text):
@@ -101,7 +106,7 @@ def build(slug):
  pages={}
  def add(route,body,title,active='/',entry=None):pages[route]=shell(title,body,active,entry)
  first=regular[0]
- home=heading(cfg['title'],cfg['description'],'INDEPENDENT PRACTICAL COURSE')
+ home='<div class="breadcrumb"><a href="/courses/">← All courses</a></div>'+heading(cfg['title'],cfg['description'],'INDEPENDENT PRACTICAL COURSE')
  home+='<div class="day-zero-callout"><div><strong>Week 1 · Day 0</strong><p>Set up once, check readiness, and keep the handbook nearby. Ready already? Begin Day 1 immediately.</p></div><a class="button secondary" href="'+day0entry['url']+'">Open Day 0</a></div>'
  home+='<section class="panel resume"><div><p class="eyebrow">NEXT HANDS-ON LESSON</p><h2 id="resume-title">'+E(first['title'])+'</h2><p class="muted small" id="resume-detail">Week 1 · Monday · 60 min</p><div class="progress-line"><span data-total-progress>Loading progress…</span></div><progress data-course-progress max="'+str(len(regular))+'" value="0" aria-label="Course progress"></progress><p id="save-status" class="save-status" role="status" aria-live="polite"></p><button id="retry-load" class="retry" hidden>Retry loading</button>'+progress_tools()+'</div><a class="button" href="'+first['url']+'" data-resume-link>Begin Day 1</a></section>'
  home+='<div class="course-stats"><span><strong>'+str(len(schedule))+'</strong> weeks</span><span><strong>'+str(hours)+'</strong> hands-on hours</span><span><strong>'+str(len(regular))+'</strong> lesson pages</span><span><strong>A$'+str(cfg['budget'])+'</strong> allowance</span></div><p class="help-note">Choose one course at a time, or divide the same seven-hour weekly budget across courses. Day 0 holds setup and reference material outside the hands-on calendar. Setup time varies; stop at your daily limit and shift the calendar when needed. Sundays stay free.</p><h2>Course outline</h2>'
@@ -196,3 +201,4 @@ def build(slug):
  print(json.dumps({'course':slug,'hours':hours,'weeks':len(schedule),'lesson_pages':len(regular),'resources':len(catalog),'html_pages':len(pages)}))
 
 for slug in SLUGS:build(slug)
+build_catalog(ROOT,OUTPUT,CONFIGS,CATALOG)
