@@ -260,7 +260,7 @@
         "steps": [
           {
             "title": "Apply JAX Transformations To Primitives",
-            "action": "Use grad, vmap and jit on small layer calculations; inspect shapes and numerical outputs.",
+            "action": "Use `grad`, `vmap` and `jit` on small layer calculations; inspect shapes and numerical outputs.",
             "evidence": "Small transformation examples run with expected shapes and derivatives.",
             "activity": 4,
             "module": 2,

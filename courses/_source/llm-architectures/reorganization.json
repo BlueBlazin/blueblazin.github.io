@@ -369,7 +369,7 @@
       },
       {
         "id": "AV01",
-        "focus": "Use the chapter selector for residual connections and layer normalization; watch at most ten minutes instead of reading model.py. The ten-minute reading block.",
+        "focus": "Use the chapter selector for residual connections and layer normalization; watch at most ten minutes instead of reading `model.py`. The ten-minute reading block.",
         "minutes": 10,
         "optional": true,
         "alternativeToReading": true,
@@ -457,7 +457,7 @@
     "4-1": [
       {
         "id": "AR09",
-        "focus": "Nested parameter trees and tree_map examples.",
+        "focus": "Nested parameter trees and `tree_map` examples.",
         "minutes": 5,
         "optional": false
       },
@@ -471,19 +471,19 @@
     "4-2": [
       {
         "id": "AR12",
-        "focus": "grad over a scalar function.",
+        "focus": "`grad` over a scalar function.",
         "minutes": 4,
         "optional": false
       },
       {
         "id": "AR11",
-        "focus": "vmap mapped batch axes.",
+        "focus": "`vmap` mapped batch axes.",
         "minutes": 3,
         "optional": false
       },
       {
         "id": "AR13",
-        "focus": "jit tracing and cache reuse for unchanged shapes.",
+        "focus": "`jit` tracing and cache reuse for unchanged shapes.",
         "minutes": 3,
         "optional": false
       }
@@ -539,7 +539,7 @@
       },
       {
         "id": "AR26",
-        "focus": "assert_close semantics for shapes, dtype and tolerance.",
+        "focus": "`assert_close` semantics for shapes, dtype and tolerance.",
         "minutes": 5,
         "optional": false
       }
@@ -567,7 +567,7 @@
       },
       {
         "id": "AR26",
-        "focus": "assert_close reporting and tolerance rules.",
+        "focus": "`assert_close` reporting and tolerance rules.",
         "minutes": 5,
         "optional": false
       }
@@ -597,7 +597,7 @@
       },
       {
         "id": "AR18",
-        "focus": "Warm-up and block_until_ready when timing JAX.",
+        "focus": "Warm-up and `block_until_ready` when timing JAX.",
         "minutes": 4,
         "optional": false
       }
@@ -729,7 +729,7 @@
     "9-3": [
       {
         "id": "AR26",
-        "focus": "assert_close for output and gradient comparisons, including useful failure messages.",
+        "focus": "`assert_close` for output and gradient comparisons, including useful failure messages.",
         "minutes": 10,
         "optional": false
       }
@@ -957,7 +957,7 @@
     "15-3": [
       {
         "id": "AR37",
-        "focus": "subprocess.run with check=True and explicit arguments for the tiny training/parity commands.",
+        "focus": "`subprocess.run` with `check=True` and explicit arguments for the tiny training/parity commands.",
         "minutes": 5,
         "optional": false
       },
@@ -989,7 +989,7 @@
     "summary": "Do only the readiness work you need, then start Day1 by implementing stable next-token loss. Setup, review questions and portfolio instructions are collected here so they do not interrupt the technical sequence. The later-use sections are reference checklists, not work to complete before learning.",
     "readyChecks": [
       "Create or reuse an isolated Python environment; verify NumPy and PyTorch on CPU. Prepare JAX CPU in the same environment only if versions are compatible, otherwise document a separate environment.",
-      "Create or reuse model/, tests/, data/, notes/, experiments/, results/ and reports/. Keep model downloads, generated datasets, checkpoints and credentials out of Git.",
+      "Create or reuse `model/`, `tests/`, `data/`, `notes/`, `experiments/`, results/ and `reports/`. Keep model downloads, generated datasets, checkpoints and credentials out of Git.",
       "Run fixed 2×3 and 3×2 matrix multiplication and an autograd smoke calculation; reuse existing evidence if it already passes.",
       "Read the one-page study rhythm, budget cap and save-at-the-hour policy. Install no GPU stack and rent no hardware to begin."
     ],

@@ -220,7 +220,7 @@
     "kind": "documentation",
     "verifiedDate": "2026-09-29",
     "provenanceUrl": "https://docs.pytest.org/en/stable/how-to/parametrize.html",
-    "provenance": "Official pytest guide; table-driven input/expectation matrices."
+    "provenance": "Official `pytest` guide; table-driven input/expectation matrices."
   },
   {
     "id": "H18",
@@ -267,7 +267,7 @@
     "kind": "documentation",
     "verifiedDate": "2026-09-29",
     "provenanceUrl": "https://docs.pytest.org/en/stable/how-to/tmp_path.html",
-    "provenance": "Official pytest guide; per-test fresh path fixtures."
+    "provenance": "Official `pytest` guide; per-test fresh path fixtures."
   },
   {
     "id": "H23",
@@ -276,7 +276,7 @@
     "kind": "documentation",
     "verifiedDate": "2026-09-29",
     "provenanceUrl": "https://docs.pytest.org/en/stable/how-to/monkeypatch.html",
-    "provenance": "Official pytest guide; deterministic environment and function substitutions."
+    "provenance": "Official `pytest` guide; deterministic environment and function substitutions."
   },
   {
     "id": "H24",

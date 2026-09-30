@@ -247,7 +247,7 @@
     "hours": 1,
     "title": "Review Decoder Components and Functional JAX",
     "work": "Retrieve the mechanisms from memory, check them against evidence and plan one bounded repair.",
-    "evidence": "Closed-book answers, a score out of six and a saved repair decision in notes/reviews/decoder-and-jax.md.",
+    "evidence": "Closed-book answers, a score out of six and a saved repair decision in `notes/reviews/decoder-and-jax.md`.",
     "resources": [
       "A2",
       "A4"
@@ -260,7 +260,7 @@
     "hours": 1,
     "title": "Review Cache Correctness and Adaptation",
     "work": "Retrieve the mechanisms from memory, check them against evidence and plan one bounded repair.",
-    "evidence": "Closed-book answers, a score out of six and a saved repair decision in notes/reviews/cache-and-adaptation.md.",
+    "evidence": "Closed-book answers, a score out of six and a saved repair decision in `notes/reviews/cache-and-adaptation.md`.",
     "resources": [
       "A3",
       "A5"
@@ -273,7 +273,7 @@
     "hours": 1,
     "title": "Review Sparse Experts and Persistent State",
     "work": "Retrieve the mechanisms from memory, check them against evidence and plan one bounded repair.",
-    "evidence": "Closed-book answers, a score out of six and a saved repair decision in notes/reviews/sparse-and-hybrid.md.",
+    "evidence": "Closed-book answers, a score out of six and a saved repair decision in `notes/reviews/sparse-and-hybrid.md`.",
     "resources": [
       "A7",
       "A8",

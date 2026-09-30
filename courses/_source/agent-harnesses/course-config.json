@@ -41,7 +41,7 @@
       "A raw loop with explicit terminal states, validated tools, enforced limits, and deterministic fake-model tests.",
       "Controlled disposable execution, permission checks, failure injection, append-only events, and supported resume reconciliation.",
       "A 24-task private suite: eight development tasks and sixteen final tasks, with reference/no-op/broken grader controls.",
-      "A frozen 16 × 2 × 3 = 96-attempt study comparing context policies with one pinned model, matched tools/budgets, inclusive overhead, and every failure retained.",
+      "A frozen \\(16\\times2\\times3=96\\)-attempt study comparing context policies with one pinned model, matched tools/budgets, inclusive overhead, and every failure retained.",
       "An MCP adapter and direct/protocol parity tests preserving host authorization.",
       "A technical report with paired per-task outcomes, honest uncertainty, cost tables, reproducible commands, and a success/restart/bounded-failure demo.",
       "A clean-checkout verification path, evidence index, and minimal external contribution draft or verified compatibility finding."
@@ -71,7 +71,7 @@
     "9": "Independent assessment & portfolio"
   },
   "setup": [
-    "Create a dedicated repository with harness/, tools/, fixtures/, tests/, evals/, traces/ and reports/. The other courses are not prerequisites.",
+    "Create a dedicated repository with `harness/`, tools/, `fixtures/`, `tests/`, `evals/`, traces/ and `reports/`. The other courses are not prerequisites.",
     "Start with deterministic fake-model responses. Add a pinned pretrained model API only when the lesson requires it; training a language model is outside this course.",
     "Keep agent-writable workspaces disposable and separate from credentials, evaluator code and expected results. Run model-generated commands and dynamic candidate-code grading in configured containers with explicit limits; a plain subprocess alone is not isolation.",
     "Track model revision, configuration, all assigned trials and paid usage. Keep development feedback separate from the frozen final evaluation."

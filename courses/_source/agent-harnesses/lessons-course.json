@@ -1,7 +1,7 @@
 {
   "1-1": {
     "objectives": [
-      "Implement a tiny FakeModel loop with a host-owned step limit.",
+      "Implement a tiny `FakeModel` loop with a host-owned step limit.",
       "Represent success and budget exhaustion as explicit terminal results."
     ],
     "before": [
@@ -22,7 +22,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Create harness/loop.py with a small RunState record: task, messages, response count, maximum responses, and terminal result. Write a minimal run() that consumes scripted dictionaries from a FakeModel iterator: an observe response appends a supplied observation, while a final response returns an answer. Check the response allowance before requesting another response. Run a two-observation-then-final script and an endless-observation script capped at three responses. Add assertions for exact response counts and terminal statuses. Sketch the state transitions in docs/loop-contract.md after the code runs. Keep this stub deliberately small: strict typed calls, real tool dispatch, exceptions, and timeouts are the next three lessons."
+        "text": "Create `harness/loop.py` with a small `RunState` record: task, messages, response count, maximum responses, and terminal result. Write a minimal `run()` that consumes scripted dictionaries from a `FakeModel` iterator: an observe response appends a supplied observation, while a final response returns an answer. Check the response allowance before requesting another response. Run a two-observation-then-final script and an endless-observation script capped at three responses. Add assertions for exact response counts and terminal statuses. Sketch the state transitions in `docs/loop-contract.md` after the code runs. Keep this stub deliberately small: strict typed calls, real tool dispatch, exceptions, and timeouts are the next three lessons."
       },
       {
         "minutes": 10,
@@ -31,9 +31,9 @@
       }
     ],
     "checks": [
-      "A runnable FakeModel loop stops at a final response.",
+      "A runnable `FakeModel` loop stops at a final response.",
       "An endless script stops at the declared maximum without an extra call.",
-      "RunState and a short transition sketch match the observed counts."
+      "`RunState` and a short transition sketch match the observed counts."
     ],
     "selfCheck": {
       "question": "Why should the host enforce the step budget even when the prompt asks the model to stop?",
@@ -65,7 +65,7 @@
       "Produce reproducible valid and malformed fake model responses."
     ],
     "before": [
-      "Use Day 1’s tiny FakeModel loop and docs/loop-contract.md. Replace the loose observe dictionaries with the strict tool-call contract developed today."
+      "Use Day 1’s tiny `FakeModel` loop and `docs/loop-contract.md`. Replace the loose observe dictionaries with the strict tool-call contract developed today."
     ],
     "explanation": "A tool schema is a contract between untrusted proposed arguments and trusted execution code. Parsing JSON only establishes syntax: the host must also reject unknown tools, missing fields, unexpected fields, wrong types, and values outside the supported domain. Keep these checks outside the tool implementation so a malformed request cannot partly execute. A deterministic fake model lets you test this interface without API variability or cost. Give each tool call an identifier that its result will carry, making later message pairing unambiguous.",
     "plan": [
@@ -82,7 +82,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Create harness/contracts.py with a ToolCall record containing id, name, and arguments. Implement one harmless echo tool that accepts exactly one string field named text. Use a dataclass plus explicit checks, or a strict validation library already in your project. Add FakeModel backed by a finite list of scripted responses. Write fixtures for a valid echo, missing text, integer text, extra field, and unknown tool. Add a dispatcher spy or counter so tests can prove rejected calls never execute a tool."
+        "text": "Create `harness/contracts.py` with a `ToolCall` record containing id, name, and arguments. Implement one harmless echo tool that accepts exactly one string field named text. Use a dataclass plus explicit checks, or a strict validation library already in your project. Add `FakeModel` backed by a finite list of scripted responses. Write fixtures for a valid echo, missing text, integer text, extra field, and unknown tool. Add a dispatcher spy or counter so tests can prove rejected calls never execute a tool."
       },
       {
         "minutes": 10,
@@ -125,7 +125,7 @@
       "Return structured terminal outcomes for successful and failing tools."
     ],
     "before": [
-      "Use FakeModel, strict ToolCall validation, and the echo dispatcher from Activity 1, step 2."
+      "Use `FakeModel`, strict `ToolCall` validation, and the echo dispatcher from Activity 1, step 2."
     ],
     "explanation": "The model/tool loop is a sequence of observable records. Each tool call must be followed by a result associated with the same identifier, and the next model invocation must see that result. Otherwise the model is continuing with an incomplete account of the world. Keep tool failures separate from final answers: an exception can become a structured error observation or a terminal failure according to your chosen policy. For this first implementation, make that policy explicit and deterministic rather than adding automatic retries.",
     "plan": [
@@ -142,7 +142,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Extend the Day 1 run() stub in harness/loop.py with the validated tool states. Append the model response, validate its call, dispatch echo, and append a result with the matching call id before requesting the next scripted response. Represent a final answer as a terminal record with status, answer, and step count. Add a second fake tool that raises a controlled exception. Convert that exception into your documented error outcome while preserving a useful error type and a sanitized message. Do not add live API transport today."
+        "text": "Extend the Day 1 `run()` stub in `harness/loop.py` with the validated tool states. Append the model response, validate its call, dispatch echo, and append a result with the matching call id before requesting the next scripted response. Represent a final answer as a terminal record with status, answer, and step count. Add a second fake tool that raises a controlled exception. Convert that exception into your documented error outcome while preserving a useful error type and a sanitized message. Do not add live API transport today."
       },
       {
         "minutes": 10,
@@ -199,7 +199,7 @@
       {
         "minutes": 10,
         "title": "Verify and save",
-        "text": "Run all five scenarios twice to confirm deterministic results. Save tests/test_loop.py and a short result table with the expected counts and observed statuses."
+        "text": "Run all five scenarios twice to confirm deterministic results. Save `tests/test_loop.py` and a short result table with the expected counts and observed statuses."
       }
     ],
     "checks": [
@@ -241,12 +241,12 @@
       {
         "minutes": 10,
         "title": "Study",
-        "text": "Use the core resources above for ten minutes in total, focusing only on the indicated sections. Spend 6 minutes on H12: Path.resolve and ancestry checks; symlink behavior. Spend 4 minutes on H19: Tool outputs that return useful bounded evidence. Stop at the time limit and use the page as a reference while building."
+        "text": "Use the core resources above for ten minutes in total, focusing only on the indicated sections. Spend 6 minutes on H12: `Path.resolve` and ancestry checks; symlink behavior. Spend 4 minutes on H19: Tool outputs that return useful bounded evidence. Stop at the time limit and use the page as a reference while building."
       },
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Create harness/workspace.py with a shared resolve_path(root, relative_path) helper. Implement read_file with an explicit byte cap and exact_search with a fixed maximum number of matching lines. Return structured fields for path, line number, text, and truncation. Create fixtures containing one match, multiple matches, and a missing path. Reject absolute paths and resolved escapes. Add a command tool stub that returns unsupported without executing anything. Keep accepted files as small UTF-8 text and state this restriction in the tool descriptions."
+        "text": "Create `harness/workspace.py` with a shared `resolve_path(root, relative_path)` helper. Implement `read_file` with an explicit byte cap and `exact_search` with a fixed maximum number of matching lines. Return structured fields for path, line number, text, and truncation. Create fixtures containing one match, multiple matches, and a missing path. Reject absolute paths and resolved escapes. Add a command tool stub that returns unsupported without executing anything. Keep accepted files as small UTF-8 text and state this restriction in the tool descriptions."
       },
       {
         "minutes": 10,
@@ -270,7 +270,7 @@
         "url": "https://docs.python.org/3/library/pathlib.html",
         "label": "Python pathlib",
         "type": "documentation",
-        "focus": "Path.resolve and ancestry checks; symlink behavior.",
+        "focus": "`Path.resolve` and ancestry checks; symlink behavior.",
         "minutes": 6
       },
       {
@@ -306,7 +306,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Implement write_file(path, content) using the same workspace resolution and size limit as read_file. Restrict the exercise to a disposable workspace and choose clear behavior for missing parent directories. Add a trace collector around dispatch that records call id, arguments, outcome, start/end times from a monotonic clock, and cost_kind. Script a fake-model read/write/read sequence that changes one configuration value. Record fake-model API cost as zero with cost_kind=mock; do not disguise a token estimate as a provider bill."
+        "text": "Implement `write_file(path, content)` using the same workspace resolution and size limit as `read_file`. Restrict the exercise to a disposable workspace and choose clear behavior for missing parent directories. Add a trace collector around dispatch that records call id, arguments, outcome, start/end times from a monotonic clock, and `cost_kind`. Script a fake-model read/write/read sequence that changes one configuration value. Record fake-model API cost as zero with `cost_kind=mock`; do not disguise a token estimate as a provider bill."
       },
       {
         "minutes": 10,
@@ -366,7 +366,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Create eval/manifest.json with 24 stable ids, split labels, short requests, task family, and fixture paths. Reserve sixteen final ids without running an agent on them. Implement dev-01 as a configuration edit, dev-02 as a small text/data repair, and dev-03 as a tested function correction. Keep each fixture tiny enough to inspect in minutes. Add a fresh-copy helper and one deterministic outcome check per task. Save reference outputs or patches in the host-only evaluation directory; do not add them to the copied workspace."
+        "text": "Create `eval/manifest.json` with 24 stable ids, split labels, short requests, task family, and fixture paths. Reserve sixteen final ids without running an agent on them. Implement dev-01 as a configuration edit, dev-02 as a small text/data repair, and dev-03 as a tested function correction. Keep each fixture tiny enough to inspect in minutes. Add a fresh-copy helper and one deterministic outcome check per task. Save reference outputs or patches in the host-only evaluation directory; do not add them to the copied workspace."
       },
       {
         "minutes": 10,
@@ -409,7 +409,7 @@
       "Diagnose failures from verified outcomes and traces."
     ],
     "before": [
-      "Use dev-01 through dev-03, their outcome checks, and scripted FakeModel responses."
+      "Use dev-01 through dev-03, their outcome checks, and scripted `FakeModel` responses."
     ],
     "explanation": "End-to-end execution connects the request, tool interface, loop, workspace mutation, and grader. This first run is an integration check, not a measure of model capability: scripted responses deliberately exercise known paths. The important distinction is between a harness that completes its protocol and a task whose final state satisfies the grader. Save both statuses. A trace should let you locate the first divergence, such as a malformed argument, a missing observation, or an edit to the wrong file, without rerunning an expensive model.",
     "plan": [
@@ -421,17 +421,17 @@
       {
         "minutes": 10,
         "title": "Study",
-        "text": "Use the core resources above for ten minutes in total, focusing only on the indicated sections. Spend 10 minutes on H14: Iterable side_effect and call assertions. Stop at the time limit and use the page as a reference while building."
+        "text": "Use the core resources above for ten minutes in total, focusing only on the indicated sections. Spend 10 minutes on H14: Iterable `side_effect` and call assertions. Stop at the time limit and use the page as a reference while building."
       },
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Write a small development runner that copies a fixture, supplies its request to run(), collects the final state, and invokes the host-side grader. Add one FakeModel script per development task using read/search/write tools as appropriate. Run all three from fresh copies. If a run fails, classify whether the fixture, tool contract, loop, or proposed edit caused it before making a narrow correction. Save a machine-readable row per run with task id, protocol status, outcome status, elapsed time, mock cost, and trace path."
+        "text": "Write a small development runner that copies a fixture, supplies its request to `run()`, collects the final state, and invokes the host-side grader. Add one `FakeModel` script per development task using read/search/write tools as appropriate. Run all three from fresh copies. If a run fails, classify whether the fixture, tool contract, loop, or proposed edit caused it before making a narrow correction. Save a machine-readable row per run with task id, protocol status, outcome status, elapsed time, mock cost, and trace path."
       },
       {
         "minutes": 10,
         "title": "Verify and save",
-        "text": "Run all three tasks again after fixes. Save results/dev-smoke.json and link each result to a complete trace; confirm no final task was executed."
+        "text": "Run all three tasks again after fixes. Save `results/dev-smoke.json` and link each result to a complete trace; confirm no final task was executed."
       }
     ],
     "checks": [
@@ -450,7 +450,7 @@
         "url": "https://docs.python.org/3/library/unittest.mock.html",
         "label": "Python unittest.mock",
         "type": "documentation",
-        "focus": "Iterable side_effect and call assertions.",
+        "focus": "Iterable `side_effect` and call assertions.",
         "minutes": 10
       }
     ]
@@ -479,7 +479,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Create harness/runner.py behind the existing mocked command interface. Prefer a fresh container with only a disposable task mount, a minimal explicit environment, no host sockets, and network disabled. Run a fixed benign command that prints a known task file and environment variable names. Put a harmless canary file outside the mounted workspace and verify it is unavailable inside. Keep the model client and API key on the host. If container setup is blocked, implement and label a subprocess runner as incomplete isolation, and record the remaining boundary work. Set explicit memory, CPU, and process-count limits supported by the chosen runtime, and record their effective configuration. Do not enable model-generated command execution until the isolation gate passes; a blocked subprocess prototype remains mock-only."
+        "text": "Create `harness/runner.py` behind the existing mocked command interface. Prefer a fresh container with only a disposable task mount, a minimal explicit environment, no host sockets, and network disabled. Run a fixed benign command that prints a known task file and environment variable names. Put a harmless canary file outside the mounted workspace and verify it is unavailable inside. Keep the model client and API key on the host. If container setup is blocked, implement and label a subprocess runner as incomplete isolation, and record the remaining boundary work. Set explicit memory, CPU, and process-count limits supported by the chosen runtime, and record their effective configuration. Do not enable model-generated command execution until the isolation gate passes; a blocked subprocess prototype remains mock-only."
       },
       {
         "minutes": 10,
@@ -535,7 +535,7 @@
       {
         "minutes": 10,
         "title": "Study",
-        "text": "Use the core resources above for ten minutes in total, focusing only on the indicated sections. Spend 10 minutes on H12: Resolved paths, parent paths, and is_relative_to limitations. Stop at the time limit and use the page as a reference while building."
+        "text": "Use the core resources above for ten minutes in total, focusing only on the indicated sections. Spend 10 minutes on H12: Resolved paths, parent paths, and `is_relative_to` limitations. Stop at the time limit and use the page as a reference while building."
       },
       {
         "minutes": 35,
@@ -564,7 +564,7 @@
         "url": "https://docs.python.org/3/library/pathlib.html",
         "label": "Python pathlib",
         "type": "documentation",
-        "focus": "Resolved paths, parent paths, and is_relative_to limitations.",
+        "focus": "Resolved paths, parent paths, and `is_relative_to` limitations.",
         "minutes": 10
       }
     ]
@@ -592,7 +592,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Add a short configurable wall-time cap and a cumulative stdout-plus-stderr byte cap to harness/runner.py. Read output incrementally or use an execution API with equivalent enforced limits. On either breach, stop the whole task execution unit and confirm termination; preserve only a bounded output prefix and a structured reason. Add two tiny Python fixture commands: an endless sleep loop and a loop printing fixed-size lines. Keep limits small so the tests finish quickly. Record elapsed wall time, collected bytes, exit status, and termination reason."
+        "text": "Add a short configurable wall-time cap and a cumulative stdout-plus-stderr byte cap to `harness/runner.py`. Read output incrementally or use an execution API with equivalent enforced limits. On either breach, stop the whole task execution unit and confirm termination; preserve only a bounded output prefix and a structured reason. Add two tiny Python fixture commands: an endless sleep loop and a loop printing fixed-size lines. Keep limits small so the tests finish quickly. Record elapsed wall time, collected bytes, exit status, and termination reason."
       },
       {
         "minutes": 10,
@@ -644,12 +644,12 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Create tests/test_execution_boundary.py as a compact parametrized matrix. Include an allowed read/write command, traversal, outside symlink, write through outside parent symlink, denied tool, denied network access, infinite process, excessive output, and missing credential canary. Assert both the returned category and absence of the prohibited effect. Add docs/execution-boundary.md with actual mounts, environment, networking, limits, cleanup behavior, and known limitations. If any claimed isolation check is unsupported by your current runner, record a failing or blocked gate instead of weakening the expected result."
+        "text": "Create `tests/test_execution_boundary.py` as a compact parametrized matrix. Include an allowed read/write command, traversal, outside symlink, write through outside parent symlink, denied tool, denied network access, infinite process, excessive output, and missing credential canary. Assert both the returned category and absence of the prohibited effect. Add `docs/execution-boundary.md` with actual mounts, environment, networking, limits, cleanup behavior, and known limitations. If any claimed isolation check is unsupported by your current runner, record a failing or blocked gate instead of weakening the expected result."
       },
       {
         "minutes": 10,
         "title": "Verify and save",
-        "text": "Run the complete matrix from a clean task workspace. Save the result summary and confirm docs/execution-boundary.md contains only guarantees supported by the implementation and tests."
+        "text": "Run the complete matrix from a clean task workspace. Save the result summary and confirm `docs/execution-boundary.md` contains only guarantees supported by the implementation and tests."
       }
     ],
     "checks": [
@@ -704,7 +704,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Create harness/events.py with a JSONL writer that appends run_id, sequence, event_type, timestamp, and payload. Give model responses and tool calls stable identifiers within the run. Log run_started, model_response, tool_requested, tool_started, tool_finished, and run_finished for one fixture. Define a small failure enum covering validation, authorization, tool error, timeout, output limit, step limit, and infrastructure. Keep task grading in a separate outcome record. Avoid secrets in arguments or errors; use bounded payloads and paths to larger saved artifacts."
+        "text": "Create `harness/events.py` with a JSONL writer that appends `run_id`, sequence, `event_type`, timestamp, and payload. Give model responses and tool calls stable identifiers within the run. Log `run_started`, `model_response`, `tool_requested`, `tool_started`, `tool_finished`, and `run_finished` for one fixture. Define a small failure enum covering validation, authorization, tool error, timeout, output limit, step limit, and infrastructure. Keep task grading in a separate outcome record. Avoid secrets in arguments or errors; use bounded payloads and paths to larger saved artifacts."
       },
       {
         "minutes": 10,
@@ -822,7 +822,7 @@
       {
         "minutes": 10,
         "title": "Verify and save",
-        "text": "Save eval/control-results.json with eight rows showing reference pass and no-op/broken fail. Repair any permissive grader before using that fixture for agent results."
+        "text": "Save `eval/control-results.json` with eight rows showing reference pass and no-op/broken fail. Repair any permissive grader before using that fixture for agent results."
       }
     ],
     "checks": [
@@ -877,7 +877,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Run all eight development fixtures through the suite runner with the current configured model mode. Use deterministic scripts where that is your existing baseline and label them clearly. Collect task id, model mode, run id, terminal status, grade, elapsed time, cost provenance, and trace path. Group unsuccessful runs by the earliest supported cause: task misunderstanding, bad edit, tool/interface issue, budget limit, or infrastructure. Write reports/dev-v1.md with the result table and two short trace analyses. Make no changes based on final-task agent outcomes."
+        "text": "Run all eight development fixtures through the suite runner with the current configured model mode. Use deterministic scripts where that is your existing baseline and label them clearly. Collect task id, model mode, run id, terminal status, grade, elapsed time, cost provenance, and trace path. Group unsuccessful runs by the earliest supported cause: task misunderstanding, bad edit, tool/interface issue, budget limit, or infrastructure. Write `reports/dev-v1.md` with the result table and two short trace analyses. Make no changes based on final-task agent outcomes."
       },
       {
         "minutes": 10,
@@ -938,7 +938,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Create eval/evaluator.py with a run_trial(task_id, runner, config) entry point. Load the pinned fixture, create a new workspace, run the supplied runner, then invoke the host-side grader against the result. Return a structured TrialResult instead of scraping console text. First supply two simple runners: one applies the known reference patch and one does nothing. Include fixture hash, grader version, runner name, and outcome in the result. Keep agent-written tests out of the trusted grading path unless the grader explicitly verifies them. For a grader that runs student-generated Python, execute the candidate in the isolated runner or a fresh grading container with trusted checks mounted read-only and no secrets, then collect bounded results. Never import candidate modules into the host evaluator."
+        "text": "Create `eval/evaluator.py` with a `run_trial(task_id, runner, config)` entry point. Load the pinned fixture, create a new workspace, run the supplied runner, then invoke the host-side grader against the result. Return a structured `TrialResult` instead of scraping console text. First supply two simple runners: one applies the known reference patch and one does nothing. Include fixture hash, grader version, runner name, and outcome in the result. Keep agent-written tests out of the trusted grading path unless the grader explicitly verifies them. For a grader that runs student-generated Python, execute the candidate in the isolated runner or a fresh grading container with trusted checks mounted read-only and no secrets, then collect bounded results. Never import candidate modules into the host evaluator."
       },
       {
         "minutes": 10,
@@ -981,7 +981,7 @@
       "Apply the same externally enforced budgets to both future runners."
     ],
     "before": [
-      "Use TrialResult and run_trial() from Activity 5, step 1.",
+      "Use `TrialResult` and `run_trial()` from Activity 5, step 1.",
       "Complete the provider adapter bridge with offline protocol tests. Keep credentials host-side and do not make paid calls until this lesson’s reservation tests pass."
     ],
     "explanation": "A fair harness comparison must specify the resources each system is allowed to spend. The same model name is not enough when context limits, output limits, retries, or tool budgets differ. Capture provider-reported usage where available and compute estimated charges using a recorded price table; the estimate is not a bill. Enforce the common limits outside both runner adapters when possible. A run that reaches a limit is still an attempted trial, with a failure reason and the usage incurred before stopping.",
@@ -1112,7 +1112,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Add a command such as python -m eval.compare --split development --tasks dev-01 dev-02 that invokes both adapters through run_trial(). Start each run from a fresh fixture. Match model settings where supported, environment restrictions, wall-time, token and cost ceilings; record differing tool interfaces and system prompts. Save harness, task, grade, terminal reason, elapsed time, usage, cost provenance, and trace path. Inspect one disagreement if present, otherwise compare two passing traces. Label the table a descriptive development systems pilot. Do not attribute a difference solely to context policy or silently remove a baseline failure."
+        "text": "Add a command such as:\n\n```bash\npython -m eval.compare --split development --tasks dev-01 dev-02\n```\n\nThe command invokes both adapters through `run_trial()`. Start each run from a fresh fixture. Match model settings where supported, environment restrictions, wall-time, token and cost ceilings; record differing tool interfaces and system prompts. Save harness, task, grade, terminal reason, elapsed time, usage, cost provenance, and trace path. Inspect one disagreement if present, otherwise compare two passing traces. Label the table a descriptive development systems pilot. Do not attribute a difference solely to context policy or silently remove a baseline failure."
       },
       {
         "minutes": 10,
@@ -1172,7 +1172,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Implement list_files with a relative root, stable lexical ordering, and an explicit maximum entry count. Return entries plus truncated and total_seen or another honest indication of incompleteness. Reuse path authorization and define how hidden files, symlinks, and generated directories are handled. Select two existing development tasks where the relevant edit or dependency is not named directly. Add a few harmless distractor files if needed, version that fixture change, and preserve the task’s original behavior and grader. Record the known relevant filenames in host-only analysis notes."
+        "text": "Implement `list_files` with a relative root, stable lexical ordering, and an explicit maximum entry count. Return entries plus truncated and `total_seen` or another honest indication of incompleteness. Reuse path authorization and define how hidden files, symlinks, and generated directories are handled. Select two existing development tasks where the relevant edit or dependency is not named directly. Add a few harmless distractor files if needed, version that fixture change, and preserve the task’s original behavior and grader. Record the known relevant filenames in host-only analysis notes."
       },
       {
         "minutes": 10,
@@ -1232,7 +1232,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Extend exact_search to return path, matching line number, a bounded text excerpt, and a truncation indicator. Add read_lines(path, start, count) with documented line numbering and a maximum returned span. Keep the existing byte cap as a second bound. Include requested range, returned range, and omitted-count metadata when known. Script a search-to-read example where the first excerpt lacks a required nearby definition, then retrieve that definition explicitly. Log selected paths and ranges so later analysis can distinguish absent repository evidence from evidence that existed but was never returned."
+        "text": "Extend `exact_search` to return path, matching line number, a bounded text excerpt, and a truncation indicator. Add this interface with documented line numbering and a maximum returned span:\n\n```python\nread_lines(path, start, count)\n```\n\nKeep the existing byte cap as a second bound. Include requested range, returned range, and omitted-count metadata when known. Script a search-to-read example where the first excerpt lacks a required nearby definition, then retrieve that definition explicitly. Log selected paths and ranges so later analysis can distinguish absent repository evidence from evidence that existed but was never returned."
       },
       {
         "minutes": 10,
@@ -1336,7 +1336,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Write reports/navigation-analysis.md with a compact timeline: task requirement, required file/lines, search or read request, returned evidence, omission, action, and grade. Analyze one success and one failure where available. If all runs pass, construct a small development diagnostic that lowers a retrieval cap enough to omit a known dependency and label it as an injected case. Optionally restore only the missing excerpt for one diagnostic replay. Save both traces and explain what the replay supports without treating a single stochastic difference as proof."
+        "text": "Write `reports/navigation-analysis.md` with a compact timeline: task requirement, required file/lines, search or read request, returned evidence, omission, action, and grade. Analyze one success and one failure where available. If all runs pass, construct a small development diagnostic that lowers a retrieval cap enough to omit a known dependency and label it as an injected case. Optionally restore only the missing excerpt for one diagnostic replay. Save both traces and explain what the replay supports without treating a single stochastic difference as proof."
       },
       {
         "minutes": 10,
@@ -1371,7 +1371,7 @@
       "Represent tool action status and workspace version explicitly."
     ],
     "before": [
-      "Use the event log, RunState, workspace tools, and evaluator developed in earlier harness activities."
+      "Use the event log, `RunState`, workspace tools, and evaluator developed in earlier harness activities."
     ],
     "explanation": "A long-running agent needs more than a conversation transcript to resume correctly. Its durable state must connect messages to tool outcomes, remaining budgets, the current workspace version, and any action whose completion is uncertain. Persist only what is needed to reconstruct a valid next transition, but do not assume the latest message reflects the latest filesystem state. A process can crash between mutating a file and recording success. Represent this gap explicitly so restart code can reconcile the workspace instead of silently repeating a side effect.",
     "plan": [
@@ -1388,7 +1388,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Create docs/resume-contract.md and a versioned DurableRunState schema. Include run/task/config ids, model messages, completed tool outcomes, step and usage counters, terminal status, workspace snapshot identifier, and current action id/status. Define pending, started, completed, and uncertain action states. For a file replacement, propose expected-before and expected-after content hashes as reconciliation evidence. List which fields come from the event log and which require inspecting the workspace. Sketch restart transitions for no action in flight, completed action, and uncertain mutating action; implementation comes next session. Include in-flight model request IDs and durable budget reservations as well as tool actions. Define a run deadline that does not reset on restart; a process-local monotonic timestamp cannot be reused across processes. For this course, persist a wall-clock expiry plus consumed allowance, use monotonic clocks within each process, and treat expiry or clock inconsistencies conservatively."
+        "text": "Create `docs/resume-contract.md` and a versioned DurableRunState schema. Include run/task/config ids, model messages, completed tool outcomes, step and usage counters, terminal status, workspace snapshot identifier, and current action id/status. Define pending, started, completed, and uncertain action states. For a file replacement, propose expected-before and expected-after content hashes as reconciliation evidence. List which fields come from the event log and which require inspecting the workspace. Sketch restart transitions for no action in flight, completed action, and uncertain mutating action; implementation comes next session. Include in-flight model request IDs and durable budget reservations as well as tool actions. Define a run deadline that does not reset on restart; a process-local monotonic timestamp cannot be reused across processes. For this course, persist a wall-clock expiry plus consumed allowance, use monotonic clocks within each process, and treat expiry or clock inconsistencies conservatively."
       },
       {
         "minutes": 10,
@@ -1448,7 +1448,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Implement save_checkpoint and load_checkpoint in harness/checkpoint.py using a temporary file and atomic replacement within one directory; document your durability assumptions. Validate schema version and required fields on load. Before dispatching a tool, persist its id, arguments, expected workspace version, and started status. After observing the result, update messages, tool outcome, budget counters, and verified workspace identifier, then save completed status. Exercise this with a harmless read and a single-file replacement. Keep the original event log append-only and link checkpoint records to the last included event sequence. Flush checkpoint writes before replacement. State whether your contract covers only process interruption or also machine/power failure; atomic rename alone does not prove power-loss durability. Recover any in-flight model reservation conservatively rather than resending it for free."
+        "text": "Implement `save_checkpoint` and `load_checkpoint` in `harness/checkpoint.py` using a temporary file and atomic replacement within one directory; document your durability assumptions. Validate schema version and required fields on load. Before dispatching a tool, persist its id, arguments, expected workspace version, and started status. After observing the result, update messages, tool outcome, budget counters, and verified workspace identifier, then save completed status. Exercise this with a harmless read and a single-file replacement. Keep the original event log append-only and link checkpoint records to the last included event sequence. Flush checkpoint writes before replacement. State whether your contract covers only process interruption or also machine/power failure; atomic rename alone does not prove power-loss durability. Recover any in-flight model reservation conservatively rather than resending it for free."
       },
       {
         "minutes": 10,
@@ -1566,7 +1566,7 @@
       {
         "minutes": 10,
         "title": "Verify and save",
-        "text": "Save tests/test_resume.py results and two readable restart traces. Write a brief guarantee statement restricted to the tested replacement-file contract and its stated storage assumptions."
+        "text": "Save `tests/test_resume.py` results and two readable restart traces. Write a brief guarantee statement restricted to the tested replacement-file contract and its stated storage assumptions."
       }
     ],
     "checks": [
@@ -1575,7 +1575,7 @@
       "Traces show reconciliation decisions and the supported guarantee is scoped precisely."
     ],
     "selfCheck": {
-      "question": "Why is a test that calls save_checkpoint and then exits normally insufficient?",
+      "question": "Why is a test that calls `save_checkpoint` and then exits normally insufficient?",
       "answer": "It avoids the uncertain crash windows. The important failures occur between intent persistence, side effects, and completion persistence, so tests must interrupt those boundaries."
     },
     "pitfall": "Do not claim universal exactly-once execution from a passing test of one local file-replacement operation.",
@@ -1613,7 +1613,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Create docs/compaction-policy.md and a CompactedContext schema containing objective, constraints, decisions with support, evidence pointers, changed files, and pending actions. Specify how pointers identify file/range/version or event ids, and how stale evidence is marked. Choose a small explicit model-input ceiling suitable for development and reserve room for the next response separately. Define the activation trigger and maximum summary size. Hand-author one compact record from an existing trace and list facts deliberately dropped. Preserve the full trace outside the model request; no summary call is required today. Define the ceiling over the full provider input, including system instructions and tool schemas, and ensure input plus reserved output fits the selected model’s context limit. If required fixed content alone exceeds the ceiling, fail with a context-budget outcome rather than silently increasing it."
+        "text": "Create `docs/compaction-policy.md` and a CompactedContext schema containing objective, constraints, decisions with support, evidence pointers, changed files, and pending actions. Specify how pointers identify file/range/version or event ids, and how stale evidence is marked. Choose a small explicit model-input ceiling suitable for development and reserve room for the next response separately. Define the activation trigger and maximum summary size. Hand-author one compact record from an existing trace and list facts deliberately dropped. Preserve the full trace outside the model request; no summary call is required today. Define the ceiling over the full provider input, including system instructions and tool schemas, and ensure input plus reserved output fits the selected model’s context limit. If required fixed content alone exceeds the ceiling, fail with a context-budget outcome rather than silently increasing it."
       },
       {
         "minutes": 10,
@@ -1665,7 +1665,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Implement compact_context(history, state, budget) using a deterministic extractor plus the structured fields from yesterday. Build the next request from the immutable task/constraints, compact record, and as many recent complete interaction units as fit. Use the model tokenizer when available; otherwise label the conservative counting method and leave a margin. Add a pointer resolver for event ids and file-version/range references. Mark stale or missing pointers rather than silently treating them as evidence. Test one long synthetic development trace that crosses the activation threshold and includes a changed file. Treat an assistant turn containing multiple tool calls and all corresponding results as one complete interaction group, preserving any provider-required continuation blocks. If fixed content plus the required newest group cannot fit, return an explicit context-budget stop; do not split the group or loop forever."
+        "text": "Implement this interface using a deterministic extractor plus the structured fields from yesterday:\n\n```python\ncompact_context(history, state, budget)\n```\n\nBuild the next request from the immutable task/constraints, compact record, and as many recent complete interaction units as fit. Use the model tokenizer when available; otherwise label the conservative counting method and leave a margin. Add a pointer resolver for event ids and file-version/range references. Mark stale or missing pointers rather than silently treating them as evidence. Test one long synthetic development trace that crosses the activation threshold and includes a changed file. Treat an assistant turn containing multiple tool calls and all corresponding results as one complete interaction group, preserving any provider-required continuation blocks. If fixed content plus the required newest group cannot fit, return an explicit context-budget stop; do not split the group or loop forever."
       },
       {
         "minutes": 10,
@@ -1726,7 +1726,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Implement recent_history_context by retaining the original task/constraints and the newest complete call/result interaction units within the ceiling. Run this and compact_context on the same small development task set through the evaluator. Record model/version, tools, task revisions, ceiling, total-token cap, time cap, and actual usage. Save per-request context size, policy activation count, task grade, and trace path. If you use a model to produce summaries, route those requests through the same usage accounting; for deterministic extraction, record that no summarizer model calls were made."
+        "text": "Implement `recent_history_context` by retaining the original task/constraints and the newest complete call/result interaction units within the ceiling. Run this and `compact_context` on the same small development task set through the evaluator. Record model/version, tools, task revisions, ceiling, total-token cap, time cap, and actual usage. Save per-request context size, policy activation count, task grade, and trace path. If you use a model to produce summaries, route those requests through the same usage accounting; for deterministic extraction, record that no summarizer model calls were made."
       },
       {
         "minutes": 10,
@@ -1786,7 +1786,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Write reports/compaction-loss.md with the declared ceiling, summary budget, activation point, original evidence, retained record, omitted fact, next action, and verified outcome. Use a naturally observed loss case if available. Otherwise create a tiny development diagnostic that requires remembering an earlier constraint, deliberately remove that fact from the compact record, and label the injected omission. Optionally replay with the fact restored to check the mechanism. Preserve both payloads and outcome traces, and distinguish observed behavior from a proposed explanation. Do not alter final tasks or inspect their agent outcomes."
+        "text": "Write `reports/compaction-loss.md` with the declared ceiling, summary budget, activation point, original evidence, retained record, omitted fact, next action, and verified outcome. Use a naturally observed loss case if available. Otherwise create a tiny development diagnostic that requires remembering an earlier constraint, deliberately remove that fact from the compact record, and label the injected omission. Optionally replay with the fact restored to check the mechanism. Preserve both payloads and outcome traces, and distinguish observed behavior from a proposed explanation. Do not alter final tasks or inspect their agent outcomes."
       },
       {
         "minutes": 10,
@@ -1839,7 +1839,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Choose exactly one existing read-only tool. Create docs/mcp-contract.md with a table mapping its name, description, argument fields, validation errors, return content, and permission gate to the SDK interface. Use one valid request, one missing required argument, and one disallowed path as concrete examples. Mark the existing host function you intend to call from the adapter; do not duplicate its permission logic. Record the SDK version and local transport selected. Stop before implementing another tool or a new agent loop."
+        "text": "Choose exactly one existing read-only tool. Create `docs/mcp-contract.md` with a table mapping its name, description, argument fields, validation errors, return content, and permission gate to the SDK interface. Use one valid request, one missing required argument, and one disallowed path as concrete examples. Mark the existing host function you intend to call from the adapter; do not duplicate its permission logic. Record the SDK version and local transport selected. Stop before implementing another tool or a new agent loop."
       },
       {
         "minutes": 10,
@@ -1874,7 +1874,7 @@
       "Reuse the existing permission-checked implementation."
     ],
     "before": [
-      "docs/mcp-contract.md from the previous session.",
+      "`docs/mcp-contract.md` from the previous session.",
       "A passing direct invocation of the chosen read-only tool."
     ],
     "explanation": "An adapter translates between interfaces without becoming a second implementation of the underlying operation. Keep the protocol-specific code thin: parse the request through the SDK, pass validated arguments to the existing host entry point, and translate the result into the SDK result shape. This preserves one source of truth for path confinement and error handling. A successful request proves that the transport works; later sessions will establish that invalid and unauthorized requests preserve the same boundary as direct invocation.",
@@ -1928,7 +1928,7 @@
     ],
     "before": [
       "The MCP adapter and smoke command from the previous session.",
-      "The valid, invalid, and unauthorized examples in mcp-contract.md."
+      "The valid, invalid, and unauthorized examples in `mcp-contract.md`."
     ],
     "explanation": "The two invocation paths can encode results differently while remaining functionally equivalent. Compare the meaningful outcome: permitted content, validation failure, or permission rejection. A protocol wrapper may add metadata or structure that the direct function does not need. Normalizing those superficial differences makes a useful comparison, but normalizing away an error category would hide a boundary failure. Run the same fixture snapshot and inputs through both paths so that any mismatch can be attributed to the adapter rather than changing workspace contents.",
     "plan": [
@@ -1950,7 +1950,7 @@
       {
         "minutes": 10,
         "title": "Verify and save",
-        "text": "Run the matrix from a clean fixture snapshot and save docs/mcp-parity.md with the case table and any deliberate formatting differences."
+        "text": "Run the matrix from a clean fixture snapshot and save `docs/mcp-parity.md` with the case table and any deliberate formatting differences."
       }
     ],
     "checks": [
@@ -2239,7 +2239,7 @@
       {
         "minutes": 10,
         "title": "Verify and save",
-        "text": "Save evals/fixture-audit.json or an equivalent table with counts, hashes, control outcomes, and the authoritative frozen revision."
+        "text": "Save `evals/fixture-audit.json` or an equivalent table with counts, hashes, control outcomes, and the authoritative frozen revision."
       }
     ],
     "checks": [
@@ -2539,7 +2539,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Create evals/experiment-plan.md. Write a directional or two-sided hypothesis about final task success under the same limits. Define the recent-history and evidence-preserving policies precisely enough to identify when each activates and what it retains. List the pinned model identifier, system instructions, tools, fixtures, context ceiling, output limits, run deadline, and cost cap shared across conditions. Explicitly charge compaction calls to its condition. Declare success to be the deterministic task outcome, not an agent claim or a favorable-looking transcript. Do not run final tasks."
+        "text": "Create `evals/experiment-plan.md`. Write a directional or two-sided hypothesis about final task success under the same limits. Define the recent-history and evidence-preserving policies precisely enough to identify when each activates and what it retains. List the pinned model identifier, system instructions, tools, fixtures, context ceiling, output limits, run deadline, and cost cap shared across conditions. Explicitly charge compaction calls to its condition. Declare success to be the deterministic task outcome, not an agent claim or a favorable-looking transcript. Do not run final tasks."
       },
       {
         "minutes": 10,
@@ -2582,7 +2582,7 @@
       {
         "minutes": 5,
         "title": "Retrieve",
-        "text": "Calculate 16 × 2 × 3 and explain why the independent task count is sixteen rather than ninety-six."
+        "text": "Calculate \\(16\\times2\\times3\\) and explain why the independent task count is sixteen rather than ninety-six."
       },
       {
         "minutes": 10,
@@ -2592,7 +2592,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Extend experiment-plan.md with task split IDs, three repeats per condition, per-trial success, per-task mean success, time, token usage, cost, and failure categories. Predeclare a paired task-level difference and a task-cluster bootstrap or clearly labeled descriptive uncertainty summary. Estimate expected API cost from development runs and the maximum under your caps for all 96 attempts. Include compaction and retries, record currency and pricing date, and compare with the remaining A$175 API allocation inside this course’s A$250 allowance (the A$1,000 total covers all three courses). Set a total-study stop rule before any final run. Predeclare that a budget-limited partial study reports attempted/planned counts and descriptive outcomes; do not present it as the complete 96-attempt estimate or silently impute unattempted trials."
+        "text": "Extend `experiment-plan.md` with task split IDs, three repeats per condition, per-trial success, per-task mean success, time, token usage, cost, and failure categories. Predeclare a paired task-level difference and a task-cluster bootstrap or clearly labeled descriptive uncertainty summary. Estimate expected API cost from development runs and the maximum under your caps for all 96 attempts. Include compaction and retries, record currency and pricing date, and compare with the remaining A$175 API allocation inside this course’s A$250 allowance (the A$1,000 total covers all three courses). Set a total-study stop rule before any final run. Predeclare that a budget-limited partial study reports attempted/planned counts and descriptive outcomes; do not present it as the complete 96-attempt estimate or silently impute unattempted trials."
       },
       {
         "minutes": 10,
@@ -2770,7 +2770,7 @@
       {
         "minutes": 10,
         "title": "Study",
-        "text": "Use the core resources above for ten minutes in total, focusing only on the indicated sections. Spend 5 minutes on H21: itertools.product for the trial Cartesian product. Spend 5 minutes on H28: Transaction boundaries for a shared reservation ledger. Stop at the time limit and use the page as a reference while building."
+        "text": "Use the core resources above for ten minutes in total, focusing only on the indicated sections. Spend 5 minutes on H21: `itertools.product` for the trial Cartesian product. Spend 5 minutes on H28: Transaction boundaries for a shared reservation ledger. Stop at the time limit and use the page as a reference while building."
       },
       {
         "minutes": 35,
@@ -2799,7 +2799,7 @@
         "url": "https://docs.python.org/3/library/itertools.html",
         "label": "Python itertools",
         "type": "documentation",
-        "focus": "itertools.product for the trial Cartesian product.",
+        "focus": "`itertools.product` for the trial Cartesian product.",
         "minutes": 5
       },
       {
@@ -3085,7 +3085,7 @@
       {
         "minutes": 10,
         "title": "Verify and save",
-        "text": "Save reports/failure-analysis.md with up to three evidence-linked failures, or the documented success-case fallback, and a statement of what the cases establish."
+        "text": "Save `reports/failure-analysis.md` with up to three evidence-linked failures, or the documented success-case fallback, and a statement of what the cases establish."
       }
     ],
     "checks": [
@@ -3360,7 +3360,7 @@
     ],
     "before": [
       "Audited trial outcomes with task and condition identifiers.",
-      "The uncertainty method predeclared in experiment-plan.md."
+      "The uncertainty method predeclared in `experiment-plan.md`."
     ],
     "explanation": "Trials on the same task share difficulty and structure, so treating all ninety-six observations as unrelated can overstate precision. First calculate each condition’s mean success across its three trials on each task, then compute the paired difference for that task. Average those sixteen differences for a transparent task-weighted estimate. A task-cluster bootstrap resamples task IDs and carries all their paired trial records together. Its interval describes uncertainty under those assumptions; a small custom suite still cannot establish performance on all coding tasks or future model versions. Task-level resampling also assumes tasks are adequate sampling units. If multiple tasks share a generator or closely related family, disclose this dependence and treat the interval as a descriptive task-bootstrap summary; it does not correct family-level correlation or establish population coverage.",
     "plan": [
@@ -3491,7 +3491,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Create reports/harness-report.md, targeting two to four pages of equivalent Markdown. Draft sections for question, harness design, two conditions, task suite, limits and metrics, main results, failure analysis, and limitations. Explain the context ceiling and how compaction overhead is charged. Link the frozen manifest and authoritative result tables. Include one representative evidence-loss or recovery example, clearly labeled as illustration. Use actual measured numbers or explicit placeholders referencing the source table; do not invent a favorable summary to make the draft look finished."
+        "text": "Create `reports/harness-report.md`, targeting two to four pages of equivalent Markdown. Draft sections for question, harness design, two conditions, task suite, limits and metrics, main results, failure analysis, and limitations. Explain the context ceiling and how compaction overhead is charged. Link the frozen manifest and authoritative result tables. Include one representative evidence-loss or recovery example, clearly labeled as illustration. Use actual measured numbers or explicit placeholders referencing the source table; do not invent a favorable summary to make the draft look finished."
       },
       {
         "minutes": 10,
@@ -3584,7 +3584,7 @@
       {
         "minutes": 10,
         "title": "Verify and save",
-        "text": "Dry-run all three commands and save reports/demo-script.md with the narration outline and expected evidence."
+        "text": "Dry-run all three commands and save `reports/demo-script.md` with the narration outline and expected evidence."
       }
     ],
     "checks": [
@@ -3669,7 +3669,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Create a new repository named agent-harness-lab. Create harness/, tests/, fixtures/, evals/, docs/, reports/, and scripts/. Choose one Python environment workflow, install a test runner, and record the exact Python and package versions. Add a minimal test that imports your package and round-trips a small JSON object. Add ignore rules for the environment, credentials, runtime traces, and generated task directories. Write README setup instructions and docs/environment.md with your OS, Python version, test command, and dependency export or lockfile. Do not implement the agent loop yet."
+        "text": "Create a new repository named agent-harness-lab. Create the course directories:\n\n```bash\nmkdir -p harness tests fixtures evals docs reports scripts\n```\n\n Choose one Python environment workflow, install a test runner, and record the exact Python and package versions. Add a minimal test that imports your package and round-trips a small JSON object. Add ignore rules for the environment, credentials, runtime traces, and generated task directories. Write README setup instructions and `docs/environment.md` with your OS, Python version, test command, and dependency export or lockfile. Do not implement the agent loop yet."
       },
       {
         "minutes": 10,
@@ -3720,7 +3720,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Write docs/evaluation-charter.md. For a toy task outside the future benchmark, such as changing a function to handle an empty list, specify a successful outcome, a reference solution, a no-op, and a broken solution; predict their grades without building the full runner. Record the planned 8-development/16-final split, the ban on final-agent-result-driven tuning, and the 16 × 2 × 3 = 96-attempt study. Create a spending ledger with chosen currency, a personal API allowance within the total study budget, and fields for reservations and actual charges. Record how you will supply secrets at runtime and which local container runtime you will inspect before the execution-boundary module."
+        "text": "Write `docs/evaluation-charter.md`. For a toy task outside the future benchmark, such as changing a function to handle an empty list, specify a successful outcome, a reference solution, a no-op, and a broken solution; predict their grades without building the full runner. Record the planned 8-development/16-final split, the ban on final-agent-result-driven tuning, and the \\(16\\times2\\times3=96\\)-attempt study. Create a spending ledger with chosen currency, a personal API allowance within the total study budget, and fields for reservations and actual charges. Record how you will supply secrets at runtime and which local container runtime you will inspect before the execution-boundary module."
       },
       {
         "minutes": 10,
@@ -3761,7 +3761,7 @@
       {
         "minutes": 5,
         "title": "Retrieve",
-        "text": "Answer closed-book: (1) Why is a path-prefix check insufficient for symlinks? (2) What must an event include to identify one tool attempt? (3) Why must execution replay start from a clean fixture with a new run ID?"
+        "text": "Answer closed-book:\n\n(1) Why is a path-prefix check insufficient for symlinks?\n2. What must an event include to identify one tool attempt?\n3. Why must execution replay start from a clean fixture with a new run ID?"
       },
       {
         "minutes": 10,
@@ -3771,12 +3771,12 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Choose one allowed operation and its denied counterpart from the execution matrix. Run both in fresh disposable workspaces and inspect the real effects. Use the execution replay from Activity 4, step 2: feed recorded model responses to FakeModel, re-execute only approved local tools in a new clean fixture, and compare normalized decisions and outcomes under a new run ID. Keep the original logs and workspace unchanged. Explain separately that viewing recorded observations is read-only playback, not another execution. Record any unsupported boundary gate and its smallest next fix."
+        "text": "Choose one allowed operation and its denied counterpart from the execution matrix. Run both in fresh disposable workspaces and inspect the real effects. Use the execution replay from Activity 4, step 2: feed recorded model responses to `FakeModel`, re-execute only approved local tools in a new clean fixture, and compare normalized decisions and outcomes under a new run ID. Keep the original logs and workspace unchanged. Explain separately that viewing recorded observations is read-only playback, not another execution. Record any unsupported boundary gate and its smallest next fix."
       },
       {
         "minutes": 10,
         "title": "Verify and save",
-        "text": "Save reports/review-module-2.md with the six-point score, commands, trace references, and one remaining limitation. Target at least 5/6 with no zero on the boundary answer; use the next flex hour for any remaining gate."
+        "text": "Save `reports/review-module-2.md` with the six-point score, commands, trace references, and one remaining limitation. Target at least 5/6 with no zero on the boundary answer; use the next flex hour for any remaining gate."
       }
     ],
     "checks": [
@@ -3786,7 +3786,7 @@
     ],
     "selfCheck": {
       "question": "What are the answers to the three assessment questions?",
-      "answer": "(1) A path that appears inside the root can resolve through a symlink outside it; enforce the supported resolved boundary, including parent paths for writes. (2) Stable run/action identifiers, ordering, arguments, outcomes, and timing/usage fields connect the attempt to evidence. (3) Execution replay is a new execution and may perform the approved local effects again; a fresh fixture prevents duplication in the original workspace and a new ID preserves provenance. Read-only log playback merely displays recorded observations."
+      "answer": "1. A path that appears inside the root can resolve through a symlink outside it; enforce the supported resolved boundary, including parent paths for writes.\n2. Stable run/action identifiers, ordering, arguments, outcomes, and timing/usage fields connect the attempt to evidence.\n3. Execution replay is a new execution and may perform the approved local effects again; a fresh fixture prevents duplication in the original workspace and a new ID preserves provenance. Read-only log playback merely displays recorded observations."
     },
     "pitfall": "A passing log comparison is not proof that the underlying process could not access a forbidden resource.",
     "reading": [
@@ -3856,7 +3856,7 @@
       {
         "minutes": 5,
         "title": "Retrieve",
-        "text": "Answer closed-book: (1) Why can an atomic checkpoint still leave an uncertain write? (2) What should a third file hash mean during before/after reconciliation? (3) Which context and accounting constraints must both policies share?"
+        "text": "Answer closed-book:\n\n(1) Why can an atomic checkpoint still leave an uncertain write?\n2. What should a third file hash mean during before/after reconciliation?\n3. Which context and accounting constraints must both policies share?"
       },
       {
         "minutes": 10,
@@ -3871,7 +3871,7 @@
       {
         "minutes": 10,
         "title": "Verify and save",
-        "text": "Save reports/review-module-4.md with score, restart trace, payload references, and one unsupported generalization. Target 5/6 with no zero on uncertain-side-effect handling; carry gaps to flex time."
+        "text": "Save `reports/review-module-4.md` with score, restart trace, payload references, and one unsupported generalization. Target 5/6 with no zero on uncertain-side-effect handling; carry gaps to flex time."
       }
     ],
     "checks": [
@@ -3881,7 +3881,7 @@
     ],
     "selfCheck": {
       "question": "What are the answers to the three assessment questions?",
-      "answer": "(1) Checkpoint persistence and the workspace mutation are separate operations, so a crash can occur between them. (2) A hash matching neither before nor intended after indicates conflict or uncertainty; stop for reconciliation rather than overwriting it blindly. (3) Keep model revision, task/constraints, valid call/result pairs, context ceiling, tools, time, and total-token/cost limits matched; charge summarizer calls and latency to the compaction condition."
+      "answer": "1. Checkpoint persistence and the workspace mutation are separate operations, so a crash can occur between them.\n2. A hash matching neither before nor intended after indicates conflict or uncertainty; stop for reconciliation rather than overwriting it blindly.\n3. Keep model revision, task/constraints, valid call/result pairs, context ceiling, tools, time, and total-token/cost limits matched; charge summarizer calls and latency to the compaction condition."
     },
     "pitfall": "Do not replace the original failing trace with the repaired version; preserve both as separate evidence.",
     "reading": [
@@ -3951,7 +3951,7 @@
       {
         "minutes": 5,
         "title": "Retrieve",
-        "text": "Answer closed-book: (1) Why must the pilot activate both policies? (2) Why are timeouts and budget stops retained? (3) Does MCP compatibility establish tool authorization?"
+        "text": "Answer closed-book:\n\n(1) Why must the pilot activate both policies?\n2. Why are timeouts and budget stops retained?\n3. Does MCP compatibility establish tool authorization?"
       },
       {
         "minutes": 10,
@@ -3966,7 +3966,7 @@
       {
         "minutes": 10,
         "title": "Verify and save",
-        "text": "Save reports/review-module-6.md with score and go/no-go evidence. Require at least 5/6 and all experiment gates satisfied before starting held-out attempts; use flex time if any gate is blocked."
+        "text": "Save `reports/review-module-6.md` with score and go/no-go evidence. Require at least 5/6 and all experiment gates satisfied before starting held-out attempts; use flex time if any gate is blocked."
       }
     ],
     "checks": [
@@ -3976,7 +3976,7 @@
     ],
     "selfCheck": {
       "question": "What are the answers to the three assessment questions?",
-      "answer": "(1) Without activation, the trial does not exercise the intended difference in memory policy. (2) They are outcomes under the declared budget; excluding them creates a favorable, selected denominator. (3) No. MCP describes capability interaction; trusted host code must still enforce permissions independently of model output."
+      "answer": "1. Without activation, the trial does not exercise the intended difference in memory policy.\n2. They are outcomes under the declared budget; excluding them creates a favorable, selected denominator.\n3. No. MCP describes capability interaction; trusted host code must still enforce permissions independently of model output."
     },
     "pitfall": "A deadline is not a reason to quietly lower a gate or tune against the final set.",
     "reading": [
@@ -4104,7 +4104,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Create reports/evidence-index.md with rows for loop termination, execution boundary, resume reconciliation, MCP parity, context-policy behavior, 96-attempt accounting, cost, and uncertainty. Link each row to its command, frozen revision or configuration, and smallest relevant trace/table. Add a section distinguishing the main held-out study, development diagnostics, and any optional external pilot. Repair broken links or mislabeled artifacts. Mark missing evidence as a limitation rather than manufacturing a new favorable run to fill the slot."
+        "text": "Create `reports/evidence-index.md` with rows for loop termination, execution boundary, resume reconciliation, MCP parity, context-policy behavior, 96-attempt accounting, cost, and uncertainty. Link each row to its command, frozen revision or configuration, and smallest relevant trace/table. Add a section distinguishing the main held-out study, development diagnostics, and any optional external pilot. Repair broken links or mislabeled artifacts. Mark missing evidence as a limitation rather than manufacturing a new favorable run to fill the slot."
       },
       {
         "minutes": 10,
@@ -4156,7 +4156,7 @@
       {
         "minutes": 10,
         "title": "Verify and save",
-        "text": "Save reports/clean-checkout.md with environment, commands, results, and fixes. Verify that the default reproduction path makes no paid calls and that the full-study rerun is explicitly opt-in."
+        "text": "Save `reports/clean-checkout.md` with environment, commands, results, and fixes. Verify that the default reproduction path makes no paid calls and that the full-study rerun is explicitly opt-in."
       }
     ],
     "checks": [
@@ -4307,7 +4307,7 @@
       "Preserve tool-call/result semantics and account for every outbound request."
     ],
     "before": [
-      "The raw FakeModel loop, strict tool dispatcher, shared evaluator, and verified execution boundary.",
+      "The raw `FakeModel` loop, strict tool dispatcher, shared evaluator, and verified execution boundary.",
       "Use one provider with a documented tool interface; the worked reference is the official Anthropic Python SDK. An alternative provider needs equivalent tests."
     ],
     "explanation": "An SDK transports requests; your harness still owns the loop. A real response may contain text, multiple tool calls, provider-specific continuation data, a stop reason, and usage fields. Reducing that response to one string loses information needed by the next turn. Keep a provider representation alongside your normalized records, validate proposed actions, and return each result using the correct call ID. Today builds the adapter against offline fixtures. The next budget lesson authorizes the first small live call only after reservation tests pass.",
@@ -4325,7 +4325,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Create harness/provider.py behind the FakeModel interface. Serialize task, system instructions, tool schema, and prior messages for one chosen model. Preserve complete provider-required response blocks and normalize tool IDs, stop reason, model/request identifiers, and available usage. Configure explicit timeouts and disable automatic SDK retries so the harness can count attempts. Start with one tool call per response if supported; otherwise handle all calls sequentially and return every result, or reject an unsupported multi-call response before any tool executes. Use synthetic provider fixtures for final text, one tool call, two tool calls, and output-limit termination. Treat truncated output as a distinct bounded outcome. Keep the API key outside logs and task containers; do not make live requests today."
+        "text": "Create `harness/provider.py` behind the `FakeModel` interface. Serialize task, system instructions, tool schema, and prior messages for one chosen model. Preserve complete provider-required response blocks and normalize tool IDs, stop reason, model/request identifiers, and available usage. Configure explicit timeouts and disable automatic SDK retries so the harness can count attempts. Start with one tool call per response if supported; otherwise handle all calls sequentially and return every result, or reject an unsupported multi-call response before any tool executes. Use synthetic provider fixtures for final text, one tool call, two tool calls, and output-limit termination. Treat truncated output as a distinct bounded outcome. Keep the API key outside logs and task containers; do not make live requests today."
       },
       {
         "minutes": 10,

@@ -7,7 +7,7 @@
 Do only the readiness work you need, then start Day1 by implementing stable next-token loss. Setup, review questions and portfolio instructions are collected here so they do not interrupt the technical sequence. The later-use sections are reference checklists, not work to complete before learning.
 
 - Create or reuse an isolated Python environment; verify NumPy and PyTorch on CPU. Prepare JAX CPU in the same environment only if versions are compatible, otherwise document a separate environment.
-- Create or reuse model/, tests/, data/, notes/, experiments/, results/ and reports/. Keep model downloads, generated datasets, checkpoints and credentials out of Git.
+- Create or reuse `model/`, `tests/`, `data/`, `notes/`, `experiments/`, results/ and `reports/`. Keep model downloads, generated datasets, checkpoints and credentials out of Git.
 - Run fixed 2×3 and 3×2 matrix multiplication and an autograd smoke calculation; reuse existing evidence if it already passes.
 - Read the one-page study rhythm, budget cap and save-at-the-hour policy. Install no GPU stack and rent no hardware to begin.
 
@@ -146,7 +146,7 @@ Must-pass tests:
 - Resume includes optimizer, schedule, RNG, and data position, not only model weights. Compare resumed and uninterrupted trajectories under the same supported deterministic setup.
 - LoRA keeps the base frozen, excludes prompt tokens from the intended SFT loss, and evaluates task correctness separately from syntax validity.
 
-For GQA cache accounting, use `2 × B × L × T × n_kv_heads × head_dim × bytes_per_element`. The factor two is K and V. For standard dense attention scores, memory is proportional to `B × n_query_heads × T × T`. Distinguish model weights, optimizer state, activations, and KV state when explaining memory. Derive an architecture-specific formula for MLA or a recurrent model rather than reusing GQA's formula.
+For GQA cache accounting, use \(2BLT\,n_{\mathrm{kv\_heads}}\,d_{\mathrm{head}}\,s\), where \(s\) is bytes per element. The factor two is K and V. For standard dense attention scores, memory is proportional to \(B\,n_{\mathrm{query\_heads}}\,T^2\). Distinguish model weights, optimizer state, activations, and KV state when explaining memory. Derive an architecture-specific formula for MLA or a recurrent model rather than reusing GQA's formula.
 
 JAX requirements are substantive: a complete functional decoder, explicit parameter/optimizer/RNG state, a jitted train step, shared-weight parity, and a short training run. You need not duplicate every expensive experiment in both frameworks. The scheduled exercises cover `grad`, `vmap` and `jit`. `lax.scan` is an optional control-flow extension after the required work passes; using Flax later is also optional, not a prerequisite for this course.
 
@@ -177,7 +177,7 @@ Prepare one report of about 2–4 pages, or equivalent Markdown, for this course
 - **A1 — [Stanford CS336 Spring 2026](https://cs336.stanford.edu/).** Use lectures on resource accounting, architectures, kernels, inference, data, and post-training. Adapt selected work from [A1 basics](https://github.com/stanford-cs336/assignment1-basics) and [A2 systems](https://github.com/stanford-cs336/assignment2-systems). Do not attempt all five full assignments alongside this curriculum. Pin handout/repository versions; some linked READMEs retain earlier-year labels.
 - **A2 — [The Llama 3 Herd of Models](https://arxiv.org/abs/2407.21783).** Read architecture/training sections and map components to your implementation. It is a baseline for architectural literacy, not a full-scale reproduction target.
 - **A3 — [RoFormer](https://arxiv.org/abs/2104.09864) and [GQA](https://arxiv.org/abs/2305.13245).** Focus on rotary-position identities and query/KV grouping. Derive shapes before code.
-- **A4 — [JAX documentation](https://docs.jax.dev/en/latest/).** Focus on arrays, pytrees, random keys, transformations, jit/control flow, benchmarking, and autodiff. The [Training Cookbook](https://docs.jax.dev/en/latest/the-training-cookbook.html) is a reference when organizing a training loop.
+- **A4 — [JAX documentation](https://docs.jax.dev/en/latest/).** Focus on arrays, pytrees, random keys, transformations, `jit`/control flow, benchmarking, and autodiff. The [Training Cookbook](https://docs.jax.dev/en/latest/the-training-cookbook.html) is a reference when organizing a training loop.
 - **A5 — [LoRA](https://arxiv.org/abs/2106.09685).** Implement the low-rank update and merge behavior. [DPO](https://arxiv.org/abs/2305.18290) and [DeepSeekMath/GRPO](https://arxiv.org/abs/2402.03300) are optional method readings after SFT works.
 - **A6 — [SmolLM2-360M](https://huggingface.co/HuggingFaceTB/SmolLM2-360M).** Practical pretrained dense model for the small SFT lab. Use its model card, exact tokenizer, architecture configuration, license, and revision. A larger model is optional after a memory/time pilot.
 - **A7 — [DeepSeekMoE](https://arxiv.org/abs/2401.06066).** Read routing, shared experts, and specialization. Your required toy top-2 layer is intentionally simpler; document that distinction.

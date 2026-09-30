@@ -329,7 +329,7 @@
         "steps": [
           {
             "title": "Apply JAX Transformations To Primitives",
-            "action": "Use grad, vmap and jit on small layer calculations; inspect shapes and numerical outputs.",
+            "action": "Use `grad`, `vmap` and `jit` on small layer calculations; inspect shapes and numerical outputs.",
             "evidence": "Small transformation examples run with expected shapes and derivatives.",
             "activity": 4,
             "module": 2,
@@ -390,7 +390,7 @@
           {
             "title": "Review Decoder Components and Functional JAX",
             "action": "Retrieve the mechanisms from memory, check them against evidence and plan one bounded repair.",
-            "evidence": "Closed-book answers, a score out of six and a saved repair decision in notes/reviews/decoder-and-jax.md.",
+            "evidence": "Closed-book answers, a score out of six and a saved repair decision in `notes/reviews/decoder-and-jax.md`.",
             "activity": 202,
             "source_activity": 202,
             "module": 2,
@@ -773,7 +773,7 @@
           {
             "title": "Review Cache Correctness and Adaptation",
             "action": "Retrieve the mechanisms from memory, check them against evidence and plan one bounded repair.",
-            "evidence": "Closed-book answers, a score out of six and a saved repair decision in notes/reviews/cache-and-adaptation.md.",
+            "evidence": "Closed-book answers, a score out of six and a saved repair decision in `notes/reviews/cache-and-adaptation.md`.",
             "activity": 204,
             "source_activity": 204,
             "module": 4,
@@ -1148,7 +1148,7 @@
           {
             "title": "Review Sparse Experts and Persistent State",
             "action": "Retrieve the mechanisms from memory, check them against evidence and plan one bounded repair.",
-            "evidence": "Closed-book answers, a score out of six and a saved repair decision in notes/reviews/sparse-and-hybrid.md.",
+            "evidence": "Closed-book answers, a score out of six and a saved repair decision in `notes/reviews/sparse-and-hybrid.md`.",
             "activity": 206,
             "source_activity": 206,
             "module": 6,

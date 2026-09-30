@@ -51,7 +51,7 @@
         "steps": [
           {
             "title": "Build the First Bounded Agent Loop",
-            "action": "Implement a tiny FakeModel loop with explicit terminal state and a response cap; test normal completion and exhaustion.",
+            "action": "Implement a tiny `FakeModel` loop with explicit terminal state and a response cap; test normal completion and exhaustion.",
             "evidence": "Working loop plus successful and capped transcript tests.",
             "activity": 1,
             "module": 1,

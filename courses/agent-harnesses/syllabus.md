@@ -4,24 +4,24 @@
 
 ## Day 0
 
-Prepare only the tools needed for your first lab, then begin Day 1 with a working FakeModel loop. All setup, review and course-administration material lives here. Later-use checklists are references for their stated milestones, not prerequisites to complete now.
+Prepare only the tools needed for your first lab, then begin Day 1 with a working `FakeModel` loop. All setup, review and course-administration material lives here. Later-use checklists are references for their stated milestones, not prerequisites to complete now.
 
-- I can run Python and pytest in my course workspace.
+- I can run Python and `pytest` in my course workspace.
 - My repository ignores credentials, virtual environments, generated task workspaces and private runtime traces.
 - Fake model responses are the default; the first lab makes no paid requests.
 - I know the A$250 course ceiling and the development/final-task separation rule.
 
 ### Local repository and Python
 
-Create agent-harness-lab with harness/, tests/, fixtures/, evals/, docs/, reports/, and scripts/. Create or reuse a Python virtual environment and install pytest. Run a minimal import/JSON smoke test. Ignore credentials, environments, generated workspaces, and private runtime traces. Python and pytest are sufficient for Day 1. Install and pin provider/MCP SDKs from this setup reference before the lessons that actually use them.
+Create agent-harness-lab with `harness/`, `tests/`, `fixtures/`, `evals/`, `docs/`, `reports/`, and `scripts/`. Create or reuse a Python virtual environment and install pytest. Run a minimal import/JSON smoke test. Ignore credentials, environments, generated workspaces, and private runtime traces. Python and `pytest` are sufficient for Day 1. Install and pin provider/MCP SDKs from this setup reference before the lessons that actually use them.
 
 ### Execution-runtime readiness
 
-Before the execution-boundary module, prepare a local container runtime supporting Apple silicon. Follow its official installation instructions and confirm one harmless container starts, record its version and how to stop it. The Day 1 FakeModel loop does not require a container. The actual mounts, permissions, network and resource boundaries are implemented in the course. If installation blocks, save the exact blocker and resolve it before live-code lessons; never replace isolation with an unlabelled host subprocess.
+Before the execution-boundary module, prepare a local container runtime supporting Apple silicon. Follow its official installation instructions and confirm one harmless container starts, record its version and how to stop it. The Day 1 `FakeModel` loop does not require a container. The actual mounts, permissions, network and resource boundaries are implemented in the course. If installation blocks, save the exact blocker and resolve it before live-code lessons; never replace isolation with an unlabelled host subprocess.
 
 ### Study, evaluation, and spending conventions
 
-Read the course outcome, 8 development / 16 final split rule, and budget convention. Create a ledger with A$175 API, A$50 CPU/storage, A$25 contingency within this course’s A$250 allowance. Set fake responses as the default mode. Put report/evidence templates in docs/ without filling future result fields. Sundays are off; weekdays and Saturdays retain their existing time caps.
+Read the course outcome, 8 development / 16 final split rule, and budget convention. Create a ledger with A$175 API, A$50 CPU/storage, A$25 contingency within this course’s A$250 allowance. Set fake responses as the default mode. Put report/evidence templates in `docs/` without filling future result fields. Sundays are off; weekdays and Saturdays retain their existing time caps.
 
 ### Setup and optional integrations
 

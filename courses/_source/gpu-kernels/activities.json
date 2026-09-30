@@ -234,7 +234,7 @@
     "hours": 1,
     "title": "Freeze environments, measurement rules, and spending limits",
     "work": "Write the local/NVIDIA/H100 environment plan and a bounded measurement contract before renting a GPU.",
-    "evidence": "reports/kernels/environment-plan.md and a spending ledger with a shutdown checklist.",
+    "evidence": "`reports/kernels/environment-plan.md` and a spending ledger with a shutdown checklist.",
     "resources": [
       "K2",
       "K6"
@@ -247,7 +247,7 @@
     "hours": 1,
     "title": "Review execution, reductions, and benchmark validity",
     "work": "Audit vector add, softmax, and RMSNorm using a closed-book explanation and one targeted numerical check.",
-    "evidence": "review-2.md with a memory diagram, masked-row example, and an honest benchmark audit.",
+    "evidence": "`review-2.md` with a memory diagram, masked-row example, and an honest benchmark audit.",
     "resources": [
       "K2",
       "K3"
@@ -260,7 +260,7 @@
     "hours": 1,
     "title": "Review tiled matmul and online attention",
     "work": "Reconstruct a tile and online-softmax merge, then audit one causal boundary case.",
-    "evidence": "review-4.md with dimensioned tile addresses, a worked merge, and a supported-shape audit.",
+    "evidence": "`review-4.md` with dimensioned tile addresses, a worked merge, and a supported-shape audit.",
     "resources": [
       "K3",
       "K4"
@@ -273,7 +273,7 @@
     "hours": 1,
     "title": "Review differentiation, integration, and Pallas evidence",
     "work": "Defend the RMSNorm derivative and audit framework integration alongside the actual H100 result.",
-    "evidence": "review-6.md with a gradient derivation, branch table, and separated Pallas compile/execute evidence.",
+    "evidence": "`review-6.md` with a gradient derivation, branch table, and separated Pallas compile/execute evidence.",
     "resources": [
       "K5",
       "K6"
@@ -286,7 +286,7 @@
     "hours": 1,
     "title": "Take the independent kernel assessment",
     "work": "Explain and diagnose a kernel result from first principles without introducing a new implementation.",
-    "evidence": "assessment.md containing a timed explanation, one diagnosis, and an honest competency rubric.",
+    "evidence": "`assessment.md` containing a timed explanation, one diagnosis, and an honest competency rubric.",
     "resources": [
       "K2"
     ]

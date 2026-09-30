@@ -409,7 +409,7 @@
         "steps": [
           {
             "title": "Freeze Matmul Tuning and Baselines",
-            "action": "Choose a small tile search before measuring; prepare torch.matmul and compiled-composition baselines with matching precision and resident inputs.",
+            "action": "Choose a small tile search before measuring; prepare `torch.matmul` and compiled-composition baselines with matching precision and resident inputs.",
             "evidence": "Predeclared tiles, shapes, and baseline settings.",
             "activity": 6,
             "module": 3,
@@ -905,7 +905,7 @@
         "steps": [
           {
             "title": "Benchmark Pallas Against Jitted JAX",
-            "action": "Measure the existing kernel and jax.jit baseline on the same H100; use block_until_ready and separate compilation from warmed execution.",
+            "action": "Measure the existing kernel and `jax.jit` baseline on the same H100; use `block_until_ready` and separate compilation from warmed execution.",
             "evidence": "Matched error/timing table with compile and execute costs separated.",
             "activity": 12,
             "module": 6,

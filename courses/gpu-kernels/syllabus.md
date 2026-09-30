@@ -18,7 +18,7 @@ At the beginning. Set a sustainable schedule, create the repository, and prepare
 
 ### Before the first NVIDIA lab
 
-Immediately before 1-3. Choose and record a compatible image, verify CUDA/Triton and nvcc/compiler/Ninja for the CUDA extension, run the smoke, export evidence and stop billing when finished. Do not rent hardware merely to read this section.
+Immediately before 1-3. Choose and record a compatible image, verify CUDA/Triton and `nvcc`/compiler/Ninja for the CUDA extension, run the smoke, export evidence and stop billing when finished. Do not rent hardware merely to read this section.
 
 ### Before the first Pallas GPU lab
 

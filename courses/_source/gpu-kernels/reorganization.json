@@ -415,7 +415,7 @@
     "2-3": [
       {
         "id": "KR02",
-        "focus": "program_id, arange, masked loads and stores.",
+        "focus": "`program_id`, `arange`, masked loads and stores.",
         "minutes": 10,
         "optional": false
       },
@@ -628,7 +628,7 @@
     "8-4": [
       {
         "id": "KR18",
-        "focus": "dropout_p, is_causal and backend selection; match your reference.",
+        "focus": "`dropout_p`, `is_causal` and backend selection; match your reference.",
         "minutes": 10,
         "optional": false
       }
@@ -668,7 +668,7 @@
     "10-1": [
       {
         "id": "KR11",
-        "focus": "Wrapping Triton kernels with triton_op and wrap_triton.",
+        "focus": "Wrapping Triton kernels with `triton_op` and wrap_triton.",
         "minutes": 10,
         "optional": false
       }
@@ -724,7 +724,7 @@
     "12-1": [
       {
         "id": "KR14",
-        "focus": "Compilation, data transfer, and block_until_ready timing boundaries.",
+        "focus": "Compilation, data transfer, and `block_until_ready` timing boundaries.",
         "minutes": 10,
         "optional": false
       }
@@ -846,7 +846,7 @@
       },
       {
         "title": "Before the first NVIDIA lab",
-        "text": "Immediately before 1-3. Choose and record a compatible image, verify CUDA/Triton and nvcc/compiler/Ninja for the CUDA extension, run the smoke, export evidence and stop billing when finished. Do not rent hardware merely to read this section.",
+        "text": "Immediately before 1-3. Choose and record a compatible image, verify CUDA/Triton and `nvcc`/compiler/Ninja for the CUDA extension, run the smoke, export evidence and stop billing when finished. Do not rent hardware merely to read this section.",
         "resources": [
           "KR07",
           "KR01"

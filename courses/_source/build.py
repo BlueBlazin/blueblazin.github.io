@@ -14,38 +14,15 @@ assert len({cfg['track'] for cfg in CONFIGS.values()})==len(CONFIGS), 'Each cour
 assert all(cfg['slug']==s and cfg['basePath']=='/courses/'+s for s,cfg in CONFIGS.items()), 'Course paths must match catalog slugs'
 URLS={v['track']:v['url'] for v in CONFIGS.values()}
 
-def inline(text):
- protected=[]
- def keep(v):protected.append(v);return f'ZZHOLD{len(protected)-1}ZZ'
- text=re.sub(r'`([^`]+)`',lambda m:keep('<code>'+E(m[1])+'</code>'),str(text))
- text=re.sub(r'\[([^\]]+)\]\((https?://[^\s)]+)\)',lambda m:keep('<a href="'+E(m[2],quote=True)+'" target="_blank" rel="noopener noreferrer">'+E(m[1])+'</a>'),text)
- text=E(text);text=re.sub(r'\*\*(.+?)\*\*',r'<strong>\1</strong>',text)
- for i,v in enumerate(protected):text=text.replace(f'ZZHOLD{i}ZZ',v)
- return text
-
-def para(x):return '<p>'+inline(x).replace('\n','<br>')+'</p>'
-def ul(xs):return '<ul>'+''.join('<li>'+inline(x)+'</li>' for x in xs)+'</ul>'
-def markdown(text):
- out=[];lines=text.strip().splitlines();i=0
- while i<len(lines):
-  line=lines[i].strip()
-  if not line:i+=1;continue
-  if line.startswith('|'):
-   rows=[]
-   while i<len(lines) and lines[i].strip().startswith('|'):
-    row=[x.strip() for x in lines[i].strip().strip('|').split('|')]
-    if not all(re.fullmatch(r':?-+:?',x) for x in row):rows.append(row)
-    i+=1
-   out.append('<div class="table-wrap"><table><thead><tr>'+''.join('<th scope="col">'+inline(x)+'</th>' for x in rows[0])+'</tr></thead><tbody>'+''.join('<tr>'+''.join('<td>'+inline(x)+'</td>' for x in row)+'</tr>' for row in rows[1:])+'</tbody></table></div>');continue
-  if line.startswith('- '):
-   xs=[]
-   while i<len(lines) and lines[i].strip().startswith('- '):xs.append(lines[i].strip()[2:]);i+=1
-   out.append(ul(xs));continue
-  if line.startswith('#'):out.append('<h3>'+inline(line.lstrip('# '))+'</h3>');i+=1;continue
-  block=[line];i+=1
-  while i<len(lines) and lines[i].strip() and not lines[i].lstrip().startswith(('|','- ','#')):block.append(lines[i].strip());i+=1
-  out.append(para(' '.join(block)))
- return '\n'.join(out)
+from formatting import inline, para, ul, markdown, prepare_math, strings
+import hashlib
+STYLE_VERSION=hashlib.sha256((ROOT/'style.css').read_bytes()).hexdigest()[:10]
+math_sources=[]
+for slug in SLUGS:
+ for path in (ROOT/slug).glob('*'):
+  if path.suffix=='.json' and path.name not in {'course-data.json','course-index.json'}:math_sources.extend(strings(json.loads(path.read_text())))
+  elif path.suffix=='.md':math_sources.append(path.read_text())
+prepare_math(math_sources)
 
 def build(slug):
  folder=ROOT/slug;cfg=CONFIGS[slug];base=cfg['basePath'];track=cfg['track']
@@ -102,7 +79,7 @@ def build(slug):
     if other['week']==entry['week']:sidebar+='<a class="mini-lesson" href="'+other['url']+'"'+(' aria-current="page"' if other['id']==entry['id'] else '')+'><strong>Day '+str(other['dayNumber'])+' · '+other['day']+' · '+str(other['minutes'])+' min</strong>'+E(other['title'])+'</a>'
   sidebar+='<div class="sidebar-foot"><p>Mon–Fri <strong>1 hour</strong><br>Saturday <strong>2 hours</strong><br>Sunday <strong>off</strong></p><a href="'+href('/syllabus.md')+'" download>Download handbook</a></div><div class="divider"></div><p class="sidebar-label">Other courses</p>'+''.join('<a class="navlink" href="'+v['url']+'">'+E(v['title'])+'</a>' for s,v in CONFIGS.items() if s!=slug)
   favicon='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><rect width="40" height="40" rx="5" fill="'+cfg['color']+'"/><text x="20" y="28" text-anchor="middle" fill="white" font-family="sans-serif" font-size="25">'+track+'</text></svg>'
-  return '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+E(title)+' · '+E(cfg['title'])+'</title><meta name="description" content="'+E(cfg['description'],quote=True)+'"><meta name="theme-color" content="'+cfg['color']+'"><link rel="icon" href="data:image/svg+xml,'+quote(favicon)+'"><link rel="stylesheet" href="'+href('/style.css')+'"><script src="'+href('/course.js')+'" defer></script></head><body'+(' data-lesson="'+entry['id']+'"' if entry else '')+'><a class="skip" href="#main">Skip to content</a><header class="topbar"><a class="brand" href="'+href('/')+'"><span class="brandmark" aria-hidden="true">'+E(cfg['symbol'])+'</span><span>'+E(cfg['title'])+'<small>'+E(cfg['tagline'])+'</small></span></a><span class="topmeta">'+str(hours)+' hands-on hours · '+str(len(schedule))+' weeks</span><button id="menu-button" class="menu-button" aria-expanded="false" aria-controls="sidebar">Course menu</button></header><div class="layout"><aside class="sidebar" id="sidebar">'+sidebar+'</aside><main id="main">'+body+'<footer class="page-footer">'+E(cfg['title'])+' · Weekdays 1 hour · Saturdays 2 hours · Sundays off · <a href="https://github.com/BlueBlazin/blueblazin.github.io/tree/master/courses/_source/'+slug+'">Course source</a></footer></main></div></body></html>'
+  return '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+E(title)+' · '+E(cfg['title'])+'</title><meta name="description" content="'+E(cfg['description'],quote=True)+'"><meta name="theme-color" content="'+cfg['color']+'"><link rel="icon" href="data:image/svg+xml,'+quote(favicon)+'"><link rel="stylesheet" href="'+href('/style.css')+'?v='+STYLE_VERSION+'">'+('<link rel="stylesheet" href="/courses/assets/katex/katex.min.css?v=0.18.9">' if 'data-math-source' in body else '')+'<script src="'+href('/course.js')+'" defer></script></head><body'+(' data-lesson="'+entry['id']+'"' if entry else '')+'><a class="skip" href="#main">Skip to content</a><header class="topbar"><a class="brand" href="'+href('/')+'"><span class="brandmark" aria-hidden="true">'+E(cfg['symbol'])+'</span><span>'+E(cfg['title'])+'<small>'+E(cfg['tagline'])+'</small></span></a><span class="topmeta">'+str(hours)+' hands-on hours · '+str(len(schedule))+' weeks</span><button id="menu-button" class="menu-button" aria-expanded="false" aria-controls="sidebar">Course menu</button></header><div class="layout"><aside class="sidebar" id="sidebar">'+sidebar+'</aside><main id="main">'+body+'<footer class="page-footer">'+E(cfg['title'])+' · Weekdays 1 hour · Saturdays 2 hours · Sundays off · <a href="https://github.com/BlueBlazin/blueblazin.github.io/tree/master/courses/_source/'+slug+'">Course source</a></footer></main></div></body></html>'
  pages={}
  def add(route,body,title,active='/',entry=None):pages[route]=shell(title,body,active,entry)
  first=regular[0]

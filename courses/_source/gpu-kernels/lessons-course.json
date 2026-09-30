@@ -23,7 +23,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Write a small pure-Python shape-and-traffic calculator. For vector addition at N=129, calculate valid global indices for blocks of128 and the FP32 read/write payload. For a linear layer with M=32, K=64, N=256, calculate output shape,2*M*K*N FLOPs and the ideal input/output bytes. Then model one attention score matrix for B=1, H=4, T=32, D=16 and compare its element count with Q/K/V. Print a three-row table and assert the vector payload is12*N bytes. Sketch threads, blocks, registers, shared memory and global memory. End with one bottleneck hypothesis for each operation. This executes useful indexing and memory reasoning locally; do not install CUDA or start a paid instance."
+        "text": "Write a small pure-Python shape-and-traffic calculator. For vector addition at N=129, calculate valid global indices for blocks of 128 and the FP32 read/write payload. For a linear layer with M=32, K=64, N=256, calculate output shape, \\(2MKN\\) FLOPs and the ideal input/output bytes. Then model one attention score matrix for B=1, H=4, T=32, D=16 and compare its element count with Q/K/V. Print a three-row table and assert the vector payload is \\(12N\\) bytes. Sketch threads, blocks, registers, shared memory and global memory. End with one bottleneck hypothesis for each operation. This executes useful indexing and memory reasoning locally; do not install CUDA or start a paid instance."
       },
       {
         "minutes": 10,
@@ -76,7 +76,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Create scripts/gpu_smoke.py that prints the GPU name, framework version, dtype, seed, and batch/sequence/model dimensions, then runs one forward pass of the supplied tiny decoder fixture and checks finite output. Connect to the chosen RTX 4090 environment and use a pinned image or record its exact identifier. Give environment repair at most twenty minutes of this build block. Run the smoke script, save its command and output to reports/kernels/environment.md, and copy artifacts back. If setup fails, save the exact command, error, and next diagnostic instead of changing providers repeatedly."
+        "text": "Create `scripts/gpu_smoke.py` that prints the GPU name, framework version, dtype, seed, and batch/sequence/model dimensions, then runs one forward pass of the supplied tiny decoder fixture and checks finite output. Connect to the chosen RTX 4090 environment and use a pinned image or record its exact identifier. Give environment repair at most twenty minutes of this build block. Run the smoke script, save its command and output to `reports/kernels/environment.md`, and copy artifacts back. If setup fails, save the exact command, error, and next diagnostic instead of changing providers repeatedly."
       },
       {
         "minutes": 10,
@@ -125,7 +125,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Create kernels/benchmark.py with an untimed warm-up, a configurable repetition count, and at least three independent timing batches. Use resident tensors, synchronize before and after each wall-clock batch, and divide elapsed batch time by its call count. Return raw batch samples, their median, and spread. Add a separate cold-call measurement. Run a deliberately unsynchronized timer on the same operation, then the valid timer. Store both results with a timeline explanation. Keep host-to-device copies outside the steady-state region and retain an optional separate transfer measurement."
+        "text": "Create `kernels/benchmark.py` with an untimed warm-up, a configurable repetition count, and at least three independent timing batches. Use resident tensors, synchronize before and after each wall-clock batch, and divide elapsed batch time by its call count. Return raw batch samples, their median, and spread. Add a separate cold-call measurement. Run a deliberately unsynchronized timer on the same operation, then the valid timer. Store both results with a timeline explanation. Keep host-to-device copies outside the steady-state region and retain an optional separate transfer measurement."
       },
       {
         "minutes": 10,
@@ -174,7 +174,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Capture a short warmed decoder profile on the same fixed batch; keep the trace window to a few iterations so inspection fits this hour. Group operations consistently and select the three largest relevant self-device costs, avoiding nested double counting. For each, record shapes, dtype, call count, time, approximate FLOPs, and a labeled lower-bound byte estimate. Compare the ranking with your predictions and identify one surprise. Save the trace and a three-row table in reports/kernels/decoder-profile.md. If you also profile MPS, put it in a separately labeled table."
+        "text": "Capture a short warmed decoder profile on the same fixed batch; keep the trace window to a few iterations so inspection fits this hour. Group operations consistently and select the three largest relevant self-device costs, avoiding nested double counting. For each, record shapes, dtype, call count, time, approximate FLOPs, and a labeled lower-bound byte estimate. Compare the ranking with your predictions and identify one surprise. Save the trace and a three-row table in `reports/kernels/decoder-profile.md`. If you also profile MPS, put it in a separately labeled table."
       },
       {
         "minutes": 10,
@@ -211,7 +211,7 @@
     "before": [
       "The working NVIDIA environment from Activity 1.",
       "Contiguous FP32 vectors and your reusable timing utility; timing is not today’s main task.",
-      "Remote environment includes the CUDA toolkit and nvcc, a compatible host C++ compiler, and Ninja for the PyTorch extension loader. A CUDA-enabled PyTorch wheel alone does not supply this toolchain."
+      "Remote environment includes the CUDA toolkit and `nvcc`, a compatible host C++ compiler, and Ninja for the PyTorch extension loader. A CUDA-enabled PyTorch wheel alone does not supply this toolchain."
     ],
     "explanation": "Vector addition exposes the smallest useful CUDA mapping: one thread computes one output element. For a one-dimensional launch, its global index is blockIdx.x times blockDim.x plus threadIdx.x. The host chooses enough blocks to cover the vector, so the kernel must guard indices outside the logical length. Neighboring threads access neighboring elements in this mapping, which gives a straightforward contiguous access pattern. The wrapper is part of the operator contract: it checks device, shape, dtype, and layout before a raw pointer reaches the kernel. This lesson implements only the minimal forward operation.",
     "plan": [
@@ -228,7 +228,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Create kernels/cuda_vector_add.cu and a small Python-facing wrapper following your pinned framework extension example. Use one-dimensional indexing, a block size such as 128, and a guarded write z[i] = x[i] + y[i]. Allocate the output in the wrapper, validate equal-length contiguous CUDA FP32 inputs, and launch on the framework’s current stream. Begin with length 256 and print the first few reference/output values. Keep compilation outside any later timer. Save a sketch relating blocks to indices; do not add shared memory, vectorized loads, or tuning."
+        "text": "Create `kernels/cuda_vector_add.cu` and a small Python-facing wrapper following your pinned framework extension example. Use one-dimensional indexing, a block size such as 128, and a guarded write:\n\n```cuda\nif (i < N) {\n    z[i] = x[i] + y[i];\n}\n```\n\nAllocate the output in the wrapper, validate equal-length contiguous CUDA FP32 inputs, and launch on the framework’s current stream. Begin with length 256 and print the first few reference/output values. Keep compilation outside any later timer. Save a sketch relating blocks to indices; do not add shared memory, vectorized loads, or tuning."
       },
       {
         "minutes": 10,
@@ -266,7 +266,7 @@
       "Your compiled CUDA vector-add wrapper from 2-1.",
       "The benchmark utility from 1-3."
     ],
-    "explanation": "The grid usually covers more elements than the vector contains. With block size B, the block count is ceiling(N/B), and the final block may have fewer than B valid elements. A guard i < N prevents out-of-bounds reads and writes. Boundary tests should sit just below and above a block multiple, since convenient powers of two hide indexing mistakes. An empty input needs an explicit wrapper policy rather than a zero-block launch. Compilation and loading are one-time setup costs; retain them separately from the warmed operator timing so that neither cost disappears from the report.",
+    "explanation": "The grid usually covers more elements than the vector contains. With block size B, the block count is \\(\\lceil N/B\\rceil\\), and the final block may have fewer than B valid elements. A guard `i < N` prevents out-of-bounds reads and writes. Boundary tests should sit just below and above a block multiple, since convenient powers of two hide indexing mistakes. An empty input needs an explicit wrapper policy rather than a zero-block launch. Compilation and loading are one-time setup costs; retain them separately from the warmed operator timing so that neither cost disappears from the report.",
     "plan": [
       {
         "minutes": 5,
@@ -281,7 +281,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Create tests/test_vector_add.py with lengths 1, 127, 128, 129, 255, 256, and 257, plus one larger vector. Include random, zero, and mixed-sign inputs. Check both reads and the write are inside the i < N guard. Define empty input to return an empty output without launching, or reject it clearly. Run the matrix against PyTorch and log maximum absolute error. Warm the already-built extension and use your common timer for one small and one large length, saving build duration in a separate field."
+        "text": "Create `tests/test_vector_add.py` with lengths 1, 127, 128, 129, 255, 256, and 257, plus one larger vector. Include random, zero, and mixed-sign inputs. Check both reads and the write are inside the i < N guard. Define empty input to return an empty output without launching, or reject it clearly. Run the matrix against PyTorch and log maximum absolute error. Warm the already-built extension and use your common timer for one small and one large length, saving build duration in a separate field."
       },
       {
         "minutes": 10,
@@ -315,7 +315,7 @@
       "The CUDA test matrix and PyTorch reference from 2-2.",
       "The pinned Triton installation on the NVIDIA environment."
     ],
-    "explanation": "A Triton program works on a block of logical elements expressed as a vector of offsets. For block width B, offsets are program_id times B plus arange(0, B). A Boolean mask offsets < N describes the valid lanes of the final program. Masked loads supply a chosen value for invalid lanes, and masked stores prevent invalid writes. This resembles the CUDA coverage calculation but leaves more instruction scheduling to the compiler. Reusing the same inputs and reference makes the comparison about implementation, rather than accidental differences between two separately written test suites.",
+    "explanation": "A Triton program works on a block of logical elements expressed as a vector of offsets. For block width B, offsets are `program_id` times B plus `arange(0, B)`. A Boolean mask offsets < N describes the valid lanes of the final program. Masked loads supply a chosen value for invalid lanes, and masked stores prevent invalid writes. This resembles the CUDA coverage calculation but leaves more instruction scheduling to the compiler. Reusing the same inputs and reference makes the comparison about implementation, rather than accidental differences between two separately written test suites.",
     "plan": [
       {
         "minutes": 5,
@@ -325,12 +325,12 @@
       {
         "minutes": 10,
         "title": "Study",
-        "text": "Use the core resources above for ten minutes in total, focusing only on the indicated sections. Read K3’s vector-add tutorial, focusing only on program_id, arange, launch grid, and load/store masks."
+        "text": "Use the core resources above for ten minutes in total, focusing only on the indicated sections. Read K3’s vector-add tutorial, focusing only on `program_id`, `arange`, launch grid, and load/store masks."
       },
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Create kernels/triton_vector_add.py with one jitted kernel and a checked host wrapper. Form offsets from the program ID, load x and y with mask offsets < N and other = 0, add, and store under the same mask. Use the wrapper’s ceiling division to set the launch grid. Reuse the exact FP32 inputs, empty-input policy, and boundary matrix from the CUDA exercise. Start with one small supported example, then run every case. Record a short mapping from a CUDA thread index to a Triton logical lane."
+        "text": "Create `kernels/triton_vector_add.py` with one jitted kernel and a checked host wrapper. Form offsets from the program ID, load x and y with mask offsets < N and `other = 0`, add, and store under the same mask. Use the wrapper’s ceiling division to set the launch grid. Reuse the exact FP32 inputs, empty-input policy, and boundary matrix from the CUDA exercise. Start with one small supported example, then run every case. Record a short mapping from a CUDA thread index to a Triton logical lane."
       },
       {
         "minutes": 10,
@@ -344,7 +344,7 @@
       "I can explain a program ID, block offset, and lane mask."
     ],
     "selfCheck": {
-      "question": "What does other = 0 do on a masked load, and why is it not a substitute for a masked store?",
+      "question": "What does `other = 0` do on a masked load, and why is it not a substitute for a masked store?",
       "answer": "It supplies a value for invalid load lanes. The store still needs its own mask to avoid writing outside the output."
     },
     "pitfall": "A mask applied to only one input load leaves the other input vulnerable to out-of-bounds access.",
@@ -384,7 +384,7 @@
       {
         "minutes": 10,
         "title": "Verify and save",
-        "text": "Check that all candidates used identical inputs and timing boundaries. Save reports/kernels/vector-add.md with the correctness matrix, timing table, and limitations."
+        "text": "Check that all candidates used identical inputs and timing boundaries. Save `reports/kernels/vector-add.md` with the correctness matrix, timing table, and limitations."
       }
     ],
     "checks": [
@@ -417,7 +417,7 @@
       "Your Triton vector-add kernel and timing utility.",
       "A CPU or MPS PyTorch environment; a cloud GPU is unnecessary today."
     ],
-    "explanation": "For a row x, softmax computes exp(x_i - m) divided by the sum of exp(x_j - m), where m is the row maximum. Subtracting one shared constant leaves the mathematical probabilities unchanged and avoids exponentiating large positive values. For an M by N input, the maximum and denominator each have one value per row. A fused row kernel can keep these intermediates on chip and write only the final output. Its ideal payload is one input read plus one output write; that estimate does not imply every row width fits the same execution strategy.",
+    "explanation": "For a row \\(x\\), stable softmax computes:\n\n\\[\n\\operatorname{softmax}(x)_i=\\frac{e^{x_i-m}}{\\sum_j e^{x_j-m}},\\qquad m=\\max_j x_j.\n\\]\n\n Subtracting one shared constant leaves the mathematical probabilities unchanged and avoids exponentiating large positive values. For an M by N input, the maximum and denominator each have one value per row. A fused row kernel can keep these intermediates on chip and write only the final output. Its ideal payload is one input read plus one output write; that estimate does not imply every row width fits the same execution strategy.",
     "plan": [
       {
         "minutes": 5,
@@ -432,7 +432,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Create notes/kernels/softmax-contract.md and a small FP32 reference function. Declare contiguous two-dimensional finite inputs, row-wise normalization, and an initial maximum width such as 1024. Define fixed shapes including widths 1, 31, 32, 33, 127, 128, and 129 and row counts 1 and 17. Add zeros, repeated values, and large finite positive/negative offsets. Write the stable formula with M by N shapes and estimate ideal fused traffic as 2MN times element bytes. Keep nonfinite inputs explicitly outside the initial contract."
+        "text": "Create `notes/kernels/softmax-contract.md` and a small FP32 reference function. Declare contiguous two-dimensional finite inputs, row-wise normalization, and an initial maximum width such as 1024. Define fixed shapes including widths 1, 31, 32, 33, 127, 128, and 129 and row counts 1 and 17. Add zeros, repeated values, and large finite positive/negative offsets. Write the stable formula with M by N shapes and estimate ideal fused traffic as 2MN times element bytes. Keep nonfinite inputs explicitly outside the initial contract."
       },
       {
         "minutes": 10,
@@ -447,7 +447,7 @@
     ],
     "selfCheck": {
       "question": "Why does max subtraction help without changing softmax mathematically?",
-      "answer": "The common factor exp(-m) appears in every numerator and in the denominator, so it cancels while keeping exponent arguments nonpositive."
+      "answer": "The common factor \\(e^{-m}\\) appears in every numerator and in the denominator, so it cancels while keeping exponent arguments nonpositive."
     },
     "pitfall": "An all-negative-infinity row is outside this finite-input contract; do not silently claim it behaves like an ordinary row.",
     "reading": [
@@ -476,12 +476,12 @@
       {
         "minutes": 10,
         "title": "Study",
-        "text": "Use the core resources above for ten minutes in total, focusing only on the indicated sections. Read K3’s softmax kernel for row addressing, tl.max, tl.sum, and FP32 arithmetic. Then close the reference while implementing."
+        "text": "Use the core resources above for ten minutes in total, focusing only on the indicated sections. Read K3’s softmax kernel for row addressing, `tl.max`, `tl.sum`, and FP32 arithmetic. Then close the reference while implementing."
       },
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Create kernels/triton_softmax.py with a wrapper validating your declared shape and dtype contract. Launch M programs, one per row. Compute a power-of-two block width, load the row using its actual stride, convert to FP32, and perform max-subtracted exponentiation and normalization. Mask the output store. Begin with FP32 widths 8, 32, and 128 and row counts 1 and 4. Compare outputs with your stable PyTorch reference and record maximum absolute error plus row-sum error. Leave autotuning and wider rows for later investigation."
+        "text": "Create `kernels/triton_softmax.py` with a wrapper validating your declared shape and dtype contract. Launch M programs, one per row. Compute a power-of-two block width, load the row using its actual stride, convert to FP32, and perform max-subtracted exponentiation and normalization. Mask the output store. Begin with FP32 widths 8, 32, and 128 and row counts 1 and 4. Compare outputs with your stable PyTorch reference and record maximum absolute error plus row-sum error. Leave autotuning and wider rows for later investigation."
       },
       {
         "minutes": 10,
@@ -562,7 +562,7 @@
     ],
     "before": [
       "Passing Triton softmax with its support matrix.",
-      "Your timing utility and a pinned torch.compile-capable environment."
+      "Your timing utility and a pinned `torch.compile`-capable environment."
     ],
     "explanation": "Fusion can eliminate repeated global-memory passes through intermediate arrays, but it is not automatically faster at every shape. A one-program-per-row design may expose too little parallelism when there are few rows, or require too many resources for wide rows. The eager baseline for this exercise is the explicit stable sequence of maximum, subtraction, exponential, sum, and division. Compile that same function to create the second baseline. A library softmax is a useful additional reference, but should not be mislabeled as an unfused composition. Compare equivalent input precision, output dtype, and allocation boundaries.",
     "plan": [
@@ -584,7 +584,7 @@
       {
         "minutes": 10,
         "title": "Verify and save",
-        "text": "Check matching dtype, shapes, and allocation semantics, then save reports/kernels/softmax.md. Keep every selected shape in the table, including unfavorable results."
+        "text": "Check matching dtype, shapes, and allocation semantics, then save `reports/kernels/softmax.md`. Keep every selected shape in the table, including unfavorable results."
       }
     ],
     "checks": [
@@ -596,7 +596,7 @@
       "question": "Why might a fused kernel lose when there is only one short row?",
       "answer": "It has little work and little parallelism; launch and wrapper overhead can dominate any reduction in intermediate traffic."
     },
-    "pitfall": "Do not call torch.softmax an unfused multi-operation baseline without inspecting what that operator actually executes.",
+    "pitfall": "Do not call `torch.softmax` an unfused multi-operation baseline without inspecting what that operator actually executes.",
     "reading": [
       {
         "id": "K3",
@@ -610,10 +610,10 @@
       "Build reference examples before implementing the GPU reduction."
     ],
     "before": [
-      "The framework rmsnorm_reference function supplied in fixtures/decoder.py; no architecture-course implementation is required.",
+      "The framework `rmsnorm_reference` function supplied in `fixtures/decoder.py`; no architecture-course implementation is required.",
       "The row-reduction lessons from Triton softmax."
     ],
-    "explanation": "RMSNorm scales each row x by the reciprocal square root of its mean square plus epsilon, then multiplies by a learned vector w: y_i = x_i w_i / sqrt(mean_j(x_j squared) + epsilon). Unlike LayerNorm, it does not subtract a row mean. For an M by N input, the reduction yields M scalars and the weight has N entries shared across rows. Accumulating squares in FP32 reduces avoidable error when inputs are lower precision. Epsilon and the point where casts occur are part of the operation definition, so reference and custom implementations must agree on them.",
+    "explanation": "RMSNorm scales each row x by the reciprocal square root of its mean square plus epsilon, then multiplies by a learned vector w: \\(y_i=x_iw_i/\\sqrt{\\frac{1}{N}\\sum_j x_j^2+\\varepsilon}\\). Unlike LayerNorm, it does not subtract a row mean. For an M by N input, the reduction yields M scalars and the weight has N entries shared across rows. Accumulating squares in FP32 reduces avoidable error when inputs are lower precision. Epsilon and the point where casts occur are part of the operation definition, so reference and custom implementations must agree on them.",
     "plan": [
       {
         "minutes": 5,
@@ -628,7 +628,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Create notes/kernels/rmsnorm-contract.md. Specify contiguous M by N inputs, a contiguous length-N weight, epsilon such as 1e-6, and FP32 accumulation. Begin with FP32 inputs; declare FP16 as a later supported test only if the environment handles it. Choose row counts 1, 7, and 64 with widths 1, 31, 32, 33, 127, and 128. Write a reference that casts before squaring and casts the final result deliberately. Calculate zero and constant-row cases by hand and save expected values alongside the shape matrix."
+        "text": "Create `notes/kernels/rmsnorm-contract.md`. Specify contiguous M by N inputs, a contiguous length-N weight, epsilon such as 1e-6, and FP32 accumulation. Begin with FP32 inputs; declare FP16 as a later supported test only if the environment handles it. Choose row counts 1, 7, and 64 with widths 1, 31, 32, 33, 127, and 128. Write a reference that casts before squaring and casts the final result deliberately. Calculate zero and constant-row cases by hand and save expected values alongside the shape matrix."
       },
       {
         "minutes": 10,
@@ -677,7 +677,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Create kernels/triton_rmsnorm.py using one program per row. Load input lanes under c < N with zero padding, cast to FP32, sum squares, divide by N, add the fixed epsilon, and take reciprocal square root. Load the length-N weight with the same tail mask and apply it before the deliberate output cast. Validate your wrapper’s device, dtype, shape, and contiguity checks. Start with row counts 1 and 4 and widths 8, 32, and 128, using both unit and varying weights. Compare full outputs with the saved reference."
+        "text": "Create `kernels/triton_rmsnorm.py` using one program per row. Load input lanes under c < N with zero padding, cast to FP32, sum squares, divide by N, add the fixed epsilon, and take reciprocal square root. Load the length-N weight with the same tail mask and apply it before the deliberate output cast. Validate your wrapper’s device, dtype, shape, and contiguity checks. Start with row counts 1 and 4 and widths 8, 32, and 128, using both unit and varying weights. Compare full outputs with the saved reference."
       },
       {
         "minutes": 10,
@@ -731,7 +731,7 @@
       {
         "minutes": 10,
         "title": "Verify and save",
-        "text": "Save reports/kernels/rmsnorm-errors.csv and summarize the largest error by dtype. Re-run the small baseline cases and ensure the final contract matches the wrapper."
+        "text": "Save `reports/kernels/rmsnorm-errors.csv` and summarize the largest error by dtype. Re-run the small baseline cases and ensure the final contract matches the wrapper."
       }
     ],
     "checks": [
@@ -775,12 +775,12 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Choose six shapes already covered by correctness checks, spanning narrow/wide rows and few/many rows. Create eager and torch.compile versions of the identical FP32-accumulating RMSNorm expression. Warm each candidate, confirm outputs, and benchmark sequentially with resident inputs and matched allocation behavior. Save at least three independent batches, medians, and spread; log cold compilation separately. Add speedup ratios relative to both baselines, including values below one. Write a short explanation of one favorable and one unfavorable regime, identifying which explanations are hypotheses rather than directly measured hardware facts."
+        "text": "Choose six shapes already covered by correctness checks, spanning narrow/wide rows and few/many rows. Create eager and `torch.compile` versions of the identical FP32-accumulating RMSNorm expression. Warm each candidate, confirm outputs, and benchmark sequentially with resident inputs and matched allocation behavior. Save at least three independent batches, medians, and spread; log cold compilation separately. Add speedup ratios relative to both baselines, including values below one. Write a short explanation of one favorable and one unfavorable regime, identifying which explanations are hypotheses rather than directly measured hardware facts."
       },
       {
         "minutes": 10,
         "title": "Verify and save",
-        "text": "Save reports/kernels/rmsnorm.md with the support contract, error table link, timing results, and environment command. Check that every advertised win names a shape and dtype."
+        "text": "Save `reports/kernels/rmsnorm.md` with the support contract, error table link, timing results, and environment command. Check that every advertised win names a shape and dtype."
       }
     ],
     "checks": [
@@ -814,7 +814,7 @@
       {
         "minutes": 5,
         "title": "Retrieve",
-        "text": "Write C[i,j] as a sum over k and give the shapes of A, B, and C."
+        "text": "Write C`[i,j]` as a sum over k and give the shapes of A, B, and C."
       },
       {
         "minutes": 10,
@@ -824,7 +824,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Create notes/kernels/matmul-tiles.md. Work through A with shape 4 by 6 and B with shape 6 by 5 using output tiles of 2 by 3 and K chunks of 2. List the coordinates read by one output program on its first two iterations and mark reused values. Write general addresses A[i*stride_am+k*stride_ak] and B[k*stride_bk+j*stride_bn]. Define your initial GPU contract as contiguous FP16 inputs, FP32 accumulation, and FP16 output. Save a PyTorch FP32-accumulating reference cast to the chosen output dtype. For the FP32 reference, explicitly select and record IEEE FP32 matmul behavior; converting inputs with .float() does not by itself disable TF32. If claiming FP32 accumulation for an FP16 torch.matmul baseline, disable reduced-precision FP16 reductions using the controls documented for the pinned PyTorch version."
+        "text": "Create `notes/kernels/matmul-tiles.md`. Work through A with shape 4 by 6 and B with shape 6 by 5 using output tiles of 2 by 3 and K chunks of 2. List the coordinates read by one output program on its first two iterations and mark reused values. Write the general addresses:\n\n```text\nA[i * stride_am + k * stride_ak]\nB[k * stride_bk + j * stride_bn]\n```\n\nDefine your initial GPU contract as contiguous FP16 inputs, FP32 accumulation, and FP16 output. Save a PyTorch FP32-accumulating reference cast to the chosen output dtype. For the FP32 reference, explicitly select and record IEEE FP32 matmul behavior; converting inputs with `.float()` does not by itself disable TF32. If claiming FP32 accumulation for an FP16 `torch.matmul` baseline, disable reduced-precision FP16 reductions using the controls documented for the pinned PyTorch version."
       },
       {
         "minutes": 10,
@@ -858,7 +858,7 @@
       "Your dimensioned matmul tile derivation and precision contract.",
       "The pinned NVIDIA/Triton environment and controlled reference."
     ],
-    "explanation": "The tiled kernel maintains an FP32 accumulator with shape BLOCK_M by BLOCK_N. On each K iteration, it loads A with shape BLOCK_M by BLOCK_K and B with shape BLOCK_K by BLOCK_N, applies a matrix dot product, and adds the result to that accumulator. Only after all K chunks have contributed is the accumulator cast and stored. Starting with dimensions that are exact tile multiples removes partial-tile indexing from the first debugging pass. This is a learning implementation: matching the reference and explaining the dataflow matter before tuning or comparing against a library kernel.",
+    "explanation": "The tiled kernel maintains an FP32 accumulator with shape `BLOCK_M` by `BLOCK_N`. On each K iteration, it loads A with shape `BLOCK_M` by `BLOCK_K` and B with shape `BLOCK_K` by `BLOCK_N`, applies a matrix dot product, and adds the result to that accumulator. Only after all K chunks have contributed is the accumulator cast and stored. Starting with dimensions that are exact tile multiples removes partial-tile indexing from the first debugging pass. This is a learning implementation: matching the reference and explaining the dataflow matter before tuning or comparing against a library kernel.",
     "plan": [
       {
         "minutes": 5,
@@ -868,12 +868,12 @@
       {
         "minutes": 10,
         "title": "Study",
-        "text": "Use the core resources above for ten minutes in total, focusing only on the indicated sections. Inspect K3’s matmul loop and tl.dot usage for your pinned version. Match supported block sizes and dtypes instead of inventing a hardware-specific path."
+        "text": "Use the core resources above for ten minutes in total, focusing only on the indicated sections. Inspect K3’s matmul loop and `tl.dot` usage for your pinned version. Match supported block sizes and dtypes instead of inventing a hardware-specific path."
       },
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Create kernels/triton_matmul.py with a checked wrapper and an explicit two-dimensional output-tile mapping. Use an initial supported configuration such as BLOCK_M=32, BLOCK_N=32, BLOCK_K=32. Allocate an FP32 accumulator, advance A/B pointers through K, and store the final cast result. Test exact-multiple cases such as (M,N,K) = (32,32,32), (64,32,64), and (32,64,96) against the saved reference. Include nonidentical rows and columns to expose transposition errors. Keep the wrapper restricted to the agreed contiguous FP16 contract until this path works."
+        "text": "Create `kernels/triton_matmul.py` with a checked wrapper and an explicit two-dimensional output-tile mapping. Use an initial supported configuration such as `BLOCK_M=32`, `BLOCK_N=32`, `BLOCK_K=32`. Allocate an FP32 accumulator, advance A/B pointers through K, and store the final cast result. Test exact-multiple cases such as (M,N,K) = (32,32,32), (64,32,64), and (32,64,96) against the saved reference. Include nonidentical rows and columns to expose transposition errors. Keep the wrapper restricted to the agreed contiguous FP16 contract until this path works."
       },
       {
         "minutes": 10,
@@ -894,7 +894,7 @@
     "reading": [
       {
         "id": "K3",
-        "focus": "Matrix-multiplication kernel: tl.dot, pointer advancement, and final output store."
+        "focus": "Matrix-multiplication kernel: `tl.dot`, pointer advancement, and final output store."
       }
     ]
   },
@@ -971,7 +971,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Run the frozen random and boundary matrix with at least two fixed seeds and one alternating-sign case. Compare against FP32 multiplication of the same stored inputs, then cast consistently. Record absolute error and a mixed absolute/relative criterion, inspecting any large outlier rather than loosening tolerance globally. Inspect generated assembly or compiler metadata for the selected dot instruction path; record exactly what you observed and avoid claims the evidence cannot support. Save hardware, compiler version, dtype settings, shapes, tolerances, and results in reports/kernels/matmul-correctness.md. For the FP32 reference, explicitly select and record IEEE FP32 matmul behavior; converting inputs with .float() does not by itself disable TF32. If claiming FP32 accumulation for an FP16 torch.matmul baseline, disable reduced-precision FP16 reductions using the controls documented for the pinned PyTorch version."
+        "text": "Run the frozen random and boundary matrix with at least two fixed seeds and one alternating-sign case. Compare against FP32 multiplication of the same stored inputs, then cast consistently. Record absolute error and a mixed absolute/relative criterion, inspecting any large outlier rather than loosening tolerance globally. Inspect generated assembly or compiler metadata for the selected dot instruction path; record exactly what you observed and avoid claims the evidence cannot support. Save hardware, compiler version, dtype settings, shapes, tolerances, and results in `reports/kernels/matmul-correctness.md`. For the FP32 reference, explicitly select and record IEEE FP32 matmul behavior; converting inputs with `.float()` does not by itself disable TF32. If claiming FP32 accumulation for an FP16 `torch.matmul` baseline, disable reduced-precision FP16 reductions using the controls documented for the pinned PyTorch version."
       },
       {
         "minutes": 10,
@@ -1020,7 +1020,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Create configs/matmul-search.json with three or four known-valid tile configurations, varying one factor where practical. Choose four supported shapes covering square and rectangular products, all within the existing memory allowance. Freeze seeds, FP16 input/FP32 accumulation policy, warm-up count, repetition count, and three independent timing batches. Prepare torch.matmul and torch.compile of the corresponding matmul function as baselines; the fused composition will be added after the epilogue lesson. Run only a small correctness smoke test per candidate today. Write the expected reuse/resource trade-off beside each configuration and keep the list fixed. For the FP32 reference, explicitly select and record IEEE FP32 matmul behavior; converting inputs with .float() does not by itself disable TF32. If claiming FP32 accumulation for an FP16 torch.matmul baseline, disable reduced-precision FP16 reductions using the controls documented for the pinned PyTorch version."
+        "text": "Create `configs/matmul-search.json` with three or four known-valid tile configurations, varying one factor where practical. Choose four supported shapes covering square and rectangular products, all within the existing memory allowance. Freeze seeds, FP16 input/FP32 accumulation policy, warm-up count, repetition count, and three independent timing batches. Prepare `torch.matmul` and `torch.compile` of the corresponding matmul function as baselines; the fused composition will be added after the epilogue lesson. Run only a small correctness smoke test per candidate today. Write the expected reuse/resource trade-off beside each configuration and keep the list fixed. For the FP32 reference, explicitly select and record IEEE FP32 matmul behavior; converting inputs with `.float()` does not by itself disable TF32. If claiming FP32 accumulation for an FP16 `torch.matmul` baseline, disable reduced-precision FP16 reductions using the controls documented for the pinned PyTorch version."
       },
       {
         "minutes": 10,
@@ -1078,7 +1078,7 @@
       {
         "minutes": 10,
         "title": "Verify and save",
-        "text": "Save reports/kernels/matmul-search.csv and a short prediction-versus-observation note. Check that differences smaller than timing variability are described cautiously."
+        "text": "Save `reports/kernels/matmul-search.csv` and a short prediction-versus-observation note. Check that differences smaller than timing variability are described cautiously."
       }
     ],
     "checks": [
@@ -1175,12 +1175,12 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Benchmark plain Triton matmul versus torch.matmul, then fused Triton bias versus eager and compiled matmul-plus-bias on the same frozen shapes. Validate each output first using the documented numerical criterion and disclose any rounding-order difference. Use resident inputs, matching output-allocation boundaries, warm-up, and three independent timing batches. Save median, spread, speedup ratios, and cold compile costs. Combine the results with the tile-search table and write a concise explanation of reuse, launch savings, possible resource pressure, and one measured regression. Do not require or manufacture a cuBLAS win."
+        "text": "Benchmark plain Triton matmul versus `torch.matmul`, then fused Triton bias versus eager and compiled matmul-plus-bias on the same frozen shapes. Validate each output first using the documented numerical criterion and disclose any rounding-order difference. Use resident inputs, matching output-allocation boundaries, warm-up, and three independent timing batches. Save median, spread, speedup ratios, and cold compile costs. Combine the results with the tile-search table and write a concise explanation of reuse, launch savings, possible resource pressure, and one measured regression. Do not require or manufacture a cuBLAS win."
       },
       {
         "minutes": 10,
         "title": "Verify and save",
-        "text": "Save reports/kernels/matmul.md with reproduction commands, support/precision matrix links, and all selected results. Audit every performance claim for a named shape and baseline."
+        "text": "Save `reports/kernels/matmul.md` with reproduction commands, support/precision matrix links, and all selected results. Audit every performance claim for a named shape and baseline."
       }
     ],
     "checks": [
@@ -1210,10 +1210,10 @@
       "Explain why previous state must be rescaled when a larger score arrives."
     ],
     "before": [
-      "Your stable softmax derivation and the supplied dense causal-attention reference in fixtures/decoder.py.",
+      "Your stable softmax derivation and the supplied dense causal-attention reference in `fixtures/decoder.py`.",
       "Paper notes or a local notebook; no rented GPU is needed."
     ],
-    "explanation": "For one query, keep a running maximum m, a normalization sum l, and a weighted value sum a. After a new score tile s arrives, set m_new = max(m, max(s)) and alpha = exp(m - m_new). With p = exp(s - m_new), update l_new = alpha*l + sum(p) and a_new = alpha*a + pV. The final output is a/l. Rescaling keeps old and new contributions in the same exponential coordinate system. This computes attention without retaining all scores, but the temporary score tile and the running output accumulator still require memory.",
+    "explanation": "For one query, keep a running maximum m, a normalization sum \\(\\ell\\), and a weighted value sum a. After a new score tile \\(s\\) arrives:\n\n\\[\n\\begin{aligned}\nm_{\\mathrm{new}} &= \\max(m,\\max_i s_i),\\\\\n\\alpha &= e^{m-m_{\\mathrm{new}}},\\qquad p_i=e^{s_i-m_{\\mathrm{new}}},\\\\\n\\ell_{\\mathrm{new}} &= \\alpha\\ell+\\sum_i p_i,\\\\\na_{\\mathrm{new}} &= \\alpha a+pV.\n\\end{aligned}\n\\]\n\nThe final output is \\(a/\\ell\\). Rescaling keeps old and new contributions in the same exponential coordinate system. This computes attention without retaining all scores, but the temporary score tile and the running output accumulator still require memory.",
     "plan": [
       {
         "minutes": 5,
@@ -1228,7 +1228,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Create notes/kernels/online-softmax.md. Write the recurrence for one query and a value dimension D, labeling m and l as scalars, a as length D, scores as length B, and V as B by D. Work through scores [1,2,4] split after the second entry with simple two-dimensional values. Show explicitly why the old denominator and weighted sum need the same rescaling factor. Specify a safe initialization using the first nonempty valid tile, or equivalent guarded handling of m=-infinity, l=0, a=0. Do not implement the full attention kernel yet."
+        "text": "Create `notes/kernels/online-softmax.md`. Write the recurrence for one query and a value dimension D, labeling m and l as scalars, a as length D, scores as length B, and V as B by D. Work through scores `[1,2,4]` split after the second entry with simple two-dimensional values. Show explicitly why the old denominator and weighted sum need the same rescaling factor. Specify a safe initialization using the first nonempty valid tile, or equivalent guarded handling of m=-infinity, l=0, a=0. Do not implement the full attention kernel yet."
       },
       {
         "minutes": 10,
@@ -1277,7 +1277,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Create kernels/online_softmax_reference.py with a function accepting a finite score vector and a value matrix, iterating over chosen tile lengths. Use FP32 state and implement the exact m/l/a recurrence. Compare its output with softmax(scores) @ values for tile sizes 1, 2, 3, and the full vector length. Include a late maximum, repeated scores, negative scores, and large finite offsets. Save state snapshots for one late-maximum example so the rescaling is visible. Keep all examples small enough to inspect locally and do not introduce attention masking today."
+        "text": "Create `kernels/online_softmax_reference.py` with a function accepting a finite score vector and a value matrix, iterating over chosen tile lengths. Use FP32 state and implement the exact m/l/a recurrence. Compare its output with `softmax(scores) @ values` for tile sizes 1, 2, 3, and the full vector length. Include a late maximum, repeated scores, negative scores, and large finite offsets. Save state snapshots for one late-maximum example so the rescaling is visible. Keep all examples small enough to inspect locally and do not introduce attention masking today."
       },
       {
         "minutes": 10,
@@ -1308,10 +1308,10 @@
       "Avoid constructing a full sequence-by-sequence score tensor."
     ],
     "before": [
-      "The passing online-softmax reference and the supplied dense causal-attention reference in fixtures/decoder.py.",
+      "The passing online-softmax reference and the supplied dense causal-attention reference in `fixtures/decoder.py`.",
       "Small local Q/K/V tensors with one head and a fixed value dimension."
     ],
-    "explanation": "For a query block Q_b, compute only one score tile Q_b K_t transpose divided by sqrt(D) at a time. Each query row owns its own running maximum, denominator, and weighted output vector. Causal masking uses absolute positions: key position j is valid only when j is at most query position i. Query and key block numbers alone are insufficient for positions inside a diagonal tile. The output accumulator spans query-block rows by value dimension, while score storage spans query-block rows by key-block rows. Keeping these tiles bounded avoids allocating the full quadratic score matrix.",
+    "explanation": "For a query block \\(Q_b\\), compute only one score tile \\(Q_bK_t^\\top/\\sqrt{D}\\) at a time. Each query row owns its own running maximum, denominator, and weighted output vector. Causal masking uses absolute positions: key position j is valid only when j is at most query position i. Query and key block numbers alone are insufficient for positions inside a diagonal tile. The output accumulator spans query-block rows by value dimension, while score storage spans query-block rows by key-block rows. Keeping these tiles bounded avoids allocating the full quadratic score matrix.",
     "plan": [
       {
         "minutes": 5,
@@ -1380,7 +1380,7 @@
       {
         "minutes": 10,
         "title": "Verify and save",
-        "text": "Verify all selected partitions and the future-perturbation check. Save reports/kernels/blockwise-attention.md, including exactly which memory quantities are estimates."
+        "text": "Verify all selected partitions and the future-perturbation check. Save `reports/kernels/blockwise-attention.md`, including exactly which memory quantities are estimates."
       }
     ],
     "checks": [
@@ -1424,7 +1424,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Create notes/kernels/triton-attention-contract.md. Choose D=32, contiguous Q/K/V shaped B by H by N by D, FP16 inputs/output, FP32 normalization state, and causal attention without dropout. Initially fix B=H=1 and bound N to a small tested range such as 1 to 256. Choose supported query/key tile sizes from the pinned tutorial and draw their pointers and masks. State score scaling, probability-dot casting, and fully masked-row handling. Prepare exact-tile and later tail cases against your existing reference. Keep the support narrow enough to finish the forward implementation within its scheduled sessions."
+        "text": "Create `notes/kernels/triton-attention-contract.md`. Choose D=32, contiguous Q/K/V shaped B by H by N by D, FP16 inputs/output, FP32 normalization state, and causal attention without dropout. Initially fix B=H=1 and bound N to a small tested range such as 1 to 256. Choose supported query/key tile sizes from the pinned tutorial and draw their pointers and masks. State score scaling, probability-dot casting, and fully masked-row handling. Prepare exact-tile and later tail cases against your existing reference. Keep the support narrow enough to finish the forward implementation within its scheduled sessions."
       },
       {
         "minutes": 10,
@@ -1477,7 +1477,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Create kernels/triton_attention.py with a wrapper enforcing the frozen contract. Translate Q/K/V addressing and per-query FP32 state from your verified reference. Implement the key-tile loop, scaled scores, causal diagonal mask, maximum rescaling, denominator update, and probability-times-V accumulator update. Start with one exact query/key tile at B=H=1, D=32 and modest finite values. Compare the complete output against both dense and blockwise references. Use small targeted state/debug outputs only if needed, removing them before timing. Keep all other shape cases rejected until they are validated."
+        "text": "Create `kernels/triton_attention.py` with a wrapper enforcing the frozen contract. Translate Q/K/V addressing and per-query FP32 state from your verified reference. Implement the key-tile loop, scaled scores, causal diagonal mask, maximum rescaling, denominator update, and probability-times-V accumulator update. Start with one exact query/key tile at B=H=1, D=32 and modest finite values. Compare the complete output against both dense and blockwise references. Use small targeted state/debug outputs only if needed, removing them before timing. Keep all other shape cases rejected until they are validated."
       },
       {
         "minutes": 10,
@@ -1588,7 +1588,7 @@
       {
         "minutes": 10,
         "title": "Verify and save",
-        "text": "Save reports/kernels/attention-forward.md with support limits, commands, errors, latency, and memory accounting. State explicitly that backward is unimplemented and optional."
+        "text": "Save `reports/kernels/attention-forward.md` with support limits, commands, errors, latency, and memory accounting. State explicitly that backward is unimplemented and optional."
       }
     ],
     "checks": [
@@ -1621,7 +1621,7 @@
       "Your RMSNorm forward formula and supported shape contract.",
       "A small PyTorch CPU reference using explicit epsilon."
     ],
-    "explanation": "For one row x of width D, define r = (mean(x²) + ε)^(-1/2), y = w ⊙ x r, and upstream gradient g = ∂L/∂y. The input gradient is r(g ⊙ w) − x r³ mean(g ⊙ w ⊙ x). The shared weight gradient sums g ⊙ x r over every leading row dimension. The correction term couples all elements in a row. Epsilon remains inside r; replacing mean(x²) by a variance would derive a different operator. This algebra check is separate from validating the eventual low-precision GPU implementation.",
+    "explanation": "For one row \\(x\\) of width \\(D\\), define \\(r=(\\operatorname{mean}(x^2)+\\varepsilon)^{-1/2}\\), \\(y=w\\odot x r\\), and upstream gradient \\(g=\\partial L/\\partial y\\). The input gradient is:\n\n\\[\n\\frac{\\partial L}{\\partial x}=r(g\\odot w)-xr^3\\operatorname{mean}(g\\odot w\\odot x).\n\\]\n\n The shared weight gradient sums \\(g\\odot x r\\) over every leading row dimension. The correction term couples all elements in a row. Epsilon remains inside r; replacing \\(\\operatorname{mean}(x^2)\\) by a variance would derive a different operator. This algebra check is separate from validating the eventual low-precision GPU implementation.",
     "plan": [
       {
         "minutes": 5,
@@ -1636,7 +1636,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Create a scratch derivation beside your existing normalization tests. Flatten leading dimensions into M rows and annotate every intermediate with its shape. Derive dx using the product rule and dr/dx, then derive dw by summing row contributions. Implement these equations with ordinary FP64 CPU tensor operations for a tiny M=2, D=5 example. Form the scalar objective sum(y*g) with a fixed random g and compare your equations with PyTorch autograd. Repeat with all-zero x and a nonzero epsilon; retain the reference for later GPU comparisons."
+        "text": "Create a scratch derivation beside your existing normalization tests. Flatten leading dimensions into M rows and annotate every intermediate with its shape. Derive dx using the product rule and dr/dx, then derive dw by summing row contributions. Implement these equations with ordinary FP64 CPU tensor operations for a tiny M=2, D=5 example. Form the scalar objective `sum(y*g)` with a fixed random g and compare your equations with PyTorch autograd. Repeat with all-zero x and a nonzero epsilon; retain the reference for later GPU comparisons."
       },
       {
         "minutes": 10,
@@ -1670,7 +1670,7 @@
       "The validated equations and CPU reference from step 9-1.",
       "Your working Triton RMSNorm forward and CUDA environment."
     ],
-    "explanation": "The dx formula requires two row reductions: mean(x²) and mean(g ⊙ w ⊙ x). A simple first kernel assigns one program to a row, loads masked feature lanes, accumulates reductions in FP32, and casts only the final result to the declared output dtype. Invalid lanes must contribute zero, while normalization divides by the true width D rather than the padded block width. Recomputing r is acceptable for this restricted exercise; later profiling can compare recomputation with saving statistics. Correct supported inputs matter before backward-kernel speed.",
+    "explanation": "The dx formula requires two row reductions: \\(\\operatorname{mean}(x^2)\\) and \\(\\operatorname{mean}(g\\odot w\\odot x)\\). A simple first kernel assigns one program to a row, loads masked feature lanes, accumulates reductions in FP32, and casts only the final result to the declared output dtype. Invalid lanes must contribute zero, while normalization divides by the true width D rather than the padded block width. Recomputing r is acceptable for this restricted exercise; later profiling can compare recomputation with saving statistics. Correct supported inputs matter before backward-kernel speed.",
     "plan": [
       {
         "minutes": 5,
@@ -1717,7 +1717,7 @@
     ],
     "before": [
       "A validated Triton dx kernel from step 9-2.",
-      "The formula dw[j] = sum_rows(g*x*r)[j]."
+      "The formula \\(\\partial L/\\partial w_j=\\sum_i g_{ij}x_{ij}r_i\\)."
     ],
     "explanation": "Each output weight gradient combines contributions from every row, so independent row programs cannot simply store to the same dw locations. For a small supported shape family, a clear two-stage design writes row or row-group partials and then reduces them in a second kernel. This uses extra memory but makes ownership and correctness visible. Scratch buffers must have a bounded size and be fully written before being read. The first implementation need not beat a library backward; it must handle all declared dimensions without races or silently dropped rows.",
     "plan": [
@@ -1827,7 +1827,7 @@
       {
         "minutes": 10,
         "title": "Study",
-        "text": "Use the core resources above for ten minutes in total, focusing only on the indicated sections. Read K5 on torch.library.triton_op and its supported launch wrapper for your installed PyTorch version."
+        "text": "Use the core resources above for ten minutes in total, focusing only on the indicated sections. Read K5 on `torch.library.triton_op` and its supported launch wrapper for your installed PyTorch version."
       },
       {
         "minutes": 35,
@@ -1853,7 +1853,7 @@
     "reading": [
       {
         "id": "K5",
-        "focus": "Triton operator registration and composition with torch.compile"
+        "focus": "Triton operator registration and composition with `torch.compile`"
       }
     ]
   },
@@ -1881,7 +1881,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Register backward using the official interface matching your pinned PyTorch version, calling only the gradient paths that passed the previous lab. Save required tensors or statistics deliberately and handle configuration arguments correctly. Add a wrapper contract check for device, dtype, feature width, row count, and layout. Choose fallback or rejection for each unsupported category and document that choice. Exercise one valid training objective plus representative unsupported dtype, noncontiguous layout, and size cases. Compare supported x and weight gradients with the framework RMSNorm expression using identical upstream gradients. Wrap any Triton launches used by the backward in a separately registered triton_op with wrap_triton as required by K5, rather than calling raw Triton kernels directly from the registered autograd formula. Verify one compiled scalar loss followed by backward, in addition to the eager gradient check."
+        "text": "Register backward using the official interface matching your pinned PyTorch version, calling only the gradient paths that passed the previous lab. Save required tensors or statistics deliberately and handle configuration arguments correctly. Add a wrapper contract check for device, dtype, feature width, row count, and layout. Choose fallback or rejection for each unsupported category and document that choice. Exercise one valid training objective plus representative unsupported dtype, noncontiguous layout, and size cases. Compare supported x and weight gradients with the framework RMSNorm expression using identical upstream gradients. Wrap any Triton launches used by the backward in a separately registered `triton_op` with `wrap_triton` as required by K5, rather than calling raw Triton kernels directly from the registered autograd formula. Verify one compiled scalar loss followed by backward, in addition to the eager gradient check."
       },
       {
         "minutes": 10,
@@ -1913,7 +1913,7 @@
     ],
     "before": [
       "A registered differentiable RMSNorm with explicit fallback behavior.",
-      "The supplied decoder fixture, its norm_factory(width, eps) module factory, fixed synthetic tokens/targets, and saved deterministic random state dict."
+      "The supplied decoder fixture, its `norm_factory(width, eps)` module factory, fixed synthetic tokens/targets, and saved deterministic random state dict."
     ],
     "explanation": "Operator-level agreement does not guarantee integration-level agreement: the decoder may normalize a different axis, flatten rows differently, use another epsilon, or cast weights at a different point. A single configuration switch makes the reference and custom paths share all other code. Compare both models from identical parameters and random state, with stochastic behavior disabled or controlled. Loss is a useful summary but can hide local errors, so also inspect representative parameter gradients and the normalization inputs. A short matched step is sufficient here; a new training campaign is unnecessary.",
     "plan": [
@@ -1930,7 +1930,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Connect the decoder fixture’s norm implementation hook to your checked RMSNorm wrapper, preserving the supplied reference path. Instantiate two tiny models from the same state dict and feed the same fixed batch with dropout disabled or identically controlled. Run forward, loss, and backward once for each path. Compare loss, selected logits, RMSNorm weight gradients, and one attention and feedforward parameter gradient. If the decoder shape exceeds the restricted kernel contract, exercise the declared fallback or use a smaller valid test configuration; do not silently expand kernel support. Save the complete comparison configuration with the results. Use the actual fixture interface: norm_factory(width, eps) returns an nn.Module whose weight parameter is named weight and whose forward(x) calls your registered rmsnorm(x, weight, eps), flattening leading dimensions and restoring the original shape. Pass that factory to create_fixture or TinyDecoder. Preserve the incoming epsilon (the fixture defaults to 1e-5) and validate the configured feature width (64 by default), rather than hard-coding the earlier standalone exercise settings."
+        "text": "Connect the decoder fixture’s norm implementation hook to your checked RMSNorm wrapper, preserving the supplied reference path. Instantiate two tiny models from the same state dict and feed the same fixed batch with dropout disabled or identically controlled. Run forward, loss, and backward once for each path. Compare loss, selected logits, RMSNorm weight gradients, and one attention and feedforward parameter gradient. If the decoder shape exceeds the restricted kernel contract, exercise the declared fallback or use a smaller valid test configuration; do not silently expand kernel support. Save the complete comparison configuration with the results. Use the actual fixture interface: `norm_factory(width, eps)` returns an `nn.Module` whose weight parameter is named weight and whose `forward(x)` calls your registered `rmsnorm(x, weight, eps)`, flattening leading dimensions and restoring the original shape. Pass that factory to `create_fixture` or `TinyDecoder`. Preserve the incoming epsilon (the fixture defaults to 1e-5) and validate the configured feature width (64 by default), rather than hard-coding the earlier standalone exercise settings."
       },
       {
         "minutes": 10,
@@ -2213,7 +2213,7 @@
       "A correctness-validated Pallas kernel and matched JAX reference.",
       "The same H100 environment and a bounded measurement plan."
     ],
-    "explanation": "JAX dispatch is asynchronous, so timing only the function call can measure enqueue overhead while device work continues. Force the returned computation to finish with block_until_ready() at the chosen measurement boundary. The first call may include compilation and initialization, which should be reported separately from warmed execution. Both implementations need resident inputs, the same shape and dtype, and equivalent output materialization. Compilation reuse across shapes is not guaranteed. A custom kernel losing to jax.jit is an informative result: compiler fusion may already implement the operation efficiently.",
+    "explanation": "JAX dispatch is asynchronous, so timing only the function call can measure enqueue overhead while device work continues. Force the returned computation to finish with `block_until_ready()` at the chosen measurement boundary. The first call may include compilation and initialization, which should be reported separately from warmed execution. Both implementations need resident inputs, the same shape and dtype, and equivalent output materialization. Compilation reuse across shapes is not guaranteed. A custom kernel losing to `jax.jit` is an informative result: compiler fusion may already implement the operation efficiently.",
     "plan": [
       {
         "minutes": 5,
@@ -2223,12 +2223,12 @@
       {
         "minutes": 10,
         "title": "Study",
-        "text": "Use the core resources above for ten minutes in total, focusing only on the indicated sections. Read K6 benchmarking guidance and identify where block_until_ready() belongs for a completed-call measurement."
+        "text": "Use the core resources above for ten minutes in total, focusing only on the indicated sections. Read K6 benchmarking guidance and identify where `block_until_ready()` belongs for a completed-call measurement."
       },
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Select two or three already-validated shapes rather than expanding support. On the same H100, construct resident inputs once and run both the Pallas function and jax.jit reference. Record first-call wall time separately; then warm each path and collect a few repeated batches of completed calls using block_until_ready() on the result. Alternate implementation order between batches to reduce order effects. Save raw timings, median and spread, correctness errors, and the precise timing boundary. Do not include host transfers in one path while excluding them from the other."
+        "text": "Select two or three already-validated shapes rather than expanding support. On the same H100, construct resident inputs once and run both the Pallas function and `jax.jit` reference. Record first-call wall time separately; then warm each path and collect a few repeated batches of completed calls using `block_until_ready()` on the result. Alternate implementation order between batches to reduce order effects. Save raw timings, median and spread, correctness errors, and the precise timing boundary. Do not include host transfers in one path while excluding them from the other."
       },
       {
         "minutes": 10,
@@ -2242,7 +2242,7 @@
       "Compilation/first-call cost and execution measurements are separate."
     ],
     "selfCheck": {
-      "question": "Why can jax.jit outperform a hand-written Pallas row kernel?",
+      "question": "Why can `jax.jit` outperform a hand-written Pallas row kernel?",
       "answer": "The compiler may already fuse the operation well, while the custom layout or launch adds overhead or uses hardware less effectively."
     },
     "pitfall": "Reporting an unsynchronized enqueue time as GPU execution latency.",
@@ -2419,12 +2419,12 @@
       {
         "minutes": 10,
         "title": "Study",
-        "text": "Use the core resources above for ten minutes in total, focusing only on the indicated sections. Revisit K2 timing principles and K5 compiler interaction; identify which conditions might change kernel fusion. Consult the official torch.compile API for dynamic shapes, graph breaks, and recompilation: https://docs.pytorch.org/docs/stable/generated/torch.compile.html."
+        "text": "Use the core resources above for ten minutes in total, focusing only on the indicated sections. Revisit K2 timing principles and K5 compiler interaction; identify which conditions might change kernel fusion. Consult the official `torch.compile` API for dynamic shapes, graph breaks, and recompilation: https://docs.pytorch.org/docs/stable/generated/torch.compile.html."
       },
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Create a machine-readable experiment manifest with eager/compiled mode, reference/custom kernel, two or three supported prompt lengths, batch size, dtype, device, fixture code revision and state-dict hash, warmup count, and timing repetitions. Run the supplied full-versus-cached logit parity smoke before timing. Define prefill as prompt processing through the selected output boundary and decode as a fixed number of generated steps with equivalent cache initialization. Add separate fields for transfers, compilation/first-call cost, and warmed device execution. Run only a tiny parity smoke across the four mode/kernel combinations today. Estimate the upcoming GPU time and fit it inside the existing allowance before launching measurements. Fix model.eval() and torch.inference_mode() for every prefill/decode path, including warm-up; eval mode alone does not disable autograd. Ensure prompt length plus generated steps is at most config.max_seq_len (256 by default). For compiled decode, warm the complete fixed decode trajectory, then inspect TORCH_LOGS=recompiles,graph_breaks output outside timing to identify shape recompilation or eager fallback. Freeze the dynamic-shape policy and label graph breaks or fallback instead of treating a completed call as proof of compiled execution."
+        "text": "Create a machine-readable experiment manifest with eager/compiled mode, reference/custom kernel, two or three supported prompt lengths, batch size, dtype, device, fixture code revision and state-dict hash, warmup count, and timing repetitions. Run the supplied full-versus-cached logit parity smoke before timing. Define prefill as prompt processing through the selected output boundary and decode as a fixed number of generated steps with equivalent cache initialization. Add separate fields for transfers, compilation/first-call cost, and warmed device execution. Run only a tiny parity smoke across the four mode/kernel combinations today. Estimate the upcoming GPU time and fit it inside the existing allowance before launching measurements. Fix `model.eval()` and `torch.inference_mode()` for every prefill/decode path, including warm-up; eval mode alone does not disable autograd. Ensure prompt length plus generated steps is at most `config.max_seq_len` (256 by default). For compiled decode, warm the complete fixed decode trajectory, then inspect `TORCH_LOGS=recompiles,graph_breaks` output outside timing to identify shape recompilation or eager fallback. Freeze the dynamic-shape policy and label graph breaks or fallback instead of treating a completed call as proof of compiled execution."
       },
       {
         "minutes": 10,
@@ -2477,7 +2477,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Run the manifest's prefill cases without changing shapes or precision after seeing results. Load the saved deterministic random state dict once, prepare identical inputs, and separately record transfer time and the first execution of each mode/kernel configuration. Warm each variant, then collect repeated completed-execution batches for the selected lengths, alternating variant order where practical. Save every raw batch with its configuration key. Check logits or loss parity on the same workload before accepting a timing row. If compilation fails for a declared case, record that failure rather than substituting another execution mode without a label. Keep model.eval() and torch.inference_mode() active for both warm-up and measured inference. Confirm each prompt shape has completed its intended compiled warm-up before collecting a warmed row."
+        "text": "Run the manifest's prefill cases without changing shapes or precision after seeing results. Load the saved deterministic random state dict once, prepare identical inputs, and separately record transfer time and the first execution of each mode/kernel configuration. Warm each variant, then collect repeated completed-execution batches for the selected lengths, alternating variant order where practical. Save every raw batch with its configuration key. Check logits or loss parity on the same workload before accepting a timing row. If compilation fails for a declared case, record that failure rather than substituting another execution mode without a label. Keep `model.eval()` and `torch.inference_mode()` active for both warm-up and measured inference. Confirm each prompt shape has completed its intended compiled warm-up before collecting a warmed row."
       },
       {
         "minutes": 10,
@@ -2526,7 +2526,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "For each frozen prompt length, initialize the cache from the same prompt and decode the same fixed number of steps in every variant. Use deterministic token selection or supplied next-token inputs so execution paths remain comparable. Separate cache construction from the decode timer, synchronize at the declared boundary, and repeat matched batches. Record total decode time, the chosen per-token summary, batch variability, and final cache length. Check selected logits or generated tokens against the reference and retain any compiled-mode failure or slowdown. Reinitialize state between repetitions rather than accumulating history accidentally. Run cache construction, warm-up, and timed decode under model.eval() and torch.inference_mode(). Before timing a compiled case, warm that entire prompt-plus-decode trajectory from a reset cache until no new compilation occurs, checking recompilation/graph-break logs outside the timed region. Reusing a prefill-only warm-up is insufficient when cache lengths grow. If a path falls back to eager or continues recompiling, label that result explicitly rather than calling it warmed compiled decode. Keep all lengths within config.max_seq_len."
+        "text": "For each frozen prompt length, initialize the cache from the same prompt and decode the same fixed number of steps in every variant. Use deterministic token selection or supplied next-token inputs so execution paths remain comparable. Separate cache construction from the decode timer, synchronize at the declared boundary, and repeat matched batches. Record total decode time, the chosen per-token summary, batch variability, and final cache length. Check selected logits or generated tokens against the reference and retain any compiled-mode failure or slowdown. Reinitialize state between repetitions rather than accumulating history accidentally. Run cache construction, warm-up, and timed decode under `model.eval()` and `torch.inference_mode()`. Before timing a compiled case, warm that entire prompt-plus-decode trajectory from a reset cache until no new compilation occurs, checking recompilation/graph-break logs outside the timed region. Reusing a prefill-only warm-up is insufficient when cache lengths grow. If a path falls back to eager or continues recompiling, label that result explicitly rather than calling it warmed compiled decode. Keep all lengths within `config.max_seq_len`."
       },
       {
         "minutes": 10,
@@ -2560,7 +2560,7 @@
       "Saved prefill and decode data for all frozen cases.",
       "Your earlier operator microbenchmarks and Amdahl calculation."
     ],
-    "explanation": "End-to-end results are the practical test of a custom kernel, but their interpretation still requires matched conditions. A microbenchmark gain can disappear because normalization occupies little total time, compilation already fuses surrounding work, or dispatch overhead changes. Conversely, a larger-than-expected effect should prompt a check for changed work or fusion before being credited to the kernel alone. Report every frozen case, including failures and slowdowns. Use speedup = reference latency / custom latency consistently, and pair ratios with absolute milliseconds so small effects remain understandable.",
+    "explanation": "End-to-end results are the practical test of a custom kernel, but their interpretation still requires matched conditions. A microbenchmark gain can disappear because normalization occupies little total time, compilation already fuses surrounding work, or dispatch overhead changes. Conversely, a larger-than-expected effect should prompt a check for changed work or fusion before being credited to the kernel alone. Report every frozen case, including failures and slowdowns. Use \\(\\text{speedup}=t_{\\mathrm{reference}}/t_{\\mathrm{custom}}\\) consistently, and pair ratios with absolute milliseconds so small effects remain understandable.",
     "plan": [
       {
         "minutes": 5,
@@ -3206,7 +3206,7 @@
     ],
     "before": [
       "Python, Git, a PyTorch CPU environment, and basic tensor/autograd familiarity.",
-      "Download fixtures/decoder.py from this course’s setup guide; CUDA is unnecessary today."
+      "Download `fixtures/decoder.py` from this course’s setup guide; CUDA is unnecessary today."
     ],
     "explanation": "This course uses a supplied small causal decoder as an integration workload, so building a language model is not a prerequisite. Its framework reference contains embeddings, causal attention, an MLP, and RMSNorm; it runs on CPU or CUDA and exposes a normalization hook for your later kernel. Deterministic random weights and synthetic integer tokens are sufficient for correctness and performance experiments. They do not establish language-model quality. Keep the fixture revision, state dict, and inputs fixed so a later speed comparison measures an implementation change rather than a different workload.",
     "plan": [
@@ -3223,7 +3223,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Create folders fixtures/, kernels/, tests/, reports/kernels/, and notes/kernels/ in a new Git repository. Copy in the supplied fixture and run its documented CPU smoke with a tiny configuration, fixed seed, and short integer-token batch. Save its dimensions, finite-output result, and deterministic random state dict with a content hash. Trace one forward pass through attention, normalization, and the MLP, recording input/output shapes in notes/kernels/fixture.md. Locate the normalization hook and cache smoke without modifying them. If PyTorch setup blocks progress, record the exact error and use the guide’s CPU environment before attempting anything on MPS."
+        "text": "Create folders `fixtures/`, `kernels/`, `tests/`, `reports/kernels/`, and `notes/kernels/` in a new Git repository. Copy in the supplied fixture and run its documented CPU smoke with a tiny configuration, fixed seed, and short integer-token batch. Save its dimensions, finite-output result, and deterministic random state dict with a content hash. Trace one forward pass through attention, normalization, and the MLP, recording input/output shapes in `notes/kernels/fixture.md`. Locate the normalization hook and cache smoke without modifying them. If PyTorch setup blocks progress, record the exact error and use the guide’s CPU environment before attempting anything on MPS."
       },
       {
         "minutes": 10,
@@ -3251,7 +3251,7 @@
   "intro-2": {
     "title": "Freeze environments, measurement rules, and spending limits",
     "action": "Write the local/NVIDIA/H100 environment plan and a bounded measurement contract before renting a GPU.",
-    "evidence": "reports/kernels/environment-plan.md and a spending ledger with a shutdown checklist.",
+    "evidence": "`reports/kernels/environment-plan.md` and a spending ledger with a shutdown checklist.",
     "objectives": [
       "Separate local derivation work from hardware-dependent GPU evidence.",
       "Define reproducible timing and a limited cloud spending plan."
@@ -3275,7 +3275,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Create reports/kernels/environment-plan.md with separate local CPU, RTX 4090-class CUDA/Triton, and H100 Pallas environments. For each remote image, record the exact image tag or digest and planned framework/toolkit versions; note that the CUDA C++ lab requires nvcc, a host compiler, and Ninja. Create a ledger with date, device, hourly quote and currency, runtime, storage, conversion/tax allowance, and running total against the course allocation. Write a default shutdown-and-export checklist. Define a timing contract: fixed resident inputs, untimed warm-up, completed execution via synchronization, several raw timing batches, and compilation reported separately. Do not rent hardware in this planning hour."
+        "text": "Create `reports/kernels/environment-plan.md` with separate local CPU, RTX 4090-class CUDA/Triton, and H100 Pallas environments. For each remote image, record the exact image tag or digest and planned framework/toolkit versions; note that the CUDA C++ lab requires `nvcc`, a host compiler, and Ninja. Create a ledger with date, device, hourly quote and currency, runtime, storage, conversion/tax allowance, and running total against the course allocation. Write a default shutdown-and-export checklist. Define a timing contract: fixed resident inputs, untimed warm-up, completed execution via synchronization, several raw timing batches, and compilation reported separately. Do not rent hardware in this planning hour."
       },
       {
         "minutes": 10,
@@ -3307,7 +3307,7 @@
   "review-2": {
     "title": "Review execution, reductions, and benchmark validity",
     "action": "Audit vector add, softmax, and RMSNorm using a closed-book explanation and one targeted numerical check.",
-    "evidence": "review-2.md with a memory diagram, masked-row example, and an honest benchmark audit.",
+    "evidence": "`review-2.md` with a memory diagram, masked-row example, and an honest benchmark audit.",
     "objectives": [
       "Explain memory access, tail masks, and reduction identities without code.",
       "Find a concrete correctness or measurement gap in existing evidence."
@@ -3331,7 +3331,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Create reports/kernels/review-2.md. Explain a width-33 row in a power-of-two tile: distinguish invalid softmax lanes from RMSNorm zero padding and identify the correct denominator. Select one advertised edge case from each operation and locate its saved correctness evidence. Inspect the timer boundaries and allocation behavior of one performance comparison. Recompute one median from raw samples. If a real gap is cheap to resolve locally, add the focused reference or wrapper check; otherwise record the exact next GPU check for flex time. End with two claims you can defend and one limitation."
+        "text": "Create `reports/kernels/review-2.md`. Explain a width-33 row in a power-of-two tile: distinguish invalid softmax lanes from RMSNorm zero padding and identify the correct denominator. Select one advertised edge case from each operation and locate its saved correctness evidence. Inspect the timer boundaries and allocation behavior of one performance comparison. Recompute one median from raw samples. If a real gap is cheap to resolve locally, add the focused reference or wrapper check; otherwise record the exact next GPU check for flex time. End with two claims you can defend and one limitation."
       },
       {
         "minutes": 10,
@@ -3407,7 +3407,7 @@
   "review-4": {
     "title": "Review tiled matmul and online attention",
     "action": "Reconstruct a tile and online-softmax merge, then audit one causal boundary case.",
-    "evidence": "review-4.md with dimensioned tile addresses, a worked merge, and a supported-shape audit.",
+    "evidence": "`review-4.md` with dimensioned tile addresses, a worked merge, and a supported-shape audit.",
     "objectives": [
       "Explain what matmul tiling reuses and what online attention avoids storing.",
       "Distinguish demonstrated shape support from tutorial capabilities."
@@ -3431,7 +3431,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "In reports/kernels/review-4.md, trace one matmul output element across two K tiles with a tail. Work through an online-softmax merge where the second tile contains the new maximum, showing rescaling of both denominator and weighted sum. Pick a query/key diagonal tile and draw its absolute-position causal mask. Locate saved evidence for a sequence length just beyond a block boundary and a future-key perturbation. Compare advertised shapes/dtypes with actual tests. Fix one documentation mismatch or write a minimal failing input for flex time; no additional tuning campaign is required."
+        "text": "In `reports/kernels/review-4.md`, trace one matmul output element across two K tiles with a tail. Work through an online-softmax merge where the second tile contains the new maximum, showing rescaling of both denominator and weighted sum. Pick a query/key diagonal tile and draw its absolute-position causal mask. Locate saved evidence for a sequence length just beyond a block boundary and a future-key perturbation. Compare advertised shapes/dtypes with actual tests. Fix one documentation mismatch or write a minimal failing input for flex time; no additional tuning campaign is required."
       },
       {
         "minutes": 10,
@@ -3507,7 +3507,7 @@
   "review-6": {
     "title": "Review differentiation, integration, and Pallas evidence",
     "action": "Defend the RMSNorm derivative and audit framework integration alongside the actual H100 result.",
-    "evidence": "review-6.md with a gradient derivation, branch table, and separated Pallas compile/execute evidence.",
+    "evidence": "`review-6.md` with a gradient derivation, branch table, and separated Pallas compile/execute evidence.",
     "objectives": [
       "Explain RMSNorm input and weight gradients with their correct reduction axes.",
       "Assess whether custom-op and Pallas claims match executed evidence."
@@ -3531,7 +3531,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Create reports/kernels/review-6.md. Re-derive RMSNorm dx and dw without copying code, then compare with the saved CPU derivation. Link one actual supported-dtype GPU gradient result and the model-level parity smoke. Exercise or locate evidence for one unsupported input taking its declared fallback/rejection branch. Audit the Pallas result’s device identity and block_until_ready boundary, and recompute one warmed summary from raw logs. If H100 execution is still blocked, label that competency incomplete and reserve a specific flex task rather than substituting interpretation evidence."
+        "text": "Create `reports/kernels/review-6.md`. Re-derive RMSNorm dx and dw without copying code, then compare with the saved CPU derivation. Link one actual supported-dtype GPU gradient result and the model-level parity smoke. Exercise or locate evidence for one unsupported input taking its declared fallback/rejection branch. Audit the Pallas result’s device identity and `block_until_ready` boundary, and recompute one warmed summary from raw logs. If H100 execution is still blocked, label that competency incomplete and reserve a specific flex task rather than substituting interpretation evidence."
       },
       {
         "minutes": 10,
@@ -3651,7 +3651,7 @@
   "final-1": {
     "title": "Take the independent kernel assessment",
     "action": "Explain and diagnose a kernel result from first principles without introducing a new implementation.",
-    "evidence": "assessment.md containing a timed explanation, one diagnosis, and an honest competency rubric.",
+    "evidence": "`assessment.md` containing a timed explanation, one diagnosis, and an honest competency rubric.",
     "objectives": [
       "Defend execution, numerical, and timing choices without relying on copied code.",
       "Diagnose a plausible bug using an explicit falsifiable check."

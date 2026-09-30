@@ -22,7 +22,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Create notes/diagnostic.md and answer: (1) For Q,K,V shaped [2,4,8,16], what are attention-score and output shapes? (2) How do you compute cross-entropy for logits [1000,999] with target 0 without overflow? (3) For L=(wx-y)^2, derive dL/dw. (4) Which attention entries must a causal mask exclude, and how would a future-token perturbation expose a reversed mask? (5) Why should documents be split into train and validation before creating overlapping token chunks? Record confidence and a small check for each answer, then rank your three highest-value gaps."
+        "text": "Create `notes/diagnostic.md` and answer:\n\n1. For Q,K,V shaped `[2,4,8,16]`, what are attention-score and output shapes?\n2. How do you compute cross-entropy for logits `[1000,999]` with target 0 without overflow?\n3. For \\(L=(wx-y)^2\\), derive \\(\\partial L/\\partial w\\).\n4. Which attention entries must a causal mask exclude, and how would a future-token perturbation expose a reversed mask?\n5. Why should documents be split into train and validation before creating overlapping token chunks?\n\nRecord confidence and a small check for each answer, then rank your three highest-value gaps."
       },
       {
         "minutes": 10,
@@ -37,7 +37,7 @@
     ],
     "selfCheck": {
       "question": "What are the diagnostic answers, and which one changed your reasoning?",
-      "answer": "1: scores [2,4,8,8], output [2,4,8,16]. 2: subtract 1000; loss = log(1+exp(-1)), about 0.3133. 3: 2(wx-y)x. 4: exclude key position j greater than query position i; changing later input tokens must leave earlier outputs unchanged. 5: otherwise overlapping or related text from one document may appear in both sets and inflate apparent generalization. Explain your largest correction in your own words."
+      "answer": "1. scores `[2,4,8,8]`, output `[2,4,8,16]`.\n2. subtract 1000; \\(\\ell=\\log(1+e^{-1})\\), about 0.3133.\n3. \\(2(wx-y)x\\).\n4. exclude key position j greater than query position i; changing later input tokens must leave earlier outputs unchanged.\n5. otherwise overlapping or related text from one document may appear in both sets and inflate apparent generalization.\n\nExplain your largest correction in your own words."
     },
     "pitfall": "Do not turn a low-confidence answer into an unplanned multi-hour prerequisite course.",
     "reading": [
@@ -56,12 +56,12 @@
       "Day0 readiness is complete: NumPy/PyTorch CPU imports work and the course repository exists.",
       "Use the optional Day0 diagnostic only if a prerequisite is rusty; no diagnostic report is required to begin."
     ],
-    "explanation": "A language-model example contains input tokens and targets shifted by one position. If logits have shape [B,T,V], each [V] row predicts the next token; the loss averages valid positions. Stable cross-entropy is logsumexp(logits) minus the target logit. Subtracting each row maximum before exponentiation avoids overflow without changing the softmax distribution. Freezing the input bytes, tokenizer identity and token IDs gives every later framework comparison the same starting point. A small fixed sample is sufficient here; corpus preparation comes later.",
+    "explanation": "A language-model example contains input tokens and targets shifted by one position. If logits have shape `[B,T,V]`, each `[V]` row predicts the next token; the loss averages valid positions. Stable cross-entropy is log-sum-exp of the logits minus the target logit:\n\n\\[\n\\ell(z,y)=\\log\\sum_j e^{z_j}-z_y\n= m + \\log\\sum_j e^{z_j-m}-z_y,\\qquad m=\\max_j z_j.\n\\]\n\n Subtracting each row maximum before exponentiation avoids overflow without changing the softmax distribution. Freezing the input bytes, tokenizer identity and token IDs gives every later framework comparison the same starting point. A small fixed sample is sufficient here; corpus preparation comes later.",
     "plan": [
       {
         "minutes": 5,
         "title": "Retrieve",
-        "text": "Write the input and target sequences produced from token IDs [4,7,2,9]. State the expected logits shape."
+        "text": "Write the input and target sequences produced from token IDs `[4,7,2,9]`. State the expected logits shape."
       },
       {
         "minutes": 10,
@@ -71,12 +71,12 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Use the model/, tests/, data/ and notes/ directories prepared on Day0. Choose and pin one existing tokenizer; do not train a tokenizer in this session. Save a short text sample you can redistribute, its checksum, tokenizer revision and resulting token IDs. Form two fixed examples without crossing document boundaries. Implement cross-entropy using a row maximum and log-sum-exp, gathering target logits before averaging. Compare against PyTorch functional cross_entropy on random logits and on [1000,999]. Keep the reference in the test rather than replacing your implementation."
+        "text": "Use the `model/`, `tests/`, `data/` and `notes/` directories prepared on Day0. Choose and pin one existing tokenizer; do not train a tokenizer in this session. Save a short text sample you can redistribute, its checksum, tokenizer revision and resulting token IDs. Form two fixed examples without crossing document boundaries. Implement cross-entropy using a row maximum and log-sum-exp, gathering target logits before averaging. Compare against PyTorch functional `cross_entropy` on random logits and on `[1000,999]`. Keep the reference in the test rather than replacing your implementation."
       },
       {
         "minutes": 10,
         "title": "Verify and save",
-        "text": "Check finite loss, translation invariance after adding 1000 to every logit, and agreement with the reference. Save data/manifest.json and the small loss test."
+        "text": "Check finite loss, translation invariance after adding 1000 to every logit, and agreement with the reference. Save `data/manifest.json` and the small loss test."
       }
     ],
     "checks": [
@@ -88,7 +88,7 @@
       "question": "Why is subtracting the maximum legitimate even though it changes every logit?",
       "answer": "The same exponential factor appears in the softmax numerator and denominator and cancels. Equivalently, the added shift cancels between log-sum-exp and the target logit."
     },
-    "pitfall": "Do not shift targets twice when flattening [B,T,V] logits for a framework loss.",
+    "pitfall": "Do not shift targets twice when flattening `[B,T,V]` logits for a framework loss.",
     "reading": [
       {
         "id": "A1",
@@ -105,7 +105,7 @@
       "Stable-loss tests and the fixed token sample.",
       "A chosen tiny shape: B=2, T=8, width=32, four heads."
     ],
-    "explanation": "Each attention head maps a token vector to query, key and value vectors. With Q,K,V shaped [B,H,T,D], scores QKᵀ/√D have shape [B,H,T,T]. The causal mask excludes key positions greater than the query position before softmax. Softmax normalizes over keys, then its weights multiply V. Scaling reduces growth in score variance with head width. A causal model must be invariant to changes strictly after the position being predicted; this behavioral test catches mistakes that a shape test cannot.",
+    "explanation": "Each attention head maps a token vector to query, key and value vectors. With Q,K,V shaped `[B,H,T,D]`, scores \\(QK^\\top/\\sqrt{D}\\) have shape `[B,H,T,T]`. The causal mask excludes key positions greater than the query position before softmax. Softmax normalizes over keys, then its weights multiply V. Scaling reduces growth in score variance with head width. A causal model must be invariant to changes strictly after the position being predicted; this behavioral test catches mistakes that a shape test cannot.",
     "plan": [
       {
         "minutes": 5,
@@ -120,7 +120,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Implement projections from [B,T,C] to Q,K,V, reshape to [B,H,T,D], apply scaled scores, mask future positions with negative infinity, and normalize over the final axis. Combine heads back to [B,T,C] and apply an output projection. Use plain PyTorch operations so intermediate tensors remain inspectable. On a fixed random input, save the output, change input positions 5 onward, and confirm output positions 0 through 4 are unchanged. Also inspect attention weights to confirm every forbidden entry is zero."
+        "text": "Implement projections from `[B,T,C]` to Q,K,V, reshape to `[B,H,T,D]`, apply scaled scores, mask future positions with negative infinity, and normalize over the final axis. Combine heads back to `[B,T,C]` and apply an output projection. Use plain PyTorch operations so intermediate tensors remain inspectable. On a fixed random input, save the output, change input positions 5 onward, and confirm output positions 0 through 4 are unchanged. Also inspect attention weights to confirm every forbidden entry is zero."
       },
       {
         "minutes": 10,
@@ -154,7 +154,7 @@
       "The tested attention module from the previous session.",
       "Stable loss and fixed token IDs."
     ],
-    "explanation": "A pre-norm decoder block computes u=x+Attention(LayerNorm(x)), followed by y=u+MLP(LayerNorm(u)). The MLP expands the channel width, applies GELU and projects back. Residual additions require equal outer shapes, but they do not guarantee meaningful gradients or causality. Learned position embeddings belong at the model input: token and position vectors are added before the first block, not repeatedly inside every block. This session builds a minimal composition whose behavior you can inspect before stacking layers and training it.",
+    "explanation": "A pre-norm decoder block computes:\n\n\\[\n\\begin{aligned}\nu &= x+\\operatorname{Attention}(\\operatorname{LayerNorm}(x)),\\\\\ny &= u+\\operatorname{MLP}(\\operatorname{LayerNorm}(u)).\n\\end{aligned}\n\\]\n\n The MLP expands the channel width, applies GELU and projects back. Residual additions require equal outer shapes, but they do not guarantee meaningful gradients or causality. Learned position embeddings belong at the model input: token and position vectors are added before the first block, not repeatedly inside every block. This session builds a minimal composition whose behavior you can inspect before stacking layers and training it.",
     "plan": [
       {
         "minutes": 5,
@@ -178,7 +178,7 @@
       }
     ],
     "checks": [
-      "The two residual additions preserve [B,T,C].",
+      "The two residual additions preserve `[B,T,C]`.",
       "Embedding positions are added once at model input.",
       "The composed path passes causality and finite-gradient checks."
     ],
@@ -203,7 +203,7 @@
       "The tested GPT block and input embedding wrapper.",
       "A fixed tokenizer vocabulary size V."
     ],
-    "explanation": "A complete decoder wraps repeated residual blocks between input embeddings and a final normalization plus vocabulary projection. The logits retain [B,T,V] so every token position can contribute a training example. Embedding parameters can dominate a tiny model when the tokenizer vocabulary is large, which makes width alone a misleading model-size label. Weight tying reuses the token embedding matrix for the output projection; if you choose it, count the shared parameter once. A tiny configuration is a correctness tool rather than a language-quality demonstration.",
+    "explanation": "A complete decoder wraps repeated residual blocks between input embeddings and a final normalization plus vocabulary projection. The logits retain `[B,T,V]` so every token position can contribute a training example. Embedding parameters can dominate a tiny model when the tokenizer vocabulary is large, which makes width alone a misleading model-size label. Weight tying reuses the token embedding matrix for the output projection; if you choose it, count the shared parameter once. A tiny configuration is a correctness tool rather than a language-quality demonstration.",
     "plan": [
       {
         "minutes": 5,
@@ -227,13 +227,13 @@
       }
     ],
     "checks": [
-      "A two-block decoder returns [B,T,V] finite logits.",
+      "A two-block decoder returns `[B,T,V]` finite logits.",
       "Calculated and programmatic parameter counts agree.",
       "Context-length handling and weight tying are documented."
     ],
     "selfCheck": {
       "question": "Why can a “width 128” model still contain millions of parameters?",
-      "answer": "Its token embedding contains V×128 parameters, and an untied output head adds another similarly sized matrix. Vocabulary size matters even when the residual stack is small."
+      "answer": "Its token embedding contains \\(V\\times128\\) parameters, and an untied output head adds another similarly sized matrix. Vocabulary size matters even when the residual stack is small."
     },
     "pitfall": "Summing aliases separately can double-count a tied embedding/output parameter.",
     "reading": [
@@ -256,12 +256,12 @@
       "The complete tiny decoder and fixed batch.",
       "A notes cell for a scalar optimizer calculation."
     ],
-    "explanation": "AdamW maintains first and second moments of gradients, applies bias correction, and decouples weight decay from the loss gradient. For the first update from zero moments, m̂=g and v̂=g², so the adaptive term is g/(|g|+ε). The decay term scales the old parameter separately. A training step must clear stale gradients, compute the loss, backpropagate, clip if needed and update parameters. Clipping changes the gradient fed to the optimizer; record the unclipped norm to distinguish a stable step from a frequently clipped one.",
+    "explanation": "AdamW maintains first and second moments of gradients, applies bias correction, and decouples weight decay from the loss gradient. For the first update from zero moments, \\(\\hat m=g\\) and \\(\\hat v=g^2\\), so the adaptive term is \\(g/(|g|+\\varepsilon)\\). The decay term scales the old parameter separately. A training step must clear stale gradients, compute the loss, backpropagate, clip if needed and update parameters. Clipping changes the gradient fed to the optimizer; record the unclipped norm to distinguish a stable step from a frequently clipped one.",
     "plan": [
       {
         "minutes": 5,
         "title": "Retrieve",
-        "text": "Write the derivative of a scalar quadratic and list the correct order of zero_grad, forward, backward, clipping and optimizer.step."
+        "text": "Write the derivative of a scalar quadratic and list the correct order of `zero_grad`, forward, backward, clipping and optimizer.step."
       },
       {
         "minutes": 10,
@@ -271,7 +271,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Use a scalar torch Parameter to compare built-in AdamW’s first update with w_new=w_old×(1−lr×decay)−lr×g/(abs(g)+epsilon). Set gradient explicitly so the comparison isolates optimizer arithmetic. Then add AdamW to your decoder loop: clear gradients, compute loss, call backward, record total gradient norm, clip to a declared threshold and step. Run a handful of repeated-batch updates, checking finite parameters and loss. Keep learning rate and batch fixed so an implementation error is not hidden by repeated retuning."
+        "text": "Use a scalar torch Parameter to compare built-in AdamW’s first update with this scalar update:\n\n```python\nw_new = w_old * (1 - lr * decay) - lr * g / (abs(g) + epsilon)\n```\n\nSet gradient explicitly so the comparison isolates optimizer arithmetic. Then add AdamW to your decoder loop: clear gradients, compute loss, call backward, record total gradient norm, clip to a declared threshold and step. Run a handful of repeated-batch updates, checking finite parameters and loss. Keep learning rate and batch fixed so an implementation error is not hidden by repeated retuning."
       },
       {
         "minutes": 10,
@@ -403,7 +403,7 @@
       "The working GPT-style decoder and tiny-batch checks.",
       "A separate configuration flag or branch to preserve the earlier baseline."
     ],
-    "explanation": "RMSNorm rescales each token vector using its root mean square: y=x×rsqrt(mean(x²)+ε)×g. Unlike LayerNorm, it does not subtract the mean. SwiGLU uses two input projections: silu(xW_gate) multiplied elementwise by xW_up, then projected back by W_down. The intermediate width is a design choice; copying the old 4C width increases parameter count because there are now three projection matrices. These replacements change the function and parameter budget, so preserve the GPT baseline and record the modern decoder’s exact configuration.",
+    "explanation": "RMSNorm rescales each token vector using its root mean square:\n\n\\[\ny_i=\\frac{x_i g_i}{\\sqrt{\\frac{1}{D}\\sum_{j=1}^{D}x_j^2+\\varepsilon}}.\n\\]\n\n Unlike LayerNorm, it does not subtract the mean. SwiGLU uses two input projections, multiplies them elementwise, then projects back:\n\n\\[\n\\operatorname{SwiGLU}(x)=\\bigl(\\operatorname{SiLU}(xW_{\\mathrm{gate}})\\odot xW_{\\mathrm{up}}\\bigr)W_{\\mathrm{down}}.\n\\]\n\n The intermediate width is a design choice; copying the old 4C width increases parameter count because there are now three projection matrices. These replacements change the function and parameter budget, so preserve the GPT baseline and record the modern decoder’s exact configuration.",
     "plan": [
       {
         "minutes": 5,
@@ -452,22 +452,22 @@
       "The modern block with RMSNorm and SwiGLU.",
       "Attention Q/K tensors with an even head dimension."
     ],
-    "explanation": "RoPE rotates pairs of query and key channels by position-dependent angles. For each pair, R(θ)[a,b]=[a cosθ−b sinθ, a sinθ+b cosθ]. At position zero the rotation is identity. Applying rotations at positions m and n yields (R_m q)ᵀ(R_n k)=qᵀR_(n−m)k, exposing relative position in the attention score. Frequencies vary across channel pairs. Your pairing layout and frequency convention must be explicit: mathematically valid alternatives can still be incompatible with another implementation’s weights.",
+    "explanation": "RoPE rotates pairs of query and key channels by position-dependent angles. For each pair:\n\n\\[\nR(\\theta)\\begin{bmatrix}a\\\\b\\end{bmatrix}\n=\\begin{bmatrix}a\\cos\\theta-b\\sin\\theta\\\\a\\sin\\theta+b\\cos\\theta\\end{bmatrix}.\n\\]\n\n At position zero the rotation is identity. Applying rotations at positions m and n yields \\((R_mq)^\\top(R_nk)=q^\\top R_{n-m}k\\), exposing relative position in the attention score. Frequencies vary across channel pairs. Your pairing layout and frequency convention must be explicit: mathematically valid alternatives can still be incompatible with another implementation’s weights.",
     "plan": [
       {
         "minutes": 5,
         "title": "Retrieve",
-        "text": "Write the 2×2 rotation matrix and calculate what it does at angles zero and π/2."
+        "text": "Write the 2×2 rotation matrix and calculate what it does at angles zero and \\(\\pi/2\\)."
       },
       {
         "minutes": 10,
         "title": "Study",
-        "text": "Use the core resources above for ten minutes in total, focusing only on the indicated sections. Read A3’s rotary construction and relative-position identity. Derive R_mᵀR_n=R_(n−m) for one pair before generalizing to a head."
+        "text": "Use the core resources above for ten minutes in total, focusing only on the indicated sections. Read A3’s rotary construction and relative-position identity. Derive \\(R_m^\\top R_n=R_{n-m}\\) for one pair before generalizing to a head."
       },
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Choose an adjacent-pair channel layout and an explicit frequency base. Build cosine and sine values from a supplied positions vector rather than assuming every call begins at zero. Apply rotation to Q and K, preserving [B,H,T,D], and leave V unchanged. Test identity at zero, norm preservation and the relative-position dot-product equation using random vectors. Include an offset example with positions 7 through 10 and a negative relative difference in the algebraic test. Keep learned-position removal for the integration decision explicit in your notes."
+        "text": "Choose an adjacent-pair channel layout and an explicit frequency base. Build cosine and sine values from a supplied positions vector rather than assuming every call begins at zero. Apply rotation to Q and K, preserving `[B,H,T,D]`, and leave V unchanged. Test identity at zero, norm preservation and the relative-position dot-product equation using random vectors. Include an offset example with positions 7 through 10 and a negative relative difference in the algebraic test. Keep learned-position removal for the integration decision explicit in your notes."
       },
       {
         "minutes": 10,
@@ -482,7 +482,7 @@
     ],
     "selfCheck": {
       "question": "Does the relative-position identity mean that rotating Q alone is sufficient?",
-      "answer": "No. The cancellation to a relative rotation uses both R_m on Q and R_n on K. Rotating only one side leaves a score tied to that side’s absolute position."
+      "answer": "No. The cancellation to a relative rotation uses both \\(R_m\\) on Q and \\(R_n\\) on K. Rotating only one side leaves a score tied to that side’s absolute position."
     },
     "pitfall": "Do not silently mix adjacent-pair and split-half channel conventions between Q, K or a reference implementation.",
     "reading": [
@@ -516,7 +516,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Give the attention module separate query and KV projection output widths. Reshape Q to [B,Hq,T,D] and K/V to [B,Hkv,T,D], applying RoPE to each before grouping. Implement a clear grouped computation or an initial repeat-interleave path. Independently construct a reference by expanding each KV head across its query group, then reuse standard attention. Compare outputs and selected input/projection gradients on a fixed small case. Reject invalid head ratios with a useful error rather than relying on a reshape failure."
+        "text": "Give the attention module separate query and KV projection output widths. Reshape Q to `[B,Hq,T,D]` and K/V to `[B,Hkv,T,D]`, applying RoPE to each before grouping. Implement a clear grouped computation or an initial repeat-interleave path. Independently construct a reference by expanding each KV head across its query group, then reuse standard attention. Compare outputs and selected input/projection gradients on a fixed small case. Reject invalid head ratios with a useful error rather than relying on a reshape failure."
       },
       {
         "minutes": 10,
@@ -531,7 +531,7 @@
     ],
     "selfCheck": {
       "question": "Does GQA automatically reduce the size of an explicitly materialized attention-score tensor?",
-      "answer": "No. Scores still have one row group per query head, typically [B,Hq,T,T]. GQA directly reduces K/V projection and cache dimensions; score materialization is a separate issue."
+      "answer": "No. Scores still have one row group per query head, typically `[B,Hq,T,T]`. GQA directly reduces K/V projection and cache dimensions; score materialization is a separate issue."
     },
     "pitfall": "Using repeat instead of the intended contiguous repeat-interleave can assign the wrong KV head to a query group.",
     "reading": [
@@ -645,29 +645,29 @@
   },
   "4-2": {
     "objectives": [
-      "Apply grad, vmap and jit to the same small mathematical function.",
+      "Apply `grad`, `vmap` and `jit` to the same small mathematical function.",
       "Explain shape and state constraints exposed by transformations."
     ],
     "before": [
       "The pure JAX functions and parameter pytree from the previous session.",
       "A small fixed matrix/vector example with an analytic derivative."
     ],
-    "explanation": "JAX transformations change how a function executes while preserving its mathematical intent. grad differentiates a scalar-valued function with respect to chosen arguments. vmap maps a function over designated batch axes without writing the batch loop yourself. jit compiles a traced computation specialized to relevant shapes and static choices. They compose, but a Python side effect is not reliable runtime state. A tiny linear regression example makes expected values and gradients calculable, letting you distinguish transformation mistakes from the complexity of a transformer.",
+    "explanation": "JAX transformations change how a function executes while preserving its mathematical intent. `grad` differentiates a scalar-valued function with respect to chosen arguments. `vmap` maps a function over designated batch axes without writing the batch loop yourself. `jit` compiles a traced computation specialized to relevant shapes and static choices. They compose, but a Python side effect is not reliable runtime state. A tiny linear regression example makes expected values and gradients calculable, letting you distinguish transformation mistakes from the complexity of a transformer.",
     "plan": [
       {
         "minutes": 5,
         "title": "Retrieve",
-        "text": "For f(w,x)=sum((w*x)^2), derive the gradient with respect to w and predict the result shape."
+        "text": "For \\(f(w,x)=\\sum_i(w_i x_i)^2\\), derive the gradient with respect to w and predict the result shape."
       },
       {
         "minutes": 10,
         "title": "Study",
-        "text": "Use the core resources above for ten minutes in total, focusing only on the indicated sections. Read A4’s grad, vmap and jit examples. Identify which argument and axis will be differentiated or mapped in your exercise."
+        "text": "Use the core resources above for ten minutes in total, focusing only on the indicated sections. Read A4’s `grad`, `vmap` and `jit` examples. Identify which argument and axis will be differentiated or mapped in your exercise."
       },
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Implement the scalar function on a small vector and compare grad with 2*w*x*x. Create a batch of x vectors and use vmap to produce per-example losses; compare with an explicit Python-loop reference on these tiny arrays. Differentiate the mean batched loss and verify it equals the mean of per-example gradients. Apply jit to the batched loss/gradient function, call it twice with the same shapes, and compare values with the eager version. Keep timing out of this correctness exercise and return diagnostics as values."
+        "text": "Implement the scalar function on a small vector and compare `grad` with 2*w*x*x. Create a batch of x vectors and use `vmap` to produce per-example losses; compare with an explicit Python-loop reference on these tiny arrays. Differentiate the mean batched loss and verify it equals the mean of per-example gradients. Apply `jit` to the batched loss/gradient function, call it twice with the same shapes, and compare values with the eager version. Keep timing out of this correctness exercise and return diagnostics as values."
       },
       {
         "minutes": 10,
@@ -677,18 +677,18 @@
     ],
     "checks": [
       "Autodiff agrees with the analytic vector gradient.",
-      "vmap agrees with the explicit batch reference.",
+      "`vmap` agrees with the explicit batch reference.",
       "Jitted and eager calculations return matching values."
     ],
     "selfCheck": {
-      "question": "Why must grad receive a scalar objective rather than a vector of per-example losses?",
+      "question": "Why must `grad` receive a scalar objective rather than a vector of per-example losses?",
       "answer": "A gradient is defined here for one scalar objective. Reduce the losses, for example with mean, or explicitly request a Jacobian/per-example gradients with the appropriate transformation."
     },
-    "pitfall": "Printing or appending to a Python list inside jit tracing does not implement a reliable per-step training log.",
+    "pitfall": "Printing or appending to a Python list inside `jit` tracing does not implement a reliable per-step training log.",
     "reading": [
       {
         "id": "A4",
-        "focus": "grad, vmap, jit and pure-function transformation constraints"
+        "focus": "`grad`, `vmap`, `jit` and pure-function transformation constraints"
       }
     ]
   },
@@ -701,7 +701,7 @@
       "Tested PyTorch RMSNorm, RoPE, projections and SwiGLU.",
       "The JAX transformation exercises and a shared tiny configuration."
     ],
-    "explanation": "Cross-framework parity requires matching mathematics before comparing results. PyTorch linear layers commonly store weights as [out,in], while a direct x@W convention uses [in,out]; either is valid, but the conversion must be explicit. RMSNorm epsilon placement, rotary pairing and activation definitions must also agree. Independently seeded initializations are not equivalent across frameworks, so generate each parameter once in NumPy and load those arrays into both implementations. Begin on CPU FP32 to keep device and mixed-precision differences out of the first comparison.",
+    "explanation": "Cross-framework parity requires matching mathematics before comparing results. PyTorch linear layers commonly store weights as `[out,in]`, while a direct x@W convention uses `[in,out]`; either is valid, but the conversion must be explicit. RMSNorm epsilon placement, rotary pairing and activation definitions must also agree. Independently seeded initializations are not equivalent across frameworks, so generate each parameter once in NumPy and load those arrays into both implementations. Begin on CPU FP32 to keep device and mixed-precision differences out of the first comparison.",
     "plan": [
       {
         "minutes": 5,
@@ -716,7 +716,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Write pure JAX functions for linear projection, RMSNorm, RoPE and SwiGLU using the same documented formulas as PyTorch. Generate a deterministic NumPy parameter bundle and input arrays; map them explicitly into each framework. Compare each primitive independently, including zero-position and nonzero-offset RoPE examples. Start with atol=1e-5 and rtol=1e-4 on FP32 CPU, recording actual maximum absolute and relative errors rather than only a pass flag. Do not assemble the full decoder yet; this session isolates the reusable functions."
+        "text": "Write pure JAX functions for linear projection, RMSNorm, RoPE and SwiGLU using the same documented formulas as PyTorch. Generate a deterministic NumPy parameter bundle and input arrays; map them explicitly into each framework. Compare each primitive independently, including zero-position and nonzero-offset RoPE examples. Start with `atol=1e-5` and `rtol=1e-4` on FP32 CPU, recording actual maximum absolute and relative errors rather than only a pass flag. Do not assemble the full decoder yet; this session isolates the reusable functions."
       },
       {
         "minutes": 10,
@@ -748,7 +748,7 @@
     ],
     "before": [
       "The shared NumPy parameter bundle and forward-parity table.",
-      "Working autograd/grad examples in both frameworks."
+      "Working autograd/`grad` examples in both frameworks."
     ],
     "explanation": "Matching forward outputs does not guarantee matching derivatives: a detached value, wrong broadcasting reduction or custom gradient path can preserve a result while changing learning. For each primitive, differentiate the same scalar objective in both frameworks. A weighted sum of outputs uses a fixed upstream gradient and avoids comparing two differently reduced losses. Compare both input gradients and a representative parameter gradient. When errors appear, inspect dtype, epsilon, layout and the first divergent operation before changing any threshold; a tolerance should describe expected arithmetic, not hide a bug.",
     "plan": [
@@ -765,7 +765,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "For projection, RMSNorm, RoPE and SwiGLU, define the scalar sum(output*fixed_probe) using identical probe arrays. Compute gradients with respect to input and selected parameters in both frameworks, translating weight layouts before comparison. If a discrepancy needs diagnosis, add a centered FP64 finite-difference check for one scalar parameter. Use NumPy/PyTorch float64, or enable jax_enable_x64 before creating arrays in a separate JAX diagnostic process; confirm the actual dtype and keep the normal parity suite FP32. Extend the parity table with maximum errors and tolerances. Include a nonzero rotary offset and a nonuniform normalization input so identity-like special cases do not make a broken derivative look correct."
+        "text": "For projection, RMSNorm, RoPE and SwiGLU, define the scalar `sum(output * fixed_probe)` using identical probe arrays. Compute gradients with respect to input and selected parameters in both frameworks, translating weight layouts before comparison. If a discrepancy needs diagnosis, add a centered FP64 finite-difference check for one scalar parameter. Use NumPy/PyTorch float64, or enable `jax_enable_x64` before creating arrays in a separate JAX diagnostic process; confirm the actual dtype and keep the normal parity suite FP32. Extend the parity table with maximum errors and tolerances. Include a nonzero rotary offset and a nonuniform normalization input so identity-like special cases do not make a broken derivative look correct."
       },
       {
         "minutes": 10,
@@ -779,7 +779,7 @@
       "Tolerance choices and any discrepancy diagnosis are recorded."
     ],
     "selfCheck": {
-      "question": "Why can comparing only the gradient of sum(output) miss a bug?",
+      "question": "Why can comparing only the gradient of `sum(output)` miss a bug?",
       "answer": "A uniform upstream gradient can cancel or hide certain permutations and reduction errors. A fixed nonuniform probe exercises a richer derivative direction while keeping the objective scalar."
     },
     "pitfall": "Do not accept a larger tolerance until you have ruled out layout, reduction, epsilon and dtype mismatches.",
@@ -819,7 +819,7 @@
       {
         "minutes": 10,
         "title": "Verify and save",
-        "text": "Save the complete forward function, a parameter-tree shape manifest and a finite [B,T,V] logits test. Run the future-token perturbation check once."
+        "text": "Save the complete forward function, a parameter-tree shape manifest and a finite `[B,T,V]` logits test. Run the future-token perturbation check once."
       }
     ],
     "checks": [
@@ -828,7 +828,7 @@
       "Logits are finite, correctly shaped and causal."
     ],
     "selfCheck": {
-      "question": "Must this tiny decoder use lax.scan to count as a functional JAX implementation?",
+      "question": "Must this tiny decoder use `lax.scan` to count as a functional JAX implementation?",
       "answer": "No. Functional means state and effects are explicit. A fixed loop over a tiny known layer list can be traced; scan becomes a useful design choice when its control-flow and compilation tradeoffs matter."
     },
     "pitfall": "Do not create or mutate trainable arrays inside the forward function; pass the parameter tree in.",
@@ -961,7 +961,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Create a single reproducible parity command using the shared configuration, data and NumPy weights. Compare full logits, shifted-token mean loss and gradients for the selected parameter groups, transforming layouts explicitly. Use at least two short sequence lengths and include a nonzero rotary offset. Report maximum absolute error plus a sensible relative statistic that does not divide blindly by zero. If one comparison fails, reuse intermediate probes to identify the cause. Keep default FP32 CPU tolerances near atol=1e-5 and rtol=1e-4 unless a documented numerical reason warrants a specific change."
+        "text": "Create a single reproducible parity command using the shared configuration, data and NumPy weights. Compare full logits, shifted-token mean loss and gradients for the selected parameter groups, transforming layouts explicitly. Use at least two short sequence lengths and include a nonzero rotary offset. Report maximum absolute error plus a sensible relative statistic that does not divide blindly by zero. If one comparison fails, reuse intermediate probes to identify the cause. Keep default FP32 CPU tolerances near `atol=1e-5` and `rtol=1e-4` unless a documented numerical reason warrants a specific change."
       },
       {
         "minutes": 10,
@@ -995,7 +995,7 @@
       "The tested modern PyTorch decoder and RoPE offsets.",
       "An inference-only path with dropout disabled."
     ],
-    "explanation": "During causal decoding, earlier keys and values need not be recomputed for each new token. A cache stores per-layer K and V, typically [B,Hkv,Tcached,D], while a new query attends to the relevant stored prefix. RoPE makes positions part of the cache contract: a key is rotated for its absolute position once before storage. Prefill processes a prompt; decode extends it. This session uses simple growing tensors for clarity. Preallocated buffers and optimized serving are separate engineering choices, not prerequisites for proving cache correctness.",
+    "explanation": "During causal decoding, earlier keys and values need not be recomputed for each new token. A cache stores per-layer K and V, typically `[B,Hkv,Tcached,D]`, while a new query attends to the relevant stored prefix. RoPE makes positions part of the cache contract: a key is rotated for its absolute position once before storage. Prefill processes a prompt; decode extends it. This session uses simple growing tensors for clarity. Preallocated buffers and optimized serving are separate engineering choices, not prerequisites for proving cache correctness.",
     "plan": [
       {
         "minutes": 5,
@@ -1010,7 +1010,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Add an inference method that accepts optional per-layer K/V state and returns logits plus new state. Use model.eval() and torch.inference_mode() around this inference path. Begin with a short full-prompt prefill, then decode exactly one new token at a time. Rotate new keys using positions beginning at the existing cache length or an explicit absolute offset, concatenate along the token axis and preserve Hkv rather than expanding cached heads. Track logical length separately from token content. Print or return a small state-shape trace for a three-token prompt followed by two decode calls; defer speed tuning."
+        "text": "Add an inference method that accepts optional per-layer K/V state and returns logits plus new state. Use `model.eval()` and `torch.inference_mode()` around this inference path. Begin with a short full-prompt prefill, then decode exactly one new token at a time. Rotate new keys using positions beginning at the existing cache length or an explicit absolute offset, concatenate along the token axis and preserve Hkv rather than expanding cached heads. Track logical length separately from token content. Print or return a small state-shape trace for a three-token prompt followed by two decode calls; defer speed tuning."
       },
       {
         "minutes": 10,
@@ -1203,7 +1203,7 @@
       "A tested PyTorch linear layer and gradient checks.",
       "A scratch small-matrix example, separate from pretrained loading."
     ],
-    "explanation": "LoRA represents a weight update as a product of two smaller matrices. For a linear weight W shaped [out,in], choose A shaped [r,in] and B shaped [out,r], then use W_eff=W+(α/r)BA. The base W stays frozen while A and B train, giving r(in+out) trainable weights instead of out×in. This reduces trainable state, but it does not remove the base model’s forward computation or weights. The adapter is still a precisely defined mathematical function whose output and gradients can be tested on small arrays.",
+    "explanation": "LoRA represents a weight update as a product of two smaller matrices. For a linear weight W shaped `[out,in]`, choose A shaped `[r,in]` and B shaped `[out,r]`, then use:\n\n\\[\nW_{\\mathrm{eff}}=W+\\frac{\\alpha}{r}BA.\n\\]\n\n The base W stays frozen while A and B train, giving \\(r(d_{\\mathrm{in}}+d_{\\mathrm{out}})\\) trainable weights instead of \\(d_{\\mathrm{out}}d_{\\mathrm{in}}\\). This reduces trainable state, but it does not remove the base model’s forward computation or weights. The adapter is still a precisely defined mathematical function whose output and gradients can be tested on small arrays.",
     "plan": [
       {
         "minutes": 5,
@@ -1213,7 +1213,7 @@
       {
         "minutes": 10,
         "title": "Study",
-        "text": "Use the core resources above for ten minutes in total, focusing only on the indicated sections. Read A5’s low-rank update construction and scaling. Derive output = linear(x,W)+(α/r)linear(linear(x,A),B)."
+        "text": "Use the core resources above for ten minutes in total, focusing only on the indicated sections. Read A5’s low-rank update construction and scaling. Derive:\n\n\\[\n\\operatorname{output}=\\operatorname{linear}(x,W)+(\\alpha/r)\\operatorname{linear}(\\operatorname{linear}(x,A),B)\n\\]"
       },
       {
         "minutes": 35,
@@ -1228,12 +1228,12 @@
     ],
     "checks": [
       "A, B and base-weight shapes match the formula.",
-      "The trainable count equals r(in+out).",
+      "The trainable count equals \\(r(d_{\\mathrm{in}}+d_{\\mathrm{out}})\\).",
       "Base weights are frozen and the factorized forward matches the dense update."
     ],
     "selfCheck": {
       "question": "For an 8→12 linear layer at rank 2, how many adapter weights train, excluding biases?",
-      "answer": "There are 2×8+12×2=40 trainable adapter weights. The frozen base matrix contains 12×8=96 weights."
+      "answer": "There are \\(2\\times8+12\\times2=40\\) trainable adapter weights. The frozen base matrix contains \\(12\\times8=96\\) weights."
     },
     "pitfall": "Do not include the frozen base parameters in the optimizer merely because the wrapper exposes them.",
     "reading": [
@@ -1350,7 +1350,7 @@
       "The pinned pretrained baseline and tested LoRA wrapper.",
       "A list of actual linear-module names from the loaded model."
     ],
-    "explanation": "An adapter experiment is defined partly by where adaptation is allowed. Selecting named projection layers makes the intervention reproducible and permits an exact trainable-parameter calculation. Freezing must be checked by both requires_grad settings and observed gradients after backward. Layer-level merge parity is necessary but insufficient: replacement logic, tied modules or an unintended target can still alter the full model. Compare complete model logits before training and after a small adapter change, keeping token IDs and evaluation settings fixed throughout.",
+    "explanation": "An adapter experiment is defined partly by where adaptation is allowed. Selecting named projection layers makes the intervention reproducible and permits an exact trainable-parameter calculation. Freezing must be checked by both `requires_grad` settings and observed gradients after backward. Layer-level merge parity is necessary but insufficient: replacement logic, tied modules or an unintended target can still alter the full model. Compare complete model logits before training and after a small adapter change, keeping token IDs and evaluation settings fixed throughout.",
     "plan": [
       {
         "minutes": 5,
@@ -1461,7 +1461,7 @@
       {
         "minutes": 5,
         "title": "Retrieve",
-        "text": "For tokens [prompt1,prompt2,target1,target2], identify which logits predict target1 and target2."
+        "text": "For tokens `[prompt1,prompt2,target1,target2]`, identify which logits predict target1 and target2."
       },
       {
         "minutes": 10,
@@ -1615,7 +1615,7 @@
       "Your working PyTorch feed-forward block and its parameter count.",
       "A tiny CPU FP32 tensor with batch 2, length 3 and model width 16."
     ],
-    "explanation": "A sparse expert layer selects a small subset of feed-forward networks for each token. In this toy design, flatten the batch and sequence into N tokens, compute router logits of shape [N, 4], and choose two experts per row. Normalize the selected logits with a softmax before combining their outputs. All four expert weight sets exist in memory, even though one token uses only two. This distinction separates stored parameters from token-level computation; it does not, by itself, establish faster execution.",
+    "explanation": "A sparse expert layer selects a small subset of feed-forward networks for each token. In this toy design, flatten the batch and sequence into N tokens, compute router logits of shape `[N, 4]`, and choose two experts per row. Normalize the selected logits with a softmax before combining their outputs. All four expert weight sets exist in memory, even though one token uses only two. This distinction separates stored parameters from token-level computation; it does not, by itself, establish faster execution.",
     "plan": [
       {
         "minutes": 5,
@@ -1630,7 +1630,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Create notes/moe-design.md. Define x:[N,16], router weights [16,4], selected indices [N,2], selected weights [N,2], expert outputs [N,16], and restored output [2,3,16]. Choose a simple two-linear-layer expert with hidden width 32 and no biases. Work out one expert’s parameter count and then the router-plus-four-expert total. Compute the router-plus-two-expert count for one token. State your activation, top-2 normalization, tie behavior and no-token-dropping policy so tomorrow’s forward pass has a precise contract. Label this as a teaching MoE, not a reproduction of DeepSeekMoE."
+        "text": "Create `notes/moe-design.md`. Define x:`[N,16]`, router weights `[16,4]`, selected indices `[N,2]`, selected weights `[N,2]`, expert outputs `[N,16]`, and restored output `[2,3,16]`. Choose a simple two-linear-layer expert with hidden width 32 and no biases. Work out one expert’s parameter count and then the router-plus-four-expert total. Compute the router-plus-two-expert count for one token. State your activation, top-2 normalization, tie behavior and no-token-dropping policy so tomorrow’s forward pass has a precise contract. Label this as a teaching MoE, not a reproduction of DeepSeekMoE."
       },
       {
         "minutes": 10,
@@ -1661,7 +1661,7 @@
       "Preserve autograd through selected routing weights and expert computations."
     ],
     "before": [
-      "notes/moe-design.md from the previous session.",
+      "`notes/moe-design.md` from the previous session.",
       "A CPU FP32 PyTorch environment; no GPU session is needed."
     ],
     "explanation": "The simplest useful MoE forward pass prioritizes readable semantics. Compute router logits, take their top two entries, apply softmax to those two values, then add the two weighted expert outputs. The selected indices are discrete; ordinary autograd does not differentiate the selection boundary. It does differentiate selected logits through their softmax weights and the selected expert computations. Explicit loops are acceptable here because the learning goal is routing correctness. Dispatch efficiency and distributed experts would introduce different engineering problems beyond this lab.",
@@ -1669,7 +1669,7 @@
       {
         "minutes": 5,
         "title": "Retrieve",
-        "text": "From yesterday’s design, write the equation y_n = sum over selected experts of weight times expert(x_n)."
+        "text": "From yesterday’s design, write the equation \\(y_n=\\sum_{e\\in\\mathcal S_n}p_{n,e}E_e(x_n)\\), where \\(\\mathcal S_n\\) is the selected expert set and \\(p_{n,e}\\) its routing weights."
       },
       {
         "minutes": 10,
@@ -1679,7 +1679,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Implement a small module in your architecture package, using a ModuleList of four experts and one router linear layer. Flatten [B,T,D] into [N,D]. For each token, evaluate only its two selected experts and sum the weighted outputs, retaining tensors rather than converting weights to Python numbers. Stack the results and restore [B,T,D]. Return routing indices and weights as optional diagnostics. Run the six-token fixture, print only shapes and selected expert IDs, and backpropagate a scalar loss to confirm the graph remains connected."
+        "text": "Implement a small module in your architecture package, using a ModuleList of four experts and one router linear layer. Flatten `[B,T,D]` into `[N,D]`. For each token, evaluate only its two selected experts and sum the weighted outputs, retaining tensors rather than converting weights to Python numbers. Stack the results and restore `[B,T,D]`. Return routing indices and weights as optional diagnostics. Run the six-token fixture, print only shapes and selected expert IDs, and backpropagate a scalar loss to confirm the graph remains connected."
       },
       {
         "minutes": 10,
@@ -1696,7 +1696,7 @@
       "question": "Why does converting a routing weight to a Python float cause trouble?",
       "answer": "The float is detached from autograd, so that contribution no longer trains the router through the weighted output."
     },
-    "pitfall": "An in-place write into a detached output buffer or accidental .item() can silently break the desired gradient path.",
+    "pitfall": "An in-place write into a detached output buffer or accidental .`item()` can silently break the desired gradient path.",
     "reading": [
       {
         "id": "A7",
@@ -1723,12 +1723,12 @@
       {
         "minutes": 10,
         "title": "Study",
-        "text": "Use the core resources above for ten minutes in total, focusing only on the indicated sections. Read your routing contract and write the dense formula with a [N,4] sparse weight matrix. No new reading is required."
+        "text": "Use the core resources above for ten minutes in total, focusing only on the indicated sections. Read your routing contract and write the dense formula with a `[N,4]` sparse weight matrix. No new reading is required."
       },
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Evaluate all four experts on the entire [N,D] input and stack outputs as [N,4,D]. Scatter the normalized top-2 weights into a zero [N,4] tensor, multiply and sum along the expert axis. Clone the model state and input for the two paths. Use the same fixed random tensor to form a scalar weighted output sum, then compare outputs and all available gradients in CPU FP32. Treat an unused expert’s absent gradient as zero only when interpreting the comparison, and deliberately swap two routing indices once to prove the test catches the error."
+        "text": "Evaluate all four experts on the entire `[N,D]` input and stack outputs as `[N,4,D]`. Scatter the normalized top-2 weights into a zero `[N,4]` tensor, multiply and sum along the expert axis. Clone the model state and input for the two paths. Use the same fixed random tensor to form a scalar weighted output sum, then compare outputs and all available gradients in CPU FP32. Treat an unused expert’s absent gradient as zero only when interpreting the comparison, and deliberately swap two routing indices once to prove the test catches the error."
       },
       {
         "minutes": 10,
@@ -1755,7 +1755,7 @@
     ],
     "before": [
       "Passing MoE forward and gradient parity tests.",
-      "The parameter calculation in notes/moe-design.md."
+      "The parameter calculation in `notes/moe-design.md`."
     ],
     "explanation": "Routing counts describe how often an expert is selected, not how useful it is. With N tokens and top-2 selection, the total count across four experts must be 2N when no token is dropped. Repeated inputs or a biased router may concentrate work on a few experts. That can create poor utilization even while forward and gradient parity remain perfect. This lab records the behavior rather than adding a balancing objective; changing training objectives would be a separate experiment with its own controls.",
     "plan": [
@@ -1772,7 +1772,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Add a small diagnostic that counts selected expert IDs and reports each count and fraction of the 2N assignments. Run a fixed random input batch, then a deliberately skewed fixture made from repeated inputs or a documented router-weight change. Save both count tables. Re-run the dense-reference parity checks on the skewed case. Extend notes/moe-design.md with your total and active parameter counts, two observations about utilization, and one reason the explicit implementation might run slower than a dense feed-forward layer despite activating fewer expert weights."
+        "text": "Add a small diagnostic that counts selected expert IDs and reports each count and fraction of the 2N assignments. Run a fixed random input batch, then a deliberately skewed fixture made from repeated inputs or a documented router-weight change. Save both count tables. Re-run the dense-reference parity checks on the skewed case. Extend `notes/moe-design.md` with your total and active parameter counts, two observations about utilization, and one reason the explicit implementation might run slower than a dense feed-forward layer despite activating fewer expert weights."
       },
       {
         "minutes": 10,
@@ -1821,7 +1821,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Create notes/mla.md with columns for paper symbol, shape, operation and code location. Trace a token representation through the down-projection to the KV latent, the content key/value up-projections, and the positional-key path. Add query content and positional shapes only far enough to form an attention score. Choose the paper’s row- or column-vector convention and use it consistently. Link the exact reference revision you inspect. If a code path fuses projections, describe the mathematical pieces in the note rather than trying to rewrite or execute the whole model."
+        "text": "Create `notes/mla.md` with columns for paper symbol, shape, operation and code location. Trace a token representation through the down-projection to the KV latent, the content key/value up-projections, and the positional-key path. Add query content and positional shapes only far enough to form an attention score. Choose the paper’s row- or column-vector convention and use it consistently. Link the exact reference revision you inspect. If a code path fuses projections, describe the mathematical pieces in the note rather than trying to rewrite or execute the whole model."
       },
       {
         "minutes": 10,
@@ -1852,7 +1852,7 @@
       "Trace content and positional contributions to one attention score."
     ],
     "before": [
-      "Your dimensioned notes/mla.md from the previous session.",
+      "Your dimensioned `notes/mla.md` from the previous session.",
       "The reference revision and paper notation already selected."
     ],
     "explanation": "The cache is the state retained for future tokens; projection weights and temporary reconstructed tensors are different memory categories. In MLA, the compact KV latent and a positional key component can provide the retained per-token state. Understanding the memory saving requires following the inference algebra as well as the projections: a naive implementation may reconstruct and retain expanded keys and values, forfeiting the intended benefit. Today’s artifact distinguishes persistent tensors from transient work and shows where the next token reads each retained component.",
@@ -1870,7 +1870,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Add a two-token walkthrough to notes/mla.md. Draw a table after token 1 and after token 2 with each retained tensor’s name and accumulated shape. Follow one new query against one cached token, splitting the content score and positional score before they are added. Mark projection weights as shared model parameters and any reconstructed head tensors as temporary unless your inspected implementation retains them. Explain in two sentences how an algebraic projection rearrangement can avoid retaining expanded content K/V. Do not implement a full MLA module during this hour."
+        "text": "Add a two-token walkthrough to `notes/mla.md`. Draw a table after token 1 and after token 2 with each retained tensor’s name and accumulated shape. Follow one new query against one cached token, splitting the content score and positional score before they are added. Mark projection weights as shared model parameters and any reconstructed head tensors as temporary unless your inspected implementation retains them. Explain in two sentences how an algebraic projection rearrangement can avoid retaining expanded content K/V. Do not implement a full MLA module during this hour."
       },
       {
         "minutes": 10,
@@ -1901,7 +1901,7 @@
       "Calculate and check a concrete MLA-versus-GQA example."
     ],
     "before": [
-      "The persistent-cache inventory in notes/mla.md.",
+      "The persistent-cache inventory in `notes/mla.md`.",
       "Your GQA cache formula from the earlier KV-cache activity."
     ],
     "explanation": "Memory accounting is easiest when you count elements first and multiply by bytes per element last. For a simple compact MLA cache, count one latent width plus one retained positional-key width per token per layer. For GQA, count both key and value heads. Choose an illustrative configuration and label it as such; matching a few dimensions does not make two models quality-equivalent. Separate bytes from MiB, and distinguish logical tensor storage from allocator overhead, workspace memory and the weights needed to execute inference.",
@@ -1919,7 +1919,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "In notes/mla.md, use an illustrative B=1, L=8, T=2048, FP16 configuration. Set GQA KV heads=4 and head width=64; set the compact MLA latent width=128 and positional-key width=32. Calculate GQA bytes as 2BLTh_kv d s and compact MLA bytes as BLT(r+d_pos)s, with s=2. Convert both results to MiB using 2^20, calculate their ratio, then double T and predict the new values. Verify arithmetic in a ten-line script or calculator. State that projection weights and temporary tensors are excluded."
+        "text": "In `notes/mla.md`, use an illustrative B=1, L=8, T=2048, FP16 configuration. Set GQA KV heads=4 and head width=64; set the compact MLA latent width=128 and positional-key width=32. Calculate the logical cache sizes, with \\(s=2\\) bytes per element:\n\n\\[\n\\begin{aligned}\nM_{\\mathrm{GQA}} &= 2BLT h_{\\mathrm{kv}}d s,\\\\\nM_{\\mathrm{MLA}} &= BLT(r+d_{\\mathrm{pos}})s.\n\\end{aligned}\n\\]\n\n Convert both results to MiB using \\(2^{20}\\), calculate their ratio, then double T and predict the new values. Verify arithmetic in a ten-line script or calculator. State that projection weights and temporary tensors are excluded."
       },
       {
         "minutes": 10,
@@ -1950,7 +1950,7 @@
       "Finish a falsifiable, dimensioned architecture note."
     ],
     "before": [
-      "The projection trace, two-token cache walkthrough and memory calculation in notes/mla.md.",
+      "The projection trace, two-token cache walkthrough and memory calculation in `notes/mla.md`.",
       "Your implementation-depth labels: implemented, code-traced or paper-only."
     ],
     "explanation": "A useful architecture note links mechanism to evidence. A low-rank projection is only one component of a design: position handling, scoring equations, reconstruction or projection rearrangement, and the tensors actually cached determine its behavior. The goal is to explain those connections precisely enough that another engineer can find a mistaken dimension or assumption. You are not claiming an implementation or reproducing reported model quality. Labeling knowledge depth keeps a strong technical reading exercise from turning into an unsupported portfolio claim.",
@@ -1968,7 +1968,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Edit notes/mla.md into a short architecture brief: start with the problem, add the dimension table and two-token cache trace, then present the worked memory example. Add a paragraph answering why simply projecting K and V down and later expanding them is not enough to establish the same design or cache behavior. Distinguish the paper’s mechanism from any code path you actually traced. End with two test cases you would require before implementing MLA: full-prefix versus cached logits, and measured retained-state size versus your formula. Keep them future checks, not new assignments."
+        "text": "Edit `notes/mla.md` into a short architecture brief: start with the problem, add the dimension table and two-token cache trace, then present the worked memory example. Add a paragraph answering why simply projecting K and V down and later expanding them is not enough to establish the same design or cache behavior. Distinguish the paper’s mechanism from any code path you actually traced. End with two test cases you would require before implementing MLA: full-prefix versus cached logits, and measured retained-state size versus your formula. Keep them future checks, not new assignments."
       },
       {
         "minutes": 10,
@@ -2017,7 +2017,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Create notes/hybrid-state.md. Record the exact Qwen3.5 configuration and source revision you inspect. Make a layer-type table with columns for sequence mixer, input/output width, persistent state, and whether that state grows with token count. Use the model card or linked official configuration to identify the pattern; if a dimension is absent, write unresolved instead of guessing. Place the Gated DeltaNet recurrence next to this table as the mechanism you will trace tomorrow. Keep Mamba-2 and Mamba-3 as optional context, not additional required reading or implementations."
+        "text": "Create `notes/hybrid-state.md`. Record the exact Qwen3.5 configuration and source revision you inspect. Make a layer-type table with columns for sequence mixer, input/output width, persistent state, and whether that state grows with token count. Use the model card or linked official configuration to identify the pattern; if a dimension is absent, write unresolved instead of guessing. Place the Gated DeltaNet recurrence next to this table as the mechanism you will trace tomorrow. Keep Mamba-2 and Mamba-3 as optional context, not additional required reading or implementations."
       },
       {
         "minutes": 10,
@@ -2048,10 +2048,10 @@
       "Explain state decay separately from the targeted delta correction."
     ],
     "before": [
-      "notes/hybrid-state.md with a selected recurrent component.",
+      "`notes/hybrid-state.md` with a selected recurrent component.",
       "A9’s gated delta rule equation or its linked reference code."
     ],
-    "explanation": "Use a state matrix S of shape [d_v,d_k], key and query vectors of length d_k, and a value vector of length d_v. One convenient trace first decays the old state, then corrects its prediction at the new key, and finally reads with the query. This makes every multiplication easy to check. The state matrix is an intermediate memory of the sequence, distinct from the model’s trained projection weights. A dimensioned hand calculation is the required outcome; a full optimized recurrence implementation is not.",
+    "explanation": "Use a state matrix S of shape `[d_v,d_k]`, key and query vectors of length \\(d_k\\), and a value vector of length \\(d_v\\). One convenient trace first decays the old state, then corrects its prediction at the new key, and finally reads with the query. This makes every multiplication easy to check. The state matrix is an intermediate memory of the sequence, distinct from the model’s trained projection weights. A dimensioned hand calculation is the required outcome; a full optimized recurrence implementation is not.",
     "plan": [
       {
         "minutes": 5,
@@ -2061,17 +2061,17 @@
       {
         "minutes": 10,
         "title": "Study",
-        "text": "Use the core resources above for ten minutes in total, focusing only on the indicated sections. Inspect A9’s gated delta rule and confirm the convention S:[d_v,d_k]. If the code transposes this convention, note the mapping."
+        "text": "Use the core resources above for ten minutes in total, focusing only on the indicated sections. Inspect A9’s gated delta rule and confirm the convention S:`[d_v,d_k]`. If the code transposes this convention, note the mapping."
       },
       {
         "minutes": 35,
         "title": "Build",
-        "text": "In notes/hybrid-state.md, rewrite the recurrence as S_bar=alpha*S_prev, error=v-S_bar*k, S_new=S_bar+beta*error*k^T, and output=S_new*q. Label every shape. Work one example with d_k=2, d_v=2, S_prev=identity, k=q=[1,0], v=[2,0], alpha=0.5 and beta=1. Compute each intermediate by hand and explain which state column changes. Keep the input projections and gate-generating networks outside this deliberately narrow state-update example. Locate corresponding operations in the reference code if readable within the timebox; otherwise label the trace paper-only and preserve the code question for flex time."
+        "text": "In `notes/hybrid-state.md`, rewrite the recurrence as:\n\n\\[\n\\begin{aligned}\n\\bar S &= \\alpha S_{\\mathrm{prev}},\\\\\ne &= v-\\bar S k,\\\\\nS_{\\mathrm{new}} &= \\bar S+\\beta e k^\\top,\\\\\n\\operatorname{output} &= S_{\\mathrm{new}}q.\n\\end{aligned}\n\\]\n\n Label every shape. Work one example with \\(d_k=d_v=2\\), \\(S_{\\mathrm{prev}}=I\\), `k = q = [1, 0]`, `v = [2, 0]`, \\(\\alpha=0.5\\), and \\(\\beta=1\\). Compute each intermediate by hand and explain which state column changes. Keep the input projections and gate-generating networks outside this deliberately narrow state-update example. Locate corresponding operations in the reference code if readable within the timebox; otherwise label the trace paper-only and preserve the code question for flex time."
       },
       {
         "minutes": 10,
         "title": "Verify and save",
-        "text": "Check the example yields S_new with first column [2,0] and second column [0,0.5], and output [2,0]. Save the arithmetic beside the source link."
+        "text": "Check the example yields \\(S_{\\mathrm{new}}\\) with first column `[2,0]` and second column [0,0.5], and output `[2,0]`. Save the arithmetic beside the source link."
       }
     ],
     "checks": [
@@ -2097,10 +2097,10 @@
       "Calculate combined recurrent and attention state for an illustrative hybrid."
     ],
     "before": [
-      "The [d_v,d_k] state convention from the previous session.",
+      "The `[d_v,d_k]` state convention from the previous session.",
       "Your full-attention KV formula and hybrid component inventory."
     ],
-    "explanation": "A storage formula describes a representation under stated assumptions. If each recurrent head retains a d_v by d_k matrix, that matrix contributes the same number of elements after ten tokens or ten thousand. This says nothing about how much information can be recovered from it. A hybrid model adds recurrent storage to the KV storage of its attention layers and may retain additional short-convolution state. Keep the matrix-only calculation explicit, then list omitted terms instead of presenting it as exact end-to-end memory.",
+    "explanation": "A storage formula describes a representation under stated assumptions. If each recurrent head retains a \\(d_v\\) by \\(d_k\\) matrix, that matrix contributes the same number of elements after ten tokens or ten thousand. This says nothing about how much information can be recovered from it. A hybrid model adds recurrent storage to the KV storage of its attention layers and may retain additional short-convolution state. Keep the matrix-only calculation explicit, then list omitted terms instead of presenting it as exact end-to-end memory.",
     "plan": [
       {
         "minutes": 5,
@@ -2115,7 +2115,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Add an illustrative calculation with B=1, eight recurrent layers, four recurrent heads, d_k=d_v=32 and FP32 recurrent state. Calculate B*L_rec*H*d_v*d_k*s_state. Separately use two GQA layers, two KV heads, head width 32 and FP16 KV state; calculate 2*B*L_att*T*h_kv*d_head*s_kv at T=512 and T=4096. Tabulate recurrent matrix bytes, attention-cache bytes and their sum. Label these toy dimensions, not the selected Qwen model’s exact configuration. Add a list of excluded weights, activations, allocator overhead and any auxiliary persistent state."
+        "text": "Add an illustrative calculation with B=1, eight recurrent layers, four recurrent heads, \\(d_k=d_v=32\\) and FP32 recurrent state. Calculate \\(B L_{\\mathrm{rec}} H d_v d_k s_{\\mathrm{state}}\\). Separately use two GQA layers, two KV heads, head width 32 and FP16 KV state; calculate \\(2B L_{\\mathrm{att}} T h_{\\mathrm{kv}}d_{\\mathrm{head}}s_{\\mathrm{kv}}\\) at T=512 and T=4096. Tabulate recurrent matrix bytes, attention-cache bytes and their sum. Label these toy dimensions, not the selected Qwen model’s exact configuration. Add a list of excluded weights, activations, allocator overhead and any auxiliary persistent state."
       },
       {
         "minutes": 10,
@@ -2147,7 +2147,7 @@
     ],
     "before": [
       "Your component map, single-token calculation and storage table.",
-      "The exact source revisions cited in notes/hybrid-state.md."
+      "The exact source revisions cited in `notes/hybrid-state.md`."
     ],
     "explanation": "An architecture explanation should connect the state update, memory footprint and expected trade-offs without turning expectations into measured results. Your small calculation demonstrates how a recurrent state changes; it does not establish the quality or speed of a complete hybrid model. Similarly, a byte formula does not validate a kernel. The required finish is a coherent walkthrough linking components to persistent state. A tiny numerical recurrence is optional only if those core artifacts are already complete and there is time left in this hour.",
     "plan": [
@@ -2164,7 +2164,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Edit notes/hybrid-state.md into a compact walkthrough. Start with the chosen hybrid component map, present the one-token arithmetic, then compare state growth against your GQA cache. Add three carefully qualified trade-offs: retained memory, access to detailed past token representations, and implementation requirements for efficient training versus decoding. Mark every statement as derived, source-reported or personally measured where relevant. If all core checks pass before the 35-minute build block ends, optionally translate only the tiny scalar-gate recurrence into NumPy and compare its output with the hand calculation; stop there."
+        "text": "Edit `notes/hybrid-state.md` into a compact walkthrough. Start with the chosen hybrid component map, present the one-token arithmetic, then compare state growth against your GQA cache. Add three carefully qualified trade-offs: retained memory, access to detailed past token representations, and implementation requirements for efficient training versus decoding. Mark every statement as derived, source-reported or personally measured where relevant. If all core checks pass before the 35-minute build block ends, optionally translate only the tiny scalar-gate recurrence into NumPy and compare its output with the hand calculation; stop there."
       },
       {
         "minutes": 10,
@@ -2213,7 +2213,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Start notes/current-architectures.md with a table whose columns are your decoder, the selected Gemma variant, DeepSeek-V4 and evidence depth. Populate your decoder column from code. Fill only the Gemma cells supported by A10 or linked official material; use not specified when a detail is unavailable. Cover attention pattern, cached state, routed versus dense feed-forward computation, positional handling and documented training choices. Put a link beside each external claim. Add one sentence per row explaining what implementation or inference behavior would change if you adopted that component."
+        "text": "Start `notes/current-architectures.md` with a table whose columns are your decoder, the selected Gemma variant, DeepSeek-V4 and evidence depth. Populate your decoder column from code. Fill only the Gemma cells supported by A10 or linked official material; use not specified when a detail is unavailable. Cover attention pattern, cached state, routed versus dense feed-forward computation, positional handling and documented training choices. Put a link beside each external claim. Add one sentence per row explaining what implementation or inference behavior would change if you adopted that component."
       },
       {
         "minutes": 10,
@@ -2244,7 +2244,7 @@
       "Separate related attention-compression designs instead of treating them as interchangeable."
     ],
     "before": [
-      "notes/current-architectures.md and yesterday’s fixed comparison axes.",
+      "`notes/current-architectures.md` and yesterday’s fixed comparison axes.",
       "Your MLA note plus A11’s DeepSeek-V4 technical report."
     ],
     "explanation": "Architecture families evolve, and a familiar acronym is not evidence that a newer design uses exactly the same mechanism. Start from the current report’s definitions, then compare its retained state and attention-selection rules with your previous MLA and GQA notes. Distinguish a reported design choice from a reported benchmark result: the former can be traced structurally, while the latter depends on the authors’ full training and evaluation setup. This session extends your component map without introducing another required implementation or a model download.",
@@ -2262,7 +2262,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Fill the DeepSeek-V4 column in notes/current-architectures.md using the same rows as yesterday. For attention/cache, explicitly record what state is retained and whether the description also changes how prior positions are selected. Add expert-routing and positional details only where supported by the report. Record one documented training choice without turning it into a requirement for your project. Place two short comparison notes below the table: one relationship to your MLA trace and one concrete difference from your dense GQA decoder. Keep missing details visible and all benchmark claims attributed."
+        "text": "Fill the DeepSeek-V4 column in `notes/current-architectures.md` using the same rows as yesterday. For attention/cache, explicitly record what state is retained and whether the description also changes how prior positions are selected. Add expert-routing and positional details only where supported by the report. Record one documented training choice without turning it into a requirement for your project. Place two short comparison notes below the table: one relationship to your MLA trace and one concrete difference from your dense GQA decoder. Keep missing details visible and all benchmark claims attributed."
       },
       {
         "minutes": 10,
@@ -2311,7 +2311,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Add a survey table to notes/current-architectures.md with rows SFT, DPO and GRPO, and columns training example or sampled group, feedback signal, reference/baseline role as described by the source, and what your current trainer lacks. Write one concrete example for each using your earlier structured-output task. Then draw a four-stage multimodal interface: non-text input, encoder/features, adapter or projection, and language-model input stream. Label which parts your text-only code already has and which are absent. Explicitly mark this whole session survey-only; no reward pipeline or vision encoder implementation is required."
+        "text": "Add a survey table to `notes/current-architectures.md` with rows SFT, DPO and GRPO, and columns training example or sampled group, feedback signal, reference/baseline role as described by the source, and what your current trainer lacks. Write one concrete example for each using your earlier structured-output task. Then draw a four-stage multimodal interface: non-text input, encoder/features, adapter or projection, and language-model input stream. Label which parts your text-only code already has and which are absent. Explicitly mark this whole session survey-only; no reward pipeline or vision encoder implementation is required."
       },
       {
         "minutes": 10,
@@ -2360,7 +2360,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Condense notes/current-architectures.md to approximately two pages: one page for the component comparison and one for interpretation plus the brief post-training/multimodal survey. Add an evidence-depth legend and use it in every external-model row. Link your own code or results when discussing the baseline. Write three closing observations: a change you can already test in your toy model, a change requiring new systems work, and a paper-only direction to revisit later. Keep all optional architectures outside the required implementation list, and remove any unsupported ranking or universal performance claim."
+        "text": "Condense `notes/current-architectures.md` to approximately two pages: one page for the component comparison and one for interpretation plus the brief post-training/multimodal survey. Add an evidence-depth legend and use it in every external-model row. Link your own code or results when discussing the baseline. Write three closing observations: a change you can already test in your toy model, a change requiring new systems work, and a paper-only direction to revisit later. Keep all optional architectures outside the required implementation list, and remove any unsupported ranking or universal performance claim."
       },
       {
         "minutes": 10,
@@ -2417,7 +2417,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Create experiments/gqa-vs-mha/config.json and a short protocol note. Use your validated decoder dimensions, or a tiny width-128, eight-query-head fixture; compare eight versus two KV heads. Hold layers, batch, token inputs, query/output/MLP dimensions, dtype and device fixed. Select three supported prompt lengths, such as 32,128,512, with a fixed short decode length. Calculate both models’ parameter counts and explicitly identify K/V projection differences. Specify warm-up, synchronized timing, sample count and output columns. Set both models to evaluation mode and use torch.inference_mode() around all timed forward and cache operations. Write a small timing helper using time.perf_counter. For CUDA synchronize immediately before starting and immediately after the measured call; for MPS use its corresponding synchronize call; CPU execution needs no device synchronization. Allocate inputs before timing, run three warm-up calls and choose five measured repetitions. Keep this helper specific to your inference experiment, with no tuning search."
+        "text": "Create `experiments/gqa-vs-mha/config.json` and a short protocol note. Use your validated decoder dimensions, or a tiny width-128, eight-query-head fixture; compare eight versus two KV heads. Hold layers, batch, token inputs, query/output/MLP dimensions, dtype and device fixed. Select three supported prompt lengths, such as 32,128,512, with a fixed short decode length. Calculate both models’ parameter counts and explicitly identify K/V projection differences. Specify warm-up, synchronized timing, sample count and output columns. Set both models to evaluation mode and use `torch.inference_mode()` around all timed forward and cache operations. Write a small timing helper using `time.perf_counter`. For CUDA synchronize immediately before starting and immediately after the measured call; for MPS use its corresponding synchronize call; CPU execution needs no device synchronization. Allocate inputs before timing, run three warm-up calls and choose five measured repetitions. Keep this helper specific to your inference experiment, with no tuning search."
       },
       {
         "minutes": 10,
@@ -2466,7 +2466,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Run full-prefix versus incremental-cache checks for both configurations at each supported test length, using fixed tokens and evaluation mode. Run the grouped attention against the expanded-KV reference separately. For each prompt length, calculate 2*B*L*T*h_kv*d_head*bytes_per_element and compare it with the sum of numel times element_size over the actual retained K/V tensors. Save a CSV with configuration, length, expected bytes, observed tensor bytes, maximum logit error and tolerance. If the cache preallocates capacity, report logical used bytes and allocated capacity separately."
+        "text": "Run full-prefix versus incremental-cache checks for both configurations at each supported test length, using fixed tokens and evaluation mode. Run the grouped attention against the expanded-KV reference separately. For each prompt length, calculate \\(2BLT h_{\\mathrm{kv}}d_{\\mathrm{head}}s\\), where \\(s\\) is bytes per element, and compare it with the sum of `numel` times `element_size` over the actual retained K/V tensors. Save a CSV with configuration, length, expected bytes, observed tensor bytes, maximum logit error and tolerance. If the cache preallocates capacity, report logical used bytes and allocated capacity separately."
       },
       {
         "minutes": 10,
@@ -2515,7 +2515,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "On the selected device, load the two frozen configurations and use the same fixed token batches. Use evaluation mode plus torch.inference_mode() throughout the benchmark. Warm up each measured path. Record repeated prefill samples for every chosen prompt length, then cached-decode samples using the same starting context and fixed number of decode steps. Rebuild or reset the cache between independent trials so earlier trials do not extend later contexts. Save every timing sample, hardware name, software versions, precision and cache policy to experiments/gqa-vs-mha/raw.csv plus a metadata file. Stop at the predefined sample count; this session does not include tuning either implementation."
+        "text": "On the selected device, load the two frozen configurations and use the same fixed token batches. Use evaluation mode plus `torch.inference_mode()` throughout the benchmark. Warm up each measured path. Record repeated prefill samples for every chosen prompt length, then cached-decode samples using the same starting context and fixed number of decode steps. Rebuild or reset the cache between independent trials so earlier trials do not extend later contexts. Save every timing sample, hardware name, software versions, precision and cache policy to `experiments/gqa-vs-mha/raw.csv` plus a metadata file. Stop at the predefined sample count; this session does not include tuning either implementation."
       },
       {
         "minutes": 10,
@@ -2564,7 +2564,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Write experiments/gqa-vs-mha/report.md with a configuration table, correctness summary, cache-byte table and separate prefill/decode timing tables. Report median and spread with sample count. Explain at least one result using a plausible workload mechanism, labeling it a hypothesis unless you profiled it. Include the changed K/V parameter counts and two limitations: the measured shape/device range and the absence of quality-matched training. Link raw data and the exact benchmark command. If no reliable latency difference appears, report that outcome rather than widening the experiment until a win appears."
+        "text": "Write `experiments/gqa-vs-mha/report.md` with a configuration table, correctness summary, cache-byte table and separate prefill/decode timing tables. Report median and spread with sample count. Explain at least one result using a plausible workload mechanism, labeling it a hypothesis unless you profiled it. Include the changed K/V parameter counts and two limitations: the measured shape/device range and the absence of quality-matched training. Link raw data and the exact benchmark command. If no reliable latency difference appears, report that outcome rather than widening the experiment until a win appears."
       },
       {
         "minutes": 10,
@@ -2772,7 +2772,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Create experiments/training-ablation/report.md. Plot training and validation loss against consumed tokens for both arms on shared axes, marking any unequal endpoints. Add a table with parameter count, token budget, seed, chosen setting, final comparable validation loss and measured runtime. Include the preselected generation prompts and outputs without replacing awkward samples. Write a short interpretation that separates observation from possible mechanism, then list limits from seed count, model size, data distribution and compute budget. Link configurations, checkpoint identifiers, raw logs and the command needed to regenerate the figures."
+        "text": "Create `experiments/training-ablation/report.md`. Plot training and validation loss against consumed tokens for both arms on shared axes, marking any unequal endpoints. Add a table with parameter count, token budget, seed, chosen setting, final comparable validation loss and measured runtime. Include the preselected generation prompts and outputs without replacing awkward samples. Write a short interpretation that separates observation from possible mechanism, then list limits from seed count, model size, data distribution and compute budget. Link configurations, checkpoint identifiers, raw logs and the command needed to regenerate the figures."
       },
       {
         "minutes": 10,
@@ -2825,7 +2825,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Create reproduction/architecture-inputs.json or an equivalent readable manifest. Record source commit, Python/package lock, tokenizer revision or hashes, data revision and deterministic subset rule, tiny-model configuration, seeds, dtype, device and expected output files. Audit the PyTorch/JAX conversion mapping for transposes, tied embeddings, norm parameters and vocabulary size. Inspect one checkpoint and record which configuration and tokenizer it expects. Separate mandatory small inputs from optional full-run checkpoints so a reviewer can execute a cheap smoke run without downloading unnecessary artifacts. Replace absolute personal paths in the instructions with documented arguments."
+        "text": "Create `reproduction/architecture-inputs.json` or an equivalent readable manifest. Record source commit, Python/package lock, tokenizer revision or hashes, data revision and deterministic subset rule, tiny-model configuration, seeds, dtype, device and expected output files. Audit the PyTorch/JAX conversion mapping for transposes, tied embeddings, norm parameters and vocabulary size. Inspect one checkpoint and record which configuration and tokenizer it expects. Separate mandatory small inputs from optional full-run checkpoints so a reviewer can execute a cheap smoke run without downloading unnecessary artifacts. Replace absolute personal paths in the instructions with documented arguments."
       },
       {
         "minutes": 10,
@@ -2913,7 +2913,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Create scripts/reproduce_architecture.py as a small orchestrator around the existing tiny training and PyTorch/JAX parity entry points. Accept an output directory, use the existing two-layer CPU fixture and write to a fresh directory. Record source commit, configuration, consumed-token loss history and parity errors. Propagate any failed required test rather than treating launched subprocesses as success. Run the script once from the environment specified by the Day0 reproduction template; verify that the curve/CSV and parity table were newly generated. Keep the long cloud experiment outside this command."
+        "text": "Create `scripts/reproduce_architecture.py` as a small orchestrator around the existing tiny training and PyTorch/JAX parity entry points. Accept an output directory, use the existing two-layer CPU fixture and write to a fresh directory. Record source commit, configuration, consumed-token loss history and parity errors. Propagate any failed required test rather than treating launched subprocesses as success. Run the script once from the environment specified by the Day0 reproduction template; verify that the curve/CSV and parity table were newly generated. Keep the long cloud experiment outside this command."
       },
       {
         "minutes": 10,
@@ -3003,7 +3003,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Draft MODEL_CARD.md with architecture components, exact parameter count, tokenizer, training-token budget, optimizer/settings, intended educational use, evaluated tasks and limitations. Draft DATA_CARD.md with source and revision, license reference, selection/preprocessing, split construction, synthetic-task generation and known distribution limits. Identify which card sections describe the from-scratch model and which describe adapter experiments, using separate sections or files as needed. Link raw results and checkpoint identifiers. If redistribution permission or another provenance detail remains unresolved, mark it unresolved and describe the artifact’s status accurately rather than inventing a license conclusion."
+        "text": "Draft `MODEL_CARD.md` with architecture components, exact parameter count, tokenizer, training-token budget, optimizer/settings, intended educational use, evaluated tasks and limitations. Draft `DATA_CARD.md` with source and revision, license reference, selection/preprocessing, split construction, synthetic-task generation and known distribution limits. Identify which card sections describe the from-scratch model and which describe adapter experiments, using separate sections or files as needed. Link raw results and checkpoint identifiers. If redistribution permission or another provenance detail remains unresolved, mark it unresolved and describe the artifact’s status accurately rather than inventing a license conclusion."
       },
       {
         "minutes": 10,
@@ -3047,7 +3047,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Draft reports/architecture.md with a short purpose statement, implemented design, validation method, measured results and limitations. Include PyTorch/JAX parity errors, the bounded training comparison, the structured-task evaluation and the GQA/MHA inference study where completed. For each result, name the relevant model/data configuration, attach a small table or figure, and link raw evidence plus the exact command. Put MLA, hybrid recurrence and frontier-model reading in a clearly labeled architecture-study section. State missing measurements as gaps instead of filling them with paper-reported numbers or estimates."
+        "text": "Draft `reports/architecture.md` with a short purpose statement, implemented design, validation method, measured results and limitations. Include PyTorch/JAX parity errors, the bounded training comparison, the structured-task evaluation and the GQA/MHA inference study where completed. For each result, name the relevant model/data configuration, attach a small table or figure, and link raw evidence plus the exact command. Put MLA, hybrid recurrence and frontier-model reading in a clearly labeled architecture-study section. State missing measurements as gaps instead of filling them with paper-reported numbers or estimates."
       },
       {
         "minutes": 10,
@@ -3091,7 +3091,7 @@
       {
         "minutes": 35,
         "title": "Build",
-        "text": "Add one compact decoder-block diagram and one cache or cross-framework parameter-flow diagram to reports/architecture.md. Label meaningful tensor shapes and link each block to its source file or function. Include two equations that clarify actual implementation, such as grouped attention scoring and RMS normalization; verify constants, axis conventions and placement against code. Add a scope table listing implemented, traced and omitted mechanisms. Explain omissions such as full MLA, full recurrent/hybrid training, distributed experts or frontier-scale pretraining in terms of course scope and compute rather than implying they are trivial extensions."
+        "text": "Add one compact decoder-block diagram and one cache or cross-framework parameter-flow diagram to `reports/architecture.md`. Label meaningful tensor shapes and link each block to its source file or function. Include two equations that clarify actual implementation, such as grouped attention scoring and RMS normalization; verify constants, axis conventions and placement against code. Add a scope table listing implemented, traced and omitted mechanisms. Explain omissions such as full MLA, full recurrent/hybrid training, distributed experts or frontier-scale pretraining in terms of course scope and compute rather than implying they are trivial extensions."
       },
       {
         "minutes": 10,
@@ -3172,7 +3172,7 @@
       {
         "minutes": 5,
         "title": "Orient",
-        "text": "Create an llm-architectures repository and read the course outcomes. Write the weekly study limit in README.md: five one-hour sessions, two hours Saturday, Sunday off."
+        "text": "Create an llm-architectures repository and read the course outcomes. Write the weekly study limit in `README.md`: five one-hour sessions, two hours Saturday, Sunday off."
       },
       {
         "minutes": 10,
@@ -3182,12 +3182,12 @@
       {
         "minutes": 35,
         "title": "Build a smoke test",
-        "text": "Create model/, tests/, data/, notes/ and experiments/. In each framework, multiply fixed 2×3 and 3×2 matrices, compare against NumPy and differentiate a sum-of-squares loss with respect to the first matrix. Save the expected result and a runnable smoke script. Keep package metadata or lock files with the code, and ignore generated data and large checkpoints."
+        "text": "Create the course directories:\n\n```bash\nmkdir -p model tests data notes experiments\n```\n\n In each framework, multiply fixed 2×3 and 3×2 matrices, compare against NumPy and differentiate a sum-of-squares loss with respect to the first matrix. Save the expected result and a runnable smoke script. Keep package metadata or lock files with the code, and ignore generated data and large checkpoints."
       },
       {
         "minutes": 10,
         "title": "Verify and save",
-        "text": "Open a fresh terminal, activate each documented environment and rerun the script. Save notes/environment.md with Python, package, OS and device details, then commit the small scaffold."
+        "text": "Open a fresh terminal, activate each documented environment and rerun the script. Save `notes/environment.md` with Python, package, OS and device details, then commit the small scaffold."
       }
     ],
     "checks": [
@@ -3224,7 +3224,7 @@
       {
         "minutes": 5,
         "title": "Recall",
-        "text": "Write the shapes of x:[2,3] plus b:[3], and x transposed. Predict which axis receives the bias before executing code."
+        "text": "Write the shapes of x:`[2,3]` plus b:[3], and x transposed. Predict which axis receives the bias before executing code."
       },
       {
         "minutes": 10,
@@ -3239,7 +3239,7 @@
       {
         "minutes": 10,
         "title": "Save the debugging template",
-        "text": "Save tests/test_tensor_contracts.py and notes/testing.md with fixture, shape, dtype, reference, tolerance and failure-message conventions. Rerun the tests from the documented command."
+        "text": "Save `tests/test_tensor_contracts.py` and `notes/testing.md` with fixture, shape, dtype, reference, tolerance and failure-message conventions. Rerun the tests from the documented command."
       }
     ],
     "checks": [
@@ -3257,7 +3257,7 @@
   "review-2": {
     "title": "Review Decoder Components and Functional JAX",
     "action": "Retrieve the mechanisms from memory, check them against evidence and plan one bounded repair.",
-    "evidence": "Closed-book answers, a score out of six and a saved repair decision in notes/reviews/decoder-and-jax.md.",
+    "evidence": "Closed-book answers, a score out of six and a saved repair decision in `notes/reviews/decoder-and-jax.md`.",
     "objectives": [
       "Derive the current model mechanisms without referring to code.",
       "Use saved correctness evidence to distinguish understanding from a plausible explanation."
@@ -3271,7 +3271,7 @@
       {
         "minutes": 25,
         "title": "Answer without notes",
-        "text": "1. Starting from Q,K,V:[B,H,T,D], derive causal attention output shapes and describe a test that detects future leakage. 2. Show why (R_m q)ᵀ(R_n k)=qᵀR_(n−m)k for the RoPE rotations used in your implementation; name the pairing convention. 3. Explain how JAX train-step parameters, optimizer state and random keys enter and leave a pure function, and why PyTorch/JAX parity requires shared weights rather than equal seed numbers."
+        "text": "1. Starting from Q,K,V:`[B,H,T,D]`, derive causal attention output shapes and describe a test that detects future leakage.\n2. Show why \\((R_mq)^\\top(R_nk)=q^\\top R_{n-m}k\\) for the RoPE rotations used in your implementation; name the pairing convention.\n3. Explain how JAX train-step parameters, optimizer state and random keys enter and leave a pure function, and why PyTorch/JAX parity requires shared weights rather than equal seed numbers."
       },
       {
         "minutes": 10,
@@ -3286,7 +3286,7 @@
       {
         "minutes": 10,
         "title": "Choose the next step",
-        "text": "Save the review to notes/reviews/decoder-and-jax.md. Check the most relevant correctness gates and compute spending. Write one repair sized to a flex hour, or record why you are ready to proceed."
+        "text": "Save the review to `notes/reviews/decoder-and-jax.md`. Check the most relevant correctness gates and compute spending. Write one repair sized to a flex hour, or record why you are ready to proceed."
       }
     ],
     "checks": [
@@ -3296,7 +3296,7 @@
     ],
     "selfCheck": {
       "question": "What should the three answers establish?",
-      "answer": "Scores have shape [B,H,T,T], head outputs [B,H,T,D], and concatenated heads [B,T,H*D]; perturbing later tokens must not change earlier outputs. Orthogonal rotations satisfy R_mᵀR_n=R_(n−m) within each paired subspace. A pure step receives and returns explicit state; random keys are split explicitly. Equal seeds in different frameworks do not promise identical random arrays, so transfer the actual parameter values and account for layout differences."
+      "answer": "Scores have shape `[B,H,T,T]`, head outputs `[B,H,T,D]`, and concatenated heads `[B,T,H*D]`; perturbing later tokens must not change earlier outputs. Orthogonal rotations satisfy \\(R_m^\\top R_n=R_{n-m}\\) within each paired subspace. A pure step receives and returns explicit state; random keys are split explicitly. Equal seeds in different frameworks do not promise identical random arrays, so transfer the actual parameter values and account for layout differences."
     },
     "pitfall": "Do not treat a high self-score as permission to ignore a failing implementation test.",
     "reading": [
@@ -3357,7 +3357,7 @@
   "review-4": {
     "title": "Review Cache Correctness and Adaptation",
     "action": "Retrieve the mechanisms from memory, check them against evidence and plan one bounded repair.",
-    "evidence": "Closed-book answers, a score out of six and a saved repair decision in notes/reviews/cache-and-adaptation.md.",
+    "evidence": "Closed-book answers, a score out of six and a saved repair decision in `notes/reviews/cache-and-adaptation.md`.",
     "objectives": [
       "Derive the current model mechanisms without referring to code.",
       "Use saved correctness evidence to distinguish understanding from a plausible explanation."
@@ -3371,7 +3371,7 @@
       {
         "minutes": 25,
         "title": "Answer without notes",
-        "text": "1. Derive KV-cache bytes for L layers, B examples, T cached positions, Hkv heads, head width d and s bytes per element; explain cached versus full-prefix parity. 2. For W:[d_out,d_in], specify LoRA factor shapes, parameter count and a zero-update initialization that can still learn. 3. Explain how prompt loss masking and separated template/entity families affect the interpretation of your structured-task evaluation."
+        "text": "1. Derive KV-cache bytes for L layers, B examples, T cached positions, Hkv heads, head width d and s bytes per element; explain cached versus full-prefix parity.\n2. For W:`[d_out,d_in]`, specify LoRA factor shapes, parameter count and a zero-update initialization that can still learn.\n3. Explain how prompt loss masking and separated template/entity families affect the interpretation of your structured-task evaluation."
       },
       {
         "minutes": 10,
@@ -3386,7 +3386,7 @@
       {
         "minutes": 10,
         "title": "Choose the next step",
-        "text": "Save the review to notes/reviews/cache-and-adaptation.md. Check the most relevant correctness gates and compute spending. Write one repair sized to a flex hour, or record why you are ready to proceed."
+        "text": "Save the review to `notes/reviews/cache-and-adaptation.md`. Check the most relevant correctness gates and compute spending. Write one repair sized to a flex hour, or record why you are ready to proceed."
       }
     ],
     "checks": [
@@ -3396,7 +3396,7 @@
     ],
     "selfCheck": {
       "question": "What should the three answers establish?",
-      "answer": "The logical KV payload is 2*L*B*T*Hkv*d*s; allocation capacity and metadata are additional. Each cached path must match its own full-prefix logits with aligned positions and masks. With delta W=(alpha/r)*B*A, A:[r,d_in], B:[d_out,r], there are r*(d_in+d_out) trainable factors; initializing one factor to zero and the other nonzero gives a zero initial update without blocking every gradient. Masking prompt targets defines which outputs train the adapter; separated families reduce a specific source of leakage but do not establish broad real-world generalization."
+      "answer": "The logical KV payload is \\(2LBTH_{\\mathrm{kv}}ds\\); allocation capacity and metadata are additional. Each cached path must match its own full-prefix logits with aligned positions and masks. With \\(\\Delta W=(\\alpha/r)BA\\), A:`[r,d_in]`, B:`[d_out,r]`, there are \\(r(d_{\\mathrm{in}}+d_{\\mathrm{out}})\\) trainable factors; initializing one factor to zero and the other nonzero gives a zero initial update without blocking every gradient. Masking prompt targets defines which outputs train the adapter; separated families reduce a specific source of leakage but do not establish broad real-world generalization."
     },
     "pitfall": "Do not treat a high self-score as permission to ignore a failing implementation test.",
     "reading": [
@@ -3457,7 +3457,7 @@
   "review-6": {
     "title": "Review Sparse Experts and Persistent State",
     "action": "Retrieve the mechanisms from memory, check them against evidence and plan one bounded repair.",
-    "evidence": "Closed-book answers, a score out of six and a saved repair decision in notes/reviews/sparse-and-hybrid.md.",
+    "evidence": "Closed-book answers, a score out of six and a saved repair decision in `notes/reviews/sparse-and-hybrid.md`.",
     "objectives": [
       "Derive the current model mechanisms without referring to code.",
       "Use saved correctness evidence to distinguish understanding from a plausible explanation."
@@ -3471,7 +3471,7 @@
       {
         "minutes": 25,
         "title": "Answer without notes",
-        "text": "1. In a four-expert top-2 layer, explain stored versus active parameters, the routing-count sum, and why output parity alone does not validate learning. 2. Compare the tensors retained per token in your GQA cache and the MLA design you traced; separate stored cache from temporary reconstructed tensors. 3. Trace the dimensions of the recurrent state in the hybrid design you studied and explain why fixed recurrent state per recurrent layer does not mean the whole hybrid model has no growing cache."
+        "text": "1. In a four-expert top-2 layer, explain stored versus active parameters, the routing-count sum, and why output parity alone does not validate learning.\n2. Compare the tensors retained per token in your GQA cache and the MLA design you traced; separate stored cache from temporary reconstructed tensors.\n3. Trace the dimensions of the recurrent state in the hybrid design you studied and explain why fixed recurrent state per recurrent layer does not mean the whole hybrid model has no growing cache."
       },
       {
         "minutes": 10,
@@ -3486,7 +3486,7 @@
       {
         "minutes": 10,
         "title": "Choose the next step",
-        "text": "Save the review to notes/reviews/sparse-and-hybrid.md. Check the most relevant correctness gates and compute spending. Write one repair sized to a flex hour, or record why you are ready to proceed."
+        "text": "Save the review to `notes/reviews/sparse-and-hybrid.md`. Check the most relevant correctness gates and compute spending. Write one repair sized to a flex hour, or record why you are ready to proceed."
       }
     ],
     "checks": [
@@ -3634,7 +3634,7 @@
       {
         "minutes": 10,
         "title": "Save the assessment",
-        "text": "Save notes/final-defense.md, the score out of ten and the recording link. Correct the weakest explanation and identify any remaining required gate that must be repaired before the portfolio is called complete."
+        "text": "Save `notes/final-defense.md`, the score out of ten and the recording link. Correct the weakest explanation and identify any remaining required gate that must be repaired before the portfolio is called complete."
       }
     ],
     "checks": [
@@ -3681,7 +3681,7 @@
       {
         "minutes": 10,
         "title": "Record reviewer evidence",
-        "text": "Save reproduction/reviewer-check.md with the source commit, command, runtime, output paths and repaired assumption. Link this from the README quickstart."
+        "text": "Save `reproduction/reviewer-check.md` with the source commit, command, runtime, output paths and repaired assumption. Link this from the README quickstart."
       }
     ],
     "checks": [
@@ -3728,7 +3728,7 @@
       {
         "minutes": 10,
         "title": "Review scope",
-        "text": "Save contributions/architecture-draft.md and any minimal patch. Remove unsupported claims, large unrelated changes and private data. Note the next human review or submission step without claiming the draft has been accepted."
+        "text": "Save `contributions/architecture-draft.md` and any minimal patch. Remove unsupported claims, large unrelated changes and private data. Note the next human review or submission step without claiming the draft has been accepted."
       }
     ],
     "checks": [
@@ -3770,12 +3770,12 @@
       {
         "minutes": 35,
         "title": "Assemble the release candidate",
-        "text": "Link the quickstart, architecture diagram, model/data cards, result reports, defense and contribution draft from README.md. Include a small project index and an optional full-experiment reproduction section with actual cost. Inspect tracked files for large generated artifacts, private paths and credentials. Create a local release-candidate tag or version note after confirming required tests pass; publishing can follow your normal GitHub review process."
+        "text": "Link the quickstart, architecture diagram, model/data cards, result reports, defense and contribution draft from `README.md`. Include a small project index and an optional full-experiment reproduction section with actual cost. Inspect tracked files for large generated artifacts, private paths and credentials. Create a local release-candidate tag or version note after confirming required tests pass; publishing can follow your normal GitHub review process."
       },
       {
         "minutes": 10,
         "title": "Record completion and next question",
-        "text": "Save notes/course-completion.md listing passed required gates, unresolved limitations and one next experiment. Record final architecture spending against the shared A$1000 learning budget and leave the remaining reserve available for future study."
+        "text": "Save `notes/course-completion.md` listing passed required gates, unresolved limitations and one next experiment. Record final architecture spending against the shared A$1000 learning budget and leave the remaining reserve available for future study."
       }
     ],
     "checks": [

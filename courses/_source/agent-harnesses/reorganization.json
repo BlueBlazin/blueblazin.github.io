@@ -388,7 +388,7 @@
     "2-1": [
       {
         "id": "H12",
-        "focus": "Path.resolve and ancestry checks; symlink behavior.",
+        "focus": "`Path.resolve` and ancestry checks; symlink behavior.",
         "minutes": 6,
         "optional": false
       },
@@ -430,7 +430,7 @@
     "2-4": [
       {
         "id": "H14",
-        "focus": "Iterable side_effect and call assertions.",
+        "focus": "Iterable `side_effect` and call assertions.",
         "minutes": 10,
         "optional": false
       }
@@ -452,7 +452,7 @@
     "3-2": [
       {
         "id": "H12",
-        "focus": "Resolved paths, parent paths, and is_relative_to limitations.",
+        "focus": "Resolved paths, parent paths, and `is_relative_to` limitations.",
         "minutes": 10,
         "optional": false
       }
@@ -952,7 +952,7 @@
     "13-1": [
       {
         "id": "H21",
-        "focus": "itertools.product for the trial Cartesian product.",
+        "focus": "`itertools.product` for the trial Cartesian product.",
         "minutes": 5,
         "optional": false
       },
@@ -1136,9 +1136,9 @@
   },
   "day0": {
     "title": "Week 1 · Day 0 — Setup and Course Guide",
-    "summary": "Prepare only the tools needed for your first lab, then begin Day 1 with a working FakeModel loop. All setup, review and course-administration material lives here. Later-use checklists are references for their stated milestones, not prerequisites to complete now.",
+    "summary": "Prepare only the tools needed for your first lab, then begin Day 1 with a working `FakeModel` loop. All setup, review and course-administration material lives here. Later-use checklists are references for their stated milestones, not prerequisites to complete now.",
     "readyChecks": [
-      "I can run Python and pytest in my course workspace.",
+      "I can run Python and `pytest` in my course workspace.",
       "My repository ignores credentials, virtual environments, generated task workspaces and private runtime traces.",
       "Fake model responses are the default; the first lab makes no paid requests.",
       "I know the A$250 course ceiling and the development/final-task separation rule."
@@ -1146,7 +1146,7 @@
     "sections": [
       {
         "title": "Local repository and Python",
-        "text": "Create agent-harness-lab with harness/, tests/, fixtures/, evals/, docs/, reports/, and scripts/. Create or reuse a Python virtual environment and install pytest. Run a minimal import/JSON smoke test. Ignore credentials, environments, generated workspaces, and private runtime traces. Python and pytest are sufficient for Day 1. Install and pin provider/MCP SDKs from this setup reference before the lessons that actually use them.",
+        "text": "Create agent-harness-lab with `harness/`, `tests/`, `fixtures/`, `evals/`, `docs/`, `reports/`, and `scripts/`. Create or reuse a Python virtual environment and install pytest. Run a minimal import/JSON smoke test. Ignore credentials, environments, generated workspaces, and private runtime traces. Python and `pytest` are sufficient for Day 1. Install and pin provider/MCP SDKs from this setup reference before the lessons that actually use them.",
         "resources": [
           "H30",
           "H9",
@@ -1155,7 +1155,7 @@
       },
       {
         "title": "Execution-runtime readiness",
-        "text": "Before the execution-boundary module, prepare a local container runtime supporting Apple silicon. Follow its official installation instructions and confirm one harmless container starts, record its version and how to stop it. The Day 1 FakeModel loop does not require a container. The actual mounts, permissions, network and resource boundaries are implemented in the course. If installation blocks, save the exact blocker and resolve it before live-code lessons; never replace isolation with an unlabelled host subprocess.",
+        "text": "Before the execution-boundary module, prepare a local container runtime supporting Apple silicon. Follow its official installation instructions and confirm one harmless container starts, record its version and how to stop it. The Day 1 `FakeModel` loop does not require a container. The actual mounts, permissions, network and resource boundaries are implemented in the course. If installation blocks, save the exact blocker and resolve it before live-code lessons; never replace isolation with an unlabelled host subprocess.",
         "resources": [
           "H32",
           "H10"
@@ -1163,7 +1163,7 @@
       },
       {
         "title": "Study, evaluation, and spending conventions",
-        "text": "Read the course outcome, 8 development / 16 final split rule, and budget convention. Create a ledger with A$175 API, A$50 CPU/storage, A$25 contingency within this course’s A$250 allowance. Set fake responses as the default mode. Put report/evidence templates in docs/ without filling future result fields. Sundays are off; weekdays and Saturdays retain their existing time caps.",
+        "text": "Read the course outcome, 8 development / 16 final split rule, and budget convention. Create a ledger with A$175 API, A$50 CPU/storage, A$25 contingency within this course’s A$250 allowance. Set fake responses as the default mode. Put report/evidence templates in `docs/` without filling future result fields. Sundays are off; weekdays and Saturdays retain their existing time caps.",
         "resources": [
           "H4",
           "C5"

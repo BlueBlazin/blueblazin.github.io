@@ -36,7 +36,7 @@ for folder in WEB.iterdir():
   if file.suffix=='.html':
    d=Doc();d.feed(file.read_text());assert not d.errors,(file,d.errors[:5]);assert not d.stack,(file,d.stack);docs[file]=d
  for d in docs.values():videoids.update(d.videos)
- if folder.name=='covers':continue
+ if folder.name in {'covers','assets'}:continue
  source=ROOT/folder.name;index=json.loads((source/'course-index.json').read_text());schedule=json.loads((source/'schedule.json').read_text());lessons=json.loads((source/'lessons-course.json').read_text());plan=json.loads((source/'reorganization.json').read_text());catalog=json.loads((source/'resources.json').read_text());catalogids={r['id'] for r in catalog}
  assert len(catalogids)==len(catalog)
  for r in catalog:

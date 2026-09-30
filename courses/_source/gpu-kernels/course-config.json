@@ -51,7 +51,7 @@
     "requirements": [
       "Small configurable PyTorch causal decoder with embedding, dense causal attention, RMSNorm, and MLP; CPU/CUDA execution.",
       "Export inspectable dense causal-attention and FP32-accumulating RMSNorm reference functions.",
-      "Expose norm_factory(width, eps), returning an nn.Module with a length-width weight parameter and forward(x); this module can call a registered rmsnorm(x, weight, eps) implementation after flattening leading dimensions to rows.",
+      "Expose `norm_factory(width, eps)`, returning an `nn.Module` with a length-width weight parameter and `forward(x)`; this module can call a registered `rmsnorm(x, weight, eps)` implementation after flattening leading dimensions to rows.",
       "Provide deterministic synthetic tokens/targets and initialization/state-dict save instructions; no trained checkpoint dependency.",
       "Provide an inference KV-cache path with explicit reset, absolute query/key causal positions, and a CPU full-sequence-versus-cached logit parity smoke.",
       "Document tiny dimensions fitting the restricted RMSNorm contract and the exact CPU smoke command."
@@ -104,10 +104,10 @@
     "9": "Independent assessment & portfolio"
   },
   "setup": [
-    "Create a dedicated repository with fixtures/, kernels/, tests/, benchmarks/, results/ and reports/. The other courses are not prerequisites.",
-    "Download the supplied decoder fixture into fixtures/decoder.py. It provides untrained deterministic weights, reference operations, replaceable RMSNorm and a KV-cache path; no architecture-course checkpoint is required.",
+    "Create a dedicated repository with `fixtures/`, `kernels/`, `tests/`, benchmarks/, results/ and `reports/`. The other courses are not prerequisites.",
+    "Download the supplied decoder fixture into `fixtures/decoder.py`. It provides untrained deterministic weights, reference operations, replaceable RMSNorm and a KV-cache path; no architecture-course checkpoint is required.",
     "Prepare CPU reference checks on the M1 Max. Use Linux NVIDIA hardware for CUDA/Triton, and the documented H100 setup for the required Pallas/Mosaic work.",
-    "CUDA extension builds require the CUDA toolkit including nvcc, a compatible host C++ compiler and Ninja. A PyTorch CUDA wheel alone does not supply the compiler toolchain.",
+    "CUDA extension builds require the CUDA toolkit including `nvcc`, a compatible host C++ compiler and Ninja. A PyTorch CUDA wheel alone does not supply the compiler toolchain.",
     "Install local PyTorch from the [official selector](https://pytorch.org/get-started/locally/) for the CPU fixture. Build the remote JAX/CUDA environment from the [official installation guide](https://docs.jax.dev/en/latest/installation.html), pinning versions compatible with the Pallas backend you actually test."
   ],
   "compute": "Develop reference code and prepare input manifests on the M1 Max. CUDA and Triton require remote Linux NVIDIA hardware; default to RTX 4090. Reserve short H100 sessions for the required Pallas/Mosaic lessons, using the pinned tutorial-compatible stack. Budget A$300 for 4090 or justified A100 use, A$75 for H100, A$25 for storage/transfers and A$50 for variation.",
