@@ -2326,7 +2326,7 @@
     ],
     "selfCheck": {
       "question": "Why is replacing an SFT loss function alone insufficient to create a complete reward-based training pipeline?",
-      "answer": "The pipeline also needs sampled outputs, feedback or rewards, the method’s baselines/reference handling, and controlled optimization and evaluation."
+      "answer": "The pipeline also needs sampled outputs, feedback or rewards, the method’s baselines/reference handling, and controlled optimization and evaluation.\n\nUse this compact check after drafting your comparison. It describes standard DPO and the outcome-supervised GRPO formulation in the assigned papers, not every later variant.\n\n| Method | Input and feedback | Reference or baseline role |\n|---|---|---|\n| SFT | Prompt plus a target response; train on its supervised completion tokens. | Ordinary SFT needs neither a preference-reference ratio nor a reward baseline. |\n| DPO | Prompt plus preferred/rejected responses; optimize their relative preference. | A fixed reference policy supplies response log-probabilities in the policy/reference ratios; no separately fitted reward model is required by the DPO objective. |\n| GRPO | A group of responses sampled from the old policy for one prompt, each with reward feedback. | Group reward statistics produce relative advantages instead of a learned value critic. The original objective also has a reference-policy KL term; the old sampling policy serves a separate probability-ratio role. |\n\nSources: [DPO, section 4](https://arxiv.org/html/2305.18290) and [DeepSeekMath, sections 4.1.1–4.1.2](https://arxiv.org/html/2402.03300)."
     },
     "pitfall": "A JSON tool-call format is still text output; producing it does not by itself make a model multimodal.",
     "reading": [

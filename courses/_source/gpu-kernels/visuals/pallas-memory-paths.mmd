@@ -1,0 +1,9 @@
+flowchart TB
+  accTitle: Refs can belong to different memory spaces
+  accDescr: The current Mosaic GPU quickstart distinguishes simple elementwise work through registers from staged Hopper tensor-core work through shared memory and an accumulator. A Ref’s declared memory space determines its role; Ref does not mean shared memory.
+  A["Global input memory"] --> B["Registers: elementwise work"]
+  B --> F["Global output memory"]
+  A --> C["SMEM input tiles"]
+  C --> D["Tensor cores and accumulator"]
+  D --> E["SMEM output tile"]
+  E --> F

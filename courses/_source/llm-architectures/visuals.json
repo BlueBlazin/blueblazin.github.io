@@ -115,8 +115,8 @@
     "lesson": "7-1",
     "placement": "key-idea",
     "title": "The adapter is a second path from the same input",
-    "description": "Input x of shape [N,8] enters both a frozen base linear layer with W shape [12,8] and a trainable adapter. The adapter applies A with shape [2,8], giving [N,2], then B with shape [12,2], giving [N,12]. Its output is scaled by alpha over two and added to the base output. A and B have 40 trainable weights in total; W has 96 frozen weights.",
-    "caption": "Rank r = 2; bias omitted. PyTorch linear weights use [out, in]. A and B train 16 + 24 = 40 weights; W retains 96 frozen weights.",
+    "description": "Input x of shape [N,8] enters both a frozen base linear layer with W shape [12,8] and a trainable adapter. The adapter applies A with shape [2,8], giving [N,2], then B with shape [12,2], giving [N,12]. Its output is scaled by alpha over two and added to the base output.",
+    "caption": "Rank r = 2; bias omitted. PyTorch linear weights use [out, in]. Count A and B as trainable weights; the shared base W remains frozen.",
     "renderer": "mermaid",
     "source": "visuals/lora-two-branches.mmd",
     "evidence": [
@@ -151,7 +151,7 @@
   {
     "id": "mla-cache-comparison",
     "lesson": "10-3",
-    "placement": "plan-2",
+    "placement": "self-check",
     "title": "Count retained elements before comparing bytes",
     "description": "A horizontal bar chart compares logical inference cache sizes for the lesson’s illustrative configuration. At 2048 tokens GQA uses 16 MiB and compact MLA uses 5 MiB. At 4096 tokens the values double to 32 and 10 MiB. The common horizontal scale starts at zero. B is 1, layers 8, FP16 has two bytes per element, GQA has four KV heads of width 64, and compact MLA retains latent width 128 plus positional-key width 32.",
     "caption": "Illustrative dimensions, not matched model quality. Only retained cache tensors are counted; weights, workspace and allocator overhead are excluded.",
@@ -170,7 +170,7 @@
   {
     "id": "gated-delta-state",
     "lesson": "11-2",
-    "placement": "plan-2",
+    "placement": "self-check",
     "title": "Decay every column, correct along the key",
     "description": "The lesson’s two-dimensional state example starts with the identity matrix. Multiplying by alpha one half gives diagonal entries one half. With k=q=[1,0], v=[2,0] and beta one, the prediction at the key is [0.5,0] and the error is [1.5,0]. The outer-product correction has only its first column nonzero. Adding it gives state [[2,0],[0,0.5]], whose readout with q is [2,0].",
     "caption": "The lesson’s single-token arithmetic. Input projections and gate-generating networks are outside this state-update example.",
@@ -184,6 +184,677 @@
       "e=[1.5,0]; β e kᵀ=[[1.5,0],[0,0]].",
       "Snew=[[2,0],[0,0.5]] and Snew q=[2,0].",
       "The error uses the decayed state, not Sprev."
+    ]
+  },
+  {
+    "id": "next-token-alignment",
+    "lesson": "1-2",
+    "placement": "key-idea",
+    "title": "Align inputs and next-token targets",
+    "description": "A stream [5,8,3,6] forms inputs [5,8,3] and targets [8,3,6]. Logit row zero predicts token 8, row one predicts token 3, and row two predicts token 6. There are three prediction rows, each with V vocabulary logits.",
+    "caption": "One unpadded example; the teaching loss receives already-aligned inputs and targets. Do not shift this pairing again.",
+    "renderer": "svg",
+    "source": "visuals/next-token-alignment.svg",
+    "evidence": [
+      "AR01",
+      "AR02"
+    ],
+    "checks": [
+      "Inputs equal stream[:-1] and targets equal stream[1:].",
+      "Every logit row t predicts raw token t+1."
+    ]
+  },
+  {
+    "id": "decoder-weight-tying",
+    "lesson": "2-1",
+    "placement": "key-idea",
+    "title": "One matrix can serve lookup and the output head",
+    "description": "Token IDs select rows from an embedding matrix E of shape V by C. Learned positions are added, then the block stack and final LayerNorm produce hidden states. With weight tying, the output projection reuses E transposed in the multiplication and produces B by T by V logits.",
+    "caption": "Optional tied-head choice, with output bias omitted. The shared matrix is counted once; learned position weights are separate.",
+    "renderer": "mermaid",
+    "source": "visuals/decoder-weight-tying.mmd",
+    "evidence": [
+      "AR03"
+    ],
+    "checks": [
+      "Positions are added before the first block.",
+      "Final LayerNorm occurs after all blocks.",
+      "Tied embedding/output weight is one [V,C] parameter."
+    ]
+  },
+  {
+    "id": "generation-loop",
+    "lesson": "2-3",
+    "placement": "key-idea",
+    "title": "Generation changes the prefix at every iteration",
+    "description": "Before requesting another token, check the token cap and learned-position context limit. If generation may continue, run the current prefix, use only its last-position logits and append the selected token. Stop if it is EOS; otherwise check the limits again.",
+    "caption": "Greedy decoding is the initial implementation. This diagram follows the course rule of stopping at the learned-position context limit. The limits check covers both the generation budget and the model’s context limit; argmax uses only the final position’s logits.",
+    "renderer": "mermaid",
+    "source": "visuals/generation-loop.mmd",
+    "evidence": [
+      "AR03"
+    ],
+    "checks": [
+      "Only last-position logits choose the next token.",
+      "Selected token is appended before the next forward.",
+      "EOS, token cap and context limit all terminate."
+    ]
+  },
+  {
+    "id": "checkpoint-resume-branches",
+    "lesson": "2-4",
+    "placement": "key-idea",
+    "title": "Compare continuations from the same full state",
+    "description": "At the interruption point, fork the same model, optimizer, schedule, random-generator and data-cursor state. One path continues directly; the other saves and restores that state before consuming the same remaining batches. Compare reload evaluation logits, then remaining-step losses and parameters.",
+    "caption": "Use the declared deterministic CPU configuration. Equal weights alone do not imply equal optimizer updates.",
+    "renderer": "mermaid",
+    "source": "visuals/checkpoint-resume-branches.mmd",
+    "evidence": [
+      "AR05",
+      "AR36"
+    ],
+    "checks": [
+      "Both branches begin from equal full state at step k.",
+      "The same remaining batch sequence is used.",
+      "State restoration follows reconstruction that may consume RNG."
+    ]
+  },
+  {
+    "id": "rmsnorm-token-axis",
+    "lesson": "3-1",
+    "placement": "key-idea",
+    "title": "RMSNorm shares gains, not token statistics",
+    "description": "Three token rows each contain four channels. Each row has its own mean-square statistic and denominator. The same learned four-channel gain vector is broadcast to all rows; no token contributes to another token’s denominator.",
+    "caption": "A single batch item with three tokens and four schematic channels. Statistics use the final channel axis.",
+    "renderer": "svg",
+    "source": "visuals/rmsnorm-token-axis.svg",
+    "evidence": [
+      "AR01"
+    ],
+    "checks": [
+      "Each denominator reduces over D only.",
+      "Gain shape is [D] and is shared across token positions.",
+      "The computation does not subtract the row mean."
+    ]
+  },
+  {
+    "id": "swiglu-branches",
+    "lesson": "3-1",
+    "placement": "key-idea",
+    "title": "Two projections meet at an elementwise gate",
+    "description": "Input x has shape B by T by C. The gate projection maps C to M and passes through SiLU. An independent up projection maps C to M. Their elementwise product preserves M, then the down projection maps M back to C.",
+    "caption": "Weights use the lesson’s row-vector convention. Ignoring biases, the three projections contain 3CM weights.",
+    "renderer": "mermaid",
+    "source": "visuals/swiglu-branches.mmd",
+    "evidence": [
+      "AR01",
+      "AR06"
+    ],
+    "checks": [
+      "Gate and up outputs both have [B,T,M].",
+      "Only the gate branch applies SiLU before the product.",
+      "Down projection restores C channels."
+    ]
+  },
+  {
+    "id": "modern-block-integration",
+    "lesson": "3-4",
+    "placement": "key-idea",
+    "title": "Check the joins between modern primitives",
+    "description": "Input x is RMS-normalized, then projected to Q,K,V. Only Q and K receive rotary positions. Causal grouped-query attention and its output projection are added to unchanged x to create u. A second RMSNorm and SwiGLU branch is added to unchanged u to create y.",
+    "caption": "Teaching decoder composition; not a checkpoint-compatibility claim. Token lookup occurs outside this block; dropout is disabled for parity.",
+    "renderer": "svg",
+    "source": "visuals/modern-block-integration.svg",
+    "evidence": [
+      "AR06",
+      "AR08"
+    ],
+    "checks": [
+      "RoPE appears on Q/K only.",
+      "Residuals add x before u, then u before y.",
+      "Both branch outputs return to [B,T,C].",
+      "Learned absolute-position embeddings are absent in this configuration."
+    ]
+  },
+  {
+    "id": "vmap-shared-parameters",
+    "lesson": "4-2",
+    "placement": "key-idea",
+    "title": "Batch examples without copying the parameter argument",
+    "description": "Three example rows of x each enter the same scalar function together with a shared parameter vector w. vmap maps axis zero of x while leaving w unmapped. The stacked losses have shape [N]; their mean is scalar and its gradient with respect to w has shape [D].",
+    "caption": "A three-row illustration of vmap(f, in_axes=(None,0)). The actual lesson fixture may use a different N or D.",
+    "renderer": "svg",
+    "source": "visuals/vmap-shared-parameters.svg",
+    "evidence": [
+      "AR11",
+      "AR12"
+    ],
+    "checks": [
+      "w is shared and not mapped; x is mapped over axis 0.",
+      "A scalar f produces losses [N].",
+      "Gradient of the mean equals the mean of per-example gradients for this smooth finite sum."
+    ]
+  },
+  {
+    "id": "linear-weight-transpose",
+    "lesson": "4-3",
+    "placement": "key-idea",
+    "title": "Transpose the values, not just the shape label",
+    "description": "A PyTorch weight [[1,2,3],[4,5,6]] has shape [2,3] for two outputs and three inputs. The direct x@Wj convention stores [[1,4],[2,5],[3,6]] with shape [3,2]. Both multiply inputs [N,3] to outputs [N,2].",
+    "caption": "Bias omitted. This illustrates a chosen direct-matmul layout, not a requirement imposed by JAX.",
+    "renderer": "svg",
+    "source": "visuals/linear-weight-transpose.svg",
+    "evidence": [
+      "AR09",
+      "AR01"
+    ],
+    "checks": [
+      "Wj[i,j]=W[j,i].",
+      "Both operations use the same six values and produce [N,2]."
+    ]
+  },
+  {
+    "id": "functional-model-boundary",
+    "lesson": "5-1",
+    "placement": "key-idea",
+    "title": "Keep arrays outside the pure forward function",
+    "description": "The parameter pytree owns embeddings, block dictionaries, final norm and output-head arrays. That tree, token IDs, positions and fixed configuration cross the pure forward boundary as explicit inputs. The function returns logits and optional intermediate activations; it does not create trainable arrays.",
+    "caption": "Dropout is disabled for this parity model. If stochastic operations are enabled later, pass and split explicit random keys too.",
+    "renderer": "mermaid",
+    "source": "visuals/functional-model-boundary.mmd",
+    "evidence": [
+      "AR09",
+      "AR14"
+    ],
+    "checks": [
+      "Trainable arrays are supplied in params, not created in forward.",
+      "Each block has a distinct parameter subtree.",
+      "Tokens and positions are explicit inputs."
+    ]
+  },
+  {
+    "id": "parity-first-divergence",
+    "lesson": "5-2",
+    "placement": "key-idea",
+    "title": "Compare corresponding boundaries in order",
+    "description": "Two framework lanes show embeddings, block-one residual, block-two residual and final logits. A schematic first mismatch at block one narrows inspection to the operations between the matching embeddings and that residual output; later mismatches may be consequences.",
+    "caption": "A debugging illustration, not a measured parity result. Capture more probes inside the first differing block.",
+    "renderer": "svg",
+    "source": "visuals/parity-first-divergence.svg",
+    "evidence": [
+      "AR09",
+      "AR26"
+    ],
+    "checks": [
+      "Only corresponding activation boundaries are compared.",
+      "A first mismatch at block 1 does not establish an independent block-2 defect."
+    ]
+  },
+  {
+    "id": "functional-training-state",
+    "lesson": "5-3",
+    "placement": "key-idea",
+    "title": "The next call consumes the state returned by this call",
+    "description": "Parameters, optimizer moments and counter, plus random-key state are inputs to a training step. Together with the batch, they produce updated state and metrics. Feed the returned state into the next invocation; write metrics outside the jitted function.",
+    "caption": "The state includes every optimizer-dependent counter and moment. Returning metrics does not itself perform file logging.",
+    "renderer": "mermaid",
+    "source": "visuals/functional-training-state.mmd",
+    "evidence": [
+      "AR14",
+      "AR04"
+    ],
+    "checks": [
+      "The next step uses returned optimizer state, not the initial state.",
+      "The optimizer counter advances once per update.",
+      "Logging remains outside the compiled step."
+    ]
+  },
+  {
+    "id": "absolute-relative-tolerance",
+    "lesson": "5-4",
+    "placement": "key-idea",
+    "title": "Near zero, relative error alone is the wrong test",
+    "description": "The maximum accepted absolute difference is atol plus rtol times the magnitude of the reference b. With atol=1e−5 and rtol=1e−4, the threshold is 1e−5 at b=0 and 1.1e−4 at |b|=1. The positive intercept provides an absolute-error floor.",
+    "caption": "The standard elementwise closeness criterion with the lesson’s initial FP32 tolerances. Actual tolerances still need operation-specific justification.",
+    "renderer": "svg",
+    "source": "visuals/absolute-relative-tolerance.svg",
+    "evidence": [
+      "AR26",
+      "AR15"
+    ],
+    "checks": [
+      "Threshold equals 1e−5 at b=0 and 1.1e−4 at |b|=1.",
+      "Vertical axis is absolute difference, horizontal axis reference magnitude.",
+      "The shaded region represents acceptable error, not model measurements."
+    ]
+  },
+  {
+    "id": "cache-logit-alignment",
+    "lesson": "6-2",
+    "placement": "key-idea",
+    "title": "Align cached and full-prefix logit rows",
+    "description": "A three-token prefix a,b,c occupies positions 9,10,11. Both paths append known token d at position 12. Full recomputation processes a,b,c,d; cached execution reads retained K/V for a,b,c plus newly computed d. Compare their logits at position 12, which both predict the next position 13.",
+    "caption": "Illustrative absolute offset 9. The cache retains K/V states, not merely raw token IDs; the cells abstract those stored states.",
+    "renderer": "svg",
+    "source": "visuals/cache-logit-alignment.svg",
+    "evidence": [
+      "AR16"
+    ],
+    "checks": [
+      "Both compared paths include the appended token d at absolute position 12.",
+      "Both compared logits predict position 13.",
+      "The cached prefix positions remain 9,10,11."
+    ]
+  },
+  {
+    "id": "document-split-before-chunks",
+    "lesson": "6-3",
+    "placement": "key-idea",
+    "title": "Split documents before making overlapping examples",
+    "description": "Training documents A and B yield chunks wholly within training; validation documents C and D yield chunks wholly within validation. Each document’s example spans 0–7 and 4–11 overlap, illustrating why splitting chunks afterward could leak text.",
+    "caption": "Schematic document IDs and chunk spans. Preserve EOS/document boundaries using the lesson’s chosen separate-example or explicit-mask convention.",
+    "renderer": "svg",
+    "source": "visuals/document-split-before-chunks.svg",
+    "evidence": [
+      "AR17",
+      "AR01"
+    ],
+    "checks": [
+      "No document ID appears in both partitions.",
+      "Chunks 0–7 and 4–11 overlap at positions 4–7.",
+      "All overlapping chunks of each document remain in its assigned partition."
+    ]
+  },
+  {
+    "id": "completed-work-timing",
+    "lesson": "6-4",
+    "placement": "key-idea",
+    "title": "Measure work through device completion",
+    "description": "The host warms up outside timing, synchronizes, starts the timer and dispatches device work. The function may return before the device finishes. The timer stops only after a completion wait, so elapsed time includes the whole measured operation rather than just dispatch.",
+    "caption": "Schematic durations, not benchmark data. Use the matching completion mechanism for the selected backend.",
+    "renderer": "svg",
+    "source": "visuals/completed-work-timing.svg",
+    "evidence": [
+      "AR18",
+      "AR34"
+    ],
+    "checks": [
+      "Warm-up is outside the timed interval.",
+      "A completion wait precedes stop.",
+      "The timed interval spans all measured device work."
+    ]
+  },
+  {
+    "id": "lora-merge-state",
+    "lesson": "7-2",
+    "placement": "key-idea",
+    "title": "Merging moves the update into the base path",
+    "description": "Using column-vector shorthand, in unmerged state, output combines Wx and the separate scaled adapter BAx. Merging an evaluation copy adds the scaled BA to W once and disables the adapter branch, so only the merged weight is used. A repeat merge must be rejected or be a no-op.",
+    "caption": "Column-vector shorthand: x is [in], W is [out,in]. Preserve the unmerged training checkpoint. The test uses a nonzero update and merges only an evaluation copy.",
+    "renderer": "mermaid",
+    "source": "visuals/lora-merge-state.mmd",
+    "evidence": [
+      "AR19"
+    ],
+    "checks": [
+      "Merge adds the scaled update once.",
+      "Merged forward excludes the separate adapter path.",
+      "Repeated merge does not modify the weight again."
+    ]
+  },
+  {
+    "id": "adapter-smoke-isolation",
+    "lesson": "7-4",
+    "placement": "key-idea",
+    "title": "Keep the smoke update out of the SFT starting state",
+    "description": "Save pristine zero-update adapters before testing. The smoke branch takes one synthetic update, checks freezes and compares an unmerged model with a separate merged evaluation copy. The SFT branch restores pristine adapters and uses a fresh optimizer, excluding smoke-update state.",
+    "caption": "The pinned base weights remain frozen on every branch. The smoke result is test evidence, not the starting checkpoint of the task experiment.",
+    "renderer": "mermaid",
+    "source": "visuals/adapter-smoke-isolation.mmd",
+    "evidence": [
+      "AR19",
+      "AR21"
+    ],
+    "checks": [
+      "The SFT starting state has no synthetic update.",
+      "Merged evaluation runs on a separate copy.",
+      "The restored SFT optimizer is fresh."
+    ]
+  },
+  {
+    "id": "family-split-boundaries",
+    "lesson": "8-1",
+    "placement": "key-idea",
+    "title": "Split the generator’s families before drawing rows",
+    "description": "A three-by-three grid crosses template-family partitions with entity-family partitions. Only matching train/train, validation/validation and held-out/held-out cells are used. This gives each split exclusive family pools on both axes, unlike deduplicating complete sentences after generation.",
+    "caption": "The figure shows ownership, not equal-size datasets or an independent blind benchmark. The lesson still generates 300/50/100 examples.",
+    "renderer": "svg",
+    "source": "visuals/family-split-boundaries.svg",
+    "evidence": [
+      "AR22",
+      "AR17"
+    ],
+    "checks": [
+      "Train, validation and held-out have disjoint template-family pools.",
+      "Their entity-family pools are also disjoint.",
+      "Only the three same-partition cells generate examples."
+    ]
+  },
+  {
+    "id": "sft-label-alignment",
+    "lesson": "8-2",
+    "placement": "key-idea",
+    "title": "The last prompt logit predicts the first completion token",
+    "description": "Tokens p0,p1,p2,a0,a1,EOS,PAD have labels −100,−100,−100,a0,a1,EOS,−100 before the model’s internal causal shift. Predictor logit rows 2,3,4 train on a0,a1,EOS respectively. Other shown label targets are ignored.",
+    "caption": "Example assumes the standard internal one-token causal shift and ignore index −100. EOS is a supervised terminator in this illustrative example; verify the loaded model interface.",
+    "renderer": "svg",
+    "source": "visuals/sft-label-alignment.svg",
+    "evidence": [
+      "AR21",
+      "AR02"
+    ],
+    "checks": [
+      "labels[3]=a0 is paired with logits[2].",
+      "Supervised predictor rows are 2,3,4; supervised label positions are 3,4,5.",
+      "Padding label at position 6 is ignored.",
+      "Labels are not manually shifted a second time."
+    ]
+  },
+  {
+    "id": "sft-data-roles",
+    "lesson": "8-3",
+    "placement": "key-idea",
+    "title": "Each split has a different decision-making role",
+    "description": "Training examples supply gradients that update adapter weights. Scheduled validation evaluations choose among saved candidate checkpoints using the predeclared rule. The held-out set is used for the final fixed comparison after checkpoint selection and does not feed back into training or selection.",
+    "caption": "All splits remain frozen. The author-created held-out set is a development holdout, not an independent external benchmark.",
+    "renderer": "mermaid",
+    "source": "visuals/sft-data-roles.mmd",
+    "evidence": [
+      "AR19",
+      "AR05"
+    ],
+    "checks": [
+      "Only train supplies gradients.",
+      "Validation supplies the checkpoint-selection evidence.",
+      "Held-out outcomes have no feedback edge to training or selection."
+    ]
+  },
+  {
+    "id": "moe-stored-versus-active",
+    "lesson": "9-1",
+    "placement": "key-idea",
+    "title": "Top-2 changes use, not expert storage",
+    "description": "A box contains all four expert weight sets. One illustrative token sends work only to experts zero and two, while experts one and three remain stored. The router is additional stored and evaluated computation.",
+    "caption": "The course toy has no shared expert and no token dropping. Highlighted experts illustrate one selection, not a fixed assignment for all tokens.",
+    "renderer": "svg",
+    "source": "visuals/moe-stored-versus-active.svg",
+    "evidence": [
+      "AR25"
+    ],
+    "checks": [
+      "All four expert weight sets are present.",
+      "Exactly two expert paths are active for the illustrated token.",
+      "Expert weights use 16→32→16 with no biases; router is counted separately."
+    ]
+  },
+  {
+    "id": "dense-masked-moe",
+    "lesson": "9-3",
+    "placement": "key-idea",
+    "title": "Broadcast routing weights across output channels",
+    "description": "For a token selecting experts zero and two, the dense reference still computes all four D-wide expert outputs. It multiplies them by weights [p0,0,p2,0] broadcast across D, then sums the expert axis. Batched outputs [N,4,D] times weights [N,4,1] reduce to [N,D].",
+    "caption": "A one-token [4,D] slice of the independent reference. Sum experts: axis 0 of this slice, or axis 1 of batched [N,4,D]. Keep selected weights in the gradient graph.",
+    "renderer": "svg",
+    "source": "visuals/dense-masked-moe.svg",
+    "evidence": [
+      "AR26",
+      "AR25"
+    ],
+    "checks": [
+      "Dense reference computes all four expert outputs.",
+      "Sparse weights are expanded along a singleton D axis.",
+      "Reduction removes the expert axis, not the channel axis."
+    ]
+  },
+  {
+    "id": "mla-projection-branches",
+    "lesson": "10-1",
+    "placement": "key-idea",
+    "title": "Trace the joint latent and the separate positional key",
+    "description": "A token h of width d branches to the joint KV latent cKV of width r and a separate rotary positional-key path. Learned up-projections expand the latent to H content-key heads of width dc and H content-value heads of width dv. The positional key of width dp is shared across query heads. A query head uses its own content and rotary query vectors for the two scalar score terms.",
+    "caption": "Shape-reading diagram of MLA’s mathematical pieces; up-projections need not be materialized in the compact inference path. Symbols dc and dv name per-head content widths here. Batch and token axes apply to activations, not shared weight matrices.",
+    "renderer": "svg",
+    "source": "visuals/mla-projection-branches.svg",
+    "evidence": [
+      "AR27"
+    ],
+    "checks": [
+      "WUK maps [r] to [H·dc]; WUV maps [r] to [H·dv].",
+      "One kR [dp] is shared across heads, not H separately stored kR copies.",
+      "Both score terms are scalar inner products with matching widths."
+    ]
+  },
+  {
+    "id": "mla-cache-score",
+    "lesson": "10-2",
+    "placement": "key-idea",
+    "title": "Separate retained state from score-time algebra",
+    "description": "Content query qC is transformed by the transpose of a head’s content-key up-projection into an r-wide vector. Its dot product with the cached latent equals the original qC dot expanded content key. Separately qR dots the cached rotary positional key. Add these terms and divide by the square root of dc plus dp.",
+    "caption": "One head and one cached token. This isolates the score; values/output projection and softmax over all allowed tokens are outside the picture.",
+    "renderer": "svg",
+    "source": "visuals/mla-cache-score.svg",
+    "evidence": [
+      "AR27"
+    ],
+    "checks": [
+      "qCᵀ(WUK_i cKV)=(WUK_iᵀ qC)ᵀ cKV.",
+      "Retained widths are r and dp; WUK_i is shared learned weight.",
+      "Attention score scale is sqrt(dc+dp) for the concatenated key/query widths."
+    ]
+  },
+  {
+    "id": "hybrid-state-inventory",
+    "lesson": "11-1",
+    "placement": "key-idea",
+    "title": "Fixed recurrent state can coexist with growing KV state",
+    "description": "For one batch item, a recurrent layer retains a fixed-shape matrix per head. A full-attention layer retains K and V entries indexed by all cached positions. The hybrid model must account for both plus any auxiliary state. The side-by-side panels are an inventory comparison, not parallel execution or a claimed layer ordering.",
+    "caption": "Shapes show one batch item. Schematic component categories. Use the exact selected Qwen configuration and revision for actual layer counts and dimensions.",
+    "renderer": "svg",
+    "source": "visuals/hybrid-state-inventory.svg",
+    "evidence": [
+      "AR28",
+      "AR29"
+    ],
+    "checks": [
+      "Recurrent matrix size does not include T.",
+      "Full-attention cache includes T.",
+      "The diagram makes no model-specific layer count, ratio or ordering claim."
+    ]
+  },
+  {
+    "id": "hybrid-state-scaling",
+    "lesson": "11-3",
+    "placement": "self-check",
+    "title": "Only part of the hybrid’s retained state is constant",
+    "description": "A line chart shows recurrent matrix storage fixed at 0.125 MiB, attention cache growing at T/2048 MiB, and their sum. At T=512 the total is 0.375 MiB, and at 4096 it is 2.125 MiB. It uses the lesson’s separate FP32 matrix and FP16 cache assumptions.",
+    "caption": "Worked check of the lesson’s illustrative configuration, not Qwen’s actual allocation. One MiB is 2²⁰ bytes.",
+    "renderer": "svg",
+    "source": "visuals/hybrid-state-scaling.svg",
+    "evidence": [
+      "AR28",
+      "AR29"
+    ],
+    "checks": [
+      "Recurrent state is 1×8×4×32×32×4=131072 bytes=128 KiB.",
+      "Attention cache is 2×1×2×T×2×32×2=512T bytes.",
+      "Totals are 384 KiB at T=512 and 2176 KiB at T=4096."
+    ]
+  },
+  {
+    "id": "compression-versus-selection",
+    "lesson": "12-2",
+    "placement": "key-idea",
+    "title": "Do not confuse cache width with selected history",
+    "description": "The left panel keeps all five position rows but represents each with a narrower stored vector. The right panel keeps equal-width rows while reading only positions zero, two and four. These illustrate compression and selection as distinct axes; actual architectures may combine both.",
+    "caption": "Width reduction is one compression example; other designs compress groups of positions. Do not infer a named model’s retained state, compression granularity or selection rule from this toy picture.",
+    "renderer": "svg",
+    "source": "visuals/compression-versus-selection.svg",
+    "evidence": [
+      "AR31",
+      "AR27"
+    ],
+    "checks": [
+      "Left panel preserves all five position rows while reducing width.",
+      "Right panel preserves row width while selecting a strict subset of positions.",
+      "No latency, quality or exact current-model structure is implied."
+    ]
+  },
+  {
+    "id": "multimodal-input-merge",
+    "lesson": "12-3",
+    "placement": "self-check",
+    "title": "Text and non-text features meet at the model interface",
+    "description": "Text tokens enter through text embeddings. An image enters through a vision encoder and a learned projection or adapter that matches the language-model interface. The two representation paths are assembled according to the model’s input convention before language-model processing.",
+    "caption": "Generic token-stream interface for checking your own drawing; exact placement, modality markers and fusion rules depend on the selected model. Survey only.",
+    "renderer": "mermaid",
+    "source": "visuals/multimodal-input-merge.mmd",
+    "evidence": [
+      "AR30"
+    ],
+    "checks": [
+      "Image and text begin on distinct representation paths.",
+      "The learned connection maps non-text features into the documented LM interface.",
+      "The diagram is generic and survey-only, not an implementation claim."
+    ]
+  },
+  {
+    "id": "valid-attention-references",
+    "lesson": "13-2",
+    "placement": "key-idea",
+    "title": "Equality follows the computation, not the model label",
+    "description": "MHA cached execution is compared with MHA full-prefix execution using the same weights. GQA cached execution is compared with its own full-prefix execution. Separately, grouped attention is compared with an expanded-KV implementation that shares its grouped weights. No equality is asserted between independently parameterized MHA and GQA models.",
+    "caption": "Edges mean a required numerical comparison. Use identical inputs, positions and settings within each mathematically equivalent pair.",
+    "renderer": "mermaid",
+    "source": "visuals/valid-attention-references.mmd",
+    "evidence": [
+      "AR16",
+      "AR26",
+      "AR08"
+    ],
+    "checks": [
+      "Each cache comparison stays within its own model weights.",
+      "Expanded-KV reference uses the same grouped weights.",
+      "No independently parameterized MHA/GQA equality edge exists."
+    ]
+  },
+  {
+    "id": "prefill-decode-trials",
+    "lesson": "13-3",
+    "placement": "key-idea",
+    "title": "Reset the cache between independent timing trials",
+    "description": "Two independent trials each begin with the same P-token prompt and an empty cache. Prefill creates P cached positions, then two known decode inputs grow the cache to P+1 and P+2. Trial two restarts rather than continuing from trial one’s final cache.",
+    "caption": "Schematic two-step decode window. Use the frozen experiment’s actual prompt and decode lengths and synchronize each measured interval.",
+    "renderer": "svg",
+    "source": "visuals/prefill-decode-trials.svg",
+    "evidence": [
+      "AR34",
+      "AR16"
+    ],
+    "checks": [
+      "Both trial prefills begin from an empty cache.",
+      "Within each trial cache lengths are P, P+1, P+2.",
+      "Prefill and decode are separate measurements, with the same workload across variants."
+    ]
+  },
+  {
+    "id": "controlled-ablation-fork",
+    "lesson": "14-1",
+    "placement": "key-idea",
+    "title": "Both arms start from the same initial state",
+    "description": "A saved initial state and fixed data sequence feed two runs. The baseline uses one AdamW weight-decay setting and the ablation uses the other. Both are compared at matched consumed-token points with the same validation data; neither starts from the other’s trained weights.",
+    "caption": "Only weight decay and output paths change. The tiny smoke run must be discarded or restored before either main arm.",
+    "renderer": "mermaid",
+    "source": "visuals/controlled-ablation-fork.mmd",
+    "evidence": [
+      "AR36",
+      "AR04"
+    ],
+    "checks": [
+      "Both runs restore common initial state.",
+      "Only scientific intervention is weight decay.",
+      "The comparison uses matched consumed tokens and fixed validation."
+    ]
+  },
+  {
+    "id": "reproduction-failure-gates",
+    "lesson": "15-4",
+    "placement": "key-idea",
+    "title": "Any required failure must block the success summary",
+    "description": "Validate required inputs first. If validation fails, exit nonzero. Then run the tiny training and parity tasks, requiring each to succeed; any failure exits nonzero. Only a successful required run plus verified fresh output artifacts permits a success summary.",
+    "caption": "Reuse existing commands and preserve their failure status. This is the tiny smoke path, not a full cloud training run. A run passes only when all required children succeed and the expected fresh artifacts exist.",
+    "renderer": "mermaid",
+    "source": "visuals/reproduction-failure-gates.mmd",
+    "evidence": [
+      "AR37"
+    ],
+    "checks": [
+      "An input failure cannot reach success.",
+      "A required child failure cannot reach success.",
+      "Success requires current expected artifacts, not merely launched subprocesses."
+    ]
+  },
+  {
+    "id": "broadcast-axis-fixture",
+    "lesson": "intro-2",
+    "placement": "key-idea",
+    "title": "Match the bias to the intended axis",
+    "description": "A two-by-three matrix has rows [2,4,6] and [1,3,5]. A length-three bias [10,20,30] broadcasts identically across both rows: channel j receives b[j] for either row. A [2,1] bias would instead be row-specific.",
+    "caption": "Optional tensor refresher. The resulting sums are left for the student’s independent expected-value checks.",
+    "renderer": "svg",
+    "source": "visuals/broadcast-axis-fixture.svg",
+    "evidence": [
+      "AR26"
+    ],
+    "checks": [
+      "Bias length 3 matches the final dimension of x [2,3].",
+      "Both rows receive the identical bias vector.",
+      "[2,1] broadcasts differently and is not the same operation."
+    ]
+  },
+  {
+    "id": "adamw-decoupled-update",
+    "lesson": "2-2",
+    "placement": "key-idea",
+    "title": "Weight decay bypasses the moment calculation",
+    "description": "The loss gradient, after any configured clipping, updates first and second moments and their bias corrections. Those moments determine the adaptive gradient step. Separately, multiply the old parameter by one minus learning rate times weight decay. Subtract the adaptive step from that decayed parameter.",
+    "caption": "AdamW dependency structure, omitting AMSGrad. Decoupled decay is not an L2 term added to the gradient before moment estimation.",
+    "renderer": "mermaid",
+    "source": "visuals/adamw-decoupled-update.mmd",
+    "evidence": [
+      "AR04"
+    ],
+    "checks": [
+      "Moments use the loss gradient after the declared clipping policy.",
+      "Weight decay is applied directly to old weights.",
+      "Weight decay is not added to the gradient used for moment estimates."
+    ]
+  },
+  {
+    "id": "lora-initial-gradients",
+    "lesson": "7-2",
+    "placement": "self-check",
+    "title": "Trace the first gradient through both LoRA factors",
+    "description": "For one column-vector example y=sBAx with upstream gradient g, the gradients are s B transpose g x transpose for A and s g (Ax) transpose for B. With B zero, A’s loss gradient is zero. Nonzero A can allow B’s gradient to be nonzero. If both factors are zero, both loss gradients vanish.",
+    "caption": "Single-example, bias-free derivation with ordinary backpropagation. Optimizer weight decay is separate from these loss gradients.",
+    "renderer": "svg",
+    "source": "visuals/lora-initial-gradients.svg",
+    "evidence": [
+      "AR19"
+    ],
+    "checks": [
+      "Gradient A has [r,in] shape and contains factor Bᵀ.",
+      "Gradient B has [out,r] shape and contains Ax.",
+      "B=0 makes grad A zero; A=B=0 makes both loss gradients zero."
     ]
   }
 ]

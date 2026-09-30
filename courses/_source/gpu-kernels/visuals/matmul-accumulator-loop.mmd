@@ -1,0 +1,8 @@
+flowchart TB
+  accTitle: Keep the accumulator alive across the K loop
+  accDescr: Initialize the FP32 output accumulator once. Each K chunk loads two tiles and adds a dot product to the same accumulator. Only after all chunks are processed is the result cast and stored.
+  A["Init FP32 accumulator"] --> B["Load next A/B tiles"]
+  B --> C["Accumulate tile product"]
+  C --> D["More K tiles?"]
+  D -->|"Yes"| B
+  D -->|"No"| E["Cast; store output tile"]

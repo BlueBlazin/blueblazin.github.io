@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="415" viewBox="0 0 800 415" role="img" aria-labelledby="title desc">
+<title id="title">A recent timestamp cannot show which events a summary contains</title>
+<desc id="desc">The durable event log has sequence IDs 10 through 14. A saved compact record is explicitly based on events through sequence 11 and workspace version A. Later events 12 through 14 include a result and workspace version B. On restart the saved record does not include those newer facts, regardless of its displayed timestamp. Rebuild or explicitly stop rather than treating the stale view as current. Event order establishes coverage; workspace versions need independent comparison too.</desc>
+<rect width="800" height="415" fill="#ffffff"/>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto-start-reverse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#64748b" stroke-width="1.4"/></marker></defs>
+<g font-family="system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="16" fill="#263445">
+<text x="28" y="34" font-size="18" fill="#263445" font-weight="600">Durable event sequence</text>
+<rect x="37" y="69" width="117" height="65" rx="8" fill="#edf2f8" stroke="#c7d2de" stroke-width="1.5"/>
+<text x="96" y="98" font-size="17" fill="#263445" font-weight="600" text-anchor="middle">seq 10</text>
+<text x="96" y="120" font-size="14" fill="#263445" text-anchor="middle">saved event</text>
+<path d="M158 100 L183 100" fill="none" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="189" y="69" width="117" height="65" rx="8" fill="#edf2f8" stroke="#c7d2de" stroke-width="1.5"/>
+<text x="248" y="98" font-size="17" fill="#263445" font-weight="600" text-anchor="middle">seq 11</text>
+<text x="248" y="120" font-size="14" fill="#263445" text-anchor="middle">saved event</text>
+<path d="M310 100 L335 100" fill="none" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="341" y="69" width="117" height="65" rx="8" fill="#edf5f4" stroke="#c7d2de" stroke-width="1.5"/>
+<text x="400" y="98" font-size="17" fill="#263445" font-weight="600" text-anchor="middle">seq 12</text>
+<text x="400" y="120" font-size="14" fill="#263445" text-anchor="middle">saved event</text>
+<path d="M462 100 L487 100" fill="none" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="493" y="69" width="117" height="65" rx="8" fill="#edf5f4" stroke="#c7d2de" stroke-width="1.5"/>
+<text x="552" y="98" font-size="17" fill="#263445" font-weight="600" text-anchor="middle">seq 13</text>
+<text x="552" y="120" font-size="14" fill="#263445" text-anchor="middle">saved event</text>
+<path d="M614 100 L639 100" fill="none" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="645" y="69" width="117" height="65" rx="8" fill="#edf5f4" stroke="#c7d2de" stroke-width="1.5"/>
+<text x="704" y="98" font-size="17" fill="#263445" font-weight="600" text-anchor="middle">seq 14</text>
+<text x="704" y="120" font-size="14" fill="#263445" text-anchor="middle">saved event</text>
+<rect x="37" y="188" width="309" height="102" rx="8" fill="#edf2f8" stroke="#c7d2de" stroke-width="1.5"/>
+<text x="57" y="217" font-size="16" fill="#263445" font-weight="600">Summary covers ≤ seq 11</text>
+<text x="57" y="244" font-size="15" fill="#263445">Workspace version A</text>
+<text x="57" y="271" font-size="15" fill="#263445">Coverage stays fixed until rebuilt.</text>
+<path d="M248 139 L248 177" fill="none" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="415" y="188" width="346" height="102" rx="8" fill="#edf5f4" stroke="#c7d2de" stroke-width="1.5"/>
+<text x="435" y="217" font-size="16" fill="#263445" font-weight="600">Newer evidence: seq 12–14</text>
+<text x="435" y="244" font-size="15" fill="#263445">Includes result / workspace version B</text>
+<text x="435" y="271" font-size="15" fill="#263445">Missing from the old compact record.</text>
+<path d="M552 139 L552 177" fill="none" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="400" y="339" font-size="16" fill="#263445" font-weight="600" text-anchor="middle">Compare event coverage and workspace identity on restart.</text>
+<text x="400" y="376" font-size="15" fill="#263445" text-anchor="middle">A timestamp alone cannot establish that the compact record includes these facts.</text>
+</g>
+</svg>

@@ -1,8 +1,8 @@
 flowchart TB
   accTitle: Readiness and reuse protect different hazards
   accDescr: A shared buffer can be filled only after its previous consumer is finished. A consumer can read only after transfer completion. More work cycles through reuse; loop exit drains outstanding computation before results are used.
-  A["Prior consumer finished"] --> B["Transfer tile; wait until ready"]
-  B --> C["Read staged tile"]
+  A["Consumer complete"] --> B["Transfer; await ready"]
+  B --> C["Consume tile"]
   C --> D["More tiles?"]
   D -->|"Yes: await consumer"| A
-  D -->|"No"| E["Drain compute; then use results"]
+  D -->|"No"| E["Drain; use results"]

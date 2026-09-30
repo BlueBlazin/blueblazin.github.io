@@ -1,0 +1,5 @@
+flowchart TB
+  accTitle: LoRA merge must disable the separate adapter branch
+  accDescr: Unmerged state computes base plus adapter. Merge a copy by adding scaled BA into W and disabling the adapter branch. Merged state computes only the new base path. A repeated merge is rejected or leaves that state unchanged; it never adds BA again.
+  U["Unmerged: W x + (α/r) B A x"] -->|"Merge copy once; disable adapter"| G["Merged: (W + (α/r) B A) x only"]
+  G -->|"Repeat merge: reject or no-op"| G

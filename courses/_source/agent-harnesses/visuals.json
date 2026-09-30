@@ -39,6 +39,24 @@
     ]
   },
   {
+    "id": "path-ancestry",
+    "lesson": "2-1",
+    "placement": "key-idea",
+    "title": "Resolved ancestry beats a matching prefix",
+    "description": "Under /tmp, the workspace /tmp/lab and its sibling /tmp/lab-backup have names sharing a text prefix. A file below /tmp/lab is contained in the workspace; a file below /tmp/lab-backup is not. Resolve paths and compare ancestry rather than accepting a string prefix. This simplified directory tree has no symlinks or concurrent filesystem changes.",
+    "caption": "Simplified resolved directory tree, with no symlinks. Apply the course’s relative-path contract before this ancestry check.",
+    "renderer": "svg",
+    "source": "visuals/path-ancestry.svg",
+    "evidence": [
+      "H12"
+    ],
+    "checks": [
+      "The allowed file is below the workspace directory.",
+      "The prefix-sharing sibling is outside the workspace.",
+      "The diagram does not claim a lexical prefix proves containment."
+    ]
+  },
+  {
     "id": "execution-boundary",
     "lesson": "3-1",
     "placement": "key-idea",
@@ -59,6 +77,83 @@
     ]
   },
   {
+    "id": "symlink-resolution",
+    "lesson": "3-2",
+    "placement": "key-idea",
+    "title": "A path can leave the workspace through a parent",
+    "description": "A workspace at /tmp/lab contains a symlink named link that points to /tmp/shared outside the workspace. The relative request link/report.txt looks lexically under the workspace, but its resolved target is /tmp/shared/report.txt. The host must reject it before reading or writing. When creating a new file, inspect the resolved existing parent too. This is a controlled fixture, not a race-free hostile-filesystem guarantee.",
+    "caption": "A controlled symlink fixture. Resolve before access, including existing parents for new files; this is not a race-free defense against hostile concurrent filesystem changes.",
+    "renderer": "svg",
+    "source": "visuals/symlink-resolution.svg",
+    "evidence": [
+      "H12"
+    ],
+    "checks": [
+      "The link begins inside the root but targets a directory outside it.",
+      "The resolved file must be denied before read or write.",
+      "The new-file parent case and concurrency limitation are explicit."
+    ]
+  },
+  {
+    "id": "process-lifetime",
+    "lesson": "3-3",
+    "placement": "key-idea",
+    "title": "A timeout ends a wait; cleanup ends the work",
+    "description": "This wall-time example has a caller wait ending at its deadline while the configured task execution unit is still being terminated. The runner must stop the promised container or process group, including descendants, and confirm exit. Incremental stdout and stderr readers retain only bounded output and must also finish or be cleaned up. The terminal result follows cleanup, whose duration is reported separately. The output-byte cap is another trigger for the same cleanup path; time positions are schematic.",
+    "caption": "Time positions are schematic. The execution unit includes the promised container or process group and descendants. An output-cap breach triggers the same cleanup path; output collection stays bounded throughout.",
+    "renderer": "svg",
+    "source": "visuals/process-lifetime.svg",
+    "evidence": [
+      "H13"
+    ],
+    "checks": [
+      "The task can outlive the caller wait.",
+      "Terminal reporting follows confirmed termination and reader cleanup.",
+      "The cleanup allowance is separate from the requested cap.",
+      "Incremental readers bound combined stdout/stderr retention rather than truncating only afterward."
+    ]
+  },
+  {
+    "id": "replay-versus-playback",
+    "lesson": "4-2",
+    "placement": "key-idea",
+    "title": "Two meanings of replay",
+    "description": "The original immutable event log has two different uses. Read-only playback formats saved events and performs no tool calls. Execution replay extracts recorded model responses, feeds them to FakeModel, and executes only approved disposable local tools in a new clean fixture. That execution creates a new run ID and new event log. Compare normalized decisions and output hashes with the original, leaving its log and workspace unchanged.",
+    "caption": "Execution replay is limited to approved tools in a fresh disposable fixture. The original log and workspace are never reused for side effects.",
+    "renderer": "mermaid",
+    "source": "visuals/replay-versus-playback.mmd",
+    "evidence": [
+      "H14"
+    ],
+    "checks": [
+      "Read-only playback makes zero tool calls.",
+      "Execution replay creates a fresh fixture and new run ID.",
+      "Original events remain immutable.",
+      "Normalization retains decisions and outcomes while allowing fresh timestamps and identity."
+    ]
+  },
+  {
+    "id": "trusted-grading",
+    "lesson": "5-1",
+    "placement": "key-idea",
+    "title": "The host controls grading; candidate code stays isolated",
+    "description": "Protected host assets include the immutable initial fixture and trusted grader code. Each trial copies the initial fixture to a fresh agent execution workspace. The resulting candidate is inspected by an isolated grading container when checks need to execute candidate code; trusted checks are mounted read-only there, and credentials are absent. The host controller receives bounded inert results and records the grade. Agent output does not define the trusted tests and candidate modules are never imported into the host evaluator.",
+    "caption": "Shown for dynamic behavioral checks. Inert output comparisons can happen on the host; candidate imports and execution cannot. Each trial begins with a fresh fixture copy.",
+    "renderer": "svg",
+    "source": "visuals/trusted-grading.svg",
+    "evidence": [
+      "H7-verifier",
+      "H22",
+      "H10-security"
+    ],
+    "checks": [
+      "The agent workspace does not contain trusted graders or reference solutions.",
+      "Dynamic candidate execution is inside a bounded grading environment without credentials.",
+      "Trusted checks are read-only in grading.",
+      "Only bounded inert results return to the host."
+    ]
+  },
+  {
     "id": "budget-reservation",
     "lesson": "5-2",
     "placement": "key-idea",
@@ -76,6 +171,64 @@
       "Insufficient budget has no path to a sent request.",
       "Unknown usage preserves the reservation.",
       "The scope is a sequential dispatcher; this does not claim independent worker balances are safe."
+    ]
+  },
+  {
+    "id": "evidence-windows",
+    "lesson": "6-2",
+    "placement": "key-idea",
+    "title": "A search hit is only a location",
+    "description": "An illustrative 24-line file has a search hit at line 8 and a needed definition at lines 18 through 22. The first read requests lines 6 through 14 but its five-line cap returns only 6 through 10; 11 through 14 are known omitted requested lines. Lines 18 through 22 were never requested by that call and need a separate read. The example distinguishes search matches, requested ranges, returned content, and later retrieval; it reports no measured agent outcome.",
+    "caption": "Illustrative fixture, not an observed agent result. Lines 6–14 are nine requested lines; a five-line cap returns 6–10, while the definition at 18–22 needs another request.",
+    "renderer": "svg",
+    "source": "visuals/evidence-windows.svg",
+    "evidence": [
+      "H19"
+    ],
+    "checks": [
+      "Requested and returned line ranges are distinguished.",
+      "The known omitted count within the request is four.",
+      "The later definition was not requested by the first read.",
+      "No exact count of unseen search matches is asserted."
+    ]
+  },
+  {
+    "id": "selection-comparison",
+    "lesson": "6-3",
+    "placement": "key-idea",
+    "title": "Inspect the intervention, not only the grade",
+    "description": "Separate development trials use fresh copies of the same pinned task snapshots, with the same model, tools, context ceiling, and run caps. Trial A uses the existing selector; trial B changes only that selection policy. Selection occurs inside each trial as model requests are constructed, and may recur. Traces record selected paths and ranges alongside each final grade. Compare those intermediate records to establish whether the intervention actually changed context; identical evidence does not establish policy equivalence.",
+    "caption": "Selection runs inside each trial whenever context is constructed. Every trial gets a fresh pinned fixture; identical selected evidence means this pilot did not exercise the intended difference.",
+    "renderer": "mermaid",
+    "source": "visuals/selection-comparison.mmd",
+    "evidence": [
+      "H3-paper"
+    ],
+    "checks": [
+      "Only selection policy differs.",
+      "Model, tools, snapshots and caps are shared.",
+      "Selected ranges are recorded as intermediate observations.",
+      "Equal grades alone do not prove the contexts were the same."
+    ]
+  },
+  {
+    "id": "checkpoint-crash-window",
+    "lesson": "7-2",
+    "placement": "key-idea",
+    "title": "The file effect and its record can disagree after a crash",
+    "description": "The checkpoint first durably records action intent. The file mutation is a separate operation, followed by verification and a later durable completion checkpoint. A crash before the mutation leaves the old file; a crash after mutation but before completion may leave the new file. In both cases the durable checkpoint can still say started. Atomic checkpoint replacement does not make these separate operations one transaction. The drawing concerns the course process-interruption contract; power-loss durability requires the documented storage assumptions.",
+    "caption": "Schematic process-interruption windows. Atomic checkpoint replacement does not create a transaction with workspace mutation or by itself guarantee power-loss durability.",
+    "renderer": "svg",
+    "source": "visuals/checkpoint-crash-window.svg",
+    "evidence": [
+      "H15",
+      "H5"
+    ],
+    "checks": [
+      "Intent persistence precedes execution.",
+      "Workspace mutation precedes verified durable completion.",
+      "Before- and after-effect crashes can leave the same started checkpoint.",
+      "Separate storage operations are never shown as one atomic transaction."
     ]
   },
   {
@@ -100,7 +253,7 @@
   },
   {
     "id": "context-compaction",
-    "lesson": "8-2",
+    "lesson": "8-1",
     "placement": "key-idea",
     "title": "The saved history and model context are different",
     "description": "The full event log remains durable outside the next model request. The compacted input contains required fixed content, a derived compact record, and the newest complete interaction groups that fit. A group includes all calls in an assistant turn and every corresponding result, plus provider-required continuation data. Compaction is lossy; evidence pointers must be checked for missing or changed sources. Reserve output space separately and stop explicitly if required fixed content plus the newest group cannot fit.",
@@ -117,6 +270,46 @@
       "Multiple calls and their results stay in one complete interaction group.",
       "Output reserve is outside the bounded input and their sum must fit the model context limit.",
       "The diagram does not imply compacted evidence is lossless or always current."
+    ]
+  },
+  {
+    "id": "versioned-evidence",
+    "lesson": "8-2",
+    "placement": "key-idea",
+    "title": "A line range needs its snapshot",
+    "description": "A compact record points to settings.py at snapshot A, lines 12 through 14. The original snapshot supports the recorded observation. After an edit, snapshot B can have different content at the same line numbers. Comparing the saved version with the current version detects a stale pointer. Preserve the old observation as historical evidence and inspect current contents before treating it as a current fact; do not silently relabel the pointer.",
+    "caption": "A and B are illustrative version identities, not real hashes. A stale pointer may remain historical evidence, but cannot silently become evidence about the current file.",
+    "renderer": "svg",
+    "source": "visuals/versioned-evidence.svg",
+    "evidence": [
+      "H18",
+      "H9-tools"
+    ],
+    "checks": [
+      "The saved pointer includes path, version and range.",
+      "Current version mismatch is visible despite equal line numbers.",
+      "The diagram makes no claim that every edit necessarily changes those lines.",
+      "Stale evidence requires inspection rather than automatic acceptance."
+    ]
+  },
+  {
+    "id": "context-policy-allocation",
+    "lesson": "8-3",
+    "placement": "key-idea",
+    "title": "Share the ceiling; change what fills it",
+    "description": "Both context policies preserve required system instructions, tool schemas, the original task, and constraints. Under the same model-input ceiling, recent history uses the remaining space for newest complete interaction groups. Compaction also includes a compact evidence record, leaving the remaining space for complete recent groups. The depicted allocation is schematic, not a token count or a guarantee about how many groups fit. Any summarizer calls are charged to the compaction condition, and both policies reserve output space and share total run limits.",
+    "caption": "One illustrative allocation, not token proportions or a fixed group count. The compact record uses some of the same input allowance; actual retained groups depend on token lengths.",
+    "renderer": "svg",
+    "source": "visuals/context-policy-allocation.svg",
+    "evidence": [
+      "H18",
+      "H8"
+    ],
+    "checks": [
+      "Both requests retain identical required fixed content.",
+      "Complete recent interaction groups remain intact.",
+      "Input ceiling and output reservation are shared.",
+      "Any model-based summarization overhead is charged to compaction."
     ]
   },
   {
@@ -137,6 +330,106 @@
       "Validation and authorization remain distinct decisions.",
       "Every workspace-read path passes both gates.",
       "The protocol is not represented as a source of permission."
+    ]
+  },
+  {
+    "id": "bounded-retry",
+    "lesson": "11-1",
+    "placement": "key-idea",
+    "title": "Retry only while the same limits still permit it",
+    "description": "After a model-call error, first require both a retryable classification and remaining retry, time, and budget allowance. Otherwise stop with the recorded reason. Bound any backoff by the remaining deadline. Recheck deadline and reservation eligibility after waiting and before recording and dispatching a new attempt. Another error returns to the classification and allowance gate; success returns to the normal harness. Unknown usage from an earlier timeout retains its reservation until reconciliation.",
+    "caption": "Disable hidden SDK retries. Backoff and every new attempt remain inside the original run limits; unresolved usage from a prior timeout keeps its reservation.",
+    "renderer": "mermaid",
+    "source": "visuals/bounded-retry.mmd",
+    "evidence": [
+      "H9",
+      "H14"
+    ],
+    "checks": [
+      "Permanent errors and exhausted allowance stop before backoff.",
+      "Delay is bounded by the remaining deadline.",
+      "Deadline and reservation are rechecked before dispatch.",
+      "Each retry has its own recorded attempt and does not reset the budget."
+    ]
+  },
+  {
+    "id": "tool-failure-boundaries",
+    "lesson": "11-2",
+    "placement": "key-idea",
+    "title": "Where failure occurs changes what you know",
+    "description": "A malformed request is rejected by validation without entering the tool body. A valid and authorized request can enter execution; a later crash means execution started and effects may need inspection. Cancellation stops new scheduling and cleans up the tested execution unit before reporting its outcome. Neither a crash nor cancellation authorizes an automatic retry of an uncertain mutation. The lesson's injected crash is read-only, while the distinction explains the broader recovery rule.",
+    "caption": "The injected crash in this lab is read-only. A mutating tool might have acted before crashing, so neither crash nor cancellation is blanket permission to retry.",
+    "renderer": "mermaid",
+    "source": "visuals/tool-failure-boundaries.mmd",
+    "evidence": [
+      "H11",
+      "H13"
+    ],
+    "checks": [
+      "Rejected arguments never enter the tool body.",
+      "A post-entry crash retains possible-effect uncertainty.",
+      "Cancellation stops new scheduling and cleans up the promised execution.",
+      "No branch automatically retries an uncertain mutation."
+    ]
+  },
+  {
+    "id": "stale-summary",
+    "lesson": "11-3",
+    "placement": "key-idea",
+    "title": "Track which evidence the summary actually includes",
+    "description": "The durable event log has sequence IDs 10 through 14. A saved compact record is explicitly based on events through sequence 11 and workspace version A. Later events 12 through 14 include a result and workspace version B. On restart the saved record does not include those newer facts, regardless of its displayed timestamp. Rebuild or explicitly stop rather than treating the stale view as current. Event order establishes coverage; workspace versions need independent comparison too.",
+    "caption": "Illustrative sequence IDs and workspace versions. Rebuild the stale view or stop explicitly; a fresh timestamp cannot substitute for evidence coverage.",
+    "renderer": "svg",
+    "source": "visuals/stale-summary.svg",
+    "evidence": [
+      "H5",
+      "H23"
+    ],
+    "checks": [
+      "The compact record covers only events through seq 11.",
+      "Events 12–14 exist durably outside that coverage.",
+      "Workspace identity is checked as well as event sequence.",
+      "The diagram does not assume absence of completion proves absence of a side effect."
+    ]
+  },
+  {
+    "id": "trial-manifest",
+    "lesson": "12-2",
+    "placement": "key-idea",
+    "title": "Define every trial before running it",
+    "description": "Cross sixteen final task IDs with two context conditions and three repeat indices. Each task therefore has six planned trials, and each repeat has thirty-two, for ninety-six unique manifest rows. Each row resolves frozen artifacts, limits, and a fresh workspace. The schematic shows tasks 01, 02, and 16; tasks 03 through 15 are elided. A square is a planned trial, not a successful or completed result.",
+    "caption": "16 × 2 × 3 = 96 planned rows. Retain separate states for attempted, failed, interrupted, and unattempted work; report any budget-limited shortfall.",
+    "renderer": "svg",
+    "source": "visuals/trial-manifest.svg",
+    "evidence": [
+      "H21"
+    ],
+    "checks": [
+      "The Cartesian product has 96 unique rows, six per task, and 32 per repeat.",
+      "Three repeat slots exist for each condition in every shown task row.",
+      "The omitted task rows are explicitly labeled as thirteen more tasks.",
+      "Visual marks encode planned slots, not invented experimental results."
+    ]
+  },
+  {
+    "id": "policy-activation",
+    "lesson": "12-3",
+    "placement": "key-idea",
+    "title": "Check the context before and after selection",
+    "description": "This illustrative five-turn trace has proposed input sizes 500, 800, 1100, 1200, and 900 tokens, and selected sizes 500, 800, 650, 700, and 900 tokens. At turns 3 and 4 the proposed input exceeds the shared 1000-token input ceiling; context selection reduces it before dispatch. Every selected input is at or below the ceiling. The numbers are teaching examples, not measured performance and not a comparison between the two policies. The pilot must capture such activation evidence for both conditions.",
+    "caption": "Synthetic teaching values, not measurements or a comparison of policy quality. The development pilot must capture activation and valid bounded inputs for both conditions.",
+    "renderer": "svg",
+    "source": "visuals/policy-activation.svg",
+    "evidence": [
+      "H18",
+      "H8"
+    ],
+    "checks": [
+      "Proposed sizes are 500, 800, 1100, 1200, 900 tokens.",
+      "Selected sizes are 500, 800, 650, 700, 900 tokens.",
+      "The illustrative input ceiling is 1000 tokens and all dispatched inputs respect it.",
+      "Policy activation occurs before dispatch at turns 3 and 4.",
+      "Output reservation and overall budgets still apply; neither is included as extra input capacity."
     ]
   },
   {
@@ -161,25 +454,6 @@
     ]
   },
   {
-    "id": "trial-manifest",
-    "lesson": "13-1",
-    "placement": "key-idea",
-    "title": "Define every trial before running it",
-    "description": "Cross sixteen final task IDs with two context conditions and three repeat indices. Each task therefore has six planned trials, and each repeat has thirty-two, for ninety-six unique manifest rows. Each row resolves frozen artifacts, limits, and a fresh workspace. The schematic shows tasks 01, 02, and 16; tasks 03 through 15 are elided. A square is a planned trial, not a successful or completed result.",
-    "caption": "16 × 2 × 3 = 96 planned rows. Retain separate states for attempted, failed, interrupted, and unattempted work; report any budget-limited shortfall.",
-    "renderer": "svg",
-    "source": "visuals/trial-manifest.svg",
-    "evidence": [
-      "H21"
-    ],
-    "checks": [
-      "The Cartesian product has 96 unique rows, six per task, and 32 per repeat.",
-      "Three repeat slots exist for each condition in every shown task row.",
-      "The omitted task rows are explicitly labeled as thirteen more tasks.",
-      "Visual marks encode planned slots, not invented experimental results."
-    ]
-  },
-  {
     "id": "paired-task-bootstrap",
     "lesson": "15-3",
     "placement": "key-idea",
@@ -197,6 +471,27 @@
       "Every sampled cluster carries all six records, with both conditions together.",
       "Sampling is with replacement and the intended sample length is sixteen.",
       "No fabricated grades or confidence interval values appear."
+    ]
+  },
+  {
+    "id": "provider-multiple-calls",
+    "lesson": "bridge-provider",
+    "placement": "key-idea",
+    "title": "One response can contain several calls",
+    "description": "In the supported sequential path, a provider fixture returns complete response blocks containing calls c1 and c2. The host preserves those blocks and validates the complete response before any dispatch. It executes the calls sequentially and records their respective results. Only after all required results exist does it construct the next provider request with the original response blocks and both matching results. Unsupported multi-call responses must instead be rejected before any tool executes. These are offline tests, not live requests.",
+    "caption": "The supported sequential path in an offline fixture. If multi-call responses are unsupported, reject the whole response before any dispatch instead of silently executing only its first call.",
+    "renderer": "mermaid",
+    "source": "visuals/provider-multiple-calls.mmd",
+    "evidence": [
+      "H9",
+      "H9-tools"
+    ],
+    "checks": [
+      "Provider-required response blocks are retained.",
+      "Both calls are validated before any tool dispatch in this shown path.",
+      "Every result references its own original call ID.",
+      "The next request includes all corresponding results.",
+      "The figure does not imply live HTTP requests during the offline lesson."
     ]
   }
 ]

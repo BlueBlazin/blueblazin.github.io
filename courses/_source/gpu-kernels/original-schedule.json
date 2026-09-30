@@ -555,8 +555,8 @@
         "steps": [
           {
             "title": "Fuse One Matmul Output Epilogue",
-            "action": "Add either bias or activation to the kernel; verify the fused result against the matching PyTorch composition before benchmarking.",
-            "evidence": "Fused output matches its unfused reference on supported shapes.",
+            "action": "Add a column-bias epilogue to the FP32 accumulator before the final output cast; verify against an explicit reference with matching accumulation and cast order before benchmarking.",
+            "evidence": "Supported zero, nonconstant and tail-bias cases match the explicit reference with the same accumulation and output-cast order.",
             "activity": 6,
             "module": 3,
             "track": "K",

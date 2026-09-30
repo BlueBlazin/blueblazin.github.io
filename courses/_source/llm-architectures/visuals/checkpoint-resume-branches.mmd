@@ -1,0 +1,10 @@
+flowchart TB
+  accTitle: Checkpoint and uninterrupted training branches
+  accDescr: Fork the same complete training state at a chosen step. One branch continues; the other saves and reloads before continuing on identical remaining batches. Compare post-reload evaluation logits and subsequent losses and parameters.
+  S["State at step k: weights, moments, schedule, RNG, cursor"] --> U["Uninterrupted continuation"]
+  S --> C["Save → rebuild → restore full state"]
+  C --> R["Resumed continuation"]
+  B["Identical remaining batch sequence"] --> U
+  B --> R
+  U --> V["Compare each remaining step"]
+  R --> V

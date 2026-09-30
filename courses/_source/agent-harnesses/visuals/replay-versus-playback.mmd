@@ -1,0 +1,11 @@
+flowchart TB
+    accTitle: Playback observes; execution replay acts again
+    accDescr: The original immutable event log has two different uses. Read-only playback formats saved events and performs no tool calls. Execution replay extracts recorded model responses, feeds them to FakeModel, and executes only approved disposable local tools in a new clean fixture. That execution creates a new run ID and new event log. Compare normalized decisions and output hashes with the original, leaving its log and workspace unchanged.
+    L["Original immutable log"] --> P["Read-only playback"]
+    P --> V["Display saved events; no tools"]
+    L --> F["Recorded responses to FakeModel"]
+    W["New clean fixture"] --> R["Execute approved local tools"]
+    F --> R
+    R --> N["New run ID and log"]
+    N --> C["Compare normalized decisions and outputs"]
+    L --> C

@@ -1,0 +1,8 @@
+flowchart TB
+  accTitle: Decoupled weight decay and adaptive gradient paths in AdamW
+  accDescr: The clipped loss gradient updates moments and bias corrections, producing the adaptive step. Old weights independently undergo multiplicative decay. Combine by subtracting the adaptive step from the decayed weights; do not put weight decay into the moment-gradient branch.
+  G["Loss gradient → optional clipping"] --> M["Update m,v → bias-correct m̂,v̂"]
+  M --> A["Adaptive step: lr × m̂ / (√v̂ + ε)"]
+  W["Old parameter w"] --> D["Decay: (1 − lr × decay) w"]
+  A --> N["New parameter = decayed value − adaptive step"]
+  D --> N

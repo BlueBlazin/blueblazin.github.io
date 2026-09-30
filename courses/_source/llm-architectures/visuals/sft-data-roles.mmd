@@ -1,0 +1,8 @@
+flowchart TB
+  accTitle: Separate training, selection and final scoring data
+  accDescr: Training data updates adapters and creates candidate checkpoints. Validation evaluates those candidates and selects by a predeclared rule. After selection, held-out data supplies final scores. It does not update or select checkpoints.
+  T["300 train examples"] --> U["Adapter updates → candidate checkpoints"]
+  U --> S["Select by declared validation rule"]
+  V["50 validation examples"] --> S
+  S --> E["Final frozen evaluation"]
+  H["100 held-out examples"] --> E

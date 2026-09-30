@@ -1,0 +1,867 @@
+[
+  {
+    "lesson": "1-1",
+    "lesson_sha256": "79c539cfe2d3fe8a86afa601d37839d5fca682353a5139cc550ebbaeeffcb6cb",
+    "decision": "visual",
+    "reason": "Nested block/thread storage is spatial: the learner must distinguish per-thread registers, per-block shared memory and grid-visible global memory before sketching a traffic model.",
+    "sources": [
+      "KR01"
+    ],
+    "visual_ids": [
+      "gpu-memory-scope"
+    ]
+  },
+  {
+    "lesson": "1-2",
+    "lesson_sha256": "e8450a1798aeb9a6ec16ff142bea4e21b631e6e329db42f6a628bc502b3456b5",
+    "decision": "no-visual",
+    "reason": "This deferred Day 0 checkpoint records versions, finite smoke output, export and shutdown. Its manifest and explicit checklist are more actionable than an environment diagram.",
+    "sources": [
+      "KR07",
+      "KR01"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "1-3",
+    "lesson_sha256": "603aad301bfee38e6edd1f32e8011152fb60db6d39eb97f78f9addeb01ebfc41",
+    "decision": "visual",
+    "reason": "Host submission can finish before device work; the two-lane timeline makes both synchronization boundaries visible without inventing durations.",
+    "sources": [
+      "KR01",
+      "KR02"
+    ],
+    "visual_ids": [
+      "completed-timing"
+    ]
+  },
+  {
+    "lesson": "1-4",
+    "lesson_sha256": "fb9a35f9dc981ce3a6274d793fc0334ebecfe880cc5e3977973bef87580346a6",
+    "decision": "visual",
+    "reason": "A nested interval example exposes why adding inclusive parent and child costs double-counts work; the student still supplies actual profiler timings and FLOP/byte estimates.",
+    "sources": [
+      "KR08"
+    ],
+    "visual_ids": [
+      "profile-self-time"
+    ]
+  },
+  {
+    "lesson": "2-1",
+    "lesson_sha256": "f2350b17f3227e0a524f215c60a70718907e1637b69e6fb131d7075b5d1dae9f",
+    "decision": "visual",
+    "reason": "A concrete thread-to-address mapping makes the block offset and distinct writes visible. Use an alternative small block width so the assigned thread-index calculation remains an exercise.",
+    "sources": [
+      "KR07",
+      "KR01"
+    ],
+    "visual_ids": [
+      "cuda-thread-address"
+    ]
+  },
+  {
+    "lesson": "2-2",
+    "lesson_sha256": "2516a44a5f6465924d89467082d75c5d370ca584b926453426b966217c89f42d",
+    "decision": "no-visual",
+    "reason": "This lesson tests the already explained index guard at specified boundary lengths and documents empty-input policy. The executable case table and guarded code express those discrete outcomes more precisely than another lane picture.",
+    "sources": [
+      "KR02"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "2-3",
+    "lesson_sha256": "7273fa024c9b4858b66678f5c3ecd8685275562e1a7fc2a61428d9e7d5735e88",
+    "decision": "visual",
+    "reason": "Logical lane coverage is central to Triton indexing: highlight the partial final program and show that both reads and stores require the same mask.",
+    "sources": [
+      "KR02"
+    ],
+    "visual_ids": [
+      "tail-lanes"
+    ]
+  },
+  {
+    "lesson": "2-4",
+    "lesson_sha256": "90405820a9934d66df5fcc3cd9c39582b1c0bb4ee88bec417d0d59b1d2576a73",
+    "decision": "no-visual",
+    "reason": "The deliverable is a matched three-implementation timing table across measured sizes. A supplied performance curve would invent the size-dependent result; the payload equation and saved batch table are clearer here.",
+    "sources": [
+      "KR02"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "3-1",
+    "lesson_sha256": "d086d82708e6f47c0aad7237fd8eee518b82cd92356a9f71599d1c09deef7672",
+    "decision": "visual",
+    "reason": "Reducing columns to one maximum and denominator per row, then broadcasting back, is a shape relationship best shown on a small matrix before code.",
+    "sources": [
+      "KR03"
+    ],
+    "visual_ids": [
+      "softmax-row-shapes"
+    ]
+  },
+  {
+    "lesson": "3-2",
+    "lesson_sha256": "4b424e16e4343315b7b06f954733ff662f84a06d10f6869c81b2832a7743ad42",
+    "decision": "visual",
+    "reason": "The existing lane-by-lane example shows why negative-infinity padding stays neutral through maximum, exponentiation and denominator reduction.",
+    "sources": [
+      "KR03"
+    ],
+    "visual_ids": [
+      "softmax-padding"
+    ]
+  },
+  {
+    "lesson": "3-3",
+    "lesson_sha256": "03236ebbfaa91b10d442c7160488dd90064f4ce5a714a78f24a9d4806b532ae5",
+    "decision": "visual",
+    "reason": "The self-check distinguishes stable arithmetic from information lost when a large offset is stored. A number-line rounding example makes this otherwise counterintuitive distinction visible.",
+    "sources": [
+      "KR03",
+      "KR17"
+    ],
+    "visual_ids": [
+      "input-rounding"
+    ]
+  },
+  {
+    "lesson": "3-4",
+    "lesson_sha256": "637474af5a60ac0f756d45cb539d9c63890b0b9f710e5870734313f2694aed26",
+    "decision": "visual",
+    "reason": "The key mechanism is which intermediate tensors cross the global-memory boundary. Compare an eager composition with a fused on-chip working set while labeling the byte model as ideal, not measured.",
+    "sources": [
+      "KR03"
+    ],
+    "visual_ids": [
+      "softmax-fusion"
+    ]
+  },
+  {
+    "lesson": "4-1",
+    "lesson_sha256": "ed660a457e737645aa1be68e0c9d3c96fa9305fa2d7a433cf1615dad9abc490c",
+    "decision": "visual",
+    "reason": "One statistic belongs to each row while one feature-weight vector is shared by all rows. A matrix diagram prevents swapping these two broadcast axes.",
+    "sources": [
+      "KR09",
+      "KR05"
+    ],
+    "visual_ids": [
+      "rmsnorm-broadcast"
+    ]
+  },
+  {
+    "lesson": "4-2",
+    "lesson_sha256": "3dddb97a138d6efabddc6a5e6ca4432222a65958f893587f4408e6ba3f9e64ea",
+    "decision": "visual",
+    "reason": "The current zero-padded row makes the true-width divisor visible; epsilon is added after division and the padded lane is never counted as a feature.",
+    "sources": [
+      "KR05",
+      "KR09"
+    ],
+    "visual_ids": [
+      "rmsnorm-width"
+    ]
+  },
+  {
+    "lesson": "4-3",
+    "lesson_sha256": "880bbc5e0abbf6bf875065c04aa312cead1b6f18aa560728d106a5ac5f1e77f4",
+    "decision": "visual",
+    "reason": "The task explicitly compares relative and absolute errors near zero. An illustrative mixed-tolerance envelope shows the absolute floor and growing relative allowance without prescribing the actual test tolerances.",
+    "sources": [
+      "KR17",
+      "https://docs.pytorch.org/docs/stable/generated/torch.allclose.html"
+    ],
+    "visual_ids": [
+      "mixed-error-region"
+    ]
+  },
+  {
+    "lesson": "4-4",
+    "lesson_sha256": "7ac073b0f90e1c0c1e9fe980a37cee6768cda700ed4b2b04546ab4439f7f5237",
+    "decision": "visual",
+    "reason": "Few wide rows and many short rows can contain equal elements but expose different numbers of independent row programs. A shape comparison illustrates that trade-off without claiming measured occupancy or speed.",
+    "sources": [
+      "KR05",
+      "KR03",
+      "KR01"
+    ],
+    "visual_ids": [
+      "row-parallelism"
+    ]
+  },
+  {
+    "lesson": "5-1",
+    "lesson_sha256": "ea8c65a6e8484cb3379643446664d06741f8c94b34c49fd4c031933b236332e4",
+    "decision": "visual",
+    "reason": "The exact exercise tile explains reuse and dimension roles; move the worked example into the self-check disclosure so the learner first constructs their own coordinates and reuse account.",
+    "sources": [
+      "KR04"
+    ],
+    "visual_ids": [
+      "matmul-reuse"
+    ]
+  },
+  {
+    "lesson": "5-2",
+    "lesson_sha256": "03b03b08873cb913955c213762c8681ba4452caff9468a051a0c08c1abc416dc",
+    "decision": "visual",
+    "reason": "Accumulator lifetime is the new implementation idea: initialize outside the K loop, update once per chunk, and cast/store only after all chunks. A loop graph exposes the reset-inside-loop failure.",
+    "sources": [
+      "KR04"
+    ],
+    "visual_ids": [
+      "matmul-accumulator-loop"
+    ]
+  },
+  {
+    "lesson": "5-3",
+    "lesson_sha256": "664cf7cf4e887b547e7d7b5e0e17571b3679515a174c8d56d17b234b69dd99cc",
+    "decision": "visual",
+    "reason": "Three boundaries act on different matrix axes. A partial A/B/C tile picture makes their load-zero/store-suppress masks distinguishable.",
+    "sources": [
+      "KR04"
+    ],
+    "visual_ids": [
+      "matmul-tail-masks"
+    ]
+  },
+  {
+    "lesson": "5-4",
+    "lesson_sha256": "a6ab3fd37fa4f6417424e41e33913839341f6b09f9f318d3e56cb47969b273f9",
+    "decision": "no-visual",
+    "reason": "The lesson requires concrete dtype settings, compiler evidence and per-case errors. Explicit reference expressions and metadata are more precise than a generic precision pipeline; the student must inspect the actual dot path rather than infer one from an illustration.",
+    "sources": [
+      "KR17"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "6-1",
+    "lesson_sha256": "838247c745e0c9230882fd2507db45a2ffae69ee8f83c11ecce5b69d7d947997",
+    "decision": "visual",
+    "reason": "A wider output tile increases A reuse and accumulator size while reducing output-program count. An equal-output-area comparison makes all three consequences visible without asserting achieved occupancy.",
+    "sources": [
+      "KR04",
+      "KR01"
+    ],
+    "visual_ids": [
+      "tile-resource-tradeoff"
+    ]
+  },
+  {
+    "lesson": "6-2",
+    "lesson_sha256": "fcb633e1ff1238dbebc609283cee5ebed1a3aee9706b28856f216fef597457ea",
+    "decision": "no-visual",
+    "reason": "This is the measurement of the already frozen configurations. The learner must create the candidate-by-shape table and interpret actual variability; another tile sketch would duplicate 6-1 and a fabricated timing plot would bias the predictions.",
+    "sources": [
+      "KR01"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "6-3",
+    "lesson_sha256": "5ab8453abd46151f8895c073c429b171991167fb999dbe4956a4139a24a7acc3",
+    "decision": "visual",
+    "reason": "The two paths branch at the FP32 accumulator: bias-before-cast versus cast-before-bias have different rounding boundaries. Show those branches and column-bias broadcast explicitly.",
+    "sources": [
+      "KR04",
+      "KR17"
+    ],
+    "visual_ids": [
+      "epilogue-rounding"
+    ]
+  },
+  {
+    "lesson": "6-4",
+    "lesson_sha256": "e4bc22895a1ad04ff7c29da8961402416dca43d2789ee2aa23f87f94941fd712",
+    "decision": "no-visual",
+    "reason": "The comparison must come from plain/fused measured workloads and named library baselines. The preceding epilogue diagram already explains the mechanism; paired numerical tables with recorded semantics are clearer than an invented win/loss graphic.",
+    "sources": [
+      "KR04"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "7-1",
+    "lesson_sha256": "5cb538f5abbc804f794a57f49aad626efb042c46fffcc81d0d11c3b8ad8affe1",
+    "decision": "visual",
+    "reason": "The late-maximum worked example demonstrates that denominator and weighted numerator need the same rescaling. Place it inside self-check because the learner is explicitly asked to work through this score vector.",
+    "sources": [
+      "KR10",
+      "KR06"
+    ],
+    "visual_ids": [
+      "online-rescaling"
+    ]
+  },
+  {
+    "lesson": "7-2",
+    "lesson_sha256": "212d760c355d26d9c7a34a7120502e57f823b240010249303ab6d4efda5320b5",
+    "decision": "no-visual",
+    "reason": "The task is to test partition invariance using actual state snapshots and dense-reference errors. The recurrence and worked visual from 7-1 already supply the conceptual model; a second partition illustration would add less than inspecting the learner's own failing trace.",
+    "sources": [
+      "KR10"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "7-3",
+    "lesson_sha256": "0e85d4bd61cc5d243df43cbd201751d5dc74691d31c68fce8757749e88111d75",
+    "decision": "visual",
+    "reason": "Absolute query and key positions form a lower triangle within each diagonal block; the matrix exposes why a block-level-only causal test leaks future information. The exact 4–7 retrieval example is placed inside self-check, after the learner attempts the mask.",
+    "sources": [
+      "KR06",
+      "KR10",
+      "KR18"
+    ],
+    "visual_ids": [
+      "causal-tiles"
+    ]
+  },
+  {
+    "lesson": "7-4",
+    "lesson_sha256": "53867de8fcfcd3571c92b9dff62a1c26eda8d4ce9e87e64375205e965af4f94e",
+    "decision": "visual",
+    "reason": "The lesson separates linear persistent tensors, bounded score tiles and per-query-block state. Side-by-side allocation geometry makes the removed quadratic allocation explicit without suggesting constant total memory.",
+    "sources": [
+      "KR10",
+      "KR06"
+    ],
+    "visual_ids": [
+      "attention-workspace"
+    ]
+  },
+  {
+    "lesson": "8-1",
+    "lesson_sha256": "ebd7cd62074f64fd5184f24f97ac03ab6e8abfbc082cd6e22f2d977d8dae7e86",
+    "decision": "visual",
+    "reason": "One program owns Q and per-row state while streaming K/V. A dimensioned two-dot-product map connects score-tile shape to weighted-output shape and the fixed head dimension.",
+    "sources": [
+      "KR06",
+      "KR10"
+    ],
+    "visual_ids": [
+      "attention-program-shapes"
+    ]
+  },
+  {
+    "lesson": "8-2",
+    "lesson_sha256": "673fd7417d874aea13e3c4690bee6798f812451960a579d023c4d411c5cd9ba6",
+    "decision": "no-visual",
+    "reason": "The student now translates the already diagrammed tile/state map and recurrence into the pinned Triton API. The exp-versus-exp2 distinction is a scalar scale identity best stated in math/code, not another dataflow picture.",
+    "sources": [
+      "KR06"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "8-3",
+    "lesson_sha256": "a8c4f89d16782324ca37b860e1fef84b1a144dcaf01db4c4af1251d3f3597f9e",
+    "decision": "visual",
+    "reason": "Query padding, key padding and causality intersect before state updates. Show a diagonal tail plus a fully masked valid row, with safe unchanged-state handling separate from invalid output-row suppression.",
+    "sources": [
+      "KR06",
+      "KR10"
+    ],
+    "visual_ids": [
+      "attention-mask-intersection"
+    ]
+  },
+  {
+    "lesson": "8-4",
+    "lesson_sha256": "922d9b2a6695c05a4a63ccabea0b3c9116e54bfc12740951f77575ccc4b5c04a",
+    "decision": "no-visual",
+    "reason": "This lab measures isolated actual peak allocation and latency of three implementations. A drawn memory trace could misrepresent allocator/backend behavior; the precise reset/synchronize procedure and generated measured table are the appropriate representations.",
+    "sources": [
+      "KR18"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "9-1",
+    "lesson_sha256": "bd91e3af0578b3b93121521bbbb22798525f3d04393387b98d754141fec643ec",
+    "decision": "visual",
+    "reason": "The gradient reductions run on different axes: features couple each input row, while shared weights collect contributions across rows. Two orthogonal arrows on the same matrix make that dependency unambiguous.",
+    "sources": [
+      "KR09"
+    ],
+    "visual_ids": [
+      "rmsnorm-gradient-axes"
+    ]
+  },
+  {
+    "lesson": "9-2",
+    "lesson_sha256": "3634102441caeee334011f71273d082e7f46bb72d4d83eae21f82f7523a2e7f3",
+    "decision": "no-visual",
+    "reason": "Both row reductions are explicitly named in the formula and reuse the established masked row-kernel pattern. The actual FP32 load/reduce/cast code and controlled dx table are clearer than repeating the forward-width or gradient-axis drawings.",
+    "sources": [
+      "KR05"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "9-3",
+    "lesson_sha256": "21769d6f9998a7a7c7ddc1626e5ba130e30b952d90be29c71a823845b51dfa0e",
+    "decision": "visual",
+    "reason": "The fork/join diagram assigns disjoint scratch rows and a single final writer per feature, explaining why direct row-program stores into dw race.",
+    "sources": [
+      "KR05",
+      "KR09",
+      "KR01"
+    ],
+    "visual_ids": [
+      "weight-gradient-ownership"
+    ]
+  },
+  {
+    "lesson": "9-4",
+    "lesson_sha256": "e79d1e9525ab677274a541405069401633dfd89ab32a1a08cf927a5ec43dfc45",
+    "decision": "no-visual",
+    "reason": "This validation lesson compares actual supported GPU gradients with same-quantized-input references. Its dtype/shape matrix, separate dx/dw errors and exact reference code express the evidence requirements more clearly than a generic validation flow.",
+    "sources": [
+      "KR17"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "10-1",
+    "lesson_sha256": "70c04b31ebd947ea7e0b69a8d397456f9a3cef62b9e1047ad3a7558c47051e61",
+    "decision": "no-visual",
+    "reason": "Registration details depend on the pinned PyTorch version. The forward signature, mutability declaration, metadata and direct/compiled smoke code are the important concrete artifacts; an abstract compiler-layer drawing would not specify them reliably.",
+    "sources": [
+      "KR11"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "10-2",
+    "lesson_sha256": "6836888cb2178eca95bb000ad07aefc7f3e065d415c3d928f940ea2fea2e0288",
+    "decision": "visual",
+    "reason": "The wrapper must branch before launch to a supported differentiable custom path, semantic-preserving fallback or clear rejection. A decision graph makes the safe execution boundary explicit.",
+    "sources": [
+      "KR11"
+    ],
+    "visual_ids": [
+      "operator-support-branches"
+    ]
+  },
+  {
+    "lesson": "10-3",
+    "lesson_sha256": "b3d84cb134ef8c58c9da7a7bd441273d93f90ba33d8f8ddbe1b7e9711285ce4d",
+    "decision": "visual",
+    "reason": "Flattening batch/token axes into rows must preserve feature order and restore the original shape. A small tensor-to-matrix mapping makes the normalization integration boundary inspectable.",
+    "sources": [
+      "KR11",
+      "https://blueblazin.github.io/courses/gpu-kernels/downloads/decoder.py"
+    ],
+    "visual_ids": [
+      "flatten-leading-axes"
+    ]
+  },
+  {
+    "lesson": "10-4",
+    "lesson_sha256": "b051df72f674c58b28ebfb84a14c746591bbf649a10a6f2a2f1277f762d5787b",
+    "decision": "visual",
+    "reason": "The nonlinear gap between kernel and whole-model speedup is easiest to see as an analytic curve, explicitly using illustrative f rather than the student's unmeasured operator fraction.",
+    "sources": [
+      "KR01"
+    ],
+    "visual_ids": [
+      "amdahl-limit"
+    ]
+  },
+  {
+    "lesson": "11-1",
+    "lesson_sha256": "8cb8383d982d15d26bcfd578b06031ba28a181308ccb13f498441fb4eae7ebd5",
+    "decision": "no-visual",
+    "reason": "The deferred H100 readiness checkpoint is an environment and actual-device evidence checklist. A backend diagram would not prove execution and could blur the CPU-interpretation versus hardware requirement.",
+    "sources": [
+      "KR12"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "11-2",
+    "lesson_sha256": "8451b3fc7f272c9cd28e52b017dfc986b49e9b75899479f130ed9a7680f6b0b0",
+    "decision": "visual",
+    "reason": "The selected quickstart contains both direct elementwise accesses and staged Hopper matmul. A branched memory-space diagram shows why Ref does not imply shared memory and where staging is actually relevant.",
+    "sources": [
+      "KR12"
+    ],
+    "visual_ids": [
+      "pallas-memory-paths"
+    ]
+  },
+  {
+    "lesson": "11-3",
+    "lesson_sha256": "4f7a3211a772bc6ff4ff8635830602dd5115af96f275a644ee908498b0343642",
+    "decision": "no-visual",
+    "reason": "The student chooses softmax or RMSNorm and adapts the actual backend-supported example. The earlier operation diagrams remain valid, while a fixed new layout diagram could incorrectly impose Triton assumptions on the chosen Mosaic implementation.",
+    "sources": [
+      "KR12"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "11-4",
+    "lesson_sha256": "9772b4624658c00432fd31b293f59618870bcdf61c969034ee89cf39529ab6d7",
+    "decision": "no-visual",
+    "reason": "The core product is the actual H100 support/error matrix, including accepted tails and rejected shapes. A diagram cannot supply that evidence; explicit per-case outcomes are clearer and avoid implying untested support.",
+    "sources": [
+      "KR12"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "12-1",
+    "lesson_sha256": "a538df2f07428d36090689daeba41431939d64223d2b9b7b5ec1833e3600849c",
+    "decision": "no-visual",
+    "reason": "Completed-call timing reuses the asynchronous timeline established in 1-3. Here the new actionable detail is exactly where block_until_ready() runs; the short code/timing boundary and cold/warm result columns are clearer than duplicating the timeline.",
+    "sources": [
+      "KR14"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "12-2",
+    "lesson_sha256": "f19fa553fc387d75147d6e3222bd1e0c1e2612ce01697f249643a87de84a79ec",
+    "decision": "visual",
+    "reason": "Buffer lifetime and overlap are separate concepts. Keep the reviewed readiness/reuse cycle and add a labeled illustrative startup/steady-state/drain schedule, without pretending its generic two-buffer trace is the current official stage configuration.",
+    "sources": [
+      "KR13"
+    ],
+    "visual_ids": [
+      "pipeline-buffer-lifetime",
+      "pipeline-overlap"
+    ]
+  },
+  {
+    "lesson": "12-3",
+    "lesson_sha256": "cbcb99a64bd7fe774f0ab8017ca76fbd746532dda81c8759910cf5e3bf274d8d",
+    "decision": "no-visual",
+    "reason": "The task compares one concrete contemporary FA4/CuTe code path with the learner's own kernel. A generic fixed modern-attention diagram would erase the chosen hardware and scheduling qualifiers; the source-linked three-row comparison is the accurate visual form.",
+    "sources": [
+      "KR15"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "12-4",
+    "lesson_sha256": "2b3c62ba12aec7fdbd781edccbd24a36864f05c9633a0fa7b7c86ee044662b57",
+    "decision": "no-visual",
+    "reason": "This reference page audits saved timing code and the student's actual pipeline table. Another mechanism figure could falsely attribute the matmul pipeline to the measured row kernel, the exact mistake the lesson cautions against.",
+    "sources": [
+      "KR01"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "13-1",
+    "lesson_sha256": "2da3b6194583ad9163188f5d7a8a7caebae558e77ec66c23307cca45b4b36ee1",
+    "decision": "visual",
+    "reason": "Prefill and one cached step differ in query count and cache reuse. A per-head shape diagram makes the two workloads concrete before the student freezes a factorial benchmark manifest.",
+    "sources": [
+      "KR19",
+      "KR20",
+      "KR18",
+      "https://blueblazin.github.io/courses/gpu-kernels/downloads/decoder.py"
+    ],
+    "visual_ids": [
+      "prefill-decode-work"
+    ]
+  },
+  {
+    "lesson": "13-2",
+    "lesson_sha256": "e6d3b860420709c592e9120521f0ec067b6f1d430a9b675ae87aa5500dfcfd5a",
+    "decision": "visual",
+    "reason": "Producing all-token versus last-token logits changes the row dimension of the vocabulary matmul. A dimensioned pair makes this hidden work mismatch visible without assigning latency.",
+    "sources": [
+      "KR08",
+      "https://blueblazin.github.io/courses/gpu-kernels/downloads/decoder.py"
+    ],
+    "visual_ids": [
+      "logit-projection-work"
+    ]
+  },
+  {
+    "lesson": "13-3",
+    "lesson_sha256": "03ce5e2a2ac1aee38a755b14345a522bc26413c2470fbb19a5dc678056d72dda",
+    "decision": "visual",
+    "reason": "Warm-up must exercise the whole evolving-cache trajectory and every timed repetition must restart from the same cache length. A repeated cache-length timeline makes both boundaries explicit.",
+    "sources": [
+      "KR19",
+      "https://blueblazin.github.io/courses/gpu-kernels/downloads/decoder.py"
+    ],
+    "visual_ids": [
+      "decode-reset-timeline"
+    ]
+  },
+  {
+    "lesson": "13-4",
+    "lesson_sha256": "b1318af7de2031b67849c1bdec01fbb22d1d1ee90ec6efa4ff81b5d6d8d0f4fa",
+    "decision": "no-visual",
+    "reason": "The requested visualization is the learner-generated complete result plot from saved raw data. A prefilled figure would invent gains/regressions; the formula and matched configuration table specify how to construct the real one.",
+    "sources": [
+      "KR01"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "14-1",
+    "lesson_sha256": "8bcd6c18f5722712cb2b6e3ff291c6d59270a14e5e381bddba788bcacbd66366",
+    "decision": "no-visual",
+    "reason": "The optional DSL example is chosen by the learner and tied to an exact source revision. Annotated source and an abstraction comparison table are clearer than a generic layout that might not describe their selected CuTe or Helion kernel.",
+    "sources": [
+      "KR16"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "14-2",
+    "lesson_sha256": "7a915e5a221b0e81e2f3cea179af34ed70f71a12cfdf598b2c22f4ae4a00938c",
+    "decision": "no-visual",
+    "reason": "This Day 0 recipe rebuilds a declared environment and records missing dependencies. Commands, manifests and the first failing smoke log are directly useful; a dependency diagram would be speculative before the concrete defect is known.",
+    "sources": [
+      "KR01"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "14-3",
+    "lesson_sha256": "6ca5b5cc571b1eca57477c2a398dc3577952d8ce35e0774f6267afc261b2c3e1",
+    "decision": "no-visual",
+    "reason": "This reference repairs one observed setup defect. The minimal diff and exact smoke command communicate the change better than a generic repair flow and preserve the distinction between custom execution and fallback.",
+    "sources": [
+      "KR01"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "14-4",
+    "lesson_sha256": "600b21208348e4d859a372bbab93b91b04e025823c6e01ebd3aea4b4bff1b4b2",
+    "decision": "no-visual",
+    "reason": "Reproduction requires the original/reproduction raw-batch pair and environment differences. Those measured tables are the appropriate comparison; a supplied timing figure would invent the outcome.",
+    "sources": [
+      "KR01"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "15-1",
+    "lesson_sha256": "d4570166f347e846a48afed585f1041029b3192a1d798634562063f47cc6670a",
+    "decision": "no-visual",
+    "reason": "The risk register already maps each claim to a gap, bounded check, cost and decision criterion. It is a many-column factual table; a workflow diagram would obscure the specific evidence priorities.",
+    "sources": [
+      "KR01"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "15-2",
+    "lesson_sha256": "1d688ab1240d934f7bd544329caf8a0c0fae6c9493b0f5f4f7d134a082be7d99",
+    "decision": "no-visual",
+    "reason": "The learner must compare measured timing distributions for predeclared uncertain cases. The raw batches and resulting distributions are the useful visuals; synthetic speedup/noise pictures would not establish their decision criterion.",
+    "sources": [
+      "KR01"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "15-3",
+    "lesson_sha256": "9e2d82961693bf501575289b7aba1f52244ddb89b875b701f174fc3d3f313f20",
+    "decision": "no-visual",
+    "reason": "Operation, layout, precision and forward/dx/dw status form a support matrix. An explicit labeled table communicates unsupported, untested and failing cases more accurately than a status flowchart.",
+    "sources": [
+      "KR01"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "15-4",
+    "lesson_sha256": "c8e31a3189437a610afdb732d95047416743ff8b2f97df6c1fd9bf12857f1379",
+    "decision": "no-visual",
+    "reason": "This reference specifically regenerates the learner's figures and traces each point to raw data. Adding a canned graph would duplicate the artifact type without its actual provenance.",
+    "sources": [
+      "KR01"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "16-1",
+    "lesson_sha256": "6581bffa676c59a96e2916f7aa1ebc0946a00f4505bf033225c7ee075efebfb1",
+    "decision": "no-visual",
+    "reason": "The report must select its own measured figures and attach claims to saved evidence. The existing section outline and support table are clearer than a generic report architecture diagram.",
+    "sources": [
+      "KR11"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "16-2",
+    "lesson_sha256": "a557523a71416216e0f5915bad19dc609f3b0ccc48ed4084f1919d920891bc08",
+    "decision": "no-visual",
+    "reason": "A legitimate reproducer depends on the actual observed defect or internal limitation. Minimal executable input and expected/actual behavior are the useful representation; a generic bug diagram would invent content.",
+    "sources": [
+      "KR07"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "16-3",
+    "lesson_sha256": "9f05c47d07428cb8e753739b47d129801b85796cb592a3cc33d905a2a2a8a4ab",
+    "decision": "no-visual",
+    "reason": "The focused check must distinguish original and patched behavior under identical conditions, or verify the declared limitation. Before/after logs and a small results table are clearer than a generic testing flow.",
+    "sources": [
+      "KR17"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "16-4",
+    "lesson_sha256": "87d6dbeb009b00ef2487210435f0da71f690da31fe3d6a304eeb1f103213442a",
+    "decision": "no-visual",
+    "reason": "This release/reference page aligns scope claims, diff and validation evidence. Its checklist and contribution prose are the appropriate forms; a diagram adds no new technical relationship.",
+    "sources": [
+      "KR11"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "intro-1",
+    "lesson_sha256": "7efdfab067c75d98d8c6fe3827648d80330bbe9cfd8cc280fd6686c4a1e45eb2",
+    "decision": "visual",
+    "reason": "The course is independent of the architecture course. A fixture-specific residual-block map locates both normalization hooks and distinguishes its GELU MLP from a different decoder architecture, without supplying the student's concrete shape trace.",
+    "sources": [
+      "KR08",
+      "https://blueblazin.github.io/courses/gpu-kernels/downloads/decoder.py"
+    ],
+    "visual_ids": [
+      "fixture-norm-hook"
+    ]
+  },
+  {
+    "lesson": "intro-2",
+    "lesson_sha256": "defe46254d63023c66eaeec313d8a7ac374f779c0f280d41fdd06eb5cca7556c",
+    "decision": "no-visual",
+    "reason": "The local/CUDA/H100 planning document and spending ledger are categorical tables with versions, prices and stop conditions. A hardware illustration would add decoration rather than clarify an algorithm.",
+    "sources": [
+      "KR08"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "review-2",
+    "lesson_sha256": "dd2e6abffd174993fea22d69e25a5ea2c9c0df66568c42d96d5b64ef2e83d875",
+    "decision": "no-visual",
+    "reason": "This is a closed-book retrieval and evidence audit of already visualized indexing and reductions. A supplied worked mask would pre-answer the recall task; the learner's own memory sketch and audit table are intended artifacts.",
+    "sources": [
+      "KR01"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "flex-2",
+    "lesson_sha256": "8ef7420bdcdb752c57d816e611a5ac0e8797b7c159f2a22e926f9fe707435598",
+    "decision": "no-visual",
+    "reason": "The early-course flex reference diagnoses the learner's actual prerequisite blocker. A minimal failing case and next command are useful; no common diagram can accurately represent an unknown blocker.",
+    "sources": [
+      "KR17"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "review-4",
+    "lesson_sha256": "f727381fea51d798f96ef9904b21c3b46b5c0cd04a5b67fc454c6f7bdd3424a1",
+    "decision": "no-visual",
+    "reason": "The learner must reconstruct tiles, a late-maximum merge and a causal mask from memory. Existing teaching figures are available in the original lessons; putting solutions in this review would undermine the retrieval task.",
+    "sources": [
+      "KR01"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "flex-4",
+    "lesson_sha256": "8ef7420bdcdb752c57d816e611a5ac0e8797b7c159f2a22e926f9fe707435598",
+    "decision": "no-visual",
+    "reason": "This flexible recovery reference may address matmul or attention failures but does not choose one in advance. Saved failing tensors and a discriminating check are clearer than assuming a particular mask or recurrence bug.",
+    "sources": [
+      "KR17"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "review-6",
+    "lesson_sha256": "6379908d616b107ac21e998086af184196f93f3126c105e7aab832fee37ffebd",
+    "decision": "no-visual",
+    "reason": "The requested evidence ladder and branch table concern the student's actual CPU algebra, GPU gradients, registration and H100 logs. Supplied gradient or dispatch figures would pre-answer the closed-book derivation without validating those evidence levels.",
+    "sources": [
+      "KR01"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "flex-6",
+    "lesson_sha256": "8ef7420bdcdb752c57d816e611a5ac0e8797b7c159f2a22e926f9fe707435598",
+    "decision": "no-visual",
+    "reason": "The current blocker may be a derivation, integration or environment failure. The reference deliberately asks for one minimal reproducer and no invented extra work; an illustrative workflow would not identify its cause.",
+    "sources": [
+      "KR17"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "flex-8",
+    "lesson_sha256": "8ef7420bdcdb752c57d816e611a5ac0e8797b7c159f2a22e926f9fe707435598",
+    "decision": "no-visual",
+    "reason": "This on-demand final recovery page handles a real unresolved item, or ends early. A context-free diagram would add work without explaining the learner's particular remaining issue.",
+    "sources": [
+      "KR17"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "final-1",
+    "lesson_sha256": "70fa96f3ba353058d19bf91ed75611ce8655325859aac2109be6a5178048817e",
+    "decision": "no-visual",
+    "reason": "The independent assessment explicitly preserves a timed closed-book explanation and diagnosis. A supplied conceptual drawing would cue the assessed answers; student-generated diagrams belong in the submitted explanation.",
+    "sources": [
+      "KR01"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "final-2",
+    "lesson_sha256": "949a7167a9546987a40aaf5dca00c5a84ec453608952ad4b4651ead038ac6c33",
+    "decision": "no-visual",
+    "reason": "The clean-checkout release check is driven by documented commands and actual regeneration logs. Its distinction between new local and prior GPU evidence is best retained in the verification table.",
+    "sources": [
+      "KR11"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "final-3",
+    "lesson_sha256": "1c7c5d6b3064ab994aee0e742c83d2b087000cad7828212b02d819c9a51dc4ef",
+    "decision": "no-visual",
+    "reason": "The portfolio should expose its own measured figures, support table and evidence links. A stock portfolio diagram would compete with those artifacts and imply no additional technical understanding.",
+    "sources": [
+      "KR11"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "final-4",
+    "lesson_sha256": "e9d0104ad024bdb58919acb88cd97fa5fff80340adac2ccba2ad0967c260d618",
+    "decision": "no-visual",
+    "reason": "The final page organizes a release checklist, a five-minute demo and one future experiment. Those concise documents are the appropriate outputs; the future experiment has no result to plot yet.",
+    "sources": [
+      "KR11"
+    ],
+    "visual_ids": []
+  }
+]

@@ -1,0 +1,9 @@
+flowchart TB
+  accTitle: A generic multimodal interface with separate image and text paths
+  accDescr: Text tokens go through embeddings. Image input goes through a vision encoder and projector or adapter. The representations join the model's input stream under its documented assembly convention, then enter the language model. This is not a named model's exact implementation.
+  I["Image input"] --> V["Vision encoder → features"]
+  V --> P["Projection / adapter"]
+  T["Text token IDs"] --> E["Text embeddings"]
+  P --> S["Assemble LM inputs"]
+  E --> S
+  S --> L["Language model"]

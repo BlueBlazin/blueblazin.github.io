@@ -1,0 +1,11 @@
+flowchart TB
+    accTitle: A retry is another budgeted attempt
+    accDescr: After a model-call error, first require both a retryable classification and remaining retry, time, and budget allowance. Otherwise stop with the recorded reason. Bound any backoff by the remaining deadline. Recheck deadline and reservation eligibility after waiting and before recording and dispatching a new attempt. Another error returns to the classification and allowance gate; success returns to the normal harness. Unknown usage from an earlier timeout retains its reservation until reconciliation.
+    E["Call error"] --> C("Retryable and in budget?")
+    C -->|"No"| S["Stop: record reason"]
+    C -->|"Yes"| B["Back off within time"]
+    B --> G("Time and reserve still fit?")
+    G -->|"No"| S
+    G -->|"Yes"| R["Record and send attempt"]
+    R -->|"Error"| E
+    R -->|"Success"| N["Continue loop"]

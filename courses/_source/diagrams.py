@@ -53,24 +53,49 @@ def asset_key(source, renderer):
     return hashlib.sha256((settings + '\n' + source).encode()).hexdigest()[:24]
 
 
+def validate_visual_audit(folder, lessons, manifest):
+    """Require a current, explicit pedagogical decision for every source lesson."""
+    audit = json.loads((folder / 'visual-audit.json').read_text())
+    reviewed = {row['lesson']: row for row in audit}
+    slug = folder.name
+    assert len(reviewed) == len(audit) and reviewed.keys() == lessons.keys(), (slug, 'Every lesson needs exactly one visual review')
+    resources = {r['id'] for r in json.loads((folder / 'resources.json').read_text())}
+    by_lesson = {key: [] for key in lessons}
+    for visual in manifest:
+        assert visual['lesson'] in lessons, (slug, visual['lesson'])
+        by_lesson[visual['lesson']].append(visual['id'])
+    for key, lesson in lessons.items():
+        row = reviewed[key]
+        assert row['decision'] in {'visual', 'no-visual'}, (slug, key)
+        assert isinstance(row['reason'], str) and len(row['reason']) >= 40, (slug, key, 'Explain the pedagogical decision')
+        assert row['visual_ids'] == by_lesson[key], (slug, key, 'Audit and figures disagree')
+        assert (row['decision'] == 'visual') == bool(row['visual_ids']), (slug, key)
+        assert isinstance(row['sources'], list) and all(ref in resources or ref.startswith('https://') for ref in row['sources']), (slug, key)
+        assert row['decision'] == 'no-visual' or row['sources'], (slug, key, 'Teaching visuals need supporting sources')
+        fingerprint = hashlib.sha256(json.dumps(lesson, sort_keys=True, ensure_ascii=False, separators=(',', ':')).encode()).hexdigest()
+        assert row['lesson_sha256'] == fingerprint, (slug, key, 'Lesson changed: review its visual decision again')
+
+
 def prepare_diagrams(slugs, prose):
     ASSETS.clear(); VISUALS.clear()
     sources = {}
     for slug in slugs:
         folder = ROOT / slug
         manifest = folder / 'visuals.json'
-        if not manifest.exists(): continue
+        assert manifest.exists(), (slug, 'Provide a visuals.json manifest (it may be empty) and a complete visual-audit.json')
         lessons = json.loads((folder / 'lessons-course.json').read_text())
         resource_ids = {r['id'] for r in json.loads((folder / 'resources.json').read_text())}
+        entries = json.loads(manifest.read_text())
+        validate_visual_audit(folder, lessons, entries)
         ids = set()
-        for visual in json.loads(manifest.read_text()):
+        for visual in entries:
             required = {'id','lesson','placement','title','description','caption','renderer','source','evidence','checks'}
             assert required <= visual.keys(), (slug, visual)
             assert re.fullmatch(r'[a-z0-9-]+', visual['id']) and visual['id'] not in ids
             ids.add(visual['id'])
             assert visual['lesson'] in lessons, visual['lesson']
             placement = visual['placement']
-            assert placement == 'key-idea' or (re.fullmatch(r'plan-[0-9]+', placement) and int(placement[5:]) < len(lessons[visual['lesson']]['plan'])), placement
+            assert placement in {'key-idea', 'self-check'} or (re.fullmatch(r'plan-[0-9]+', placement) and int(placement[5:]) < len(lessons[visual['lesson']]['plan'])), placement
             assert visual['renderer'] in {'mermaid','svg'}
             assert all(visual[k].strip() for k in ('title','description','caption'))
             assert visual['checks'] and visual['evidence']
@@ -117,7 +142,7 @@ def figure(visual, identifier=''):
     attrs = f' id="visual-{escape(identifier,quote=True)}" data-visual-id="{escape(identifier,quote=True)}"' if identifier else ''
     # Preserve legible labels at narrow widths: the canvas scrolls, and the SVG opens at full size.
     minimum = min(width, 560)
-    return (f'<figure class="lesson-visual"{attrs}>'
+    return (f'<figure class="lesson-visual" data-diagram-asset="{visual["asset"]}"{attrs}>'
             f'<div class="visual-canvas" tabindex="0" role="group" aria-label="{title} diagram" style="--visual-min:{minimum}px;--visual-width:{width}px">'
             f'<img src="{url}" alt="{desc}" width="{width}" height="{height}" loading="lazy" decoding="async"></div>'
             f'<figcaption><strong>{title}</strong><p>{escape(visual["caption"])}</p>'

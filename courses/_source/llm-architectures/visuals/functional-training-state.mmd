@@ -1,0 +1,8 @@
+flowchart TB
+  accTitle: Explicit state feedback across functional training steps
+  accDescr: A jitted step receives current parameters, moments, counter, random key and batch. It returns new state and metrics. Returned state becomes the next call's state; metrics go to host logging outside jit.
+  S["Current params, moments, counter, RNG"] --> T["Jitted training step"]
+  B["Current batch"] --> T
+  T --> N["New params, moments, counter, RNG"]
+  N -->|"next call"| S
+  T --> M["Returned metrics → host logging"]

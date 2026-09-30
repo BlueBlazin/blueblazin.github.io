@@ -71,7 +71,7 @@
     "module": 3,
     "track": "K",
     "hours": 4,
-    "work": "Tune a small predefined tile search and add a bias or activation epilogue. Compare against `torch.matmul` and compiled composition.",
+    "work": "Tune a small predefined tile search and add a column-bias epilogue before the final output cast. Compare against `torch.matmul` and compiled composition with explicit matching numerical semantics.",
     "evidence": "Median timings, variability, and an explanation of reuse/occupancy trade-offs; no requirement to beat cuBLAS",
     "title": "Tune Matrix Tiles and Fused Epilogues",
     "resources": [

@@ -1,0 +1,6 @@
+flowchart TB
+  accTitle: Valid equality checks for attention configurations
+  accDescr: Compare MHA cached and full-prefix paths with their own shared weights. Compare GQA cached and full-prefix paths with their own shared weights. Separately compare grouped attention with an expanded-KV reference. There is no equality edge between MHA and GQA models.
+  MC["MHA cached logits"] ---|"same MHA weights"| MF["MHA full-prefix logits"]
+  GC["GQA cached logits"] ---|"same GQA weights"| GF["GQA full-prefix logits"]
+  G["Grouped attention output"] ---|"same grouped weights"| E["Expanded-KV attention output"]

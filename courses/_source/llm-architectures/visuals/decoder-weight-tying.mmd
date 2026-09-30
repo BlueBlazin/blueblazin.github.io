@@ -1,0 +1,8 @@
+flowchart TB
+  accTitle: Decoder with a tied token embedding and output head
+  accDescr: Token IDs use embedding E of shape V by C. Add learned positions before the block stack, then apply final LayerNorm and project to vocabulary logits using the same E. Tying counts E once.
+  E["Shared E · [V, C]"] --> L["Token lookup + learned positions"]
+  I["Token IDs · [B, T]"] --> L
+  L --> H["Block stack → final LayerNorm"]
+  H --> O["Logits = hidden × Eᵀ · [B, T, V]"]
+  E -->|"same parameter"| O

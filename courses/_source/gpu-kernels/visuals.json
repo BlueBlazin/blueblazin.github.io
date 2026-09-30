@@ -76,7 +76,7 @@
   {
     "id": "matmul-reuse",
     "lesson": "5-1",
-    "placement": "key-idea",
+    "placement": "self-check",
     "title": "A tile reuses inputs across several dot products",
     "description": "For A of shape 4 by 6 and B of shape 6 by 5, one program computes C rows zero and one and columns zero through two. The highlighted first K chunk loads a 2 by 2 A tile and a 2 by 3 B tile, adding a 2 by 3 partial product to an FP32 accumulator. Three K chunks cover all six inner-dimension values. Each A value contributes to three output columns, while each B value contributes to two output rows.",
     "caption": "Exact dimensions from the exercise. Colored cells show the first K chunk; all three chunks accumulate into the same output tile.",
@@ -95,7 +95,7 @@
   {
     "id": "online-rescaling",
     "lesson": "7-1",
-    "placement": "key-idea",
+    "placement": "self-check",
     "title": "Rescale the old denominator and weighted sum together",
     "description": "Use scores [1, 2, 4], split after the second score, with value vectors [1, 0], [0, 1], and [1, 1]. After the first tile, the running maximum is 2, denominator is 1 plus exp(-1), and weighted accumulator is [exp(-1), 1]. The next tile raises the maximum to 4. Multiplying both old states by exp(-2), then adding the new tile, gives denominator 1.1851 and weighted sum [1.0498, 1.1353]. The final attention output is approximately [0.8858, 0.9580].",
     "caption": "Exact exercise score vector; value vectors are specified here. Rounded numbers illustrate the recurrence, not a numerical test tolerance.",
@@ -114,10 +114,10 @@
   {
     "id": "causal-tiles",
     "lesson": "7-3",
-    "placement": "key-idea",
+    "placement": "self-check",
     "title": "A diagonal attention tile needs an elementwise mask",
     "description": "An eight by eight attention mask uses query positions as rows and key positions as columns. The allowed lower triangle includes the diagonal because key j must be no greater than query i. With block size four, the highlighted bottom-right tile spans positions four through seven. Its first row allows only key four within that tile; its final row allows keys four through seven. All keys zero through three are allowed for this query block.",
-    "caption": "N = 8 and block size 4 are lesson test cases. This is a mask diagram; the blockwise algorithm does not allocate this full matrix.",
+    "caption": "Worked mask for the retrieval question. This illustrates causality; the blockwise algorithm does not allocate the full matrix.",
     "renderer": "svg",
     "source": "visuals/causal-tiles.svg",
     "evidence": [
@@ -188,6 +188,477 @@
       "Consumer completion precedes overwrite of the same buffer",
       "Different buffers may overlap without removing per-buffer dependencies",
       "Outstanding computation completes before results are used"
+    ]
+  },
+  {
+    "id": "gpu-memory-scope",
+    "lesson": "1-1",
+    "placement": "key-idea",
+    "title": "Thread, block and grid-visible storage",
+    "description": "Two illustrative CUDA blocks each contain two shown threads. Registers are private to each thread, shared memory belongs to one block, and global memory is available across the grid. The picture shows ownership, not the number of resident threads or hardware multiprocessors.",
+    "caption": "Only two representative threads per block are drawn. Shared access still requires correct synchronization; ordinary blocks have no implied execution order.",
+    "renderer": "svg",
+    "source": "visuals/gpu-memory-scope.svg",
+    "evidence": [
+      "KR01"
+    ],
+    "checks": [
+      "Registers are thread-local",
+      "Shared memory shown separately for each ordinary block",
+      "No cross-block shared-memory arrow or ordering is implied"
+    ]
+  },
+  {
+    "id": "profile-self-time",
+    "lesson": "1-4",
+    "placement": "key-idea",
+    "title": "Inclusive and self time describe different totals",
+    "description": "A serial parent interval lasts ten illustrative units. Child A occupies three units and child B two, without overlap. The parent self duration is the five remaining units. Adding the parent inclusive duration to the two children produces fifteen and double-counts those child intervals.",
+    "caption": "This is a serial nesting model. Actual asynchronous device traces can overlap; use the profiler’s documented self-device metric and consistent grouping.",
+    "renderer": "svg",
+    "source": "visuals/profile-self-time.svg",
+    "evidence": [
+      "KR08"
+    ],
+    "checks": [
+      "Child intervals are [1,4] and [6,8] inside parent [0,10]",
+      "Non-overlapping child lengths sum to 5",
+      "Serial parent self time is 5; inclusive time remains 10"
+    ]
+  },
+  {
+    "id": "cuda-thread-address",
+    "lesson": "2-1",
+    "placement": "key-idea",
+    "title": "From CUDA threads to vector elements",
+    "description": "With an illustrative block width of four, block zero maps its four threads to indices zero through three, block one to four through seven, and block two to eight through eleven. Each valid thread reads matching input elements and writes its unique output element.",
+    "caption": "Small indexing example only. The implementation must still guard i < N and launch on the framework’s current stream.",
+    "renderer": "svg",
+    "source": "visuals/cuda-thread-address.svg",
+    "evidence": [
+      "KR01",
+      "KR07"
+    ],
+    "checks": [
+      "Index equals block*4+thread for all 12 shown threads",
+      "Every shown output index has one owner",
+      "No synchronization is required between independent vector-add elements"
+    ]
+  },
+  {
+    "id": "softmax-row-shapes",
+    "lesson": "3-1",
+    "placement": "key-idea",
+    "title": "Softmax reductions preserve the row axis",
+    "description": "A three-row, four-column input reduces across its columns to one maximum and one exponential denominator per row. Those row statistics are broadcast back across their own four entries to produce output of the same shape. Colored rows remain independent throughout.",
+    "caption": "Shapes illustrate the row-wise finite-input softmax contract. The maximum is computed before the shifted-exponential denominator.",
+    "renderer": "svg",
+    "source": "visuals/softmax-row-shapes.svg",
+    "evidence": [
+      "KR03"
+    ],
+    "checks": [
+      "Input and output are MxN",
+      "Both maximum and denominator have one scalar per row",
+      "No reduction or broadcasting across separate rows"
+    ]
+  },
+  {
+    "id": "input-rounding",
+    "lesson": "3-3",
+    "placement": "self-check",
+    "title": "A large offset can erase small input differences",
+    "description": "At A equal to 2 to the power 24, consecutive FP32 values above A are two apart. Under round-to-nearest ties-to-even, the exact midpoint A+1 rounds to A. Thus storing [A,A+1,A+2] yields [A,A,A+2], changing the relative differences before stable softmax can subtract a maximum.",
+    "caption": "Illustrative FP32 case for the self-check. Stable softmax prevents avoidable exponent overflow; it does not reverse prior input quantization.",
+    "renderer": "svg",
+    "source": "visuals/input-rounding.svg",
+    "evidence": [
+      "KR17"
+    ],
+    "checks": [
+      "struct.pack/unpack f maps 16777217 to 16777216",
+      "16777216 and 16777218 are exactly representable in FP32",
+      "Example assumes nearest-even rounding, not arbitrary rounding modes"
+    ]
+  },
+  {
+    "id": "softmax-fusion",
+    "lesson": "3-4",
+    "placement": "key-idea",
+    "title": "Fusion avoids materializing full-sized intermediates",
+    "description": "The unfused explicit stable expression writes shifted inputs and exponentials between separate operations, in addition to row statistics and output. A fused row kernel reads the input row, computes intermediate values on chip, and writes the normalized row. The diagram intentionally omits small row-statistic arrays from the eager strip.",
+    "caption": "Conceptual memory boundary, not a hardware trace. The compiled expression may already fuse operations; the library softmax must not be mislabeled as this eager composition.",
+    "renderer": "svg",
+    "source": "visuals/softmax-fusion.svg",
+    "evidence": [
+      "KR03"
+    ],
+    "checks": [
+      "Shifted input and exponential arrays each have MxN elements in the explicit composition",
+      "Fused ideal payload counts one input read and one output write",
+      "No claim that every row width fits the same on-chip execution strategy"
+    ]
+  },
+  {
+    "id": "rmsnorm-broadcast",
+    "lesson": "4-1",
+    "placement": "key-idea",
+    "title": "RMSNorm has two different broadcast axes",
+    "description": "A three-row, four-feature input has three row-specific inverse RMS scalars. Each scalar scales one entire row. The same four-feature weight vector is then applied to every row, indexed by column. This separates normalization statistics from shared learned weights.",
+    "caption": "Shape illustration only. Preserve the lesson’s actual epsilon and deliberate accumulation/output casts.",
+    "renderer": "svg",
+    "source": "visuals/rmsnorm-broadcast.svg",
+    "evidence": [
+      "KR09"
+    ],
+    "checks": [
+      "r has one scalar per row and w one value per feature",
+      "w is shared over leading row dimensions",
+      "No mean subtraction is included"
+    ]
+  },
+  {
+    "id": "mixed-error-region",
+    "lesson": "4-3",
+    "placement": "key-idea",
+    "title": "Why a mixed error check behaves better near zero",
+    "description": "A V-shaped upper envelope gives allowed absolute error as 0.002 plus 0.01 times the magnitude of the reference value. The shaded region below it is accepted. At a zero reference the allowed error is still 0.002, whereas a pure relative criterion would allow zero and relative-error division becomes undefined.",
+    "caption": "Illustrative tolerance values, not recommended RMSNorm thresholds. Set actual atol and rtol using the declared operation, input scale and precision.",
+    "renderer": "svg",
+    "source": "visuals/mixed-error-region.svg",
+    "evidence": [
+      "KR17",
+      "https://docs.pytorch.org/docs/stable/generated/torch.allclose.html"
+    ],
+    "checks": [
+      "Envelope evaluated as atol+rtol*abs(reference)",
+      "At reference 0 bound=.002 and at ±1 bound=.012",
+      "Shading represents nonnegative absolute errors at or below the bound"
+    ]
+  },
+  {
+    "id": "row-parallelism",
+    "lesson": "4-4",
+    "placement": "key-idea",
+    "title": "Row geometry changes available program parallelism",
+    "description": "An eight-by-four matrix and a two-by-sixteen matrix both contain thirty-two elements. A one-program-per-row implementation launches eight programs for the first and two for the second. The latter assigns a wider reduction to each program. Actual speed depends on hardware, launch overhead and per-program resource use.",
+    "caption": "Small illustrative shapes; measure the six validated shapes selected for this lab. Program count is not the same as achieved occupancy.",
+    "renderer": "svg",
+    "source": "visuals/row-parallelism.svg",
+    "evidence": [
+      "KR03",
+      "KR01"
+    ],
+    "checks": [
+      "8*4=2*16=32 elements",
+      "One-program-per-row grids have 8 and 2 programs",
+      "No measured speed or occupancy claim is present"
+    ]
+  },
+  {
+    "id": "matmul-accumulator-loop",
+    "lesson": "5-2",
+    "placement": "key-idea",
+    "title": "Keep the accumulator alive across the K loop",
+    "description": "Initialize the FP32 output accumulator once. Each K chunk loads two tiles and adds a dot product to the same accumulator. Only after all chunks are processed is the result cast and stored.",
+    "caption": "Control flow for one exact-tile output program. Masks are added in the next lesson.",
+    "renderer": "mermaid",
+    "source": "visuals/matmul-accumulator-loop.mmd",
+    "evidence": [
+      "KR04"
+    ],
+    "checks": [
+      "Accumulator initialized before K loop",
+      "Loop back edge preserves rather than resets accumulator",
+      "Output store occurs after every K chunk contributes"
+    ]
+  },
+  {
+    "id": "matmul-tail-masks",
+    "lesson": "5-3",
+    "placement": "key-idea",
+    "title": "Load masks protect the reduction as well as the output",
+    "description": "Three four-by-four tiles illustrate logical M=3, N=2 and K=1. A has a valid three-row by one-column region, B a one-row by two-column region, and C a three-row by two-column region. A loads are masked on row and K coordinates, B loads on K and column coordinates, and C stores on row and column coordinates. Invalid input positions load zero; invalid output positions are not stored.",
+    "caption": "Small geometry example, not a suggested GPU tile configuration. Real addresses still use the actual tensor strides.",
+    "renderer": "svg",
+    "source": "visuals/matmul-tail-masks.svg",
+    "evidence": [
+      "KR04"
+    ],
+    "checks": [
+      "A mask uses i<M and k<K",
+      "B mask uses k<K and j<N",
+      "C store mask uses i<M and j<N",
+      "A has3 valid/13 masked cells, B has2 valid/14 masked cells, C has6 valid/10 masked cells"
+    ]
+  },
+  {
+    "id": "tile-resource-tradeoff",
+    "lesson": "6-1",
+    "placement": "key-idea",
+    "title": "Reuse and accumulator size grow together",
+    "description": "The same sixty-four by sixty-four output uses four thirty-two by thirty-two tiles or two thirty-two by sixty-four tiles. Each first configuration program owns 1,024 FP32 accumulator values; each second configuration program owns 2,048. Increasing output width doubles reuse of each A-tile value across columns, but reduces independent output-program count and increases per-program state.",
+    "caption": "Illustrative exact-multiple tilings. Accumulator element count is a logical footprint, not a claim about compiler register allocation or achieved occupancy.",
+    "renderer": "svg",
+    "source": "visuals/tile-resource-tradeoff.svg",
+    "evidence": [
+      "KR04",
+      "KR01"
+    ],
+    "checks": [
+      "64x64 output has 4 tiles of32x32 or2 tiles of32x64",
+      "Accumulator values are1024 versus2048 per program",
+      "A element contributes to32 versus64 output columns"
+    ]
+  },
+  {
+    "id": "epilogue-rounding",
+    "lesson": "6-3",
+    "placement": "key-idea",
+    "title": "Fusion moves a rounding boundary",
+    "description": "The fused bias epilogue adds the column bias to the FP32 accumulator and rounds only the final output to FP16. A separate FP16 matmul expression rounds the accumulator first, then adds bias and produces another rounded output. These paths need not match bit-for-bit because their intermediate rounding boundaries differ.",
+    "caption": "Conceptual arithmetic boundaries, not a claim about library instruction selection. Define the fused reference to match actual bias precision and output casting.",
+    "renderer": "svg",
+    "source": "visuals/epilogue-rounding.svg",
+    "evidence": [
+      "KR04",
+      "KR17"
+    ],
+    "checks": [
+      "Bias index is output column j, shared over rows",
+      "Fused path does not round matmul output before addition",
+      "Separate FP16 path rounds the matmul intermediate before addition"
+    ]
+  },
+  {
+    "id": "attention-workspace",
+    "lesson": "7-4",
+    "placement": "key-idea",
+    "title": "Quadratic scores versus bounded tile workspace",
+    "description": "Dense attention may materialize an N by N score matrix. Processing a query block at a time needs one Bq by Bk score tile, a Bq by D weighted accumulator and two Bq-length statistics. Both algorithms still retain Q, K, V and output, each N by D. Other framework and kernel allocations must be counted separately.",
+    "caption": "Algorithmic element shapes, not measured peak allocation. Assumes fixed tile sizes and one query block’s running state resident in the illustrated sequential prototype.",
+    "renderer": "svg",
+    "source": "visuals/attention-workspace.svg",
+    "evidence": [
+      "KR10",
+      "KR06"
+    ],
+    "checks": [
+      "Dense scores scale as N²",
+      "Score tile uses Bq*Bk elements and m/l/a uses Bq*(D+2)",
+      "Four persistent NxD tensors remain linear in N",
+      "No constant-total-memory claim"
+    ]
+  },
+  {
+    "id": "attention-program-shapes",
+    "lesson": "8-1",
+    "placement": "key-idea",
+    "title": "Two tile products have different output shapes",
+    "description": "For head dimension thirty-two, a Bq by thirty-two query tile multiplies a transposed K tile to produce Bq by Bk scores. After scaling, masking and exponential weighting, the Bq by Bk weight tile multiplies a Bk by thirty-two V tile to produce a Bq by thirty-two contribution. Each query row has its own FP32 maximum, denominator and weighted accumulator.",
+    "caption": "Dimensions and ownership only; the exact recurrence is in 7-1. Specify the actual probability-dot cast before claiming any GPU multiplication precision.",
+    "renderer": "svg",
+    "source": "visuals/attention-program-shapes.svg",
+    "evidence": [
+      "KR06",
+      "KR10"
+    ],
+    "checks": [
+      "QKt produces Bq by Bk scores",
+      "pV produces Bq by32 weighted contribution",
+      "m and l each have Bq scalars, a has Bq*32 values",
+      "Scale uses1/sqrt(32), though numerical values are not plotted"
+    ]
+  },
+  {
+    "id": "attention-mask-intersection",
+    "lesson": "8-3",
+    "placement": "key-idea",
+    "title": "Preserve state for an empty tile; suppress invalid output rows",
+    "description": "On a length-five sequence, the diagonal tile with query and key positions four through seven has only one valid score: query four attending key four. Query positions five through seven are padding and must not store output. Separately, valid query one sees no allowed key in the tile containing keys four through seven: key four is future and the remaining keys are out of range. Skip that row’s update and preserve existing online state, rather than evaluating undefined negative-infinity differences.",
+    "caption": "This is per-row handling. A whole tile can be skipped only if it contains no allowed keys for any valid query. Invalid query intermediates also require deliberate safe handling.",
+    "renderer": "svg",
+    "source": "visuals/attention-mask-intersection.svg",
+    "evidence": [
+      "KR06",
+      "KR10"
+    ],
+    "checks": [
+      "N5 diagonal4..7 tile contains exactly one valid score",
+      "Queries5..7 are invalid and never stored",
+      "For valid query1, no key4..7 passes both j<N and j<=i",
+      "An empty tile preserves prior m/l/a without -inf-(-inf)",
+      "First usable tile still needs safe state initialization"
+    ]
+  },
+  {
+    "id": "rmsnorm-gradient-axes",
+    "lesson": "9-1",
+    "placement": "key-idea",
+    "title": "RMSNorm gradients have orthogonal reduction axes",
+    "description": "A three-row, four-feature matrix shows two reduction directions. The input-gradient correction computes a scalar from features within each row and broadcasts it only within that row. The weight gradient sums contributions down rows, leaving one value per shared feature weight. The diagram explains dependency axes without carrying out the full derivative algebra.",
+    "caption": "Alternative dimensions to the assigned M = 2, D = 5 check. The arrows show reduction axes; dx and dw use different contribution formulas. Preserve epsilon; no LayerNorm centering is implied.",
+    "renderer": "svg",
+    "source": "visuals/rmsnorm-gradient-axes.svg",
+    "evidence": [
+      "KR09"
+    ],
+    "checks": [
+      "dx correction reduces feature axis and retains M row statistics",
+      "dw reduces row axis and retains D features",
+      "All rows share one weight vector"
+    ]
+  },
+  {
+    "id": "operator-support-branches",
+    "lesson": "10-2",
+    "placement": "key-idea",
+    "title": "Choose a supported path before launching a kernel",
+    "description": "Inspect device, dtype, shape and layout before launch. Supported inputs use the registered custom operator and its validated backward. Unsupported inputs take a documented semantics-preserving framework fallback, or fail clearly when no such fallback is supplied.",
+    "caption": "Contract branch sketch; use the registration API for the pinned PyTorch version. Epsilon remains configuration and backward return positions follow the forward signature.",
+    "renderer": "mermaid",
+    "source": "visuals/operator-support-branches.mmd",
+    "evidence": [
+      "KR11"
+    ],
+    "checks": [
+      "Contract validation precedes every custom launch",
+      "Fallback must implement the same public semantics",
+      "Only validated backward paths are registered",
+      "Unsupported input never falls through into an unsafe custom kernel"
+    ]
+  },
+  {
+    "id": "flatten-leading-axes",
+    "lesson": "10-3",
+    "placement": "key-idea",
+    "title": "The row kernel flattens tokens, not features",
+    "description": "Two batches, each with three token rows of four features, reshape into six rows of four features. Row index is batch times three plus token. The same four-element weight vector is used for every row. After normalization, restore the original two-by-three-by-four shape.",
+    "caption": "Small shape illustration. The fixture defaults to width 64 and epsilon 1e-5; use its configured values rather than these drawing dimensions.",
+    "renderer": "svg",
+    "source": "visuals/flatten-leading-axes.svg",
+    "evidence": [
+      "KR11",
+      "https://blueblazin.github.io/courses/gpu-kernels/downloads/decoder.py"
+    ],
+    "checks": [
+      "2*3 leading rows become6, last width remains4",
+      "Contiguous logical row order is batch-major then token",
+      "Restoring shape preserves feature order and all24 elements"
+    ]
+  },
+  {
+    "id": "pallas-memory-paths",
+    "lesson": "11-2",
+    "placement": "key-idea",
+    "title": "Refs can belong to different memory spaces",
+    "description": "The current Mosaic GPU quickstart distinguishes simple elementwise work through registers from staged Hopper tensor-core work through shared memory and an accumulator. A Ref’s declared memory space determines its role; Ref does not mean shared memory.",
+    "caption": "Conceptual Hopper paths from the official quickstart; SMEM means shared memory. Transfer APIs and waits are omitted here and must be annotated from the actual chosen source revision.",
+    "renderer": "mermaid",
+    "source": "visuals/pallas-memory-paths.mmd",
+    "evidence": [
+      "KR12"
+    ],
+    "checks": [
+      "Simple ALU path does not require an explicit shared-memory stage",
+      "Staged Hopper matmul uses shared-memory operands and an accumulator",
+      "Output transfer completion is required before use",
+      "No Blackwell-only TMEM is asserted for H100"
+    ]
+  },
+  {
+    "id": "pipeline-overlap",
+    "lesson": "12-2",
+    "placement": "key-idea",
+    "title": "Startup, overlap and drain in a staged pipeline",
+    "description": "A generic two-buffer schedule loads tile zero in slot zero, then computes it while loading tile one. Slot two computes tile one while loading tile two into buffer zero, which is reusable only because tile zero’s consumer finished at the prior slot boundary. The final slot drains tile two’s computation.",
+    "caption": "Illustrative dependency schedule with equal-duration slots, not the exact current JAX matmul pipeline or a predicted speedup. The lesson’s source trace must use its actual configuration.",
+    "renderer": "svg",
+    "source": "visuals/pipeline-overlap.svg",
+    "evidence": [
+      "KR13"
+    ],
+    "checks": [
+      "Transfer of each tile completes before that tile is consumed",
+      "Buffer0 is not overwritten by tile2 until tile0 consumer finishes",
+      "Tiles1 and2 overlap transfers with computation on a different buffer",
+      "Final tile completes during drain; no unmeasured time units"
+    ]
+  },
+  {
+    "id": "prefill-decode-work",
+    "lesson": "13-1",
+    "placement": "key-idea",
+    "title": "Prefill and cached decode are different workloads",
+    "description": "For a four-token prompt, each attention head has four query rows and a four-by-four causal score shape. A subsequent call on one new token forms one query row and appends its K and V to the four-token cache, producing a one-by-five score shape. Query count and cache traffic therefore differ between phases.",
+    "caption": "Illustrative shapes only; optimized attention need not materialize these scores. Timing boundaries and generated-token counting must follow the frozen experiment manifest.",
+    "renderer": "svg",
+    "source": "visuals/prefill-decode-work.svg",
+    "evidence": [
+      "KR18",
+      "https://blueblazin.github.io/courses/gpu-kernels/downloads/decoder.py"
+    ],
+    "checks": [
+      "Prefill score shape T by T",
+      "One new cached input extends history to T+1 and score shape1 by(T+1)",
+      "Both K and V caches grow by one token per cached call"
+    ]
+  },
+  {
+    "id": "logit-projection-work",
+    "lesson": "13-2",
+    "placement": "key-idea",
+    "title": "Match the logit output boundary",
+    "description": "Projecting all T prompt hidden states through a D-by-V vocabulary matrix produces T-by-V logits. Selecting only the final hidden row before projection produces one-by-V logits. The conventional multiplication counts are approximately 2TDV and 2DV FLOPs. Merely selecting the last logit row after projecting all positions does not avoid the larger projection.",
+    "caption": "Workload comparison only. The supplied fixture computes all new-token logits; any output-boundary change must be identical across compared variants.",
+    "renderer": "svg",
+    "source": "visuals/logit-projection-work.svg",
+    "evidence": [
+      "https://blueblazin.github.io/courses/gpu-kernels/downloads/decoder.py"
+    ],
+    "checks": [
+      "All-token projection has T rows; last-hidden-row projection has1",
+      "Weights have D by V shape in both cases",
+      "Selecting last logits after full projection does not save projection work"
+    ]
+  },
+  {
+    "id": "decode-reset-timeline",
+    "lesson": "13-3",
+    "placement": "key-idea",
+    "title": "Warm the full trajectory, then reset for each repetition",
+    "description": "The warm-up and both measured repeats begin with an equivalent four-token prompt cache. Three subsequent model calls grow the cache to five, six and seven entries. Each measured repeat times the same decode-only region after its own reset/prefill. Warm-up must exercise all changing-cache shapes, not just the prefill call.",
+    "caption": "Illustrative call count, not a claim that prompt processing itself consumes a generated-token call. Use the manifest’s exact token-count definition, deterministic inputs and compile/fallback logs.",
+    "renderer": "svg",
+    "source": "visuals/decode-reset-timeline.svg",
+    "evidence": [
+      "KR19",
+      "https://blueblazin.github.io/courses/gpu-kernels/downloads/decoder.py"
+    ],
+    "checks": [
+      "Every row starts from cache4 and ends at7",
+      "Exactly3 timed model calls in each measured repeat",
+      "Prefill/reset lies outside decode-only timing bracket",
+      "Warm-up covers the same sequence of cache lengths as measurement"
+    ]
+  },
+  {
+    "id": "fixture-norm-hook",
+    "lesson": "intro-1",
+    "placement": "key-idea",
+    "title": "Locate the kernel hook in the actual fixture",
+    "description": "The supplied decoder block first applies RMSNorm and causal attention to x, then adds the attention output to the unchanged residual x. It next applies a separate RMSNorm and a linear-GELU-linear MLP to the intermediate h, adding that MLP result to h. Both norms are created with the same norm_factory interface but have separate learned weights.",
+    "caption": "This describes the provided teaching fixture, including its GELU MLP and learned positions. It is not a generic claim about every Llama-style model.",
+    "renderer": "svg",
+    "source": "visuals/fixture-norm-hook.svg",
+    "evidence": [
+      "https://blueblazin.github.io/courses/gpu-kernels/downloads/decoder.py"
+    ],
+    "checks": [
+      "First residual computes h=x+attention(attn_norm(x))",
+      "Second residual computes output=h+mlp(mlp_norm(h))",
+      "The MLP activation is GELU in the actual fixture",
+      "Final normalization outside the block also uses norm_factory"
     ]
   }
 ]

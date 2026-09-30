@@ -1,0 +1,8 @@
+flowchart TB
+  accTitle: Reproduction wrapper success and failure gates
+  accDescr: Invalid inputs exit nonzero. A required training or parity child failure also exits nonzero. Success is reported only after required children succeed and expected fresh artifacts are present.
+  I["Inputs valid?"] -->|"yes"| R["Run required tiny training + parity"]
+  I -->|"no"| F["Useful error; nonzero exit"]
+  R --> G["Run passed?"]
+  G -->|"no"| F
+  G -->|"yes"| S["Write success summary; exit zero"]

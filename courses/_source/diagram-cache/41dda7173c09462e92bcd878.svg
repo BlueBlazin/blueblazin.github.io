@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="482" viewBox="0 0 800 482" role="img" aria-labelledby="title desc">
+<title id="title">Evidence outside the returned window is not evidence of absence</title>
+<desc id="desc">An illustrative 24-line file has a search hit at line 8 and a needed definition at lines 18 through 22. The first read requests lines 6 through 14 but its five-line cap returns only 6 through 10; 11 through 14 are known omitted requested lines. Lines 18 through 22 were never requested by that call and need a separate read. The example distinguishes search matches, requested ranges, returned content, and later retrieval; it reports no measured agent outcome.</desc>
+<rect width="800" height="482" fill="#ffffff"/>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto-start-reverse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#64748b" stroke-width="1.4"/></marker></defs>
+<g font-family="system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="16" fill="#263445">
+<text x="25" y="30" font-size="18" fill="#263445" font-weight="600">One illustrative file snapshot</text>
+<rect x="61" y="52" width="190" height="384" rx="8" fill="#f8fafc" stroke="#c7d2de" stroke-width="1.5"/>
+<text x="48" y="73" font-size="14" fill="#263445" text-anchor="end">1</text>
+<path d="M82 70 L230 70" fill="none" stroke="#64748b" stroke-width="1.5"/>
+<path d="M82 85 L230 85" fill="none" stroke="#64748b" stroke-width="1.5"/>
+<path d="M82 100 L230 100" fill="none" stroke="#64748b" stroke-width="1.5"/>
+<path d="M82 115 L230 115" fill="none" stroke="#64748b" stroke-width="1.5"/>
+<path d="M82 130 L230 130" fill="none" stroke="#64748b" stroke-width="1.5"/>
+<text x="48" y="148" font-size="14" fill="#263445" text-anchor="end">6</text>
+<path d="M82 145 L230 145" fill="none" stroke="#64748b" stroke-width="1.5"/>
+<path d="M82 160 L230 160" fill="none" stroke="#64748b" stroke-width="1.5"/>
+<text x="48" y="178" font-size="14" fill="#263445" text-anchor="end">8</text>
+<path d="M82 175 L230 175" fill="none" stroke="#64748b" stroke-width="1.5"/>
+<path d="M82 190 L230 190" fill="none" stroke="#64748b" stroke-width="1.5"/>
+<text x="48" y="208" font-size="14" fill="#263445" text-anchor="end">10</text>
+<path d="M82 205 L230 205" fill="none" stroke="#64748b" stroke-width="1.5"/>
+<text x="48" y="223" font-size="14" fill="#263445" text-anchor="end">11</text>
+<path d="M82 220 L230 220" fill="none" stroke="#64748b" stroke-width="1.5"/>
+<path d="M82 235 L230 235" fill="none" stroke="#64748b" stroke-width="1.5"/>
+<path d="M82 250 L230 250" fill="none" stroke="#64748b" stroke-width="1.5"/>
+<text x="48" y="268" font-size="14" fill="#263445" text-anchor="end">14</text>
+<path d="M82 265 L230 265" fill="none" stroke="#64748b" stroke-width="1.5"/>
+<path d="M82 280 L230 280" fill="none" stroke="#64748b" stroke-width="1.5"/>
+<path d="M82 295 L230 295" fill="none" stroke="#64748b" stroke-width="1.5"/>
+<path d="M82 310 L230 310" fill="none" stroke="#64748b" stroke-width="1.5"/>
+<text x="48" y="328" font-size="14" fill="#263445" text-anchor="end">18</text>
+<path d="M82 325 L230 325" fill="none" stroke="#64748b" stroke-width="1.5"/>
+<path d="M82 340 L230 340" fill="none" stroke="#64748b" stroke-width="1.5"/>
+<path d="M82 355 L230 355" fill="none" stroke="#64748b" stroke-width="1.5"/>
+<path d="M82 370 L230 370" fill="none" stroke="#64748b" stroke-width="1.5"/>
+<text x="48" y="388" font-size="14" fill="#263445" text-anchor="end">22</text>
+<path d="M82 385 L230 385" fill="none" stroke="#64748b" stroke-width="1.5"/>
+<path d="M82 400 L230 400" fill="none" stroke="#64748b" stroke-width="1.5"/>
+<text x="48" y="418" font-size="14" fill="#263445" text-anchor="end">24</text>
+<path d="M82 415 L230 415" fill="none" stroke="#64748b" stroke-width="1.5"/>
+<rect x="70" y="136" width="172" height="135" rx="8" fill="#edf2f8" stroke="#b5c6da" stroke-width="1.5"/>
+<rect x="78" y="136" width="155" height="75" rx="8" fill="#cfdfef" stroke="#97aec5" stroke-width="1.5"/>
+<rect x="78" y="316" width="155" height="75" rx="8" fill="#d3e7e2" stroke="#91b9af" stroke-width="1.5"/>
+<text x="155" y="176" font-size="15" fill="#263445" font-weight="600" text-anchor="middle">returned 6–10</text>
+<text x="155" y="236" font-size="15" fill="#263445" text-anchor="middle">omitted 11–14</text>
+<text x="155" y="352" font-size="15" fill="#263445" font-weight="600" text-anchor="middle">definition 18–22</text>
+<path d="M247 174 L304 174" fill="none" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="320" y="114" font-size="17" fill="#263445" font-weight="600">Search hit: line 8</text>
+<text x="320" y="146" font-size="15" fill="#263445">First request: start 6, count 9 → lines 6–14</text>
+<text x="320" y="176" font-size="15" fill="#263445">Five-line cap → only 6–10 returned</text>
+<text x="320" y="206" font-size="15" fill="#263445">Four requested lines were omitted.</text>
+<path d="M247 353 L304 353" fill="none" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="320" y="294" font-size="17" fill="#263445" font-weight="600">Needed evidence is farther down</text>
+<text x="320" y="325" font-size="15" fill="#263445">Lines 18–22 were not requested at all.</text>
+<text x="320" y="355" font-size="15" fill="#263445">A later read retrieves that definition.</text>
+<text x="320" y="385" font-size="15" fill="#263445">An empty excerpt is not proof of absence.</text>
+<text x="400" y="466" font-size="15" fill="#263445" text-anchor="middle">Illustrative line cap; real tools must also enforce their byte limit.</text>
+</g>
+</svg>

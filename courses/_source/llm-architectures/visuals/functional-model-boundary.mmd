@@ -1,0 +1,9 @@
+flowchart TB
+  accTitle: Explicit inputs and parameter tree of the pure decoder
+  accDescr: Embedding arrays, block subtrees and final norm/head arrays form a params pytree. Pass params, token IDs, positions and fixed configuration explicitly to the forward function. It returns logits and optional activations without creating trainable arrays.
+  E["Embedding arrays"] --> P["params pytree"]
+  B["Block subtrees"] --> P
+  H["Final norm + head arrays"] --> P
+  P --> F["Pure decoder forward"]
+  I["Token IDs, positions, fixed config"] --> F
+  F --> O["Logits + optional activations"]

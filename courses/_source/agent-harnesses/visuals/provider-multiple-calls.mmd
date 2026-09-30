@@ -1,0 +1,14 @@
+sequenceDiagram
+    accTitle: Preserve every call in a multi-call response
+    accDescr: In the supported sequential path, a provider fixture returns complete response blocks containing calls c1 and c2. The host preserves those blocks and validates the complete response before any dispatch. It executes the calls sequentially and records their respective results. Only after all required results exist does it construct the next provider request with the original response blocks and both matching results. Unsupported multi-call responses must instead be rejected before any tool executes. These are offline tests, not live requests.
+    participant H as Host adapter
+    participant F as Provider fixture
+    participant T as Tool dispatcher
+    H->>F: Offline request
+    F-->>H: Full blocks: calls c1 and c2
+    H->>H: Preserve blocks and validate all calls
+    H->>T: Execute c1
+    T-->>H: Result for c1
+    H->>T: Execute c2
+    T-->>H: Result for c2
+    H->>H: Build next request with both results

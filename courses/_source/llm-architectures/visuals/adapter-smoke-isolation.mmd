@@ -1,0 +1,10 @@
+flowchart TB
+  accTitle: Separate adapter smoke tests from the true SFT initialization
+  accDescr: Save pristine adapters. A smoke branch makes a synthetic update and forks into unmerged and merged evaluation paths for parity. Independently restore pristine adapters and a fresh optimizer for the later SFT run.
+  P["Save pristine zero-update adapters"] --> S["Synthetic smoke update"]
+  S --> U["Unmerged evaluation"]
+  S --> M["Merged evaluation copy"]
+  U --> C["Compare full logits"]
+  M --> C
+  P --> T["Restore pristine adapters + fresh optimizer"]
+  T --> F["Later SFT starts here"]

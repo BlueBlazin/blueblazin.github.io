@@ -1,0 +1,8 @@
+flowchart TB
+  accTitle: SwiGLU branches and channel dimensions
+  accDescr: x branches to a C-to-M gate projection followed by SiLU and a separate C-to-M up projection. Multiply their outputs elementwise, then project M to C.
+  X["x · [B, T, C]"] --> G["Gate: C → M, then SiLU"]
+  X --> U["Up: C → M"]
+  G --> P["Elementwise product · [B, T, M]"]
+  U --> P
+  P --> D["Down: M → C · [B, T, C]"]

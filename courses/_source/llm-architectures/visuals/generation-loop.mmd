@@ -1,0 +1,9 @@
+flowchart TB
+  accTitle: Greedy generation with explicit stopping conditions
+  accDescr: Check token and context limits before a forward call. If allowed, run the prefix and select from last-position logits, then append. EOS stops the loop; otherwise check limits again.
+  G["Prefix within limits?"]
+  G -->|"yes"| A["Forward; append argmax token"]
+  G -->|"no"| S["Stop"]
+  A --> E["Selected EOS?"]
+  E -->|"yes"| S
+  E -->|"no"| G

@@ -1,0 +1,8 @@
+flowchart TB
+  accTitle: Choose a supported path before launching a kernel
+  accDescr: Inspect device, dtype, shape and layout before launch. Supported inputs use the registered custom operator and its validated backward. Unsupported inputs take a documented semantics-preserving framework fallback, or fail clearly when no such fallback is supplied.
+  A["Check input contract"] --> B["Supported?"]
+  B -->|"Yes"| C["Custom op and backward"]
+  B -->|"No"| D["Fallback available?"]
+  D -->|"Yes"| E["Framework path"]
+  D -->|"No"| F["Reject before launch"]

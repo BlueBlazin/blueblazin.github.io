@@ -1,0 +1,9 @@
+flowchart TB
+    accTitle: Failure before tool entry differs from failure after it
+    accDescr: A malformed request is rejected by validation without entering the tool body. A valid and authorized request can enter execution; a later crash means execution started and effects may need inspection. Cancellation stops new scheduling and cleans up the tested execution unit before reporting its outcome. Neither a crash nor cancellation authorizes an automatic retry of an uncertain mutation. The lesson's injected crash is read-only, while the distinction explains the broader recovery rule.
+    P["Proposed call"] --> V("Valid and authorized?")
+    V -->|"No"| D["Reject; tool body never entered"]
+    V -->|"Yes"| E["Execution started"]
+    E -->|"Crash"| C["Record error; inspect possible effects"]
+    E -->|"Cancellation"| K["Stop scheduling; clean up execution"]
+    E -->|"Success"| O["Record observed result"]

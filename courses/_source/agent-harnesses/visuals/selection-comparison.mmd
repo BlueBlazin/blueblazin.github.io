@@ -1,0 +1,9 @@
+flowchart TB
+    accTitle: Change selection policy, measure the selected evidence
+    accDescr: Separate development trials use fresh copies of the same pinned task snapshots, with the same model, tools, context ceiling, and run caps. Trial A uses the existing selector; trial B changes only that selection policy. Selection occurs inside each trial as model requests are constructed, and may recur. Traces record selected paths and ranges alongside each final grade. Compare those intermediate records to establish whether the intervention actually changed context; identical evidence does not establish policy equivalence.
+    T["Same snapshots, model, tools and limits"] --> A["Trial A: existing selector"]
+    T --> B["Trial B: changed selector"]
+    A --> EA["Trace A: selected evidence and grade"]
+    B --> EB["Trace B: selected evidence and grade"]
+    EA --> C["Compare contexts, activation and outcomes"]
+    EB --> C

@@ -1,0 +1,908 @@
+[
+  {
+    "lesson": "1-1",
+    "lesson_sha256": "999b57ce8fe1f561824447504b7e83692d80f941f1fdb553b1433417cb59d485",
+    "decision": "no-visual",
+    "reason": "This optional closed-book diagnostic tests shape, loss, gradient, masking and leakage reasoning; supplying those diagrams before the attempt would answer the questions. Its answer panel gives exact values, and the corresponding teaching lessons receive concept figures.",
+    "sources": [
+      "AR01",
+      "AR02"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "1-2",
+    "lesson_sha256": "bac0b1333df9e0176a05c3de46fa34edbf9651368ac1f56f83ad47eb58ce9906",
+    "decision": "visual",
+    "reason": "The one-position offset is a spatial indexing contract: align input tokens, next-token targets and logit rows without solving the diagnostic example.",
+    "sources": [
+      "AR01",
+      "AR02"
+    ],
+    "visual_ids": [
+      "next-token-alignment"
+    ]
+  },
+  {
+    "lesson": "1-3",
+    "lesson_sha256": "0f0276ae166df3cb899bbc6115f0645b085f1059b9e28cde0d8e41707dee3211",
+    "decision": "visual",
+    "reason": "An indexed mask makes the permitted triangle, diagonal and softmax axis directly inspectable against the future-perturbation test.",
+    "sources": [
+      "AR01"
+    ],
+    "visual_ids": [
+      "causal-attention-mask"
+    ]
+  },
+  {
+    "lesson": "1-4",
+    "lesson_sha256": "093006921c74a3cc574ee23391e608236606fae23429ae71c16b6455b927e0ad",
+    "decision": "visual",
+    "reason": "The two skip connections make normalization order and the distinct x/u residual operands visible.",
+    "sources": [
+      "AR03"
+    ],
+    "visual_ids": [
+      "pre-norm-residuals"
+    ]
+  },
+  {
+    "lesson": "2-1",
+    "lesson_sha256": "a39ce6ff12fb5ada549d61ae2ecc148467762fa98ae7fdc2c205530ae790555e",
+    "decision": "visual",
+    "reason": "A complete decoder and optional shared embedding/head tensor resolve where the final normalization belongs and why tied weights count once.",
+    "sources": [
+      "AR03"
+    ],
+    "visual_ids": [
+      "decoder-weight-tying"
+    ]
+  },
+  {
+    "lesson": "2-2",
+    "lesson_sha256": "33b583213e357ce034a69442fb195791eea8b2889b7c1c29b77af735991cb3f1",
+    "decision": "visual",
+    "reason": "Independent review identified a missing mechanism beyond the scalar update checklist: decoupled weight decay and gradient-derived moments follow separate parameter-update paths. The dependency diagram makes that distinction without solving the numeric exercise.",
+    "sources": [
+      "AR04"
+    ],
+    "visual_ids": [
+      "adamw-decoupled-update"
+    ]
+  },
+  {
+    "lesson": "2-3",
+    "lesson_sha256": "e48e505a4bf5d30ad758821c8c8b1ac52367ffe500c1ace60b6cf1879b2369bd",
+    "decision": "visual",
+    "reason": "The generate/append loop and EOS, length and context-limit exits are branching behavior that a simple operation list obscures.",
+    "sources": [
+      "AR03"
+    ],
+    "visual_ids": [
+      "generation-loop"
+    ]
+  },
+  {
+    "lesson": "2-4",
+    "lesson_sha256": "93d53a8c660a08f90bc762238410320ef67b6f9e251831a518bba10300e4b8c0",
+    "decision": "visual",
+    "reason": "Parallel uninterrupted and save/reload timelines show exactly which state and remaining updates must match.",
+    "sources": [
+      "AR05"
+    ],
+    "visual_ids": [
+      "checkpoint-resume-branches"
+    ]
+  },
+  {
+    "lesson": "3-1",
+    "lesson_sha256": "be7f96b4b05030e4de6dd59b43499ef639cf8c326f1d696ff56207079631ad06",
+    "decision": "visual",
+    "reason": "RMSNorm reduces only one token row; SwiGLU splits into two differently transformed branches before an elementwise product. Both need their own shape diagram.",
+    "sources": [
+      "AR01"
+    ],
+    "visual_ids": [
+      "rmsnorm-token-axis",
+      "swiglu-branches"
+    ]
+  },
+  {
+    "lesson": "3-2",
+    "lesson_sha256": "465035fcfad7eefb725aadf5d292b105ef9e7bd1b27111b13a9c4da982c3db99",
+    "decision": "visual",
+    "reason": "A geometric pair rotation reveals norm preservation and rotation direction without replacing the relative-position derivation.",
+    "sources": [
+      "AR07"
+    ],
+    "visual_ids": [
+      "rope-pair-rotation"
+    ]
+  },
+  {
+    "lesson": "3-3",
+    "lesson_sha256": "5a0caa9f633c1efab438895cfecb3d7c262a6c91ed927e2e272600c198c2530b",
+    "decision": "visual",
+    "reason": "Head-to-KV incidence is the essential nontrivial mapping and explains the repeat-interleave pitfall.",
+    "sources": [
+      "AR08"
+    ],
+    "visual_ids": [
+      "gqa-head-sharing"
+    ]
+  },
+  {
+    "lesson": "3-4",
+    "lesson_sha256": "c33c648744aba662f90803e54486de5c7cca419a87208ea75e58ad8429c274f4",
+    "decision": "visual",
+    "reason": "A composition map shows the separate Q/K rotary and unrotated V paths, residuals and modern MLP at the integration boundary.",
+    "sources": [
+      "AR06",
+      "AR08"
+    ],
+    "visual_ids": [
+      "modern-block-integration"
+    ]
+  },
+  {
+    "lesson": "4-1",
+    "lesson_sha256": "bf89ce1bcac074230704beedccfc84937c9874c715e05e36034a9789b1b5c747",
+    "decision": "visual",
+    "reason": "The key-splitting branches show one draw per consumed subkey and avoid implying a mutable random generator.",
+    "sources": [
+      "AR09",
+      "AR10"
+    ],
+    "visual_ids": [
+      "jax-key-lifetime"
+    ]
+  },
+  {
+    "lesson": "4-2",
+    "lesson_sha256": "191ade2388987567e00beb1247a87d62f5c9e8eaeb6d4d39c271b8d2094d181b",
+    "decision": "visual",
+    "reason": "A batched input grid and shared parameter vector make the mapped versus unmapped argument axes explicit.",
+    "sources": [
+      "AR12",
+      "AR11",
+      "AR13"
+    ],
+    "visual_ids": [
+      "vmap-shared-parameters"
+    ]
+  },
+  {
+    "lesson": "4-3",
+    "lesson_sha256": "b564630c0c64f0ce15e51be1ffc6db21d13dc14eaabc03375a2a9442e0aa2159",
+    "decision": "visual",
+    "reason": "A nonsquare value-labeled matrix makes the transpose mapping inspectable, including a bug that square shapes could conceal.",
+    "sources": [
+      "AR09",
+      "AR01"
+    ],
+    "visual_ids": [
+      "linear-weight-transpose"
+    ]
+  },
+  {
+    "lesson": "4-4",
+    "lesson_sha256": "4a175ec9a26ad27f05b139d112b7d435e54b527bfb688acd2721e4e654afc3fb",
+    "decision": "no-visual",
+    "reason": "The shared nonuniform probe is explicitly defined as sum(output * fixed_probe); the required input/parameter gradient error table and optional finite-difference calculation expose actual discrepancies more precisely than a generic backpropagation diagram.",
+    "sources": [
+      "AR12",
+      "AR15"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "5-1",
+    "lesson_sha256": "580248f0f7faf5769ffe68854c755656c10ed9cefb76d01b94ca015e0f930b1c",
+    "decision": "visual",
+    "reason": "A parameter-tree and explicit argument diagram separates array ownership from the pure decoder computation.",
+    "sources": [
+      "AR14",
+      "AR09"
+    ],
+    "visual_ids": [
+      "functional-model-boundary"
+    ]
+  },
+  {
+    "lesson": "5-2",
+    "lesson_sha256": "8a08194cbb8a6b97ee4f1fa483d325473bf9c7238bf6b202efbe0fb611fb2d55",
+    "decision": "visual",
+    "reason": "Aligned framework lanes make the first divergent activation boundary visible rather than presenting only final logit error.",
+    "sources": [
+      "AR09",
+      "AR26"
+    ],
+    "visual_ids": [
+      "parity-first-divergence"
+    ]
+  },
+  {
+    "lesson": "5-3",
+    "lesson_sha256": "a31687718bf045b8a2983fcf121d110a6df959699d03f8b0092e0f17ddc9e52a",
+    "decision": "visual",
+    "reason": "A state feedback loop exposes the requirement to feed returned optimizer moments/counter/RNG into the next call.",
+    "sources": [
+      "AR14",
+      "AR04"
+    ],
+    "visual_ids": [
+      "functional-training-state"
+    ]
+  },
+  {
+    "lesson": "5-4",
+    "lesson_sha256": "e5bd8836aeaa2290af6217068155477f4027bdfe14e65abf08e9fe8331d2b112",
+    "decision": "visual",
+    "reason": "A quantitative threshold plot explains why the absolute term controls comparisons near zero; it does not replace measured parity errors.",
+    "sources": [
+      "AR15",
+      "AR26"
+    ],
+    "visual_ids": [
+      "absolute-relative-tolerance"
+    ]
+  },
+  {
+    "lesson": "6-1",
+    "lesson_sha256": "401ec2ba853f0bd3901f2e79874c620025e88355f99f7d6c67ba7736b2a94c5e",
+    "decision": "visual",
+    "reason": "A position-indexed cache trace distinguishes retained prefix entries from newly appended entries and their absolute rotary positions.",
+    "sources": [
+      "AR16"
+    ],
+    "visual_ids": [
+      "kv-cache-growth"
+    ]
+  },
+  {
+    "lesson": "6-2",
+    "lesson_sha256": "80aa6562156de2b6a8b8178bfbf57b3b12de22411d659467a2b2bbfdddaa4c95",
+    "decision": "visual",
+    "reason": "Two aligned prefix paths show which logit rows correspond after an appended token, including a nonzero position offset.",
+    "sources": [
+      "AR16"
+    ],
+    "visual_ids": [
+      "cache-logit-alignment"
+    ]
+  },
+  {
+    "lesson": "6-3",
+    "lesson_sha256": "5c8e1a3fefd9b1047e1211569bbc8d5c60c30deffa87fe996d392db946abc0fa",
+    "decision": "visual",
+    "reason": "A document-to-chunk partition picture makes overlapping-chunk leakage and split-before-chunking concrete.",
+    "sources": [
+      "AR17",
+      "AR18"
+    ],
+    "visual_ids": [
+      "document-split-before-chunks"
+    ]
+  },
+  {
+    "lesson": "6-4",
+    "lesson_sha256": "2cc1da65a6c4d867bf682c5617cb419c19a2fea5f9167cf6a1154eea8bc39a65",
+    "decision": "visual",
+    "reason": "A host/device timeline separates warm-up, dispatch and completion, explaining the denominator of the measured pilot rate.",
+    "sources": [
+      "AR18",
+      "AR34"
+    ],
+    "visual_ids": [
+      "completed-work-timing"
+    ]
+  },
+  {
+    "lesson": "7-1",
+    "lesson_sha256": "2d25f9d0320a487d8046eece881ce8adbc0c5a3eaa50e1ca9f1a3d5181e2af98",
+    "decision": "visual",
+    "reason": "Factor dimensions and the frozen/shared input branch explain the low-rank update and which tensors train.",
+    "sources": [
+      "AR19"
+    ],
+    "visual_ids": [
+      "lora-two-branches"
+    ]
+  },
+  {
+    "lesson": "7-2",
+    "lesson_sha256": "c931aa8381491aeb1cf0a89b298feb68ed61dc4e6e1878d3a637b9c7b0aff5c8",
+    "decision": "visual",
+    "reason": "Merging requires branch disabling to avoid double application, while initialization has a distinct asymmetric gradient mechanism. Show merge state up front and the derived gradient paths inside the answer disclosure.",
+    "sources": [
+      "AR19"
+    ],
+    "visual_ids": [
+      "lora-merge-state",
+      "lora-initial-gradients"
+    ]
+  },
+  {
+    "lesson": "7-3",
+    "lesson_sha256": "8bb661126433f3137efa1b7efe97efb41caf8e45286991f737280e36ca7bab1f",
+    "decision": "no-visual",
+    "reason": "The task is loading a chosen pinned checkpoint and recording its exact tokenizer/configuration. A manifest of real revision, token IDs, device and special-token settings is clearer and safer than a generic model-loading chain.",
+    "sources": [
+      "AR20"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "7-4",
+    "lesson_sha256": "75c9211b0dd20c29276043499dafe04c1db9025eaa6ee31b4d2a2e600f4a779c",
+    "decision": "visual",
+    "reason": "A snapshot/fork/restore diagram distinguishes the disposable smoke update, merged evaluation copy and pristine start of SFT.",
+    "sources": [
+      "AR21",
+      "AR19"
+    ],
+    "visual_ids": [
+      "adapter-smoke-isolation"
+    ]
+  },
+  {
+    "lesson": "8-1",
+    "lesson_sha256": "8bd02dbc5473a271e3c1c3cc19071eabd577d56ad4b2ef4da32d661128cba8a5",
+    "decision": "visual",
+    "reason": "A template-by-entity family grid reveals cross-split family leakage that complete-string deduplication cannot detect.",
+    "sources": [
+      "AR22",
+      "AR17"
+    ],
+    "visual_ids": [
+      "family-split-boundaries"
+    ]
+  },
+  {
+    "lesson": "8-2",
+    "lesson_sha256": "7910cbb3bb499ecdde5a67c639aaf8b4b8ac6c188683a142d6a95f0395a56bcb",
+    "decision": "visual",
+    "reason": "A token/logit/label alignment grid makes the first supervised target and internal shifting semantics explicit.",
+    "sources": [
+      "AR21",
+      "AR23"
+    ],
+    "visual_ids": [
+      "sft-label-alignment"
+    ]
+  },
+  {
+    "lesson": "8-3",
+    "lesson_sha256": "a868784313ebf0d316a7f71d2aa946f518b8939bced2d8110cdc9732baa0156c",
+    "decision": "visual",
+    "reason": "The training/validation/held-out data boundaries show which split updates weights, selects checkpoints or measures final outcomes.",
+    "sources": [
+      "AR19",
+      "AR05"
+    ],
+    "visual_ids": [
+      "sft-data-roles"
+    ]
+  },
+  {
+    "lesson": "8-4",
+    "lesson_sha256": "a4448ea9ff853be434da6057491ec2dea8068a51d43790730cee0eab9604cfc8",
+    "decision": "no-visual",
+    "reason": "The deliverable is a paired table of actual baseline/adapted outcomes and separate validity/correctness counts. Invented example bars or transitions could be mistaken for results; the learner’s measured table and error examples should carry this lesson.",
+    "sources": [
+      "AR24",
+      "AR22"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "9-1",
+    "lesson_sha256": "06f60ff953f8e72b381637eb268542f74721f0cb66d19bd66118f4e5f673a528",
+    "decision": "visual",
+    "reason": "Separate stored-weight and per-token-use markings prevent the key misconception that top-2 halves stored expert memory.",
+    "sources": [
+      "AR25"
+    ],
+    "visual_ids": [
+      "moe-stored-versus-active"
+    ]
+  },
+  {
+    "lesson": "9-2",
+    "lesson_sha256": "d28508fe331f07140275d8d07df4ec6bcca967e366199eea9c7d1eb54faa6cc6",
+    "decision": "visual",
+    "reason": "A router-to-expert graph makes the selected-only softmax and weighted parallel expert paths explicit.",
+    "sources": [
+      "AR25"
+    ],
+    "visual_ids": [
+      "moe-top-two"
+    ]
+  },
+  {
+    "lesson": "9-3",
+    "lesson_sha256": "56fc8357d0a57e35ac0f2db075214daa42c1f07bfeffa0838983d501fe787e6c",
+    "decision": "visual",
+    "reason": "A labeled expert-output tensor slice and sparse weight row show the broadcast and reduction axis of the independent reference.",
+    "sources": [
+      "AR26"
+    ],
+    "visual_ids": [
+      "dense-masked-moe"
+    ]
+  },
+  {
+    "lesson": "9-4",
+    "lesson_sha256": "49db7de09950bf5d846dac8339d42c9e63ef47ad4aeb19e1e1ee41f110818f7c",
+    "decision": "no-visual",
+    "reason": "The student must compute actual ordinary/skewed expert count tables and verify their sum. A supplied balanced/skewed histogram would substitute hypothetical outcomes for the experiment; the routing mechanism is already visualized in the implementation lesson.",
+    "sources": [
+      "AR25"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "10-1",
+    "lesson_sha256": "f9cb2cca46bfaea0cd9f0931c1eeb33fd0523c9b3171f31012b85ce80283730a",
+    "decision": "visual",
+    "reason": "MLA has genuine content/position and query/KV branching with head-shared versus per-head dimensions; a projection diagram prevents omitted or repeated axes.",
+    "sources": [
+      "AR27"
+    ],
+    "visual_ids": [
+      "mla-projection-branches"
+    ]
+  },
+  {
+    "lesson": "10-2",
+    "lesson_sha256": "9a3f2ced77a1dff0fd59a7fd1c3b051d2eb72882ab1fd3a554de247c611f8bc5",
+    "decision": "visual",
+    "reason": "A two-term score diagram separates retained latent/positional state, transformed query values and shared learned weights.",
+    "sources": [
+      "AR27"
+    ],
+    "visual_ids": [
+      "mla-cache-score"
+    ]
+  },
+  {
+    "lesson": "10-3",
+    "lesson_sha256": "117199d6242832d118a8d83aaee0b05ba2e85d7dc70b6ab08de14974064a621d",
+    "decision": "visual",
+    "reason": "A common-scale cache chart makes retained-state size and context doubling visible; the exact worked exercise answer belongs inside the answer disclosure.",
+    "sources": [
+      "AR27"
+    ],
+    "visual_ids": [
+      "mla-cache-comparison"
+    ]
+  },
+  {
+    "lesson": "10-4",
+    "lesson_sha256": "d86c2f761041031ef0d9803cfb410075d4b5d87e4b2e01705baf4eeffc3ca6f9",
+    "decision": "no-visual",
+    "reason": "This synthesis assembles the learner’s projection trace, persistent-cache walkthrough and byte calculation, each supported by the preceding concept figures. Another generic compression drawing would repeat those mechanisms instead of auditing the actual note and evidence-depth labels.",
+    "sources": [
+      "AR27"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "11-1",
+    "lesson_sha256": "b31a7725b211f0ee859724334ecc1ae84f1e1f7092f1e481a0e833989bb0ff71",
+    "decision": "visual",
+    "reason": "A schematic inventory contrasts per-layer recurrent matrix state with attention token history, without inventing a Qwen layer pattern.",
+    "sources": [
+      "AR28"
+    ],
+    "visual_ids": [
+      "hybrid-state-inventory"
+    ]
+  },
+  {
+    "lesson": "11-2",
+    "lesson_sha256": "87bfc67d269e3c211533a94576814593e047c63ec4b00f1252c65276631c4bb6",
+    "decision": "visual",
+    "reason": "The matrix trace shows decay versus the key-directed column correction; move the complete worked arithmetic into the answer disclosure.",
+    "sources": [
+      "AR29"
+    ],
+    "visual_ids": [
+      "gated-delta-state"
+    ]
+  },
+  {
+    "lesson": "11-3",
+    "lesson_sha256": "b5a98a96568bb00adff7aba4eefabf4102a80c2691a9a97304fb672fde6730de",
+    "decision": "visual",
+    "reason": "A fixed-plus-growing storage plot makes hybrid total memory distinguishable from recurrent-state memory; exact toy values belong in the answer disclosure.",
+    "sources": [
+      "AR28",
+      "AR29"
+    ],
+    "visual_ids": [
+      "hybrid-state-scaling"
+    ]
+  },
+  {
+    "lesson": "11-4",
+    "lesson_sha256": "7e63f0d5a013562a88251261fe97d8b5373dade1b1b7c13b162b0773ccc79246",
+    "decision": "no-visual",
+    "reason": "The work is to connect the existing component inventory, recurrence arithmetic and storage table, then qualify retrieval and performance claims. The three preceding visuals supply the mechanisms; prose is needed for limits that a memory cartoon cannot establish.",
+    "sources": [
+      "AR29"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "12-1",
+    "lesson_sha256": "13cff046683bf62a00d370666fc02813df1ddb7798ab6eb62d25a4a2b1b88dc4",
+    "decision": "no-visual",
+    "reason": "The learner selects a named Gemma variant and fills a source-linked mechanism table. A fixed architecture diagram could silently choose a different variant or imply unsupported details; the student’s variant-specific comparison table is the correct visual representation.",
+    "sources": [
+      "AR30"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "12-2",
+    "lesson_sha256": "f400807540e965f61ba8834e94a627e3f37928b245c68331de7bec56fbf39179",
+    "decision": "visual",
+    "reason": "Contrasting cache-width compression with selecting prior positions clarifies two independent design axes without substituting for the report-specific table.",
+    "sources": [
+      "AR31"
+    ],
+    "visual_ids": [
+      "compression-versus-selection"
+    ]
+  },
+  {
+    "lesson": "12-3",
+    "lesson_sha256": "6f5c8fe6488660e796cd5bae7294a4c9f162af2a596dbe7915388054032ed11f",
+    "decision": "visual",
+    "reason": "A two-path multimodal merge clarifies the representation interface. Inside the answer disclosure, a compact exact-comparison table also distinguishes SFT targets, DPO preference pairs and GRPO rewarded groups plus their different reference/baseline roles.",
+    "sources": [
+      "AR32",
+      "AR33",
+      "AR30"
+    ],
+    "visual_ids": [
+      "multimodal-input-merge"
+    ]
+  },
+  {
+    "lesson": "12-4",
+    "lesson_sha256": "f09637c8721946c2a88fcc4b08526e6193b877b8f366ccfd900ba192604766df",
+    "decision": "no-visual",
+    "reason": "This Day0 reference is an editing/evidence-depth guide for the student’s two-page comparison. Its existing component table and previously constructed interface drawing carry the information; a new course diagram would duplicate the student’s deliverable.",
+    "sources": [
+      "AR30",
+      "AR31",
+      "AR32",
+      "AR33"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "13-1",
+    "lesson_sha256": "4e0228a421ffafecd82dd8a9c33e4671f4c7386b80382a7fccc898025edbb943",
+    "decision": "no-visual",
+    "reason": "The fair-study contract is an exact configuration and parameter-count comparison table. Query/KV sharing is already taught visually; a new head drawing with different counts would not clarify controls, timing settings or the absence of quality matching better than that table.",
+    "sources": [
+      "AR08",
+      "AR34"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "13-2",
+    "lesson_sha256": "f258c3318620354bb0f87cd175eaae3c984659f52696c3f8f0b5f555e56347a8",
+    "decision": "visual",
+    "reason": "Separate equality edges identify valid own-model cache references and GQA expanded-KV parity without implying independently parameterized MHA/GQA logits should match.",
+    "sources": [
+      "AR16",
+      "AR26"
+    ],
+    "visual_ids": [
+      "valid-attention-references"
+    ]
+  },
+  {
+    "lesson": "13-3",
+    "lesson_sha256": "65977c7b016643502a3a8393249a3a3ac149fc31c785461c1c54748fcfcee5f8",
+    "decision": "visual",
+    "reason": "A cache-length timeline separates prompt prefill from incremental decode and shows why each repetition restarts at the same context length.",
+    "sources": [
+      "AR34"
+    ],
+    "visual_ids": [
+      "prefill-decode-trials"
+    ]
+  },
+  {
+    "lesson": "13-4",
+    "lesson_sha256": "df665b26f807762c6721fd98d945b211e0c4b9b1dd69aadfd08a8156f151a2ef",
+    "decision": "no-visual",
+    "reason": "This report must display the student’s measured cache and prefill/decode tables or plots, with spread and sample count. No universal latency curve is warranted; fabricated illustrative performance data would distract from the actual raw samples.",
+    "sources": [
+      "AR34",
+      "AR35"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "14-1",
+    "lesson_sha256": "d364d51d8421ec127e707d3fea12811d41e301197a537b2e51000e01b82b5d5e",
+    "decision": "visual",
+    "reason": "Two branches from the same initial state expose the controlled weight-decay intervention and common token stream.",
+    "sources": [
+      "AR36",
+      "AR04"
+    ],
+    "visual_ids": [
+      "controlled-ablation-fork"
+    ]
+  },
+  {
+    "lesson": "14-2",
+    "lesson_sha256": "9f0623124de68f7943827077078847bcebaceff7b52bffcbe7fe9ca9b6c620e5",
+    "decision": "no-visual",
+    "reason": "The main activity is running the bounded baseline and inspecting its actual token-counted curves and checkpoint metadata. A supplied learning curve would not validate those artifacts; the earlier checkpoint comparison and ablation fork already explain the state contract.",
+    "sources": [
+      "AR05",
+      "AR17"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "14-3",
+    "lesson_sha256": "fa7858a2892499da1ddda6da287553d181945be282ae424fe1f24b878f5f2c8c",
+    "decision": "no-visual",
+    "reason": "The ablation must use the already frozen two-arm design. The existing fork figure explains common initialization; today’s configuration diff, first-batch identifiers and exact token endpoints provide stronger evidence than repeating the same diagram.",
+    "sources": [
+      "AR36",
+      "AR05"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "14-4",
+    "lesson_sha256": "ed4faf850093f51067f794f08638dd09f71756eaba10ea9490f1f4f2859a7d42",
+    "decision": "no-visual",
+    "reason": "The explicitly required student-generated training/validation plots at matched consumed tokens are the appropriate visuals. Adding invented loss curves would bias interpretation of the genuine small-seed experiment.",
+    "sources": [
+      "AR35",
+      "AR17"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "15-1",
+    "lesson_sha256": "64fa6ab25d541d943c0fbebf88237891f234e81282c9f6e0ad2773bf5edcff4c",
+    "decision": "no-visual",
+    "reason": "This reference task inventories concrete revision hashes, tokenizer identities, layouts, data and expected outputs. A manifest and conversion table expose missing inputs directly; a generic dependency graph would hide those exact identities.",
+    "sources": [
+      "AR36",
+      "AR09"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "15-2",
+    "lesson_sha256": "385a9c2d58e4fd30d661b1d6a4e0dcdd5b95d3943d015e6f0f211373e19d2a0a",
+    "decision": "no-visual",
+    "reason": "The task is executing documented commands in a clean environment and preserving the first real failure. Commands and the setup transcript are more actionable than an installation flowchart.",
+    "sources": [
+      "AR39",
+      "AR40"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "15-3",
+    "lesson_sha256": "bf372306191b056ec2f1ff31c108c4e942048237407c14e4fceba68069ee6a65",
+    "decision": "no-visual",
+    "reason": "The learner already has training/parity entry points and must create fresh outputs. The new learning curve and numerical error report are the relevant visuals; a simple train-then-parity chain would add little and failure branching is addressed in 15-4.",
+    "sources": [
+      "AR37",
+      "AR26"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "15-4",
+    "lesson_sha256": "89e8f6c816979215d98f73c7ce15a066c77b35c795a811a1e0288b1441a9b734",
+    "decision": "visual",
+    "reason": "A branching gate diagram makes any required child failure terminate the wrapper instead of reaching a success summary.",
+    "sources": [
+      "AR37"
+    ],
+    "visual_ids": [
+      "reproduction-failure-gates"
+    ]
+  },
+  {
+    "lesson": "16-1",
+    "lesson_sha256": "b544bb51c537642d0366bb90508916f42709d8d4c68347a1abcf07d870b29e81",
+    "decision": "no-visual",
+    "reason": "Model/data cards must report actual parameter counts, provenance and limitations in separate sections for scratch and pretrained artifacts. Structured text and linked manifests communicate those exact facts better than a generic provenance picture.",
+    "sources": [
+      "AR17",
+      "AR20"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "16-2",
+    "lesson_sha256": "7f85f1ea442e63c3564bf2bd4ef317c81865408624aac0936849d08966360aeb",
+    "decision": "no-visual",
+    "reason": "The report explicitly requires small figures or tables from actual measured results, with configuration/raw-data/command links. Supplied synthetic result figures would not support the student’s claims.",
+    "sources": [
+      "AR26",
+      "AR35"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "16-3",
+    "lesson_sha256": "b79763bceb0561f47c17b5758c1d42557d38fe998a0ea5bc2713c2bcc8859935",
+    "decision": "no-visual",
+    "reason": "This reference lesson is itself a student diagram-construction and verification exercise. Supplying finished diagrams for an unseen implementation risks norm/layout mismatch; earlier teaching figures are examples, while the student must draw and validate their own code-specific diagrams.",
+    "sources": [
+      "AR03",
+      "AR27"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "16-4",
+    "lesson_sha256": "a0ab910e87ce1acf42b0c5bc3ded5539e2aec42107ec07634ac5a2cb6007f77a",
+    "decision": "no-visual",
+    "reason": "The student records an explanation using their actual report figures. A new course figure would displace rather than improve the requested walkthrough and claim audit.",
+    "sources": [
+      "AR35"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "intro-1",
+    "lesson_sha256": "cfaa7615f02c0f505fa7288ce9f8591c2002c8154658c24cf28438459bf81283",
+    "decision": "no-visual",
+    "reason": "Environment setup and the fixed matrix/autograd smoke script are best expressed as commands and exact expected outputs. Matrix axes and broadcasting receive a dedicated figure in the optional tensor refresher.",
+    "sources": [
+      "AR39",
+      "AR40"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "intro-2",
+    "lesson_sha256": "b0539750eb392048207c141d76459008f972fcc55a06127188edfdaef6d907f6",
+    "decision": "visual",
+    "reason": "A small nonsquare value grid shows which axis the length-three bias broadcasts across, while leaving the learner to write independent tests.",
+    "sources": [
+      "AR26"
+    ],
+    "visual_ids": [
+      "broadcast-axis-fixture"
+    ]
+  },
+  {
+    "lesson": "review-2",
+    "lesson_sha256": "d7cf092c24211c38511ae36533e94a0335dc0462a512a3382ac53d86324c8037",
+    "decision": "no-visual",
+    "reason": "This is closed-book retrieval of attention shapes, RoPE and functional state. Displaying those diagrams would cue the answers; corrected reasoning should be compared with the earlier mechanism figures and the student’s tests.",
+    "sources": [
+      "AR01",
+      "AR07",
+      "AR14"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "flex-2",
+    "lesson_sha256": "8ef7420bdcdb752c57d816e611a5ac0e8797b7c159f2a22e926f9fe707435598",
+    "decision": "no-visual",
+    "reason": "The appropriate debugging fixture depends on the learner’s specific blocked prerequisite. A fixed flowchart would restate the short select/minimize/repair/save checklist without identifying the actual tensor or failed condition.",
+    "sources": [
+      "AR26"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "review-4",
+    "lesson_sha256": "4c49abb06edab6c739d66fde57b8dc8338a885c6bab182fda5404a1e46aea7b9",
+    "decision": "no-visual",
+    "reason": "This closed-book cache/LoRA/masking assessment should require the learner to reconstruct relationships unaided. The teaching lessons contain the relevant figures; the answer panel and saved tests are the better post-attempt check.",
+    "sources": [
+      "AR16",
+      "AR19",
+      "AR21"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "flex-4",
+    "lesson_sha256": "8ef7420bdcdb752c57d816e611a5ac0e8797b7c159f2a22e926f9fe707435598",
+    "decision": "no-visual",
+    "reason": "This optional repair reference is driven by the learner’s current failure, not a fixed architecture. The explicit smallest-test and next-command instructions are clearer than a generic decision diagram.",
+    "sources": [
+      "AR26"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "review-6",
+    "lesson_sha256": "736078c6179b71f96a114ec1b3390e9e0e183c18fb41b3a5b1f5a13df56c0efb",
+    "decision": "no-visual",
+    "reason": "This retrieval checkpoint assesses stored/active experts, MLA cache and hybrid state. Supplying those diagrams would undermine reconstruction; earlier lesson figures are available for correction after the attempt.",
+    "sources": [
+      "AR25",
+      "AR27",
+      "AR29"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "flex-6",
+    "lesson_sha256": "8ef7420bdcdb752c57d816e611a5ac0e8797b7c159f2a22e926f9fe707435598",
+    "decision": "no-visual",
+    "reason": "A useful visual here would have to depict the student’s actual minimal reproducer or uncertain derivation. The current short debugging checklist appropriately leaves that choice to the observed blocker.",
+    "sources": [
+      "AR26"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "flex-8",
+    "lesson_sha256": "8ef7420bdcdb752c57d816e611a5ac0e8797b7c159f2a22e926f9fe707435598",
+    "decision": "no-visual",
+    "reason": "This spare-capacity reference can end early when there is no blocker. A prescribed diagram would add an artificial activity; the saved minimal failure, corrected explanation and next command are the intended evidence.",
+    "sources": [
+      "AR26"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "final-1",
+    "lesson_sha256": "52f9309c3bdce9b1907cb2d2b05a46b93b98c026ef4817d0db1ad4b588a3224d",
+    "decision": "no-visual",
+    "reason": "The final defense asks for closed-book equations and implementation connections. A supplied decoder or cache diagram would cue the assessment; use the learner’s own code-linked evidence after the answers.",
+    "sources": [
+      "AR01",
+      "AR19"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "final-2",
+    "lesson_sha256": "202cda3e76ccc25ef693a14e90ca3843cd4629996cb4d01a9e1a7f97e10d04a0",
+    "decision": "no-visual",
+    "reason": "The reviewer smoke run is checked through an actual fresh-clone transcript and newly generated curve/parity artifacts. The failure-gate visual in 15-4 already explains propagation; repeating it would not detect hidden inputs.",
+    "sources": [
+      "AR37"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "final-3",
+    "lesson_sha256": "dd42ff72ebf1e7fee1cc40e746a10ed1f8477520fc4c486f952f20ce77ae5a04",
+    "decision": "no-visual",
+    "reason": "The observed upstream friction is intentionally unspecified. A useful figure must come from the real minimal reproducer; repository instructions, versioned behavior and a focused patch are more precise than a generic contribution pipeline.",
+    "sources": [
+      "AR38"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "final-4",
+    "lesson_sha256": "942c18733de5e0b149fd7f8c5b78f29825f5238dfa1bc8854ae26968167e8330",
+    "decision": "no-visual",
+    "reason": "The release is a linked index of the learner’s actual diagrams, reports and evidence. A new stock portfolio diagram would not improve the required traceability or completion decision.",
+    "sources": [
+      "AR36"
+    ],
+    "visual_ids": []
+  }
+]

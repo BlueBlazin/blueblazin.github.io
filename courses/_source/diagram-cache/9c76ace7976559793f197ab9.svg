@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="455" viewBox="0 0 800 455" role="img" aria-labelledby="title desc">
+<title id="title">Observe policy activation before the model request</title>
+<desc id="desc">This illustrative five-turn trace has proposed input sizes 500, 800, 1100, 1200, and 900 tokens, and selected sizes 500, 800, 650, 700, and 900 tokens. At turns 3 and 4 the proposed input exceeds the shared 1000-token input ceiling; context selection reduces it before dispatch. Every selected input is at or below the ceiling. The numbers are teaching examples, not measured performance and not a comparison between the two policies. The pilot must capture such activation evidence for both conditions.</desc>
+<rect width="800" height="455" fill="#ffffff"/>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto-start-reverse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#64748b" stroke-width="1.4"/></marker></defs>
+<g font-family="system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="16" fill="#263445">
+<text x="60" y="28" font-size="17" fill="#263445" font-weight="600">Illustrative context size (tokens)</text>
+<path d="M80 337.0 L702 337.0" fill="none" stroke="#64748b" stroke-width="1.5"/>
+<text x="68" y="342.0" font-size="14" fill="#263445" text-anchor="end">0</text>
+<path d="M80 242.3846153846154 L702 242.3846153846154" fill="none" stroke="#64748b" stroke-width="1.5"/>
+<text x="68" y="247.3846153846154" font-size="14" fill="#263445" text-anchor="end">500</text>
+<path d="M80 147.76923076923077 L702 147.76923076923077" fill="none" stroke="#64748b" stroke-width="1.5"/>
+<text x="68" y="152.76923076923077" font-size="14" fill="#263445" text-anchor="end">1000</text>
+<path d="M80 81 L80 337" fill="none" stroke="#64748b" stroke-width="1.5"/>
+<path d="M80 337 L702 337" fill="none" stroke="#64748b" stroke-width="1.5"/>
+<path d="M104 242.3846153846154 L247 185.6153846153846 L390 128.84615384615384 L533 109.92307692307693 L676 166.69230769230768" fill="none" stroke="#73859b" stroke-width="2.5" stroke-dasharray="6 5"/>
+<circle cx="104" cy="242.3846153846154" r="4" fill="#73859b"/>
+<circle cx="247" cy="185.6153846153846" r="4" fill="#73859b"/>
+<circle cx="390" cy="128.84615384615384" r="4" fill="#73859b"/>
+<circle cx="533" cy="109.92307692307693" r="4" fill="#73859b"/>
+<circle cx="676" cy="166.69230769230768" r="4" fill="#73859b"/>
+<path d="M104 242.3846153846154 L247 185.6153846153846 L390 214.0 L533 204.53846153846155 L676 166.69230769230768" fill="none" stroke="#25746d" stroke-width="2.5"/>
+<circle cx="104" cy="242.3846153846154" r="4" fill="#25746d"/>
+<circle cx="247" cy="185.6153846153846" r="4" fill="#25746d"/>
+<circle cx="390" cy="214.0" r="4" fill="#25746d"/>
+<circle cx="533" cy="204.53846153846155" r="4" fill="#25746d"/>
+<circle cx="676" cy="166.69230769230768" r="4" fill="#25746d"/>
+<text x="104" y="363" font-size="15" fill="#263445" text-anchor="middle">1</text>
+<text x="247" y="363" font-size="15" fill="#263445" text-anchor="middle">2</text>
+<text x="390" y="363" font-size="15" fill="#263445" text-anchor="middle">3</text>
+<text x="533" y="363" font-size="15" fill="#263445" text-anchor="middle">4</text>
+<text x="676" y="363" font-size="15" fill="#263445" text-anchor="middle">5</text>
+<text x="390" y="390" font-size="16" fill="#263445" text-anchor="middle">Model turn</text>
+<path d="M80 147.76923076923077 L702 147.76923076923077" stroke="#34495e" stroke-width="2" stroke-dasharray="2 4"/>
+<text x="708" y="152.76923076923077" font-size="15" fill="#263445">ceiling</text>
+<path d="M390 135.84615384615384 L390 207.0" fill="none" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M533 116.92307692307693 L533 197.53846153846155" fill="none" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="456" y="65" font-size="16" fill="#263445" font-weight="600" text-anchor="middle">Selection activates before dispatch</text>
+<path d="M77 424 L115 424" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="5 4"/>
+<text x="124" y="429" font-size="15" fill="#263445">proposed input</text>
+<path d="M355 424 L393 424" stroke="#25746d" stroke-width="2.5"/>
+<text x="402" y="429" font-size="15" fill="#263445">selected input sent to model</text>
+</g>
+</svg>

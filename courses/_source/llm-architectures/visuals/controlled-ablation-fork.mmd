@@ -1,0 +1,10 @@
+flowchart TB
+  accTitle: Controlled weight-decay experiment from a common initial state
+  accDescr: Restore a common initial state into baseline and ablation runs. Feed both the same data order and token allowance, changing only weight decay and output paths. Compare at matched token counts on the fixed validation set.
+  S["Common initial state"] --> B["Baseline: weight decay A"]
+  S --> A["Ablation: weight decay B"]
+  D["Same data order + token allowance"] --> B
+  D --> A
+  B --> C["Compare at matched consumed tokens"]
+  A --> C
+  V["Fixed validation examples"] --> C

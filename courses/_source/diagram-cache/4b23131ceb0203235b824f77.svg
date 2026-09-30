@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500" role="img" aria-labelledby="title desc">
+<title id="title">Control grading without executing candidate code on the host</title>
+<desc id="desc">Protected host assets include the immutable initial fixture and trusted grader code. Each trial copies the initial fixture to a fresh agent execution workspace. The resulting candidate is inspected by an isolated grading container when checks need to execute candidate code; trusted checks are mounted read-only there, and credentials are absent. The host controller receives bounded inert results and records the grade. Agent output does not define the trusted tests and candidate modules are never imported into the host evaluator.</desc>
+<rect width="800" height="500" fill="#ffffff"/>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto-start-reverse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#64748b" stroke-width="1.4"/></marker></defs>
+<g font-family="system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="16" fill="#263445">
+<text x="28" y="29" font-size="18" fill="#263445" font-weight="600">Protected host assets</text>
+<rect x="28" y="47" width="282" height="68" rx="8" fill="#f4f7fa" stroke="#c7d2de" stroke-width="1.5"/>
+<text x="169" y="77" font-size="17" fill="#263445" font-weight="600" text-anchor="middle">Pinned initial fixture</text>
+<text x="169" y="101" font-size="15" fill="#263445" text-anchor="middle">Immutable source for each trial</text>
+<rect x="493" y="47" width="282" height="68" rx="8" fill="#f4f7fa" stroke="#c7d2de" stroke-width="1.5"/>
+<text x="634" y="77" font-size="17" fill="#263445" font-weight="600" text-anchor="middle">Trusted grader code</text>
+<text x="634" y="101" font-size="15" fill="#263445" text-anchor="middle">Outside agent-writable roots</text>
+<path d="M170 120 L170 179" fill="none" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="184" y="154" font-size="15" fill="#263445">fresh copy</text>
+<path d="M634 120 L634 179" fill="none" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="651" y="154" font-size="15" fill="#263445">read-only</text>
+<rect x="28" y="186" width="282" height="167" rx="8" fill="#edf5f4" stroke="#abc9c4" stroke-width="1.5"/>
+<text x="48" y="218" font-size="17" fill="#263445" font-weight="600">Agent execution</text>
+<text x="48" y="253" font-size="15" fill="#263445">Agent edits its task workspace.</text>
+<text x="48" y="282" font-size="15" fill="#263445">No grader or reference solution.</text>
+<text x="48" y="319" font-size="15" fill="#263445">Produces a candidate snapshot.</text>
+<rect x="493" y="186" width="282" height="167" rx="8" fill="#edf2f8" stroke="#b5c6da" stroke-width="1.5"/>
+<text x="513" y="218" font-size="17" fill="#263445" font-weight="600">Grading execution</text>
+<text x="513" y="253" font-size="15" fill="#263445">Dynamic checks run candidate</text>
+<text x="513" y="275" font-size="15" fill="#263445">code here, with no credentials.</text>
+<text x="513" y="319" font-size="15" fill="#263445">Bounded execution and output.</text>
+<path d="M315 270 L488 270" fill="none" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="401" y="249" font-size="15" fill="#263445" text-anchor="middle">candidate</text>
+<text x="401" y="293" font-size="15" fill="#263445" text-anchor="middle">still untrusted</text>
+<rect x="253" y="407" width="350" height="64" rx="8" fill="#f4f7fa" stroke="#c7d2de" stroke-width="1.5"/>
+<text x="428" y="433" font-size="17" fill="#263445" font-weight="600" text-anchor="middle">Host controller records grade</text>
+<text x="428" y="457" font-size="15" fill="#263445" text-anchor="middle">Compare inert results; no candidate import</text>
+<path d="M634 357 L634 438 L608 438" fill="none" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="707" y="387" font-size="15" fill="#263445" text-anchor="middle">bounded result</text>
+</g>
+</svg>

@@ -1,0 +1,887 @@
+[
+  {
+    "lesson": "1-1",
+    "lesson_sha256": "f7432190604d9212477b15d9381ac5edf04126ebae3633b91805c7e910c0aa25",
+    "decision": "visual",
+    "reason": "The first loop has a feedback edge and two terminal branches; a state diagram makes the pre-request cap and no outgoing terminal transitions visible.",
+    "sources": [
+      "H2",
+      "H1"
+    ],
+    "visual_ids": [
+      "bounded-loop"
+    ]
+  },
+  {
+    "lesson": "1-2",
+    "lesson_sha256": "d4144b33ce478c3e70cc9b4773982fb2b96c019c78b36058c0e2945746dfc890",
+    "decision": "no-visual",
+    "reason": "The five concrete echo argument cases and a zero-dispatch counter are best represented by the required parametrized input/expected-outcome table; a generic gate would hide the actual schema distinctions.",
+    "sources": [
+      "H19",
+      "H17"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "1-3",
+    "lesson_sha256": "f293ad99315e059155e0b8c554b20709442d89d4cf39cc583e149c9f1a2e5974",
+    "decision": "visual",
+    "reason": "A sequence diagram makes call/result ID pairing and the required ordering before the next model request explicit.",
+    "sources": [
+      "H9-tools"
+    ],
+    "visual_ids": [
+      "tool-result-order"
+    ]
+  },
+  {
+    "lesson": "1-4",
+    "lesson_sha256": "6bbb649213d58a29846c366951c572feed95f2f5e117f80e6c4f24829d0499c6",
+    "decision": "no-visual",
+    "reason": "The learning task is exact model/tool invocation counts and terminal statuses for five fake scenarios. The required test table is clearer than a second loop diagram; the real-process lifetime visual belongs to 3-3.",
+    "sources": [
+      "H11"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "2-1",
+    "lesson_sha256": "d626e4e31d3124ba8e4575dbfedb3ce9e380acef561f552c2923b5f7f6f82bdd",
+    "decision": "visual",
+    "reason": "A directory containment picture distinguishes a descendant from a sibling with a shared string prefix, directly supporting the path resolver.",
+    "sources": [
+      "H12",
+      "H19"
+    ],
+    "visual_ids": [
+      "path-ancestry"
+    ]
+  },
+  {
+    "lesson": "2-2",
+    "lesson_sha256": "76757a37e2626ab50602c24a60d2e4f1db3062573af64778024c9f67c444b395",
+    "decision": "no-visual",
+    "reason": "The read/write/read fixture should be understood from its actual file diff and JSON trace, including measured time and mocked cost provenance. A generic three-step chain adds no new relation.",
+    "sources": [
+      "H19",
+      "H29"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "2-3",
+    "lesson_sha256": "5ec44ab11518dbb7fb2bb5adafc297cfe3d5481e30d04f62f855ce45d9382fd4",
+    "decision": "no-visual",
+    "reason": "The 8/16 split is a simple exact mapping and the deliverable is a task manifest plus three concrete grader fixtures. A table of request, starting state, reference, and grader is clearer than a decorative split tree.",
+    "sources": [
+      "H4",
+      "H22"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "2-4",
+    "lesson_sha256": "e7c4097926eb1f0f2532387736464ea01dde21f54b11d051d840e75dc3ab339b",
+    "decision": "no-visual",
+    "reason": "The integration lab compares protocol status and graded outcome on three actual scripted fixtures. Preserve those two fields in the result table; a hypothetical success matrix would be less useful than the required traces.",
+    "sources": [
+      "H14"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "3-1",
+    "lesson_sha256": "ee918d8472c35c6fd83f71d3440d91e659067c0c5c1484aa357cb889f200a0df",
+    "decision": "visual",
+    "reason": "Spatial boundaries distinguish host credentials/graders from the disposable task mount and configured execution restrictions.",
+    "sources": [
+      "H10",
+      "H10-security"
+    ],
+    "visual_ids": [
+      "execution-boundary"
+    ]
+  },
+  {
+    "lesson": "3-2",
+    "lesson_sha256": "a6bbfe4a94d2a63165d321c4db5f3dc5f5832d459a61c94fde2e331244f71628",
+    "decision": "visual",
+    "reason": "A symlink arrow across the workspace boundary shows why an apparently in-root parent path can authorize the wrong destination.",
+    "sources": [
+      "H12"
+    ],
+    "visual_ids": [
+      "symlink-resolution"
+    ]
+  },
+  {
+    "lesson": "3-3",
+    "lesson_sha256": "a276eb06a02549365c8588c1e9a0b0b70359b9ff575e791b9bdf0045bbcaccaf",
+    "decision": "visual",
+    "reason": "Parallel caller/child timelines expose the time between a timeout and confirmed process termination, plus the separate cleanup allowance.",
+    "sources": [
+      "H13"
+    ],
+    "visual_ids": [
+      "process-lifetime"
+    ]
+  },
+  {
+    "lesson": "3-4",
+    "lesson_sha256": "3e140a54a517014e79be4b8d2d2eac1746a5df8d9be6d709f911265d9062b10a",
+    "decision": "no-visual",
+    "reason": "This is an audit of already implemented path, network, process, and credential boundaries. Its allowed/denied case matrix with prohibited-effect assertions is the precise visual organization; a new architecture picture cannot establish the tested guarantees.",
+    "sources": [
+      "H17",
+      "H10-security"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "4-1",
+    "lesson_sha256": "6c462196ad7f6d05931ed0991a5cf20276e584bff052a78ac1e3ce370b4a903f",
+    "decision": "no-visual",
+    "reason": "JSONL event examples and an ordered table of sequence, run ID, call ID, and status expose the identifiers directly. A pictorial event chain would repeat that order while obscuring the actual fields to implement.",
+    "sources": [
+      "H16",
+      "H4"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "4-2",
+    "lesson_sha256": "4bfe8a8f53606b75c16d199d368a8b69fd0277af5813350a14af8cea8fb09701",
+    "decision": "visual",
+    "reason": "A branching diagram distinguishes viewing immutable events from replaying decisions through tools in a fresh fixture under a new run ID.",
+    "sources": [
+      "H14"
+    ],
+    "visual_ids": [
+      "replay-versus-playback"
+    ]
+  },
+  {
+    "lesson": "4-3",
+    "lesson_sha256": "3fbaeab206b85a13dedacb11f56ad8b88536e1f47e3aaf7bb23f01d10de196bd",
+    "decision": "no-visual",
+    "reason": "Eight graders require reference-pass and no-op/broken-fail controls. The mandated task-by-control table directly exposes missing cases; a schematic graph would not help assess these concrete checks.",
+    "sources": [
+      "H4",
+      "H17"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "4-4",
+    "lesson_sha256": "97c1e3115c0be50f1511c5de8b3aee3f659dd0dec00eb21f11a4dd0dd87a43b6",
+    "decision": "no-visual",
+    "reason": "The student must produce an eight-row report linked to real traces and distinguish fake from live runs. Use their actual outcome/cost table rather than an invented chart or a repeated evaluator diagram.",
+    "sources": [
+      "H4",
+      "H19"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "5-1",
+    "lesson_sha256": "02f8f777b9feffb1f9568b94b45914422c2fa8e44d3343d8f8071d069822ade3",
+    "decision": "visual",
+    "reason": "The two execution boundaries and protected grader inputs are central: the host controls grading but never imports agent-modified code.",
+    "sources": [
+      "H7-verifier",
+      "H22"
+    ],
+    "visual_ids": [
+      "trusted-grading"
+    ]
+  },
+  {
+    "lesson": "5-2",
+    "lesson_sha256": "1c78c42e0dcceed8c8f980e68ad21c1965f9f4f71ee5f7af1bddb4f7195fa597",
+    "decision": "visual",
+    "reason": "The reservation-before-dispatch branch and unknown-usage branch are easier to reason about as control flow than as an accounting list.",
+    "sources": [
+      "C5",
+      "H9"
+    ],
+    "visual_ids": [
+      "budget-reservation"
+    ]
+  },
+  {
+    "lesson": "5-3",
+    "lesson_sha256": "3d9fd6e290ba928b481a84c331492b21874e6e6e2de08b2a3356372fb557f5cf",
+    "decision": "no-visual",
+    "reason": "The substantive comparison is a conditions table distinguishing typed tools from the pinned baseline command interface. A table preserves exact common limits and differing prompts more clearly than an architecture picture that might imply one-variable control.",
+    "sources": [
+      "H3"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "5-4",
+    "lesson_sha256": "4c180d439c4c78164baa9ced2c3a42888ba2654af01fad47f57924d0745f48e9",
+    "decision": "no-visual",
+    "reason": "This tiny two-task systems pilot needs actual paired result tables and a trace-linked note; plotting invented successes or equal-height budget boxes would obscure unequal consumption and interface confounds.",
+    "sources": [
+      "H3",
+      "H8"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "6-1",
+    "lesson_sha256": "e44114aa20ec83d1cbff36de006ef59fd47c070418bc248ba0aebd56f96ae271",
+    "decision": "no-visual",
+    "reason": "Stable file ordering, exclusion policy, and truncation metadata are best checked against concrete listing outputs on empty, nested, and over-limit fixtures. A repository tree would not show those exact return-contract decisions.",
+    "sources": [
+      "H12",
+      "H3-paper"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "6-2",
+    "lesson_sha256": "0d5e8afe2132b56911c89e050c11d7fa2e97d6488f4a6a12b5c32bed9dc06213",
+    "decision": "visual",
+    "reason": "A file-line map makes requested, returned, truncated, and never-requested ranges visibly different without inventing an observed failure.",
+    "sources": [
+      "H19"
+    ],
+    "visual_ids": [
+      "evidence-windows"
+    ]
+  },
+  {
+    "lesson": "6-3",
+    "lesson_sha256": "9d2c6f8340e3a7def0bee978686a8ab9acfb64bd245d4b570e3a0250d79263bd",
+    "decision": "visual",
+    "reason": "Paired branches show the single changed selector, fixed evaluator conditions, and intermediate selected evidence that establishes activation.",
+    "sources": [
+      "H3-paper"
+    ],
+    "visual_ids": [
+      "selection-comparison"
+    ]
+  },
+  {
+    "lesson": "6-4",
+    "lesson_sha256": "b373b59fb4aaed6492521ebdf1f43408128ae2d6622e4bf9247dcb466c20c36f",
+    "decision": "no-visual",
+    "reason": "The exercise explicitly asks the learner to build a timeline from their saved evidence, actions, and grades. A supplied causal story could pre-empt that analysis or imply that one restored-excerpt replay proves causality.",
+    "sources": [
+      "H19"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "7-1",
+    "lesson_sha256": "db9584c0d578bb3a825e5cdfc7eb3475148c74be6a2cfa79b9385e317c158de8",
+    "decision": "no-visual",
+    "reason": "This session defines a versioned durable-state schema and before/after records; a field/provenance table and actual JSON examples expose missing reservations, IDs, budgets, and workspace versions more precisely than a schema tree. The temporal crash gap is visualized in 7-2.",
+    "sources": [
+      "H5",
+      "H29"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "7-2",
+    "lesson_sha256": "068ab95b7cdd4500a83c042d25ad47c049958551db0e408210a6ab9ab7118d63",
+    "decision": "visual",
+    "reason": "A two-lane timeline shows the non-atomic gap between checkpoint intent, workspace mutation, and checkpoint completion.",
+    "sources": [
+      "H15"
+    ],
+    "visual_ids": [
+      "checkpoint-crash-window"
+    ]
+  },
+  {
+    "lesson": "7-3",
+    "lesson_sha256": "e4d0dba86bdd5085e300063701c6db7306bc3008871534b4ea675e83431308bf",
+    "decision": "visual",
+    "reason": "The ordered after/before/conflict branches show when a replacement is skipped, safely retried, or stopped.",
+    "sources": [
+      "H24",
+      "H5"
+    ],
+    "visual_ids": [
+      "reconcile-file-write"
+    ]
+  },
+  {
+    "lesson": "7-4",
+    "lesson_sha256": "9841fdaaf8557134d4067bced1d6fc326453d3e9c2e18669e66a4d2534da49fd",
+    "decision": "no-visual",
+    "reason": "The fault hooks and write-count assertions must be inspected in the learner’s own before/after interruption traces. Repeating the 7-2 crash-window picture would not verify that their implementation avoids a second write or preserves its deadline.",
+    "sources": [
+      "H23"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "8-1",
+    "lesson_sha256": "9c6fbb2bdd6bc1d56e1a70c1170077e9fed9775765fcc2a9d8e5558b741f4cac",
+    "decision": "visual",
+    "reason": "At the first introduction of compaction, a durable-log versus bounded-input layout makes lossy selection distinct from deleting storage.",
+    "sources": [
+      "H18"
+    ],
+    "visual_ids": [
+      "context-compaction"
+    ]
+  },
+  {
+    "lesson": "8-2",
+    "lesson_sha256": "8db4715b0eda39cb60a9205bd9df4f6466a60dd580e7a32be64d367c3c1a0793",
+    "decision": "visual",
+    "reason": "Two file snapshots with a versioned line-range pointer show why the same line numbers do not guarantee the same evidence after an edit.",
+    "sources": [
+      "H18",
+      "H9-tools"
+    ],
+    "visual_ids": [
+      "versioned-evidence"
+    ]
+  },
+  {
+    "lesson": "8-3",
+    "lesson_sha256": "a53ca38b063cd188d9c779626749d89f46de8651adb2a8318a6bd0fa8551073a",
+    "decision": "visual",
+    "reason": "Side-by-side requests under one ceiling make the compact-record versus recent-history allocation difference visible while preserving fixed content and complete groups.",
+    "sources": [
+      "H18",
+      "H8"
+    ],
+    "visual_ids": [
+      "context-policy-allocation"
+    ]
+  },
+  {
+    "lesson": "8-4",
+    "lesson_sha256": "25b508d119fbced21c9f7257c8468cca072ec2bb29f143a690f6fa21a1ec8e73",
+    "decision": "no-visual",
+    "reason": "The learner’s original and compacted payloads are the evidence for an exact omitted fact. A supplied loss example could be mistaken for a result or substitute for the required natural/injected diagnostic distinction.",
+    "sources": [
+      "H18"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "9-1",
+    "lesson_sha256": "06268298ec8920ef190f65233073924148d62249b1edca3af9a92aeabd5a2b87",
+    "decision": "visual",
+    "reason": "Converging direct and MCP paths show that transport adds no authorization shortcut and that both paths share the host checks.",
+    "sources": [
+      "H6-tools"
+    ],
+    "visual_ids": [
+      "shared-tool-gate"
+    ]
+  },
+  {
+    "lesson": "9-2",
+    "lesson_sha256": "7e2e4ec4b8e11d092e266d2e0459ffe8aaf083f855c7f068758e2aa4c33e76a0",
+    "decision": "no-visual",
+    "reason": "The installed SDK’s minimal client/server code and a deterministic smoke trace are clearer than a duplicate of 9-1’s shared permission topology; protocol APIs must match the pinned version.",
+    "sources": [
+      "H6-sdk"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "9-3",
+    "lesson_sha256": "c55bbfac97e053d8551f67782311c689eda50433c86a31cec8c0415753f329d6",
+    "decision": "no-visual",
+    "reason": "Four identical input cases through two interfaces require a parity table retaining content and error categories. That direct mapping is more precise than another fork-and-merge diagram.",
+    "sources": [
+      "H6-tools"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "9-4",
+    "lesson_sha256": "655d77b091f8ff075c293e33ead08c9cc17b190d9bf4d49d6b3e75da33dd376a",
+    "decision": "no-visual",
+    "reason": "The task is to inspect the actual adapter call graph and prove denied requests cannot alter trusted configuration. Existing 9-1 explains the topology; the saved permitted/denied smoke trace is the evidence here.",
+    "sources": [
+      "H6-tools"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "10-1",
+    "lesson_sha256": "f7fbd547fd42414acc8ec544d6ac73d8c110f47320a27264388a5453508a0e71",
+    "decision": "no-visual",
+    "reason": "Authoring the final four fixtures requires concrete requests, references, and grader contracts, not another split diagram. The sixteen-task manifest and model-free control rows are the useful organization.",
+    "sources": [
+      "H4",
+      "H17"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "10-2",
+    "lesson_sha256": "68ea3ac7320c5b5fbb9859f3d34c2cb561ced8307e42a0571b55806ef8a922d8",
+    "decision": "no-visual",
+    "reason": "Reference, no-op, and deliberately broken states are an exact task-by-control matrix. The required table and assertions make permissive graders visible without a generic branching picture.",
+    "sources": [
+      "H17",
+      "H4"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "10-3",
+    "lesson_sha256": "d9efa4b640c6fa91c93a3feb0ac3e29748e0225dfd7b475614a08a8e3b0698a7",
+    "decision": "no-visual",
+    "reason": "A manifest record directly maps task IDs to fixture/grader hashes, split membership, and commit. The optional already-ready external branch is a short checklist; a graph would duplicate these fields and add little.",
+    "sources": [
+      "H24",
+      "H27"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "10-4",
+    "lesson_sha256": "342566929761bd2b344a4643873b7ea1af7b9aa4b2d5fb656d8320f4b8087890",
+    "decision": "no-visual",
+    "reason": "The exercise validates hashes, counts, and controls against rebuilt fixtures. Its audit table and explicit negative test cases reveal discrepancies better than an abstract identity graph.",
+    "sources": [
+      "H17",
+      "H24"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "11-1",
+    "lesson_sha256": "48fbe1b61bd2cbdd71d8d31dc5eaf6dee19ad1e3ce39baf1afefefbb07c1d3a2",
+    "decision": "visual",
+    "reason": "Error classification and remaining-budget branches form a real retry loop; the diagram makes permanent stops and rechecking limits explicit.",
+    "sources": [
+      "H9",
+      "H14"
+    ],
+    "visual_ids": [
+      "bounded-retry"
+    ]
+  },
+  {
+    "lesson": "11-2",
+    "lesson_sha256": "7e3f9fcb79ab3e6579c1d0bcfd447e5080542f97a71a2b1da990da925c529027",
+    "decision": "visual",
+    "reason": "A phase/branch diagram separates rejection before execution, a failure after entry, and cancellation cleanup, preventing a single unsafe retry category.",
+    "sources": [
+      "H11",
+      "H13"
+    ],
+    "visual_ids": [
+      "tool-failure-boundaries"
+    ]
+  },
+  {
+    "lesson": "11-3",
+    "lesson_sha256": "087503559d35536a04d066ebd7cc191e06b41f9fe49094caff963368a1f74928",
+    "decision": "visual",
+    "reason": "A summary coverage marker against later durable event sequence numbers shows staleness independently of timestamps.",
+    "sources": [
+      "H5",
+      "H23"
+    ],
+    "visual_ids": [
+      "stale-summary"
+    ]
+  },
+  {
+    "lesson": "11-4",
+    "lesson_sha256": "dcf1d30ad3c5922bd3ed5d701023db0ddd5828b3acf8c166572860faa34610a0",
+    "decision": "no-visual",
+    "reason": "A failure matrix is explicitly the best representation for execution state, classification, permitted recovery, and limits across all cases. The learner must fill it from real traces, not copy a generic recovery diagram.",
+    "sources": [
+      "H17",
+      "H14"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "12-1",
+    "lesson_sha256": "a0509d6a09cd431f118d0a49f2aa65c3177d98fcd20c1ba777e6e94dcb674664",
+    "decision": "no-visual",
+    "reason": "The two-condition table must list exact pinned settings and a written hypothesis. The policy contents are already visualized in 8-3; another parallel diagram would not replace precise model, tool, ceiling, and overhead declarations.",
+    "sources": [
+      "H8"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "12-2",
+    "lesson_sha256": "8e260a5d82797fe9590bffe824e199f06493b28dc5804493f15f60f75852bbd3",
+    "decision": "visual",
+    "reason": "At study planning, the task-by-condition-by-repeat grid explains six observations per task and the 96-row design without treating repeats as independent tasks.",
+    "sources": [
+      "H4",
+      "C5"
+    ],
+    "visual_ids": [
+      "trial-manifest"
+    ]
+  },
+  {
+    "lesson": "12-3",
+    "lesson_sha256": "8dd0130b88c713c824946e7538712598bcc8357411e72ede076b01dd800430dc",
+    "decision": "visual",
+    "reason": "An explicitly illustrative pre-selection/selected-size plot shows the threshold intervention the pilot must actually exercise and the input ceiling it must respect.",
+    "sources": [
+      "H18",
+      "H8"
+    ],
+    "visual_ids": [
+      "policy-activation"
+    ]
+  },
+  {
+    "lesson": "12-4",
+    "lesson_sha256": "76e6527d33242b85862cdaefb563292b95523f5225cde3706213b5804a779ac2",
+    "decision": "visual",
+    "reason": "A development feedback loop ending at the freeze, followed by manifest validation and final trials, exposes the no-final-feedback rule.",
+    "sources": [
+      "H27",
+      "H8"
+    ],
+    "visual_ids": [
+      "evaluation-freeze"
+    ]
+  },
+  {
+    "lesson": "13-1",
+    "lesson_sha256": "f765bf3d0b621d78036af5b840de6fc9bc47019cb80427d98bbf7d69cd2f2b63",
+    "decision": "no-visual",
+    "reason": "The trial grid is introduced at 12-2. Here actual Cartesian-product rows with stable IDs, versions, limits, and output paths plus count assertions are clearer than repeating it; concurrency remains one, so a speculative distributed-ledger graph would overemphasize an extension.",
+    "sources": [
+      "H21",
+      "H28"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "13-2",
+    "lesson_sha256": "b1616a03c589df8836cb3f1924e3f8ccab7e677bd5dcf11be8fe81dc727c6a62",
+    "decision": "no-visual",
+    "reason": "This is operational execution of the first frozen repeat. The required 32-row status table and live trace paths show real running/terminal states; a schematic dashboard would neither teach a new mechanism nor establish the actual outcomes.",
+    "sources": [
+      "H9",
+      "H4"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "13-3",
+    "lesson_sha256": "264f4be997a1097599e49081c2c0ef94bca2a39d85e2d7bdc5da86dbad3392fe",
+    "decision": "no-visual",
+    "reason": "The second repeat must retain the first round’s failures and unchanged hashes. A cumulative status/usage table and version checks directly demonstrate that invariant; no new diagram is needed.",
+    "sources": [
+      "H4",
+      "H28"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "13-4",
+    "lesson_sha256": "be77777cdd1a1a338560b2e408de7b30ebf975ec7b747abc9b7094aa478b30d8",
+    "decision": "no-visual",
+    "reason": "Reconciliation is a join of the immutable trial manifest to actual events, grades, and usage. The authoritative row table makes unattempted, running, and terminal states explicit; a completed-looking chart risks concealing missing attempts.",
+    "sources": [
+      "H21",
+      "H4"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "14-1",
+    "lesson_sha256": "491c41e5acdd470889aa9b1727c43e75adb816560466a81959becf4149cca807",
+    "decision": "no-visual",
+    "reason": "The lab already calls for a student-generated plot or comparison table from audited trial data, with denominators and units. Supplying a precomputed teaching result would be less useful and could be confused with the learner’s measurements.",
+    "sources": [
+      "H25",
+      "H4"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "14-2",
+    "lesson_sha256": "3d72a151868de4f04c5b930301d896f0865e07a0a4faad41c10475dc8e08c47b",
+    "decision": "no-visual",
+    "reason": "Representative trace excerpts selected by a declared rule are the correct evidence. A generic causal diagram could overstate what one failure establishes or preselect the interpretation the learner must test.",
+    "sources": [
+      "H19"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "14-3",
+    "lesson_sha256": "4af3a4295ac223eca20b4f1610100494f8db67fbbaec583d6b5d5bf73103bf10",
+    "decision": "no-visual",
+    "reason": "The optional pilot gates are a short conjunctive checklist with an explicit skip path, followed by a real twenty-row results table. A flowchart adds no substantial structure to that decision.",
+    "sources": [
+      "H7-results",
+      "H4"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "14-4",
+    "lesson_sha256": "661fc02e8676ab570a518b4f18278213b831559f2b8d1fb14efa1a2a9a31d4a4",
+    "decision": "no-visual",
+    "reason": "A private-versus-external comparison table directly states task counts, repeat counts, environments, and denominators. That exact mapping explains why pooling changes weights more clearly than proportional blocks without actual outcomes.",
+    "sources": [
+      "H17",
+      "H4"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "15-1",
+    "lesson_sha256": "d96ee51d6ee8bf058e59542116ad94e302d1ff44131418f9c0320fb7c16fba51",
+    "decision": "no-visual",
+    "reason": "Original grades, saved evidence, and audited corrections belong side by side in the required audit table. A schematic regrading flow would not validate task contracts and might obscure preserved originals.",
+    "sources": [
+      "H7-verifier",
+      "H4"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "15-2",
+    "lesson_sha256": "a9c8d6249d06ff01d67165ce197c67283e3f1db0c001fe48456dea8a4ea73807",
+    "decision": "no-visual",
+    "reason": "Reservations, usage-derived estimates, and billed charges need a reconciliation table with currency, pricing date, credits, and unresolved differences. The control-flow role of reservations already has a diagram in 5-2.",
+    "sources": [
+      "H26",
+      "C5"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "15-3",
+    "lesson_sha256": "fa255e9cd350ac5f55a8105a929ca0e2fec4cc00779254374baf478c6d51a721",
+    "decision": "visual",
+    "reason": "A cluster layout shows all six records traveling together when a task ID is resampled, preserving pairing and task weighting.",
+    "sources": [
+      "H20"
+    ],
+    "visual_ids": [
+      "paired-task-bootstrap"
+    ]
+  },
+  {
+    "lesson": "15-4",
+    "lesson_sha256": "128bcfa8a48a344ef7c6b93bd0d4e9746b21d00c4054e51ac85daf7420190bbe",
+    "decision": "no-visual",
+    "reason": "The lesson turns audited numbers into scoped prose using a findings generator and assertions. Exact reported metrics and a limitations paragraph are clearer than a generic claims diagram.",
+    "sources": [
+      "H8",
+      "H4"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "16-1",
+    "lesson_sha256": "f756ac75f77a51decc745513cc9b7129503d0c0e6ccf071e0ce595668b2386e1",
+    "decision": "no-visual",
+    "reason": "Moved to the Day 0 portfolio template. It explicitly asks the learner to choose a measured table or figure answering their hypothesis; a generic course figure must not substitute for their actual result.",
+    "sources": [],
+    "visual_ids": []
+  },
+  {
+    "lesson": "16-2",
+    "lesson_sha256": "88bf2264f265dc220a9cf7c007d7010af20bafdfdfb5a9b11794c6441d9b3269",
+    "decision": "no-visual",
+    "reason": "Moved to the Day 0 reproduction checklist. Exact runnable commands, expected files, and limits are the useful representation, rather than a linear setup diagram.",
+    "sources": [],
+    "visual_ids": []
+  },
+  {
+    "lesson": "16-3",
+    "lesson_sha256": "ef8a82bf0467fb2bc3edd9a129b3177f7bb24ac1a72d2e83f741f0baa2c7fb2c",
+    "decision": "no-visual",
+    "reason": "Moved to the shared demonstration checklist. Existing runnable success, restart, and bounded-failure transcripts should display the evidence; a supplied storyboard would not verify behavior.",
+    "sources": [],
+    "visual_ids": []
+  },
+  {
+    "lesson": "16-4",
+    "lesson_sha256": "cb11f1364034d77ee06b8181383ff611d8875411842664c3d22755efeb0128aa",
+    "decision": "no-visual",
+    "reason": "Moved to the shared portfolio guidance. The learner’s concise recording or annotated transcript is itself the visual artifact and should use their actual implementation.",
+    "sources": [],
+    "visual_ids": []
+  },
+  {
+    "lesson": "intro-1",
+    "lesson_sha256": "40bfe2357bdfa1a94795eef78e3f589885c8a964de18adb3810e6e14a7eb4161",
+    "decision": "no-visual",
+    "reason": "Day 0 setup consists of a directory list, shell commands, and smoke checks. Those concrete code blocks are clearer than a decorative repository tree.",
+    "sources": [
+      "H2"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "intro-2",
+    "lesson_sha256": "37df2cce77f0e297fcbdb70ce702a0dad6e1bddc6951f70f9412cea6116426c1",
+    "decision": "no-visual",
+    "reason": "Day 0 covers the evaluation charter and spending ledger. A toy grader-control table and the exact 16×2×3 calculation are sufficient here; detailed study-group and freeze diagrams appear when those mechanisms are implemented.",
+    "sources": [
+      "H4"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "review-2",
+    "lesson_sha256": "e5bfa3d514d70a448cdfba2ce2760210e43dabba18281872a55c33951e9ca9da",
+    "decision": "no-visual",
+    "reason": "This optional Day 0 milestone assessment asks for closed-book recall and an actual boundary/replay probe. Supplied diagrams beside the questions would reveal the recall answers; existing lesson diagrams are references after scoring.",
+    "sources": [
+      "H4"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "flex-2",
+    "lesson_sha256": "8ef7420bdcdb752c57d816e611a5ac0e8797b7c159f2a22e926f9fe707435598",
+    "decision": "no-visual",
+    "reason": "The pacing reference has no fixed technical mechanism: choose one actual prerequisite blocker and its smallest reproducer. A generic debugging flowchart would add prescribed steps without clarifying that specific failure.",
+    "sources": [],
+    "visual_ids": []
+  },
+  {
+    "lesson": "review-4",
+    "lesson_sha256": "df5df11745dce14f60f47fa07056e18cb713e3c5bcae27cf447b20f73e0c5ecf",
+    "decision": "no-visual",
+    "reason": "The optional milestone asks the learner to inspect their interrupted-write trace and two real context payloads. Those artifacts plus the answer guide are clearer than duplicating the recovery and context diagrams in the assessment.",
+    "sources": [
+      "H5"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "flex-4",
+    "lesson_sha256": "8ef7420bdcdb752c57d816e611a5ac0e8797b7c159f2a22e926f9fe707435598",
+    "decision": "no-visual",
+    "reason": "The pacing reference directs the learner to an actual unresolved prerequisite or a short retrieval check. Its small next-action checklist is more useful than a diagram unrelated to the chosen blocker.",
+    "sources": [],
+    "visual_ids": []
+  },
+  {
+    "lesson": "review-6",
+    "lesson_sha256": "89bca0b29a7018369e0690be1e5637229bf9e28b884d62da0b6f00dbb8978594",
+    "decision": "no-visual",
+    "reason": "The optional go/no-go reference is an evidence checklist, not a new conceptual lesson. Its manifest, activation, accounting, and authorization requirements already have dedicated diagrams at their implementation lessons.",
+    "sources": [
+      "H8",
+      "H4"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "flex-6",
+    "lesson_sha256": "8ef7420bdcdb752c57d816e611a5ac0e8797b7c159f2a22e926f9fe707435598",
+    "decision": "no-visual",
+    "reason": "The contingency slot preserves the learner’s existing failure evidence and calendar limits. No fixed concept is introduced for a visual; use the original lesson’s relevant diagram or reproducer.",
+    "sources": [],
+    "visual_ids": []
+  },
+  {
+    "lesson": "flex-8",
+    "lesson_sha256": "8ef7420bdcdb752c57d816e611a5ac0e8797b7c159f2a22e926f9fe707435598",
+    "decision": "no-visual",
+    "reason": "This shared flex guidance has no predetermined data or mechanism. The actual incomplete check and recorded next command are the concrete artifacts, and unnecessary visuals would imply extra work.",
+    "sources": [],
+    "visual_ids": []
+  },
+  {
+    "lesson": "final-1",
+    "lesson_sha256": "0d448b24844b928364b8e0a909c3ea3b54eb43e6dff60c2878ab26cc56d79418",
+    "decision": "no-visual",
+    "reason": "Moved to the Day 0 evidence-index template. A claim-to-code-to-trace table supplies exact links and limitations; a generic evidence map would be less navigable.",
+    "sources": [],
+    "visual_ids": []
+  },
+  {
+    "lesson": "final-2",
+    "lesson_sha256": "eedd5477ac94b4017b4225ec699ab2c65136c7358e1bbd894ce27e8ff7dc146f",
+    "decision": "no-visual",
+    "reason": "A fresh-checkout smoke command, its logs, and expected artifacts establish reproduction. The separation from paid reruns is an explicit command/default contract, not a topology that needs a diagram.",
+    "sources": [
+      "H30",
+      "H23"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "final-3",
+    "lesson_sha256": "4f26b41464af8f956026de9b701e1f5ece5d71a5edbbf2c47197e99d3a655490",
+    "decision": "no-visual",
+    "reason": "The upstream finding must determine its minimal reproducer. A generic contribution diagram could not explain an unknown bug; a specific diagram is appropriate only if the learner’s actual finding needs one.",
+    "sources": [
+      "H31",
+      "H17"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "final-4",
+    "lesson_sha256": "afc47cdaa461dad75937427e4cefcaade2005a5a0dbbdd77530af543760bd8c1",
+    "decision": "no-visual",
+    "reason": "Moved to the shared release checklist. README links, audited metrics, and an exact release revision are the required presentation; no new mechanism warrants a stock diagram.",
+    "sources": [],
+    "visual_ids": []
+  },
+  {
+    "lesson": "bridge-provider",
+    "lesson_sha256": "f4f6cf8c7731019669ef143da7b92fc364e8121aac19a46aec5702892cb9c1d8",
+    "decision": "visual",
+    "reason": "A sequence for one response with two calls makes complete provider blocks and all matching results visible; it also scopes the unsupported-response rejection alternative.",
+    "sources": [
+      "H9",
+      "H9-tools"
+    ],
+    "visual_ids": [
+      "provider-multiple-calls"
+    ]
+  },
+  {
+    "lesson": "fixtures-final-a",
+    "lesson_sha256": "fb200085834a4f7516ebecc0e0b7dff99c24de3443115a8afd3ffa18fb6e2a73",
+    "decision": "no-visual",
+    "reason": "The learner builds a task-family map from their actual four authored behaviors and development overlap. A canned taxonomy would preselect tasks and could falsely imply independence; their task-family table is clearer.",
+    "sources": [
+      "H4",
+      "H22"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "fixtures-final-b",
+    "lesson_sha256": "f685b1a839c6d45d855c014494a380422143f31c32e01d2ba61462979cd117da",
+    "decision": "no-visual",
+    "reason": "The second authoring batch extends the actual task-family map and control-result rows. The relevant relationships depend on the learner’s chosen fixtures, so a supplied graph would invent or duplicate them.",
+    "sources": [
+      "H17",
+      "H4"
+    ],
+    "visual_ids": []
+  },
+  {
+    "lesson": "fixtures-final-c",
+    "lesson_sha256": "e895fa51917b3168bc33fa0c54aa0295356ede30ca0826d500affcbbd9e0a633",
+    "decision": "no-visual",
+    "reason": "The third authoring batch checks missing behaviors, two-file evidence, and rejected shortcuts in the learner’s own tasks. Their family map, concrete requests, and grader-control table supply the necessary structure.",
+    "sources": [
+      "H19"
+    ],
+    "visual_ids": []
+  }
+]
