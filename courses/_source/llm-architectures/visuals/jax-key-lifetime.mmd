@@ -1,0 +1,10 @@
+flowchart TB
+  accTitle: Explicit random key lifetime in JAX
+  accDescr: Split a master key into two subkeys. Use the first to draw the layer-one weight array and the second to draw the layer-two weight array. Assemble the resulting arrays into a parameter pytree. Do not reuse the original key or consumed subkeys for another random draw.
+  K["master key"] --> S["random.split(key, 2)"]
+  S --> K1["subkey 1"]
+  S --> K2["subkey 2"]
+  K1 --> A["Draw layer 1 weights"]
+  K2 --> B["Draw layer 2 weights"]
+  A --> P["params pytree: layer 1 + layer 2"]
+  B --> P

@@ -19,4 +19,16 @@ main .code-block code{padding:0;border:0;border-radius:0;background:transparent;
 @media(max-width:760px){.code-block pre{font-size:13px;padding:14px}.math-block{padding:10px;font-size:.94rem}}
 @media print{.code-block pre{white-space:pre-wrap;overflow-wrap:anywhere}.math-block{break-inside:avoid;background:white}.code-block{break-inside:avoid}}
 
+/* Pre-rendered SVG teaching figures: readable without a script or CDN. */
+.lesson-visual{margin:24px 0;border:1px solid #dce2e9;border-radius:8px;background:#fff;overflow:hidden;max-width:100%}
+.visual-canvas{padding:18px 12px;overflow-x:auto;overscroll-behavior-x:contain;background:#fff}
+.visual-canvas img{display:block;width:min(100%,var(--visual-width));height:auto;min-width:var(--visual-min);max-width:100%;margin:auto}
+.visual-canvas:focus-visible{outline:2px solid var(--blue);outline-offset:-3px}
+.lesson-visual figcaption{border-top:1px solid #e5e9ee;background:#fafbfc;padding:15px 18px;font-size:14px;line-height:1.6}
+.lesson-visual figcaption strong{display:block;color:var(--ink);font-size:15px;font-weight:650}
+.lesson-visual figcaption p{margin:5px 0 7px;color:var(--muted)}
+.lesson-visual figcaption a{font-size:13px}
+@media(max-width:760px){.visual-canvas{padding:14px 10px}.lesson-visual figcaption{padding:12px 14px}}
+@media print{.lesson-visual{break-inside:avoid}.visual-canvas{overflow:visible}.visual-canvas img{min-width:0!important}.lesson-visual figcaption a{display:none}}
+
 :root{--blue:#146349;--blue-light:#eaf5ef}

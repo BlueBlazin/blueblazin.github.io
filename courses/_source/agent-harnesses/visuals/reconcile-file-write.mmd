@@ -1,0 +1,9 @@
+flowchart TB
+    accTitle: Reconcile an uncertain file replacement
+    accDescr: For an in-flight controlled file replacement, resolve the path again and hash the current file. If the hash matches the intended after state, record completion without rewriting. Otherwise, if it matches the recorded before state, the documented safe retry is permitted. If it matches neither, stop with a conflict. Checking the after hash first also avoids repeating a no-op replacement whose before and after hashes are equal.
+    H["Resolve path; hash current file"]
+    H --> A("After hash matches?")
+    A -->|"Yes"| C["Record completion; no rewrite"]
+    A -->|"No"| B("Before hash matches?")
+    B -->|"Yes"| R["Allow documented safe retry"]
+    B -->|"No"| X["Stop: conflict; preserve evidence"]

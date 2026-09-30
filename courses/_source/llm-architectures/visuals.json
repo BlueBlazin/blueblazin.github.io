@@ -1,0 +1,189 @@
+[
+  {
+    "id": "causal-attention-mask",
+    "lesson": "1-3",
+    "placement": "key-idea",
+    "title": "Read the mask by query row",
+    "description": "An eight-by-eight causal attention mask. Rows are query positions i and columns are key positions j, both from zero to seven. Cells on and below the diagonal are allowed because j is at most i. Cells above it are masked. Query row four can use keys zero through four, but cannot use keys five through seven.",
+    "caption": "The lesson’s width-32, four-head example. The mask is shared across heads; it does not show attention probabilities.",
+    "renderer": "svg",
+    "source": "visuals/causal-attention-mask.svg",
+    "evidence": [
+      "AR01",
+      "AR03"
+    ],
+    "checks": [
+      "The 8×8 mask has 36 allowed and 28 forbidden entries.",
+      "Cell (i,j) is allowed if and only if j≤i; row 4 allows exactly five keys.",
+      "For width 32 and 4 heads, D=8; score shape is [2,4,8,8]."
+    ]
+  },
+  {
+    "id": "pre-norm-residuals",
+    "lesson": "1-4",
+    "placement": "key-idea",
+    "title": "Two residual paths through one block",
+    "description": "Input x goes through LayerNorm then causal attention, whose output is added to the unchanged x to produce u. u goes through a separate LayerNorm and the channel MLP, whose output is added to unchanged u to produce y. Both additions have shape B by T by C.",
+    "caption": "One GPT-style block. Token and learned position embeddings are added before the first block; dropout is disabled in this correctness exercise.",
+    "renderer": "mermaid",
+    "source": "visuals/pre-norm-residuals.mmd",
+    "evidence": [
+      "AR03"
+    ],
+    "checks": [
+      "LayerNorm precedes each learned branch.",
+      "The first residual adds x and the second adds u.",
+      "The MLP returns to C channels before addition."
+    ]
+  },
+  {
+    "id": "rope-pair-rotation",
+    "lesson": "3-2",
+    "placement": "key-idea",
+    "title": "RoPE rotates a pair without stretching it",
+    "description": "A unit vector starting at coordinates (1,0) is rotated counterclockwise by 60 degrees to (one half, square root of three over two). Both endpoints lie on the same unit circle. This illustrates one adjacent channel pair in Q or K; the position and pair frequency choose the angle.",
+    "caption": "Adjacent-pair convention. The unit-vector example illustrates the rotation, not a particular model’s frequency base.",
+    "renderer": "svg",
+    "source": "visuals/rope-pair-rotation.svg",
+    "evidence": [
+      "AR07"
+    ],
+    "checks": [
+      "A positive angle rotates (1,0) counterclockwise to (cos θ,sin θ).",
+      "At θ=π/3 the endpoint is (1/2,√3/2), whose squared norm is 1.",
+      "Q and K rotate; V does not. Position zero gives angle zero."
+    ]
+  },
+  {
+    "id": "gqa-head-sharing",
+    "lesson": "3-3",
+    "placement": "key-idea",
+    "title": "Four query heads share two KV heads",
+    "description": "Query heads zero and one use key/value head zero. Query heads two and three use key/value head one. The query tensor has shape [2,4,8,16], keys and values each have shape [2,2,8,16], and the scores still have shape [2,4,8,8].",
+    "caption": "The lesson uses contiguous query groups. Only K/V have fewer heads; an explicit score tensor still follows Hq.",
+    "renderer": "svg",
+    "source": "visuals/gqa-head-sharing.svg",
+    "evidence": [
+      "AR08"
+    ],
+    "checks": [
+      "Query-to-KV mapping is [0,0,1,1], not [0,1,0,1].",
+      "Each K/V tensor has 2×2×8×16=512 elements; Q has 1024.",
+      "The explicit score tensor has 2×4×8×8=512 elements."
+    ]
+  },
+  {
+    "id": "jax-key-lifetime",
+    "lesson": "4-1",
+    "placement": "key-idea",
+    "title": "Split once, give each draw its own key",
+    "description": "A master random key is split into two subkeys. Subkey one draws the first layer’s weight array and subkey two draws the second layer’s weight array. The resulting arrays are assembled into a parameter pytree. The original key and each used subkey are not reused for another random draw; further draws require further splitting.",
+    "caption": "One weight-array draw per layer. Further random draws require further key splitting. The same random operation with the same key and arguments repeats its result.",
+    "renderer": "mermaid",
+    "source": "visuals/jax-key-lifetime.mmd",
+    "evidence": [
+      "AR09",
+      "AR10"
+    ],
+    "checks": [
+      "The original key is consumed only by split.",
+      "Each weight-array draw consumes its own distinct subkey.",
+      "The parameter pytree contains initialized arrays, not mutable random-generator state."
+    ]
+  },
+  {
+    "id": "kv-cache-growth",
+    "lesson": "6-1",
+    "placement": "key-idea",
+    "title": "Append new state; preserve the prefix",
+    "description": "After a three-token prefill, each layer has keys and values for absolute positions zero, one and two. The next call uses a query at position three and appends K3 and V3, making a cache of length four. The following call appends position four, making length five. Old entries are unchanged. The query at position three can attend to all four stored positions zero through three.",
+    "caption": "Three-token prompt, then two one-token calls, with zero-based positions and no padding. Each layer has a separate cache.",
+    "renderer": "svg",
+    "source": "visuals/kv-cache-growth.svg",
+    "evidence": [
+      "AR16"
+    ],
+    "checks": [
+      "Logical cache lengths are 3,4,5; positions are 0 through length−1.",
+      "The new query at position 3 can attend to keys 0,1,2,3.",
+      "Old K/V entries do not change; cached K is not rotated again.",
+      "The cache keeps Hkv heads instead of expanding to Hq."
+    ]
+  },
+  {
+    "id": "lora-two-branches",
+    "lesson": "7-1",
+    "placement": "key-idea",
+    "title": "The adapter is a second path from the same input",
+    "description": "Input x of shape [N,8] enters both a frozen base linear layer with W shape [12,8] and a trainable adapter. The adapter applies A with shape [2,8], giving [N,2], then B with shape [12,2], giving [N,12]. Its output is scaled by alpha over two and added to the base output. A and B have 40 trainable weights in total; W has 96 frozen weights.",
+    "caption": "Rank r = 2; bias omitted. PyTorch linear weights use [out, in]. A and B train 16 + 24 = 40 weights; W retains 96 frozen weights.",
+    "renderer": "mermaid",
+    "source": "visuals/lora-two-branches.mmd",
+    "evidence": [
+      "AR19"
+    ],
+    "checks": [
+      "A is [2,8], B is [12,2], and BA is [12,8].",
+      "The two branches receive the same x and both return [N,12].",
+      "Adapter parameter count is 2×8+12×2=40; frozen W has 12×8=96.",
+      "The adapter output is scaled by α/r, with r=2."
+    ]
+  },
+  {
+    "id": "moe-top-two",
+    "lesson": "9-2",
+    "placement": "key-idea",
+    "title": "Select two experts, then combine their outputs",
+    "description": "For one token x, the four router logits are [2,0,3,−1]. Top-2 selects experts 2 and 0. A softmax over only the selected logits [3,2] gives weights about 0.731 and 0.269. Evaluate E2(x) and E0(x), then add 0.731 E2(x) and 0.269 E0(x). Experts 1 and 3 are not evaluated for this token. The numbers illustrate the lesson’s selected-only softmax convention.",
+    "caption": "One token in the four-expert toy layer; weights are rounded. Experts 1 and 3 are skipped. Selected logits remain in the autograd graph.",
+    "renderer": "mermaid",
+    "source": "visuals/moe-top-two.mmd",
+    "evidence": [
+      "AR25"
+    ],
+    "checks": [
+      "Top-2 of [2,0,3,−1] returns expert IDs [2,0].",
+      "Softmax([3,2]) is approximately [0.73105858,0.26894142] and sums to one.",
+      "Only E2(x) and E0(x) contribute for this token.",
+      "Ordinary autograd does not differentiate the discrete selection boundary; selected logits receive gradients through their weights."
+    ]
+  },
+  {
+    "id": "mla-cache-comparison",
+    "lesson": "10-3",
+    "placement": "plan-2",
+    "title": "Count retained elements before comparing bytes",
+    "description": "A horizontal bar chart compares logical inference cache sizes for the lesson’s illustrative configuration. At 2048 tokens GQA uses 16 MiB and compact MLA uses 5 MiB. At 4096 tokens the values double to 32 and 10 MiB. The common horizontal scale starts at zero. B is 1, layers 8, FP16 has two bytes per element, GQA has four KV heads of width 64, and compact MLA retains latent width 128 plus positional-key width 32.",
+    "caption": "Illustrative dimensions, not matched model quality. Only retained cache tensors are counted; weights, workspace and allocator overhead are excluded.",
+    "renderer": "svg",
+    "source": "visuals/mla-cache-comparison.svg",
+    "evidence": [
+      "AR27"
+    ],
+    "checks": [
+      "At T=2048, GQA has 2×1×8×2048×4×64×2=16,777,216 bytes=16 MiB.",
+      "At T=2048, compact MLA has 1×8×2048×(128+32)×2=5,242,880 bytes=5 MiB.",
+      "Doubling T doubles sizes to 32 MiB and 10 MiB; GQA/MLA ratio is 3.2.",
+      "Bars share a zero baseline and use 16 SVG units per MiB."
+    ]
+  },
+  {
+    "id": "gated-delta-state",
+    "lesson": "11-2",
+    "placement": "plan-2",
+    "title": "Decay every column, correct along the key",
+    "description": "The lesson’s two-dimensional state example starts with the identity matrix. Multiplying by alpha one half gives diagonal entries one half. With k=q=[1,0], v=[2,0] and beta one, the prediction at the key is [0.5,0] and the error is [1.5,0]. The outer-product correction has only its first column nonzero. Adding it gives state [[2,0],[0,0.5]], whose readout with q is [2,0].",
+    "caption": "The lesson’s single-token arithmetic. Input projections and gate-generating networks are outside this state-update example.",
+    "renderer": "svg",
+    "source": "visuals/gated-delta-state.svg",
+    "evidence": [
+      "AR29"
+    ],
+    "checks": [
+      "S̄=0.5I and S̄k=[0.5,0].",
+      "e=[1.5,0]; β e kᵀ=[[1.5,0],[0,0]].",
+      "Snew=[[2,0],[0,0.5]] and Snew q=[2,0].",
+      "The error uses the decayed state, not Sprev."
+    ]
+  }
+]

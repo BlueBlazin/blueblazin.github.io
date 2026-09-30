@@ -1,0 +1,8 @@
+flowchart TB
+  accTitle: LoRA base and adapter branches
+  accDescr: The same input x with shape N by 8 enters a frozen W of shape 12 by 8, and a trainable A of shape 2 by 8 followed by trainable B of shape 12 by 2. Scale the adapter output by alpha over two and add to the base output. The result has shape N by 12. Bias is omitted.
+  X["x · [N, 8]"] --> W["Frozen W · [12, 8]"]
+  X --> A["Trainable A · [2, 8]"]
+  A -->|"[N, 2]"| B["Trainable B · [12, 2]"]
+  W -->|"base: [N, 12]"| Y["base + (α / 2) × adapter · [N, 12]"]
+  B -->|"adapter: [N, 12]"| Y

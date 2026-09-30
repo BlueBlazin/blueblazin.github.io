@@ -1,0 +1,11 @@
+flowchart TB
+    accTitle: Development feedback ends before final outcomes
+    accDescr: The eight development tasks support a loop of pilot runs, inspection, and revisions. Before final evaluation, freeze the tested code, policies, model configuration, budgets, fixtures, graders, and metrics in a manifest. The sixteen final tasks are validated with model-free controls and identified in the manifest. A launcher validates that manifest before final agent trials. Final outcomes feed the report, not changes to the frozen study.
+    P["Pilot on 8 development tasks"]
+    P -->|"Revise and rerun"| P
+    P -->|"Activation + boundary tests pass"| F["Freeze experiment manifest"]
+    T["16 final tasks: model-free controls"] --> F
+    F --> V("Manifest valid?")
+    V -->|"No"| B["Block launch"]
+    V -->|"Yes"| E["Run final agent trials"]
+    E --> O["Audit outcomes and report"]

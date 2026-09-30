@@ -1,0 +1,9 @@
+flowchart TB
+  accTitle: Two pre-norm residual paths
+  accDescr: Input x splits into an unchanged residual and a LayerNorm then causal attention branch. Their sum is u. u splits again into an unchanged residual and a second LayerNorm then MLP branch. The final sum is y. Both additions preserve B by T by C.
+  X["x · [B, T, C]"] --> N1["LayerNorm → causal attention"]
+  X -->|"unchanged x"| U["Add → u · [B, T, C]"]
+  N1 --> U
+  U --> N2["LayerNorm → MLP: C → 4C → C"]
+  U -->|"unchanged u"| Y["Add → y · [B, T, C]"]
+  N2 --> Y

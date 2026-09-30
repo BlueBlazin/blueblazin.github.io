@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="425" viewBox="0 0 780 425" role="img" aria-labelledby="title desc">
+<title id="title">Every task has six planned trials</title>
+<desc id="desc">The frozen private study has sixteen final tasks, two context conditions, and three repeats per condition. Each task therefore has six distinct trial rows and each repeat has thirty-two rows. The complete manifest has ninety-six unique rows. Each square in this schematic stands for one planned trial, not a success or an observed result. Task rows 3 through 15 are elided. Keep failed, interrupted, and unattempted statuses distinct rather than counting files as completed trials.</desc>
+<rect width="780" height="425" fill="#ffffff"/>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto-start-reverse"><path d="M1 1 L7 4 L1 7" fill="none" stroke="#64748b" stroke-width="1.4"/></marker></defs>
+<g font-family="system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="16" fill="#263445">
+<text x="225" y="42" font-size="18" fill="#263445" font-weight="600" text-anchor="middle">Recent history</text>
+<text x="583" y="42" font-size="18" fill="#263445" font-weight="600" text-anchor="middle">Compacted context</text>
+<text x="158" y="75" font-size="15" fill="#263445" text-anchor="middle">R1</text>
+<text x="224" y="75" font-size="15" fill="#263445" text-anchor="middle">R2</text>
+<text x="290" y="75" font-size="15" fill="#263445" text-anchor="middle">R3</text>
+<text x="516" y="75" font-size="15" fill="#263445" text-anchor="middle">R1</text>
+<text x="582" y="75" font-size="15" fill="#263445" text-anchor="middle">R2</text>
+<text x="648" y="75" font-size="15" fill="#263445" text-anchor="middle">R3</text>
+<text x="25" y="137" font-size="16" fill="#263445" font-weight="600">Task 01</text>
+<rect x="126" y="114" width="58" height="40" rx="8" fill="#edf2f8" stroke="#b5c6da" stroke-width="1.5"/>
+<rect x="192" y="114" width="58" height="40" rx="8" fill="#edf2f8" stroke="#b5c6da" stroke-width="1.5"/>
+<rect x="258" y="114" width="58" height="40" rx="8" fill="#edf2f8" stroke="#b5c6da" stroke-width="1.5"/>
+<rect x="484" y="114" width="58" height="40" rx="8" fill="#edf5f4" stroke="#abc9c4" stroke-width="1.5"/>
+<rect x="550" y="114" width="58" height="40" rx="8" fill="#edf5f4" stroke="#abc9c4" stroke-width="1.5"/>
+<rect x="616" y="114" width="58" height="40" rx="8" fill="#edf5f4" stroke="#abc9c4" stroke-width="1.5"/>
+<text x="25" y="199" font-size="16" fill="#263445" font-weight="600">Task 02</text>
+<rect x="126" y="176" width="58" height="40" rx="8" fill="#edf2f8" stroke="#b5c6da" stroke-width="1.5"/>
+<rect x="192" y="176" width="58" height="40" rx="8" fill="#edf2f8" stroke="#b5c6da" stroke-width="1.5"/>
+<rect x="258" y="176" width="58" height="40" rx="8" fill="#edf2f8" stroke="#b5c6da" stroke-width="1.5"/>
+<rect x="484" y="176" width="58" height="40" rx="8" fill="#edf5f4" stroke="#abc9c4" stroke-width="1.5"/>
+<rect x="550" y="176" width="58" height="40" rx="8" fill="#edf5f4" stroke="#abc9c4" stroke-width="1.5"/>
+<rect x="616" y="176" width="58" height="40" rx="8" fill="#edf5f4" stroke="#abc9c4" stroke-width="1.5"/>
+<text x="25" y="317" font-size="16" fill="#263445" font-weight="600">Task 16</text>
+<rect x="126" y="294" width="58" height="40" rx="8" fill="#edf2f8" stroke="#b5c6da" stroke-width="1.5"/>
+<rect x="192" y="294" width="58" height="40" rx="8" fill="#edf2f8" stroke="#b5c6da" stroke-width="1.5"/>
+<rect x="258" y="294" width="58" height="40" rx="8" fill="#edf2f8" stroke="#b5c6da" stroke-width="1.5"/>
+<rect x="484" y="294" width="58" height="40" rx="8" fill="#edf5f4" stroke="#abc9c4" stroke-width="1.5"/>
+<rect x="550" y="294" width="58" height="40" rx="8" fill="#edf5f4" stroke="#abc9c4" stroke-width="1.5"/>
+<rect x="616" y="294" width="58" height="40" rx="8" fill="#edf5f4" stroke="#abc9c4" stroke-width="1.5"/>
+<text x="225" y="247" font-size="25" fill="#263445" text-anchor="middle">⋮</text>
+<text x="583" y="247" font-size="25" fill="#263445" text-anchor="middle">⋮</text>
+<text x="24" y="244" font-size="15" fill="#263445">13 more tasks</text>
+<path d="M126 95 L126 87 L680 87 L680 95" fill="none" stroke="#64748b" stroke-width="1.5"/>
+<text x="402" y="70" font-size="15" fill="#263445" text-anchor="middle">same task fixtures</text>
+<path d="M388 100 L388 339" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="5 4"/>
+<text x="390" y="375" font-size="18" fill="#263445" font-weight="600" text-anchor="middle">16 tasks × 2 conditions × 3 repeats = 96 planned trials</text>
+<text x="390" y="404" font-size="15" fill="#263445" text-anchor="middle">6 per task · 32 per repeat · one fresh workspace per trial</text>
+</g>
+</svg>

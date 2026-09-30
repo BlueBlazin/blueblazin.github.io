@@ -1,0 +1,17 @@
+{
+  "name": "practical-ai-course-build",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Build-only rendering tools for the static AI courses",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "build": "python3 build.py",
+    "verify": "python3 verify.py && python3 verify-formatting.py && python3 verify-diagrams.py && node verify-client.mjs course.js"
+  },
+  "devDependencies": {
+    "@mermaid-js/mermaid-cli": "12.0.0",
+    "puppeteer": "25.12.0"
+  }
+}

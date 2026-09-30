@@ -22,6 +22,28 @@ DISPLAY = re.compile(r'(?m)^\s*(?:\$\$(?P<dollars>.*?)\$\$|\\\[(?P<brackets>.*?)
 FENCE = re.compile(r'^\s*(`{3,}|~{3,})([\w+-]*)\s*$')
 
 
+def read_fence(lines, start):
+    """Return a complete block using the same grammar in preflight and rendering."""
+    fence = FENCE.match(lines[start].strip())
+    if not fence: return None
+    marker, language = fence.groups(); body=[]; end=start+1
+    closing = re.compile(r'\s*'+re.escape(marker[0])+'{'+str(len(marker))+r',}\s*')
+    while end < len(lines) and not closing.fullmatch(lines[end]):
+        body.append(lines[end]); end += 1
+    if end == len(lines): raise ValueError('Unclosed code fence')
+    return {'start':start,'end':end+1,'language':language.lower(),'body':'\n'.join(body)}
+
+
+def iter_code_blocks(text):
+    lines=str(text).splitlines(); i=0
+    while i<len(lines):
+        block=read_fence(lines,i)
+        if block:
+            yield block
+            i=block['end']
+        else: i+=1
+
+
 def strings(value):
     if isinstance(value, str): yield value
     elif isinstance(value, dict):
@@ -34,7 +56,10 @@ def prepare_math(values):
     wanted = set()
     for value in values:
         # Literal examples, including dollars and LaTeX inside code, stay literal.
-        value = re.sub(r'(?ms)^\s*(`{3,}|~{3,})[^\n]*\n.*?^\s*\1\s*$', '', value)
+        lines=value.splitlines()
+        for block in iter_code_blocks(value):
+            lines[block['start']:block['end']]=['']*(block['end']-block['start'])
+        value='\n'.join(lines)
         for m in DISPLAY.finditer(value): wanted.add(((m['dollars'] or m['brackets']).strip(), True))
         value = DISPLAY.sub('', value)
         for m in TOKEN.finditer(value):
@@ -98,13 +123,13 @@ def markdown(text):
     while i<len(lines):
         line=lines[i].strip()
         if not line: i+=1;continue
-        fence=FENCE.match(line)
-        if fence:
-            marker,language=fence.groups();body=[];i+=1
-            while i<len(lines) and not re.fullmatch(r'\s*'+re.escape(marker[0])+'{'+str(len(marker))+r',}\s*',lines[i]):
-                body.append(lines[i]);i+=1
-            if i==len(lines): raise ValueError('Unclosed code fence')
-            out.append(code_block('\n'.join(body),language));i+=1;continue
+        block=read_fence(lines,i)
+        if block:
+            if block['language']=='mermaid':
+                from diagrams import mermaid_figure
+                out.append(mermaid_figure(block['body']))
+            else: out.append(code_block(block['body'],block['language']))
+            i=block['end'];continue
         if line.startswith(('$$',r'\[')):
             opener='$$' if line.startswith('$$') else r'\[';closer='$$' if opener=='$$' else r'\]'
             body=line[len(opener):];i+=1

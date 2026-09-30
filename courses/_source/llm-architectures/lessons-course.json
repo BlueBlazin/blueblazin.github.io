@@ -1696,7 +1696,7 @@
       "question": "Why does converting a routing weight to a Python float cause trouble?",
       "answer": "The float is detached from autograd, so that contribution no longer trains the router through the weighted output."
     },
-    "pitfall": "An in-place write into a detached output buffer or accidental .`item()` can silently break the desired gradient path.",
+    "pitfall": "An in-place write into a detached output buffer or accidental `.item()` can silently break the desired gradient path.",
     "reading": [
       {
         "id": "A7",

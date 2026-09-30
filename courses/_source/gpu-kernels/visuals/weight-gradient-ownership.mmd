@@ -1,0 +1,10 @@
+flowchart TB
+  accTitle: Race-free shared weight gradient
+  accDescr: Three row programs write distinct scratch rows. A later reduction kernel reads all completed rows and gives each weight gradient one final writer.
+  A["Row 0 contribution"] --> D["Scratch row 0"]
+  B["Row 1 contribution"] --> E["Scratch row 1"]
+  C["Row 2 contribution"] --> F["Scratch row 2"]
+  D --> G["Kernel 2: sum across rows"]
+  E --> G
+  F --> G
+  G --> H["dw: one final writer per feature"]

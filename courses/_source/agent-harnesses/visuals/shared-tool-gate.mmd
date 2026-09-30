@@ -1,0 +1,10 @@
+flowchart TB
+    accTitle: Direct and MCP calls share one host boundary
+    accDescr: A direct invocation and an MCP request take different interface paths. The MCP adapter translates protocol packaging. Both reach the same host entry point, which validates the schema and then authorizes the resolved path. Invalid or unauthorized requests are rejected before the read-only tool runs. The protocol itself does not grant permission.
+    D["Direct invocation"] --> V("Host schema valid?")
+    M["MCP request"] --> A["Thin protocol adapter"]
+    A --> V
+    V -->|"No"| X["Reject; no workspace read"]
+    V -->|"Yes"| P("Resolved path authorized?")
+    P -->|"No"| X
+    P -->|"Yes"| T["Existing read-only tool"]

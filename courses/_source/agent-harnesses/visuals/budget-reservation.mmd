@@ -1,0 +1,10 @@
+flowchart TB
+    accTitle: Reserve before sending; reconcile afterward
+    accDescr: For a sequential dispatcher, first check all run limits and whether the conservative request reservation fits. Refuse requests that do not fit. Persist a reservation and attempt ID before dispatch. If usage is known, settle the reservation against it. If usage is unknown, keep the reservation until reconciliation. Every later request or retry must pass the gate again.
+    G("Within limits; reservation fits?")
+    G -->|"No"| S["Stop without sending"]
+    G -->|"Yes"| R["Persist reservation + attempt ID"]
+    R --> D["Dispatch one request"]
+    D --> U("Usage known?")
+    U -->|"Yes"| K["Settle against recorded usage"]
+    U -->|"No"| Q["Keep reservation until reconciled"]

@@ -1,0 +1,14 @@
+sequenceDiagram
+    accTitle: A tool result must reach the next model turn
+    accDescr: In this successful single-tool example, the host sends history to the fake model and receives an echo call with ID c1. The host records and validates the call, invokes the tool, then appends its result with ID c1. Only then does it request the next model response, which returns a final answer. The host executes the tool; the model only proposes it.
+    participant H as Host harness
+    participant M as FakeModel
+    participant T as Echo tool
+    H->>M: History and task
+    M-->>H: Call echo, id c1
+    H->>H: Append call and validate arguments
+    H->>T: Execute validated echo
+    T-->>H: Observation
+    H->>H: Append result, call id c1
+    H->>M: History including call and result
+    M-->>H: Final answer

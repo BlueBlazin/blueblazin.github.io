@@ -1,0 +1,11 @@
+flowchart TB
+    accTitle: The first host-bounded response loop
+    accDescr: Before requesting each fake model response, the host compares the response count with the maximum. If the allowance is exhausted, it returns a budget terminal result without another request. Otherwise it reads one response and increments the count. A final response terminates; an observe response appends its observation and returns to the allowance check.
+    G("Below response cap?")
+    G -->|"No"| X["Stop: response cap"]
+    G -->|"Yes"| M["Read one FakeModel response"]
+    M --> C["Increment response count"]
+    C --> K("Response kind?")
+    K -->|"final"| F["Stop: final answer"]
+    K -->|"observe"| O["Append observation"]
+    O --> G

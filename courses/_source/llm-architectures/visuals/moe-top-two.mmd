@@ -1,0 +1,11 @@
+flowchart TB
+  accTitle: One token through the toy top-two expert layer
+  accDescr: The router receives x and emits four logits, 2, 0, 3, minus 1. Top-two selects experts 2 and 0, then softmax over logits 3 and 2 gives weights approximately 0.731 and 0.269. Evaluate E2 and E0 on the same x and add their weighted outputs. Experts 1 and 3 are not evaluated for this token.
+  X["Token x"] --> R["Router logits: [2, 0, 3, −1]"]
+  R --> S["Top-2: IDs [2, 0]; softmax([3, 2])"]
+  X --> E2["E2(x)"]
+  X --> E0["E0(x)"]
+  S -.->|"select"| E2
+  S -.->|"select"| E0
+  E2 -->|"weight ≈ 0.731"| Y["Weighted sum → y"]
+  E0 -->|"weight ≈ 0.269"| Y

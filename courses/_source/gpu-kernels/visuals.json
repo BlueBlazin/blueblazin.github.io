@@ -1,0 +1,193 @@
+[
+  {
+    "id": "tail-lanes",
+    "lesson": "2-3",
+    "placement": "key-idea",
+    "title": "One partial program still needs a full mask",
+    "description": "Two programs of 128 logical lanes cover offsets 0 through 255 for a vector of length 129. Program zero has 128 valid lanes. Program one has only offset 128 valid; offsets 129 through 255 must be masked on both input loads and the output store. Ellipses omit intermediate lane numbers.",
+    "caption": "Same N = 129 example as the first lab. Logical lanes do not imply a one-to-one mapping to physical GPU threads.",
+    "renderer": "svg",
+    "source": "visuals/tail-lanes.svg",
+    "evidence": [
+      "KR02"
+    ],
+    "checks": [
+      "ceil(129/128)=2 programs",
+      "128 valid lanes in program 0 and 1 in program 1; 127 masked lanes",
+      "Read and write masks use offset < 129"
+    ]
+  },
+  {
+    "id": "completed-timing",
+    "lesson": "1-3",
+    "placement": "key-idea",
+    "title": "Time completed work, not just submission",
+    "description": "An unsynchronized host timer ends after enqueueing while the GPU continues running. In a synchronized batch, finish prior device work before starting the timer, enqueue the batch, wait for completion, and then stop the timer. Warm-up and resident-input preparation happen before this timeline.",
+    "caption": "Schematic ordering only; bar lengths are not measured durations. This illustrates wall-clock timing, not CUDA-event timing.",
+    "renderer": "svg",
+    "source": "visuals/completed-timing.svg",
+    "evidence": [
+      "KR01",
+      "KR02"
+    ],
+    "checks": [
+      "Pre-synchronization completes before the start timestamp",
+      "Stop timestamp occurs after all batch work completes",
+      "No timing numbers or measured performance implied"
+    ]
+  },
+  {
+    "id": "softmax-padding",
+    "lesson": "3-2",
+    "placement": "key-idea",
+    "title": "Padding must be neutral throughout the reduction",
+    "description": "A five-value row [1, 2, 0, 3, 1] is loaded into eight logical lanes. The three invalid lanes load negative infinity. Subtracting the maximum of 3 leaves invalid lanes at negative infinity. Their exponentials are zero, so the denominator sums only valid data. The output store remains masked to five lanes.",
+    "caption": "Finite input row, FP32 reduction. The five-value row is a small illustration; use the lesson’s declared test widths in your implementation.",
+    "renderer": "svg",
+    "source": "visuals/softmax-padding.svg",
+    "evidence": [
+      "KR03"
+    ],
+    "checks": [
+      "Maximum of valid and padded input is 3",
+      "Invalid lanes contribute exactly zero to the exponential sum",
+      "Denominator equals 1+2*exp(-2)+exp(-1)+exp(-3)=1.6883370760125316"
+    ]
+  },
+  {
+    "id": "rmsnorm-width",
+    "lesson": "4-2",
+    "placement": "key-idea",
+    "title": "RMSNorm divides by real features",
+    "description": "For a row with three values 1, 2, and 3, a four-lane block pads the final lane with zero. The sum of squares is 14. Divide this by the real feature width 3, not the padded width 4, before adding epsilon and computing the inverse square root. Multiply by the input and feature weight and mask the output store.",
+    "caption": "Small arithmetic illustration of the same true-width rule used by the lesson’s kernel. No mean subtraction is performed.",
+    "renderer": "svg",
+    "source": "visuals/rmsnorm-width.svg",
+    "evidence": [
+      "KR09",
+      "KR05"
+    ],
+    "checks": [
+      "1^2+2^2+3^2+0^2=14",
+      "Denominator N is 3, not padded block width 4",
+      "Epsilon is added after mean-square division"
+    ]
+  },
+  {
+    "id": "matmul-reuse",
+    "lesson": "5-1",
+    "placement": "key-idea",
+    "title": "A tile reuses inputs across several dot products",
+    "description": "For A of shape 4 by 6 and B of shape 6 by 5, one program computes C rows zero and one and columns zero through two. The highlighted first K chunk loads a 2 by 2 A tile and a 2 by 3 B tile, adding a 2 by 3 partial product to an FP32 accumulator. Three K chunks cover all six inner-dimension values. Each A value contributes to three output columns, while each B value contributes to two output rows.",
+    "caption": "Exact dimensions from the exercise. Colored cells show the first K chunk; all three chunks accumulate into the same output tile.",
+    "renderer": "svg",
+    "source": "visuals/matmul-reuse.svg",
+    "evidence": [
+      "KR04"
+    ],
+    "checks": [
+      "A shape 4x6 times B shape 6x5 yields C shape 4x5",
+      "BLOCK_M=2, BLOCK_N=3, BLOCK_K=2: 3 K iterations",
+      "Per K chunk: 4 A elements, 6 B elements, 6 accumulator values, 24 conventional FLOPs",
+      "Second column tile includes column 5 which is out of bounds"
+    ]
+  },
+  {
+    "id": "online-rescaling",
+    "lesson": "7-1",
+    "placement": "key-idea",
+    "title": "Rescale the old denominator and weighted sum together",
+    "description": "Use scores [1, 2, 4], split after the second score, with value vectors [1, 0], [0, 1], and [1, 1]. After the first tile, the running maximum is 2, denominator is 1 plus exp(-1), and weighted accumulator is [exp(-1), 1]. The next tile raises the maximum to 4. Multiplying both old states by exp(-2), then adding the new tile, gives denominator 1.1851 and weighted sum [1.0498, 1.1353]. The final attention output is approximately [0.8858, 0.9580].",
+    "caption": "Exact exercise score vector; value vectors are specified here. Rounded numbers illustrate the recurrence, not a numerical test tolerance.",
+    "renderer": "svg",
+    "source": "visuals/online-rescaling.svg",
+    "evidence": [
+      "KR10",
+      "KR06"
+    ],
+    "checks": [
+      "New maximum is 4 and rescaling alpha=exp(2-4)",
+      "Final denominator exp(-3)+exp(-2)+1=1.1851223516",
+      "Final output matches dense softmax(scores)@values to rounding"
+    ]
+  },
+  {
+    "id": "causal-tiles",
+    "lesson": "7-3",
+    "placement": "key-idea",
+    "title": "A diagonal attention tile needs an elementwise mask",
+    "description": "An eight by eight attention mask uses query positions as rows and key positions as columns. The allowed lower triangle includes the diagonal because key j must be no greater than query i. With block size four, the highlighted bottom-right tile spans positions four through seven. Its first row allows only key four within that tile; its final row allows keys four through seven. All keys zero through three are allowed for this query block.",
+    "caption": "N = 8 and block size 4 are lesson test cases. This is a mask diagram; the blockwise algorithm does not allocate this full matrix.",
+    "renderer": "svg",
+    "source": "visuals/causal-tiles.svg",
+    "evidence": [
+      "KR06",
+      "KR10",
+      "KR18"
+    ],
+    "checks": [
+      "Allowed cells satisfy j<=i, including self-attention diagonal",
+      "Exactly 8*9/2=36 allowed cells in full illustrative mask",
+      "Bottom-right 4x4 tile has 10 allowed and 6 masked cells"
+    ]
+  },
+  {
+    "id": "weight-gradient-ownership",
+    "lesson": "9-3",
+    "placement": "key-idea",
+    "title": "Give every weight-gradient output one owner",
+    "description": "The first kernel computes row contributions to the shared weight gradient and writes disjoint FP32 scratch rows. A second kernel, ordered after the first on the same stream, reduces these scratch values across rows. Each feature gradient has a single final writer. This avoids independent row programs overwriting the same dw location.",
+    "caption": "Illustrative three-row, per-row-partial design. A bounded row-group design is also valid; the lesson requires explicit scratch limits.",
+    "renderer": "mermaid",
+    "source": "visuals/weight-gradient-ownership.mmd",
+    "evidence": [
+      "KR09",
+      "KR05",
+      "KR01"
+    ],
+    "checks": [
+      "Contribution for row r and feature j is g[r,j]*x[r,j]*inv_rms[r]",
+      "Scratch rows are disjoint and fully initialized before the reduction reads them",
+      "dw[j] sums every supported row exactly once",
+      "Same-stream launch ordering supplies the inter-kernel dependency"
+    ]
+  },
+  {
+    "id": "amdahl-limit",
+    "lesson": "10-4",
+    "placement": "key-idea",
+    "title": "The unchanged part of the model limits the gain",
+    "description": "An analytic Amdahl curve assumes the optimized kernel originally takes 20 percent of runtime and all other work stays fixed. Whole-step speedup is one divided by 0.8 plus 0.2 divided by kernel speedup. Doubling the kernel speed yields a whole-step speedup of about 1.11. Even an infinitely fast kernel cannot exceed 1.25 times under these assumptions.",
+    "caption": "Illustrative analytic curve, not benchmark data. Measure the actual fraction in the same workload and execution mode before applying the model.",
+    "renderer": "svg",
+    "source": "visuals/amdahl-limit.svg",
+    "evidence": [
+      "KR01"
+    ],
+    "checks": [
+      "At kernel speedup 1, overall speedup is 1",
+      "At kernel speedup 2, overall speedup=1/0.9=1.111111...",
+      "As kernel speedup tends to infinity, limit=1/0.8=1.25",
+      "Curve computed directly from Amdahl formula; axes are linear"
+    ]
+  },
+  {
+    "id": "pipeline-buffer-lifetime",
+    "lesson": "12-2",
+    "placement": "key-idea",
+    "title": "A buffer must be ready to read and safe to overwrite",
+    "description": "For each staged shared-memory buffer, the producer must first know that any previous consumer has finished. After issuing a global-to-shared transfer, wait for transfer completion before starting the consumer. Reuse that buffer only after the consumer is done. Other buffers can follow the same lifecycle concurrently, allowing overlap. At loop exit, wait for outstanding compute before using results.",
+    "caption": "Dependency model for one buffer, not the stage count or exact API sequence of the JAX example. Map each dependency to that example’s actual waits.",
+    "renderer": "mermaid",
+    "source": "visuals/pipeline-buffer-lifetime.mmd",
+    "evidence": [
+      "KR13"
+    ],
+    "checks": [
+      "Transfer completion precedes consumer reads",
+      "Consumer completion precedes overwrite of the same buffer",
+      "Different buffers may overlap without removing per-buffer dependencies",
+      "Outstanding computation completes before results are used"
+    ]
+  }
+]
