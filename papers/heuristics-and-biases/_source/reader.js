@@ -8,7 +8,7 @@
   function theme(value){root.dataset.theme=value;$('theme').textContent=value==='dark'?'Light':'Dark';$('theme').setAttribute('aria-label',`Switch to ${value==='dark'?'light':'dark'} theme`)}
   theme(storage.get(prefix+'theme')==='dark'?'dark':'light');
   $('theme').addEventListener('click',()=>{const value=root.dataset.theme==='dark'?'light':'dark';theme(value);storage.set(prefix+'theme',value)});
-  const sizes={normal:null,large:'20px',larger:'22px'};
+  const sizes={normal:null,large:'23px',larger:'25px'};
   const stored=storage.get(prefix+'size');
   if(stored && Object.hasOwn(sizes,stored)) $('font-size').value=stored;
   function font(){const value=$('font-size').value;if(sizes[value])root.style.setProperty('--body-size',sizes[value]);else root.style.removeProperty('--body-size');storage.set(prefix+'size',value);progress()}
