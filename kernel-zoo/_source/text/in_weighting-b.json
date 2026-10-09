@@ -1,0 +1,482 @@
+[
+ {
+  "id": "fejer",
+  "name": "Fejér kernel",
+  "formalName": "Fejér kernel",
+  "domain": "Fourier analysis",
+  "short": "The nonnegative kernel for averaged Fourier sums.",
+  "body": "Averaging the first N+1 Dirichlet kernels gives a nonnegative approximation kernel with good convergence properties for continuous periodic functions.",
+  "tex": "F_N(\\theta)=\\frac1{N+1}\\left(\\frac{\\sin((N+1)\\theta/2)}{\\sin(\\theta/2)}\\right)^2",
+  "example": "For N=1, F₁(θ)=1+cosθ. Its integral with normalized circle measure is 1.",
+  "note": "Cesàro averaging changes the kernel, rather than simply adding more Fourier modes.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "fourier"
+  ],
+  "type": "Weighting function",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "Fejér's Theorem and Convergence of Fourier Series",
+    "url": "https://ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/resources/18102-sp21-lecture-16/",
+    "publisher": "MIT OpenCourseWare",
+    "kind": "Lecture"
+   }
+  ],
+  "plate": "The Weighting"
+ },
+ {
+  "id": "path-kernel",
+  "name": "Generating-function kernel",
+  "formalName": "Generating-function kernel",
+  "domain": "Analytic combinatorics · queueing",
+  "short": "The coefficient canceled in the kernel method.",
+  "body": "In functional equations for generating functions, a kernel is a coefficient multiplying the unknown function. The kernel method selects a suitable root that cancels this coefficient and exposes a relation among remaining terms.",
+  "tex": "K(z,u)F(z,u)=R(z,u),\\quad K(z,U(z))=0",
+  "example": "For a walk step polynomial P(u)=u+u⁻¹, a common kernel is 1−zP(u). One chooses a formal root with the required behavior near z=0.",
+  "note": "A root cannot be chosen arbitrarily: formal-series and analyticity conditions matter. This kernel method is not machine-learning kernel fitting.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "path"
+  ],
+  "type": "Generating-function factor",
+  "status": "Named method",
+  "sources": [
+   {
+    "title": "Basic analytic combinatorics of directed lattice paths",
+    "url": "https://lipn.fr/~banderier/Papers/tcs_banderier_flajolet_2002.pdf",
+    "publisher": "Cyril Banderier and Philippe Flajolet",
+    "kind": "Research paper"
+   }
+  ],
+  "plate": "The Weighting"
+ },
+ {
+  "id": "green",
+  "name": "Green kernel / Green's function",
+  "formalName": "Green kernel / Green's function",
+  "domain": "PDE · mathematical physics",
+  "short": "The response to a point source, with boundary conditions.",
+  "body": "A Green kernel represents an inverse or solution operator for a differential equation. Integrating the point-source responses builds the response to a distributed source.",
+  "tex": "L_xG(x,y)=\\delta(x-y)",
+  "example": "For −u″=f on (0,1) with u(0)=u(1)=0, G(x,y)=min(x,y)−xy; then u(x)=∫₀¹G(x,y)f(y)dy.",
+  "note": "The operator, domain and boundary conditions are part of the definition. A Green kernel and an operator's nullspace are different.",
+  "variants": [
+   "Resolvent kernels",
+   "Fundamental solutions",
+   "Electrostatic / wave Green functions"
+  ],
+  "code": null,
+  "refs": [
+   "green"
+  ],
+  "type": "Weighting function",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "Differential Analysis: fundamental solutions",
+    "url": "https://ocw.mit.edu/courses/18-156-differential-analysis-spring-2004/62906408ea3a1fde43dee67b2c5ee0d0_lec0.pdf",
+    "publisher": "MIT OpenCourseWare",
+    "kind": "Lecture notes"
+   }
+  ],
+  "plate": "The Weighting"
+ },
+ {
+  "id": "hilbert",
+  "name": "Hilbert-transform kernel",
+  "formalName": "Hilbert-transform kernel",
+  "domain": "Signals · harmonic analysis",
+  "short": "A principal-value 1/x kernel.",
+  "body": "The Hilbert transform uses an odd singular kernel to construct a quadrature counterpart of a real signal. Its convolution is interpreted in the principal-value sense.",
+  "tex": "Hf(x)=\\frac1\\pi\\operatorname{p.v.}\\int\\frac{f(y)}{x-y}\\,dy",
+  "example": "In a standard convention, H(cosωx)=sinωx for ω>0. This is useful in analytic-signal representations.",
+  "note": "Normalization and sign conventions vary. This is not the reproducing kernel of an arbitrary Hilbert space.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "hilbert"
+  ],
+  "type": "Weighting function",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "A Short Tour of Harmonic Analysis",
+    "url": "https://math.uchicago.edu/~may/REU2013/REUPapers/Talbut.pdf",
+    "publisher": "Beatrice Talbut / University of Chicago",
+    "kind": "Mathematical exposition"
+   }
+  ],
+  "plate": "The Weighting"
+ },
+ {
+  "id": "reconstruction",
+  "name": "Interpolation / reconstruction kernel",
+  "formalName": "Interpolation / reconstruction kernel",
+  "domain": "Graphics · DSP",
+  "short": "A function used to reconstruct values between samples.",
+  "body": "A reconstruction kernel builds a continuous approximation from discrete samples. The kernel shape controls sharpness, smoothness and ringing.",
+  "tex": "\\tilde f(x)=\\sum_n f[n]h(x-n)",
+  "example": "A triangular kernel gives linear interpolation in one dimension. Ideal bandlimited reconstruction uses sinc(x)=sin(πx)/(πx).",
+  "note": "Exact sinc reconstruction requires the sampling theorem's assumptions. Bicubic and Lanczos filters are practical alternatives with different tradeoffs.",
+  "variants": [
+   "Nearest neighbor / box",
+   "Tent / bilinear",
+   "Bicubic",
+   "Sinc / Lanczos"
+  ],
+  "code": null,
+  "refs": [
+   "reconstruct"
+  ],
+  "type": "Weighting function",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "Images and image filtering: resampling",
+    "url": "https://www.cs.cornell.edu/courses/cs4670/2013fa/lectures/lec03_resample.pdf",
+    "publisher": "Cornell Computer Science",
+    "kind": "Lecture notes"
+   }
+  ],
+  "plate": "The Weighting"
+ },
+ {
+  "id": "kpm",
+  "name": "Kernel polynomial method",
+  "formalName": "Kernel polynomial method",
+  "domain": "Computational condensed matter",
+  "short": "A damping kernel for truncated polynomial expansions.",
+  "body": "Kernel polynomial methods damp coefficients of truncated Chebyshev expansions to reduce oscillations and obtain useful spectral approximations.",
+  "tex": "f_N(x)=\\sum_{n=0}^N g_n\\mu_nT_n(x)\\quad\\text{(schematic)}",
+  "example": "Jackson damping suppresses ringing in approximate densities of states. Dirichlet and Lorentz kernels give other damping choices.",
+  "note": "The displayed series omits application-specific prefactors and normalization. The kernel concerns the expansion, not GPU execution.",
+  "variants": [
+   "Jackson",
+   "Lorentz",
+   "Dirichlet"
+  ],
+  "code": null,
+  "refs": [
+   "kpm"
+  ],
+  "type": "Weighting function",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "The Kernel Polynomial Method",
+    "url": "https://arxiv.org/abs/cond-mat/0504627",
+    "publisher": "Weiße, Wellein, Alvermann and Fehske",
+    "kind": "Research review"
+   }
+  ],
+  "plate": "The Weighting"
+ },
+ {
+  "id": "regression",
+  "name": "Kernel-regression weights",
+  "formalName": "Kernel-regression weights",
+  "domain": "Statistics",
+  "short": "Weights for fitting or averaging nearby observations.",
+  "body": "In Nadaraya–Watson regression, a kernel assigns locality weights and their normalized sum gives a predicted mean. Local polynomial regression uses related weights in a local fit.",
+  "tex": "\\hat m(x)=\\frac{\\sum_i K_h(x-x_i)y_i}{\\sum_i K_h(x-x_i)}",
+  "example": "If two response values 10 and 20 receive weights 3 and 1, the local constant prediction is 12.5.",
+  "note": "This local smoother differs from kernel ridge regression in an RKHS, although both may use Gaussian functions.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "regression"
+  ],
+  "type": "Weighting function",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "KernelReg: nonparametric kernel regression",
+    "url": "https://www.statsmodels.org/dev/generated/statsmodels.nonparametric.kernel_regression.KernelReg.html",
+    "publisher": "statsmodels",
+    "kind": "Documentation"
+   }
+  ],
+  "plate": "The Weighting"
+ },
+ {
+  "id": "memory",
+  "name": "Memory / friction kernel",
+  "formalName": "Memory / friction kernel",
+  "domain": "Statistical mechanics · systems",
+  "short": "Weights on the system's past behavior.",
+  "body": "A memory kernel specifies how past states or velocities influence present evolution. Generalized Langevin equations use such kernels to describe non-instantaneous friction.",
+  "tex": "F_{\\rm mem}(t)=-\\int_0^t\\Gamma(t-s)v(s)\\,ds",
+  "example": "With Γ(t)=γe⁻ᵗ/τ, recent velocities receive greater weight than distant ones.",
+  "note": "This is a temporal response function, not a block of computer memory or a GPU routine.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "memory"
+  ],
+  "type": "Weighting function",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "Microscopic theory of Brownian motion: Mori friction kernel",
+    "url": "https://www.sciencedirect.com/science/article/pii/0378437175901624",
+    "publisher": "Physica A",
+    "kind": "Research paper"
+   }
+  ],
+  "plate": "The Weighting"
+ },
+ {
+  "id": "mollifier",
+  "name": "Mollifier / approximate-identity kernel",
+  "formalName": "Mollifier / approximate-identity kernel",
+  "domain": "Analysis · numerical smoothing",
+  "short": "A scaled kernel that smooths while approaching the identity.",
+  "body": "A standard mollifier is a smooth, nonnegative, unit-integral bump. Shrinking its scale gives a family whose convolution approximates the original function. Approximate identities form a broader class.",
+  "tex": "\\rho_\\varepsilon(x)=\\varepsilon^{-d}\\rho(x/\\varepsilon)",
+  "example": "Convolving a step with a small smooth bump replaces the jump with a narrow smooth transition.",
+  "note": "Not every smoothing filter is an approximate identity, and not every approximate identity is a compactly supported smooth mollifier.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "mollify"
+  ],
+  "type": "Weighting function",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "Approximate identities and Fourier analysis",
+    "url": "https://math.uchicago.edu/~may/REU2017/REUPapers/Zhang%2CLingxian.pdf",
+    "publisher": "Lingxian Zhang / University of Chicago",
+    "kind": "Mathematical exposition"
+   }
+  ],
+  "plate": "The Weighting"
+ },
+ {
+  "id": "poisson",
+  "name": "Poisson kernel",
+  "formalName": "Poisson kernel",
+  "domain": "Harmonic analysis · PDE",
+  "short": "Weights that extend boundary values harmonically.",
+  "body": "A Poisson kernel solves a harmonic boundary-value problem by weighting boundary data. Its form depends on the domain.",
+  "tex": "P_r(\\theta)=\\frac{1-r^2}{1-2r\\cos\\theta+r^2},\\quad 0\\le r<1",
+  "example": "In the unit disk, integrate Pᵣ against boundary values using dθ/(2π). At r=0, every boundary angle has equal weight.",
+  "note": "This Poisson kernel is unrelated to Poisson-distributed counts except through broader probabilistic connections.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "poissondisk"
+  ],
+  "type": "Weighting function",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "The Poisson kernel on the unit disc",
+    "url": "https://www.cmi.ac.in/~pramath/GradComplex_2017/Lectures/Lecture20.pdf",
+    "publisher": "Chennai Mathematical Institute",
+    "kind": "Lecture notes"
+   }
+  ],
+  "plate": "The Weighting"
+ },
+ {
+  "id": "shield",
+  "name": "Radiation point kernel",
+  "formalName": "Radiation point kernel",
+  "domain": "Radiation transport · shielding",
+  "short": "The detector response to a point radiation source.",
+  "body": "Point-kernel methods integrate point-source responses over a distributed radiation source. A basic uncollided photon-flux term combines geometric spreading and attenuation; buildup models can approximate scattered contributions.",
+  "tex": "K(r)=\\frac{e^{-\\mu r}}{4\\pi r^2}",
+  "example": "In a homogeneous absorber, the uncollided response falls with inverse-square distance and exponential attenuation.",
+  "note": "Real shielding calculations require energy, material, geometry and scattering considerations. This formula is an illustrative idealization, not a shield-design prescription.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "shield"
+  ],
+  "type": "Weighting function",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "Point-Kernel Code Development for Gamma-Ray Shielding Applications",
+    "url": "https://www.mdpi.com/2076-3417/15/14/7795",
+    "publisher": "Applied Sciences",
+    "kind": "Research paper"
+   }
+  ],
+  "plate": "The Weighting"
+ },
+ {
+  "id": "sensitivity",
+  "name": "Sensitivity / Fréchet kernel",
+  "formalName": "Sensitivity / Fréchet kernel",
+  "domain": "Geophysics · inverse problems",
+  "short": "How a model perturbation changes an observation.",
+  "body": "Linearizing a forward model produces a sensitivity kernel: a spatial weighting of parameter perturbations that predicts a small data change.",
+  "tex": "\\delta d\\approx\\int K_d(r)\\,\\delta m(r)\\,dr",
+  "example": "A seismic travel-time kernel indicates which regions of Earth's structure influence a measurement. Finite-frequency sensitivity can occupy a volume rather than a single ray.",
+  "note": "It represents a derivative of the forward model, not necessarily the resolution of a retrieved model.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "sensitivity"
+  ],
+  "type": "Weighting function",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "Three-dimensional waveform sensitivity kernels",
+    "url": "https://pure.amsterdamumc.nl/en/publications/three-dimensional-waveform-sensitivity-kernels/",
+    "publisher": "Research authors / institutional repository",
+    "kind": "Research paper"
+   }
+  ],
+  "plate": "The Weighting"
+ },
+ {
+  "id": "singular",
+  "name": "Singular / Calderón–Zygmund kernel",
+  "formalName": "Singular / Calderón–Zygmund kernel",
+  "domain": "Harmonic analysis",
+  "short": "An operator kernel singular along the diagonal.",
+  "body": "Singular integral kernels can blow up as x approaches y. Cancellation, principal values and suitable boundedness and regularity conditions make the corresponding operators meaningful.",
+  "tex": "|K(x,y)|\\lesssim |x-y|^{-d}",
+  "example": "The Hilbert-transform kernel is the one-dimensional prototype. Riesz transforms provide higher-dimensional examples.",
+  "note": "An arbitrary divergent integral is not automatically a valid singular integral operator.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "singular"
+  ],
+  "type": "Weighting function",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "Singular kernels and Calderón–Zygmund operators",
+    "url": "https://math.jhu.edu/~lindblad/633/notes4.pdf",
+    "publisher": "Terence Tao; hosted at Johns Hopkins",
+    "kind": "Lecture notes"
+   }
+  ],
+  "plate": "The Weighting"
+ },
+ {
+  "id": "sph",
+  "name": "SPH smoothing kernel",
+  "formalName": "SPH smoothing kernel",
+  "domain": "Fluid simulation · astrophysics",
+  "short": "A spatial weighting function for particle-based fields.",
+  "body": "Smoothed particle hydrodynamics approximates continuum fields through a smoothing kernel and particle sums. Smoothing length and kernel shape determine which neighbors contribute and how strongly.",
+  "tex": "A(r)\\approx\\sum_j\\frac{m_j}{\\rho_j}A_jW(r-r_j,h)",
+  "example": "A compactly supported spline kernel lets a particle gather information from a finite neighborhood rather than from the entire simulation.",
+  "note": "The smoothing kernel is a mathematical function. A GPU kernel can execute the particle sum; these are different layers.",
+  "variants": [
+   "Cubic spline",
+   "Wendland",
+   "Gaussian"
+  ],
+  "code": null,
+  "refs": [
+   "sph"
+  ],
+  "type": "Weighting function",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "Smoothed Particle Hydrodynamics",
+    "url": "https://arxiv.org/abs/1007.1245",
+    "publisher": "Peter J. Cossins",
+    "kind": "Research review"
+   }
+  ],
+  "plate": "The Weighting"
+ },
+ {
+  "id": "stein-prob",
+  "name": "Stein kernel: integration by parts",
+  "formalName": "Stein kernel: integration by parts",
+  "domain": "Probability · normal approximation",
+  "short": "A function or matrix realizing a Stein identity.",
+  "body": "For a one-dimensional variable X with mean μ, a Stein kernel τ satisfies an integration-by-parts identity for suitable test functions.",
+  "tex": "\\mathbb E[(X-\\mu)f(X)]=\\mathbb E[\\tau(X)f'(X)]",
+  "example": "For X∼N(μ,σ²), the constant τ(x)=σ² is a Stein kernel. For a uniform variable on [−1,1], τ(x)=(1−x²)/2.",
+  "note": "This τ is a function of one input. The pairwise Stein kernel used in a kernel Stein discrepancy is another construction.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "steinprob"
+  ],
+  "type": "Weighting function",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "Stein kernels and moment maps",
+    "url": "https://www.normalesup.org/~mfathi/docs/Stein%20kernels%20and%20OT%2C%20revised%20version.pdf",
+    "publisher": "Max Fathi",
+    "kind": "Research paper"
+   }
+  ],
+  "plate": "The Weighting"
+ },
+ {
+  "id": "transform",
+  "name": "Transform kernel",
+  "formalName": "Transform kernel",
+  "domain": "Fourier · Laplace · integral transforms",
+  "short": "The function against which a transform integrates.",
+  "body": "Integral transforms change a function's representation by integrating it against a prescribed function of the input and output coordinates.",
+  "tex": "\\hat f(\\xi)=\\int f(x)e^{-2\\pi i x\\xi}\\,dx",
+  "example": "The Fourier kernel is e⁻²πⁱˣξ in this convention; the one-sided Laplace kernel is e⁻ˢᵗ on t≥0.",
+  "note": "A transform kernel may oscillate, be complex-valued, and have no probability or similarity interpretation. Fourier normalization conventions vary.",
+  "variants": [
+   "Fourier",
+   "Laplace",
+   "Hankel / Bessel transforms"
+  ],
+  "code": null,
+  "refs": [
+   "transform"
+  ],
+  "type": "Weighting function",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "The Fourier Transform and Laplace Transform",
+    "url": "https://people.math.harvard.edu/~shlomo/212a/06.pdf",
+    "publisher": "Shlomo Sternberg / Harvard",
+    "kind": "Lecture notes"
+   }
+  ],
+  "plate": "The Weighting"
+ },
+ {
+  "id": "volterra",
+  "name": "Volterra-series kernel",
+  "formalName": "Volterra-series kernel",
+  "domain": "Nonlinear systems · control",
+  "short": "A higher-order impulse-response function.",
+  "body": "A Volterra expansion expresses a nonlinear system through kernels of one, two or more time lags, multiplying corresponding input values before integration.",
+  "tex": "y_2(t)=\\iint h_2(\\tau_1,\\tau_2)x(t-\\tau_1)x(t-\\tau_2)\\,d\\tau_1d\\tau_2",
+  "example": "A quadratic response requires a two-lag kernel h₂, whereas an LTI system uses a one-lag impulse response h₁.",
+  "note": "Volterra can also describe a linear integral operator with a variable integration limit. That usage is an integral-kernel subtype.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "volterra"
+  ],
+  "type": "Weighting function",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "Nonlinear System Analysis Based on the Volterra Series",
+    "url": "https://pure.southwales.ac.uk/files/2109606/M._Weiss_2003_2059431.pdf",
+    "publisher": "M. Weiss / University of South Wales",
+    "kind": "Thesis"
+   }
+  ],
+  "plate": "The Weighting"
+ }
+]

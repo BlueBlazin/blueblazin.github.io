@@ -1,0 +1,245 @@
+[
+ {
+  "id": "atomic",
+  "name": "Atomic kernel",
+  "formalName": "Atomic kernel",
+  "domain": "Historical chemistry",
+  "short": "An atom's inner core, excluding its outer electrons.",
+  "body": "Lewis's 1916 account distinguishes an inner kernel from an outer electron shell. In this terminology, the kernel comprises the nucleus and inner electrons; valence electrons lie outside it.",
+  "tex": "\\text{atomic kernel}=\\text{nucleus}+\\text{core electrons}",
+  "example": "For carbon in a simple shell picture, the nucleus and two inner electrons form a core with net charge +4; four valence electrons sit outside.",
+  "note": "This is historical chemical language. Kernel is not the usual modern name for an atomic nucleus, and Lewis's original atom model is not modern quantum mechanics.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "lewis"
+  ],
+  "type": "Atomic core",
+  "status": "Historical usage",
+  "sources": [
+   {
+    "title": "The Atom and the Molecule (1916)",
+    "url": "https://gskim071031.github.io/Pages/Classic-Papers/Lewis-1916/",
+    "publisher": "G. N. Lewis; JACS (historical paper transcription)",
+    "kind": "Original paper"
+   }
+  ],
+  "plate": "The Seed"
+ },
+ {
+  "id": "flame",
+  "name": "Flame / ignition kernel",
+  "formalName": "Flame / ignition kernel",
+  "domain": "Combustion",
+  "short": "A small ignition region that may grow into a flame.",
+  "body": "A localized heated or reacting region initiates combustion. A successful ignition kernel develops into a self-sustaining flame; a weak one can be extinguished by heat loss or stretching.",
+  "tex": "",
+  "example": "A spark in an engine creates a small hot region. Whether that region survives and grows helps determine whether ignition succeeds.",
+  "note": "Here kernel is a physical region, not a numerical filter used to simulate combustion.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "flame"
+  ],
+  "type": "Ignition region",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "Analysis on ignition kernel formation in a quiescent mixture",
+    "url": "https://www.sciencedirect.com/science/article/pii/S0010218022003510",
+    "publisher": "Combustion and Flame",
+    "kind": "Research paper"
+   }
+  ],
+  "plate": "The Seed"
+ },
+ {
+  "id": "grain",
+  "name": "Grain kernel",
+  "formalName": "Grain kernel",
+  "domain": "Botany · agriculture",
+  "short": "The grain itself, including its seed tissues.",
+  "body": "In cereals, a kernel is a grain: botanically a caryopsis, a fruit whose wall is closely joined to the seed coat. A corn kernel contains protective outer tissues, endosperm and an embryo (germ).",
+  "tex": "",
+  "example": "A maize kernel contains a developing plant and stored food. Milling separates useful fractions such as germ, starch and fiber.",
+  "note": "A corn kernel is not just the germ. Likewise, an acorn is a whole nut; its inner seed can be called its kernel.",
+  "variants": [
+   "Corn / maize",
+   "Wheat",
+   "Rice",
+   "Other cereal grains"
+  ],
+  "code": null,
+  "refs": [
+   "grain"
+  ],
+  "type": "Whole grain",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "Corn processing and kernel composition",
+    "url": "https://www.extension.purdue.edu/extmedia/id/id-333.pdf",
+    "publisher": "Purdue Extension",
+    "kind": "University publication"
+   }
+  ],
+  "plate": "The Seed"
+ },
+ {
+  "id": "fuel",
+  "name": "Nuclear fuel kernel",
+  "formalName": "Nuclear fuel kernel",
+  "domain": "Nuclear engineering · materials",
+  "short": "The fuel-bearing core of a coated particle.",
+  "body": "A TRISO particle encloses a small fuel kernel, commonly uranium dioxide or uranium oxycarbide, within protective carbon and silicon-carbide layers.",
+  "tex": "\\text{fuel kernel}\\subset\\text{coated TRISO particle}",
+  "example": "In a coated fuel particle, fission occurs in the fuel-bearing core; the surrounding layers retain fission products and protect the core.",
+  "note": "This is a material component. A radiation point kernel is instead a mathematical response function.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "fuel"
+  ],
+  "type": "Fuel particle",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "TRISO Particles",
+    "url": "https://www.energy.gov/ne/photos/triso-particles",
+    "publisher": "U.S. Department of Energy",
+    "kind": "Institutional reference"
+   }
+  ],
+  "plate": "The Seed"
+ },
+ {
+  "id": "nut",
+  "name": "Nut kernel",
+  "formalName": "Nut kernel",
+  "domain": "Botany · food science",
+  "short": "The seed or edible inner part inside a shell.",
+  "body": "In nut processing, kernel names the inner seed material recovered when the shell is removed. Everyday culinary categories need not match botanical categories.",
+  "tex": "",
+  "example": "Crack a walnut: the lobed seed inside is the walnut kernel. Kernel color, shriveling and recovery yield are quality measurements.",
+  "note": "An almond is botanically the seed of a drupe; the culinary label nut does not change what processors mean by kernel.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "nut"
+  ],
+  "type": "Inner seed",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "Growing walnuts in Oregon",
+    "url": "https://extension.oregonstate.edu/catalog/pub/em-8907-growing-walnuts-oregon",
+    "publisher": "Oregon State University",
+    "kind": "University publication"
+   }
+  ],
+  "plate": "The Seed"
+ },
+ {
+  "id": "spice",
+  "name": "SPICE data kernel",
+  "formalName": "SPICE data kernel",
+  "domain": "Space science · mission geometry",
+  "short": "A data file read by NASA's SPICE toolkit.",
+  "body": "SPICE calls its mission-geometry and supporting-data files kernels. They can be binary or text and must be loaded before computations that need their contents.",
+  "tex": "\\text{loaded kernel files}\\longmapsto\\text{geometry queries}",
+  "example": "Load ephemeris and time-conversion data, then ask SPICE for a body's position at a specified epoch. These kernels contain data; they are not launched as code.",
+  "note": "SPICE here means the spacecraft toolkit, not the electronic-circuit simulator. A meta-kernel lists other kernels to load.",
+  "variants": [
+   [
+    "SPK",
+    "Positions and velocities / ephemerides"
+   ],
+   [
+    "CK",
+    "Time-varying orientation / pointing; optional angular rates"
+   ],
+   [
+    "PCK",
+    "Body constants, shapes and orientation models"
+   ],
+   [
+    "FK",
+    "Reference-frame definitions"
+   ],
+   [
+    "IK",
+    "Instrument geometry and parameters"
+   ],
+   [
+    "LSK",
+    "Leapseconds and time-conversion constants"
+   ],
+   [
+    "SCLK",
+    "Spacecraft-clock correlation and conversion"
+   ],
+   [
+    "DSK",
+    "Detailed shape models"
+   ],
+   [
+    "EK",
+    "Event information; less commonly used today"
+   ],
+   [
+    "MK / meta-kernel",
+    "An ordered list of kernel files to load"
+   ]
+  ],
+  "code": null,
+  "refs": [
+   "spice",
+   "spicefiles",
+   "spk",
+   "ck",
+   "pck",
+   "dsk"
+  ],
+  "type": "Data file",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "Introduction to SPICE",
+    "url": "https://naif.jpl.nasa.gov/pub/naif/toolkit_docs/C/info/intrdctn.html",
+    "publisher": "NASA / JPL NAIF",
+    "kind": "Documentation"
+   },
+   {
+    "title": "SPICE Kernel Required Reading",
+    "url": "https://naif.jpl.nasa.gov/pub/naif/toolkit_docs/C/req/kernel.html",
+    "publisher": "NASA / JPL NAIF",
+    "kind": "Documentation"
+   },
+   {
+    "title": "SPK Required Reading",
+    "url": "https://naif.jpl.nasa.gov/pub/naif/toolkit_docs/C/req/spk.html",
+    "publisher": "NASA / JPL NAIF",
+    "kind": "Documentation"
+   },
+   {
+    "title": "C-Kernel Required Reading",
+    "url": "https://naif.jpl.nasa.gov/pub/naif/toolkit_docs/C/req/ck.html",
+    "publisher": "NASA / JPL NAIF",
+    "kind": "Documentation"
+   },
+   {
+    "title": "PCK Required Reading",
+    "url": "https://naif.jpl.nasa.gov/pub/naif/toolkit_docs/C/req/pck.html",
+    "publisher": "NASA / JPL NAIF",
+    "kind": "Documentation"
+   },
+   {
+    "title": "DSK Required Reading",
+    "url": "https://naif.jpl.nasa.gov/pub/naif/toolkit_docs/C/req/dsk.html",
+    "publisher": "NASA / JPL NAIF",
+    "kind": "Documentation"
+   }
+  ],
+  "plate": "Incertae sedis"
+ }
+]

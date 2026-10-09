@@ -1,0 +1,388 @@
+[
+ {
+  "id": "kernelization",
+  "name": "Parameterized problem kernel",
+  "formalName": "Parameterized problem kernel",
+  "domain": "Algorithms · complexity theory",
+  "short": "A reduced equivalent instance bounded by the parameter.",
+  "body": "Kernelization is a polynomial-time reduction of (I,k) to an equivalent instance (I′,k′), with total size bounded by a function of k. A polynomial kernel has a polynomial size bound.",
+  "tex": "(I,k)\\mapsto(I',k'),\\quad |I'|+k'\\le g(k)",
+  "example": "For Vertex Cover with budget k, a vertex of degree greater than k must be chosen. Remove it and reduce k by 1; continue with valid reduction rules.",
+  "note": "Equivalent means preserving the answer under the formal definition. Shrinking an input by an arbitrary heuristic is not enough.",
+  "variants": [
+   "Polynomial kernels",
+   "Generalized kernels / bikernels",
+   "Turing kernelization"
+  ],
+  "code": null,
+  "refs": [
+   "kernelization"
+  ],
+  "type": "Reduced problem",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "What is known about Vertex Cover Kernelization?",
+    "url": "https://arxiv.org/abs/1811.09429",
+    "publisher": "Fellows, Jaffke, Király, Rosamond and Weller",
+    "kind": "Research survey"
+   }
+  ],
+  "plate": "The Remnant"
+ },
+ {
+  "id": "lossy",
+  "name": "Approximate / lossy kernel",
+  "formalName": "Approximate / lossy kernel",
+  "domain": "Parameterized optimization",
+  "short": "A small problem with a controlled approximation loss.",
+  "body": "Lossy kernelization relaxes exact preservation for optimization problems. Solutions to the reduced instance are lifted back with a formally bounded degradation in approximation quality.",
+  "tex": "c\\text{-approximation on }I'\\longmapsto\\alpha c\\text{-approximation on }I",
+  "example": "An α-approximate kernel trades a smaller reduced problem for an explicit factor α in the lifted solution guarantee.",
+  "note": "This is still a formal parameterized guarantee, not arbitrary data reduction or an optimization heuristic called Kernel Search.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "lossy"
+  ],
+  "type": "Approximate reduction",
+  "status": "Generalization",
+  "sources": [
+   {
+    "title": "Lossy Kernelization",
+    "url": "https://arxiv.org/abs/1604.04111",
+    "publisher": "Lokshtanov, Panolan, Ramanujan and Saurabh",
+    "kind": "Research paper"
+   }
+  ],
+  "plate": "The Remnant"
+ },
+ {
+  "id": "belief",
+  "name": "Belief-revision kernel",
+  "formalName": "Belief-revision kernel",
+  "domain": "Logic · knowledge representation",
+  "short": "A minimal set of beliefs that entails a target.",
+  "body": "An α-kernel of a belief base is an inclusion-minimal subset that implies α. Kernel contraction removes at least one belief from each such subset to stop deriving α.",
+  "tex": "B\\perp\\!\\perp\\alpha=\\{X\\subseteq B:X\\models\\alpha,\\ X\\text{ minimal}\\}",
+  "example": "For B={p, p→q, q}, the q-kernels are {q} and {p,p→q}. Removing only the explicit q leaves the second proof intact.",
+  "note": "A kernel is inclusion-minimal, not necessarily smallest by cardinality. This has no connection to Lean's trusted checker beyond both occurring in logic.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "belief"
+  ],
+  "type": "Minimal premise set",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "Kernel contraction",
+    "url": "https://www.cambridge.org/core/journals/journal-of-symbolic-logic/article/kernel-contraction/C822638049E45B34EE10FBE45A8865E1",
+    "publisher": "Sven Ove Hansson / Journal of Symbolic Logic",
+    "kind": "Research paper"
+   }
+  ],
+  "plate": "The Remnant"
+ },
+ {
+  "id": "game",
+  "name": "Cooperative-game kernel / prekernel",
+  "formalName": "Cooperative-game kernel / prekernel",
+  "domain": "Game theory",
+  "short": "Payoff allocations balanced by pairwise bargaining power.",
+  "body": "Davis and Maschler's kernel is a solution concept for transferable-utility games. It uses each player's maximum surplus against another, with qualifications for individual-rationality boundaries.",
+  "tex": "s_{ij}(x)=\\max_{S\\ni i,\\ S\\not\\ni j}\\left(v(S)-\\sum_{k\\in S}x_k\\right)",
+  "example": "In a symmetric three-player game where only the grand coalition has value 1, the equal split (⅓,⅓,⅓) balances every pair's maximum surplus.",
+  "note": "The prekernel enforces equality of pairwise maximum surpluses. The kernel's boundary conditions differ. Neither is the game's core or a digraph vertex kernel.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "games"
+  ],
+  "type": "Payoff set",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "The kernel of a cooperative game",
+    "url": "https://onlinelibrary.wiley.com/doi/10.1002/nav.3800120303",
+    "publisher": "Morton Davis and Michael Maschler",
+    "kind": "Original paper"
+   }
+  ],
+  "plate": "The Remnant"
+ },
+ {
+  "id": "digraph",
+  "name": "Digraph kernel",
+  "formalName": "Digraph kernel",
+  "domain": "Graph theory · combinatorial games",
+  "short": "An independent, absorbing set of vertices.",
+  "body": "A digraph kernel is a vertex set with no arcs between its members, such that every vertex outside it has an outgoing arc to a member.",
+  "tex": "\\forall v\\notin K\\;\\exists k\\in K:\\ v\\to k",
+  "example": "For the chain a→b→c, {a,c} is a kernel: it is independent, and b points to c. A directed 3-cycle has no kernel.",
+  "note": "Absorption uses outgoing arcs in this convention. A maximal independent set alone is insufficient in a directed graph.",
+  "variants": [
+   "Quasi-kernels (distance ≤2)",
+   "k-kernels",
+   "Kernels by paths / colored kernels"
+  ],
+  "code": null,
+  "refs": [
+   "digraph"
+  ],
+  "type": "Set / region",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "Combinatorial Game Theory Foundations Applied to Digraph Kernels",
+    "url": "https://www.combinatorics.org/ojs/index.php/eljc/article/view/v4i2r10",
+    "publisher": "Aviezri Fraenkel / Electronic Journal of Combinatorics",
+    "kind": "Research paper"
+   }
+  ],
+  "plate": "The Remnant"
+ },
+ {
+  "id": "discriminating",
+  "name": "Discriminating / robust safety kernel",
+  "formalName": "Discriminating / robust safety kernel",
+  "domain": "Control · differential games",
+  "short": "States from which safety can be maintained against disturbances.",
+  "body": "A discriminating kernel strengthens viability by introducing a disturbance or opponent. Safety must be preserved using an appropriate control strategy under the stated information pattern.",
+  "tex": "\\exists\\text{ control strategy}\\ \\forall\\text{ admissible disturbances}",
+  "example": "A robot's safe region shrinks when the model must tolerate an adversarial wind rather than one favorable wind trajectory.",
+  "note": "Quantifier order, when disturbances are observed, and strategy definitions are essential. Robust-control terminology varies across formulations.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "discriminate"
+  ],
+  "type": "Robust safe set",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "The calculation of discriminating kernel",
+    "url": "https://link.springer.com/article/10.1186/s13662-017-1429-2",
+    "publisher": "Advances in Continuous and Discrete Models",
+    "kind": "Research paper"
+   }
+  ],
+  "plate": "The Remnant"
+ },
+ {
+  "id": "kernel-search",
+  "name": "Kernel Search",
+  "formalName": "Kernel Search",
+  "domain": "Operations research · MILP",
+  "short": "A selected variable subset used by an optimization heuristic.",
+  "body": "Kernel Search builds and expands a promising subset of decision variables, solving restricted mixed-integer problems while examining additional variable groups.",
+  "tex": "\\text{restricted MILP on selected variables }K",
+  "example": "In portfolio optimization, begin with a small set of promising assets and test further asset groups to improve the feasible portfolio.",
+  "note": "This is a heuristic. It does not imply an equivalent instance of parameter-bounded size, as formal kernelization does.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "ks"
+  ],
+  "type": "Candidate variables",
+  "status": "Named method",
+  "sources": [
+   {
+    "title": "Kernel Search: An application to the index tracking problem",
+    "url": "https://www.sciencedirect.com/science/article/pii/S0377221711008071",
+    "publisher": "European Journal of Operational Research",
+    "kind": "Research paper"
+   }
+  ],
+  "plate": "The Remnant"
+ },
+ {
+  "id": "perfect",
+  "name": "Perfect kernel",
+  "formalName": "Perfect kernel",
+  "domain": "Topology · descriptive set theory",
+  "short": "The perfect part left after removing isolated points.",
+  "body": "Cantor–Bendixson analysis repeatedly removes isolated points, possibly through transfinite stages. In a Polish-space setting, the remaining perfect part is called the perfect kernel.",
+  "tex": "X=P\\sqcup C,\\quad P\\text{ perfect},\\ C\\text{ countable}",
+  "example": "For the Cantor set together with one isolated point outside it, the perfect kernel is the Cantor set.",
+  "note": "Perfect means closed with no isolated points. Removing isolated points only once need not reach the perfect kernel.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "perfect"
+  ],
+  "type": "Set / region",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "Descriptive Set Theory: Cantor–Bendixson",
+    "url": "https://www.math.mcgill.ca/atserunyan/Teaching_notes/dst_lectures.pdf",
+    "publisher": "Anush Tserunyan",
+    "kind": "Lecture notes"
+   }
+  ],
+  "plate": "The Remnant"
+ },
+ {
+  "id": "kern",
+  "name": "Section kern / core",
+  "formalName": "Section kern / core",
+  "domain": "Structural mechanics",
+  "short": "The load region that keeps a section in compression.",
+  "body": "The kern of a cross-section is the region in which an eccentric compressive force can act without creating tensile stress, within the assumed linear stress model.",
+  "tex": "|e|\\le b/6\\quad\\text{(one-axis rectangular-section condition)}",
+  "example": "For eccentricity along one axis of a rectangle, the familiar middle-third condition avoids tension.",
+  "note": "The standard English term is usually kern, not kernel. It is included as a closely related STEM term; a rectangular section's full two-axis kern is a diamond.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "kern"
+  ],
+  "type": "Set / region",
+  "status": "Related term: kern",
+  "sources": [
+   {
+    "title": "On the kern of a general cross section",
+    "url": "https://www.sciencedirect.com/science/article/pii/S0020768398003370",
+    "publisher": "Massood Mofid and Arash Yavari",
+    "kind": "Research paper"
+   }
+  ],
+  "plate": "The Remnant"
+ },
+ {
+  "id": "semigroup",
+  "name": "Semigroup kernel",
+  "formalName": "Semigroup kernel",
+  "domain": "Semigroup theory",
+  "short": "The intersection of nonempty two-sided ideals.",
+  "body": "The kernel of a semigroup is its least nonempty ideal when such an ideal exists; one can define it as the intersection of all nonempty ideals. A nonempty finite semigroup has such an ideal.",
+  "tex": "K(S)=\\bigcap_{I\\ne\\varnothing\\,\\text{ideal}}I",
+  "example": "If a semigroup has an absorbing zero element, {0} is an ideal contained in every nonempty ideal, so it is the kernel.",
+  "note": "This kernel belongs to the semigroup itself. A semigroup homomorphism's congruence kernel belongs to a map.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "semigroup"
+  ],
+  "type": "Minimal ideal",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "Semigroup kernels: dissertation text",
+    "url": "https://people.cs.uchicago.edu/~laci/students/toumpakari-phd.pdf",
+    "publisher": "E. Toumpakari / University of Chicago",
+    "kind": "Thesis"
+   }
+  ],
+  "plate": "The Remnant"
+ },
+ {
+  "id": "radical",
+  "name": "Squarefree kernel / integer radical",
+  "formalName": "Squarefree kernel / integer radical",
+  "domain": "Number theory",
+  "short": "The product of distinct prime divisors.",
+  "body": "A common convention defines the squarefree kernel of n as its radical: the largest squarefree divisor of a positive integer n.",
+  "tex": "\\operatorname{rad}(n)=\\prod_{p\\mid n}p",
+  "example": "72=2³·3², so rad(72)=2·3=6. By contrast, the squarefree part in 72=m²s is s=2.",
+  "note": "Terminology varies: some sources use squarefree kernel for the squarefree part instead. Check the explicit formula.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "radical"
+  ],
+  "type": "Integer",
+  "status": "Terminology varies",
+  "sources": [
+   {
+    "title": "Product of distinct prime factors of n",
+    "url": "https://oeis.org/wiki/Product_of_distinct_prime_factors_of_n",
+    "publisher": "OEIS Foundation",
+    "kind": "Mathematical reference"
+   }
+  ],
+  "plate": "The Remnant"
+ },
+ {
+  "id": "saturation",
+  "name": "Topological set kernel",
+  "formalName": "Topological set kernel",
+  "domain": "General topology",
+  "short": "The intersection of all open supersets of a set.",
+  "body": "Some topology literature calls the saturation of A its kernel: the points that cannot be excluded by any open set containing A.",
+  "tex": "\\ker A=\\bigcap\\{U:A\\subseteq U,\\ U\\text{ open}\\}",
+  "example": "In the Sierpiński space with open sets ∅, {1}, {0,1}, the kernel of {0} is {0,1}.",
+  "note": "This construction can enlarge A. In a T₁ space it equals A, and it differs from the perfect kernel.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "saturation"
+  ],
+  "type": "Set / region",
+  "status": "Less-common usage",
+  "sources": [
+   {
+    "title": "Λrs-open sets and Λrs-closed sets in topological spaces",
+    "url": "https://www.scik.org/index.php/jmcs/article/view/6687",
+    "publisher": "Amutha and Dhana Balan",
+    "kind": "Research paper"
+   }
+  ],
+  "plate": "The Remnant"
+ },
+ {
+  "id": "viability",
+  "name": "Viability kernel",
+  "formalName": "Viability kernel",
+  "domain": "Control · dynamical systems",
+  "short": "Initial states from which some safe evolution exists.",
+  "body": "Within a constraint set, the viability kernel contains states for which at least one admissible evolution stays in the set for the specified horizon, often forever.",
+  "tex": "\\operatorname{Viab}(C)=\\{x_0:\\exists\\text{ admissible safe evolution}\\}",
+  "example": "For a vehicle near a wall, safety depends on position and velocity: some positions are already unrecoverable if the vehicle is moving too quickly.",
+  "note": "This is an existence guarantee under a model and control constraints. It does not mean every possible control is safe.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "viability"
+  ],
+  "type": "Controllable safe set",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "A Survey of Viability Theory",
+    "url": "https://epubs.siam.org/doi/abs/10.1137/0328044",
+    "publisher": "Jean-Pierre Aubin / SIAM",
+    "kind": "Research paper"
+   }
+  ],
+  "plate": "The Remnant"
+ },
+ {
+  "id": "polygon",
+  "name": "Visibility kernel",
+  "formalName": "Visibility kernel",
+  "domain": "Computational geometry",
+  "short": "All points that can see the entire shape.",
+  "body": "The kernel of a polygon or suitable polyhedron consists of points from which every point of the shape is visible along a segment staying inside it.",
+  "tex": "\\ker P=\\{p\\in P:[p,q]\\subseteq P\\ \\forall q\\in P\\}",
+  "example": "A convex polygon's kernel is the whole polygon. For a simple star-shaped polygon, intersect the interior half-planes of its edges.",
+  "note": "The kernel can be empty. A CGAL geometry kernel is software machinery, not this visible region.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "polygon"
+  ],
+  "type": "Visibility region",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "Computational Geometry: An Introduction",
+    "url": "https://www.cs.rpi.edu/~cutler/classes/computationalgeometry/F23/references/Computational_Geometry_An_Introduction.pdf",
+    "publisher": "Preparata and Shamos; RPI-hosted text",
+    "kind": "Mathematical textbook"
+   }
+  ],
+  "plate": "The Remnant"
+ }
+]

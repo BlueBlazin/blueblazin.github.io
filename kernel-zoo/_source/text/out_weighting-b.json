@@ -1,0 +1,193 @@
+{
+ "fejer": {
+  "short": "The always-nonnegative kernel that averages Fourier partial sums.",
+  "body": "The Fejér kernel F_N is the average of the first N + 1 Dirichlet kernels D_0, …, D_N. Convolving with it gives the Cesàro mean of the Fourier partial sums. Because F_N is nonnegative with mean value 1 on the circle, these means converge uniformly to f for every continuous periodic f.",
+  "tex": "F_N(\\theta)=\\frac{1}{N+1}\\sum_{k=0}^{N}D_k(\\theta)=\\frac{1}{N+1}\\left(\\frac{\\sin\\frac{(N+1)\\theta}{2}}{\\sin\\frac{\\theta}{2}}\\right)^{2}",
+  "read": "F_N at angle θ is the average of the Dirichlet kernels D_0 through D_N, which equals 1/(N + 1) times the square of a ratio of two sines.",
+  "example": "For N = 1, F_1(θ) = 1 + cos θ: never negative, with average 1 over the circle. Its peak F_N(0) = N + 1 grows while the average stays 1, so the weight concentrates near θ = 0.",
+  "why": "It is the weighting function inside the convolution integral that turns a function into its averaged Fourier approximation.",
+  "note": "Not the Dirichlet kernel D_N, which gives the plain partial sum S_N f. D_N takes negative values, and S_N f can diverge at a point even for continuous f.",
+  "variants": []
+ },
+ "path-kernel": {
+  "short": "The factor multiplying the unknown series in a generating-function equation.",
+  "body": "Counting problems such as lattice walks lead to equations K(z,u)F(z,u) = R(z,u), where R contains unknown series like F(z,0). The kernel method substitutes for u a root u_1(z) of K. The left side vanishes, so R(z,u_1(z)) = 0, which determines the unknowns.",
+  "tex": "K(z,u)\\,F(z,u)=R(z,u),\\qquad K\\bigl(z,u_1(z)\\bigr)=0\\;\\Rightarrow\\;R\\bigl(z,u_1(z)\\bigr)=0",
+  "read": "The kernel K times the generating function F, with z marking length and u marking final height, equals R; at a root u_1(z) of K, R must vanish too.",
+  "example": "For nonnegative walks with steps ±1, (u − z(1 + u²))F(z,u) = u − zF(z,0). The small root u_1(z) = (1 − √(1 − 4z²))/(2z) gives F(z,0) = u_1(z)/z, the Catalan numbers in z².",
+  "why": "The kernel is the coefficient at the core of the equation: make it vanish and the unknown function drops out.",
+  "note": "Only certain roots work: the root must be a formal series in z that tends to 0 as z → 0, so substituting it is legal. This has nothing to do with machine-learning kernel methods.",
+  "variants": []
+ },
+ "green": {
+  "short": "The response at x to a unit point source at y.",
+  "body": "For a linear differential operator L with fixed boundary conditions, the Green's function G(x,y) solves Lu = δ for a source at y. By linearity, the solution for any source f is a superposition of point responses. G is the integral kernel of the inverse operator L⁻¹.",
+  "tex": "L_xG(x,y)=\\delta(x-y),\\qquad u(x)=\\int G(x,y)\\,f(y)\\,dy",
+  "read": "Applying the operator L in x to G gives a delta spike at y; the solution u of Lu = f is f weighted by G and integrated over all source points y.",
+  "example": "For −u″ = f on (0,1) with u(0) = u(1) = 0, G(x,y) = min(x,y) − xy. A unit point load at y = 1/2 gives a tent-shaped displacement peaking at 1/4.",
+  "why": "G is the kernel inside the solution integral: it weights how much the source at y contributes to u at x.",
+  "note": "Not the null space (algebraic kernel) of L. G inverts L, and it changes whenever the operator, domain or boundary conditions change.",
+  "variants": [
+   "Resolvent kernels",
+   "Fundamental solutions",
+   "Electrostatic / wave Green's functions"
+  ]
+ },
+ "hilbert": {
+  "short": "The singular kernel 1/(πx) that shifts each nonzero frequency's phase by 90 degrees.",
+  "body": "The Hilbert transform convolves a signal with 1/(πx). The kernel is not integrable at 0, so the integral is a Cauchy principal value: cut out a small symmetric gap around y = x and let it shrink. In frequency terms, H multiplies the Fourier transform by −i sgn(ξ).",
+  "tex": "Hf(x)=\\frac{1}{\\pi}\\operatorname{p.v.}\\int_{-\\infty}^{\\infty}\\frac{f(y)}{x-y}\\,dy",
+  "read": "The Hilbert transform of f at x is 1/π times the principal-value integral, over all y, of f(y) divided by x − y.",
+  "example": "With this convention, H(cos ωx) = sin ωx for ω > 0. The analytic signal f + iHf gives a signal's instantaneous amplitude and phase, and Hilbert filters generate single-sideband radio signals.",
+  "why": "1/(π(x − y)) is the kernel inside the integral, weighting each value f(y) by its signed inverse distance to x.",
+  "note": "Unrelated to Hilbert spaces and their reproducing kernels, though both are named after David Hilbert. Sign and normalization conventions also differ between texts.",
+  "variants": []
+ },
+ "reconstruction": {
+  "short": "A function that fills in values between samples to rebuild a continuous signal.",
+  "body": "Each sample f[n] places a copy of the kernel h at its position, scaled by the sample value, and the copies are summed. To pass through the samples, h needs h(0) = 1 and h(k) = 0 at other integers. The kernel's shape trades sharpness against smoothness, aliasing and ringing.",
+  "tex": "\\tilde f(x)=\\sum_{n}f[n]\\,h(x-n)",
+  "read": "The reconstructed value at x is the sum over samples n of the sample value f[n] times the kernel h at x − n, with unit sample spacing.",
+  "example": "With the tent kernel h(x) = max(0, 1 − |x|) and samples 2 and 6 at n = 0 and 1, the value at x = 0.25 is 0.75·2 + 0.25·6 = 3: plain linear interpolation.",
+  "why": "The kernel is the fixed shape through which every sample, weighted by its value, contributes to each point between samples.",
+  "note": "Ideal sinc reconstruction, sinc(x) = sin(πx)/(πx), is exact only for bandlimited signals sampled above the Nyquist rate, and sinc never ends. Lanczos (windowed sinc) and bicubic kernels are finite-width compromises.",
+  "variants": [
+   "Nearest neighbor / box",
+   "Tent / bilinear",
+   "Bicubic",
+   "Sinc / Lanczos"
+  ]
+ },
+ "kpm": {
+  "short": "Damping factors that smooth a truncated Chebyshev expansion of a spectrum.",
+  "body": "The kernel polynomial method expands a function such as a density of states in Chebyshev polynomials, after rescaling the spectrum into [−1, 1]. Cutting the series at N terms causes Gibbs oscillations. Multiplying the moments μ_n by damping factors g_n amounts to convolving with a smooth positive kernel, such as Jackson's.",
+  "tex": "f_N(x)=\\frac{1}{\\pi\\sqrt{1-x^2}}\\Bigl[g_0\\mu_0+2\\sum_{n=1}^{N-1}g_n\\mu_n T_n(x)\\Bigr]",
+  "read": "The approximation at x is a Chebyshev series: the target's moments μ_n, times damping factors g_n, times Chebyshev polynomials T_n(x), with the weight 1/(π√(1 − x²)) in front.",
+  "example": "For the density of states of a large sparse Hamiltonian, the moments come from stochastic trace estimates. The Jackson kernel turns each sharp eigenvalue peak into a near-Gaussian of width about π/N.",
+  "why": "The damping factors g_n are the coefficients of a smoothing kernel convolved with the target, as with the Fejér kernel.",
+  "note": "The kernel is the set of damping factors g_n, not the moments μ_n. Taking all g_n = 1 (the Dirichlet kernel) is plain truncation and keeps the Gibbs oscillations.",
+  "variants": [
+   "Jackson",
+   "Lorentz",
+   "Dirichlet"
+  ]
+ },
+ "regression": {
+  "short": "Weights that let nearby observations count more in a local average.",
+  "body": "Nadaraya–Watson regression estimates E[Y | X = x] as a weighted mean of the observed y_i. Each weight K_h(x − x_i) comes from a kernel, often Gaussian or Epanechnikov, scaled by a bandwidth h. A small h follows the data closely but is noisy; a large h is smooth but biased.",
+  "tex": "\\hat m(x)=\\frac{\\sum_i K_h(x-x_i)\\,y_i}{\\sum_i K_h(x-x_i)},\\qquad K_h(u)=\\frac{1}{h}K\\!\\left(\\frac{u}{h}\\right)",
+  "read": "The estimate at x is the sum of responses y_i, each weighted by the kernel of its distance to x, divided by the total weight; h is the bandwidth.",
+  "example": "If responses 10 and 20 get kernel weights 3 and 1, the prediction is (3·10 + 1·20)/4 = 12.5. The statsmodels KernelReg class offers this local-constant estimator and a local-linear one.",
+  "why": "The kernel is the weighting function that sets how much the observation at x_i contributes to the estimate at x.",
+  "note": "This local smoother differs from kernel ridge regression, which fits a function in a reproducing-kernel Hilbert space, even when both use a Gaussian.",
+  "variants": []
+ },
+ "memory": {
+  "short": "A function weighting how a system's past velocities affect its present force.",
+  "body": "In a generalized Langevin equation, friction is not instantaneous: the drag at time t integrates past velocities, weighted by the memory kernel Γ. Such kernels arise when fast degrees of freedom, such as solvent molecules, are removed from the description. The random force then has autocorrelation k_B T Γ(t − s).",
+  "tex": "m\\,\\dot v(t)=-\\int_0^t\\Gamma(t-s)\\,v(s)\\,ds+F(t)+R(t)",
+  "read": "Mass times acceleration equals a friction force built from past velocities v(s) weighted by the kernel Γ(t − s), plus an external force F and a random force R.",
+  "example": "With Γ(t) = (γ/τ)·exp(−t/τ), velocities from roughly the last τ seconds dominate the drag. As τ → 0, the integral becomes ordinary instantaneous friction −γv(t).",
+  "why": "Γ is the kernel inside the friction integral, weighting each past moment by how long ago it was.",
+  "note": "This is a response function in time, not computer memory or an operating-system kernel. \"Memory\" means the force depends on the system's history.",
+  "variants": []
+ },
+ "mollifier": {
+  "short": "A narrow smooth bump whose convolution smooths a function while approximating it.",
+  "body": "A mollifier ρ is smooth, nonnegative, zero outside the unit ball, and integrates to 1. Rescaling it to width ε gives ρ_ε. Then f * ρ_ε is infinitely differentiable and tends to f as ε → 0, for example uniformly when f is continuous with compact support.",
+  "tex": "\\rho_\\varepsilon(x)=\\varepsilon^{-d}\\rho(x/\\varepsilon),\\qquad f*\\rho_\\varepsilon\\to f\\ \\text{as}\\ \\varepsilon\\to0",
+  "read": "ρ_ε is the bump ρ squeezed to width ε in d dimensions, its height scaled by ε^(−d) so its integral stays 1; convolving f with it approaches f.",
+  "example": "The standard bump is ρ(x) = C·exp(−1/(1 − |x|²)) for |x| < 1. Convolving a unit step with ρ_ε replaces the jump by a smooth ramp on (−ε, ε) and leaves the step unchanged elsewhere.",
+  "why": "ρ_ε is the kernel inside the convolution integral: it weights values of f near x to produce the smoothed value at x.",
+  "note": "Approximate identities are the broader class: Gaussian and Poisson kernels qualify but are never zero. A smoothing filter is an approximate identity only if it keeps total weight 1 and concentrates as ε → 0.",
+  "variants": []
+ },
+ "poisson": {
+  "short": "The weight that extends boundary values to a harmonic function inside a domain.",
+  "body": "Given values f on a boundary, the Dirichlet problem asks for a harmonic u (Δu = 0) inside that matches f. The Poisson kernel solves it: u at an interior point is a weighted average of f, with nearby boundary points weighted most. Its form depends on the domain; on the unit disk it is below.",
+  "tex": "u(re^{i\\theta})=\\frac{1}{2\\pi}\\int_{-\\pi}^{\\pi}P_r(\\theta-t)\\,f(t)\\,dt,\\qquad P_r(\\theta)=\\frac{1-r^2}{1-2r\\cos\\theta+r^2}",
+  "read": "The harmonic function at radius r and angle θ is the average of boundary values f(t), weighted by the Poisson kernel of the angle difference, for 0 ≤ r < 1.",
+  "example": "At the center, r = 0, every weight is 1, so u is the plain average of f. At r = 0.9, the nearest boundary point gets weight 19 and the opposite point about 0.053.",
+  "why": "P_r is the kernel inside the averaging integral, weighting how much each boundary value contributes to the interior point.",
+  "note": "Unrelated to the Poisson distribution. It is tied to the Green's function for Poisson's equation: up to sign, it is that function's normal derivative on the boundary.",
+  "variants": []
+ },
+ "shield": {
+  "short": "The detector response to a unit-strength point source of radiation.",
+  "body": "Point-kernel codes split a volume source, such as a tank of radioactive liquid, into many point sources and sum their kernels at the detector. The uncollided term combines inverse-square spreading with exponential attenuation in the shield. A buildup factor B approximately corrects for photons that scatter yet still arrive.",
+  "tex": "\\phi(r)=\\frac{S\\,B(\\mu r)\\,e^{-\\mu r}}{4\\pi r^2}",
+  "read": "Flux at distance r equals source strength S times buildup factor B times the attenuation e^(−μr), divided by the sphere area 4πr², with μ the attenuation coefficient.",
+  "example": "In a uniform absorber with μ = 0.5 cm⁻¹, moving a detector from 10 to 20 cm cuts the uncollided flux by 4 for distance and by e⁵ ≈ 148 for attenuation.",
+  "why": "It is the kernel in the volume integral: it weights each source point's contribution to the detector by distance and material in between.",
+  "note": "This idealized formula assumes one photon energy and a homogeneous medium. Real shielding design needs energy-dependent data, detailed geometry and validated codes.",
+  "variants": []
+ },
+ "sensitivity": {
+  "short": "A function mapping small model changes to the change in one measurement.",
+  "body": "Linearize a forward model around a reference model. A small perturbation δm then changes a datum d by an integral of δm weighted by the sensitivity kernel K_d, the Fréchet derivative of d with respect to m. Tomography stacks many such kernels into a linear system and inverts it.",
+  "tex": "\\delta d\\approx\\int_V K_d(\\mathbf r)\\,\\delta m(\\mathbf r)\\,d^3\\mathbf r",
+  "read": "The change in datum d is approximately the volume integral of the model perturbation δm at each point r, weighted by that datum's sensitivity kernel K_d.",
+  "example": "Ray theory puts all travel-time sensitivity on an infinitely thin ray. Finite-frequency kernels instead fill a \"banana-doughnut\" volume around the ray, with near-zero sensitivity on the ray itself.",
+  "why": "K_d is the kernel inside the linearized integral: it weights how much each location's model change affects the datum.",
+  "note": "A sensitivity kernel is a derivative of the forward model. It is not the resolution kernel, which describes how an inversion blurs the true model.",
+  "variants": []
+ },
+ "singular": {
+  "short": "An operator kernel that blows up like |x − y|^(−d) on the diagonal.",
+  "body": "A Calderón–Zygmund kernel K(x,y) on ℝ^d grows like |x − y|^(−d) near x = y, just too fast to be integrable. The operator is defined through principal values and cancellation. If it is bounded on L² and K obeys the bounds below, it is bounded on L^p for 1 < p < ∞.",
+  "tex": "|K(x,y)|\\le\\frac{C}{|x-y|^{d}},\\qquad|\\nabla K(x,y)|\\le\\frac{C}{|x-y|^{d+1}}",
+  "read": "The kernel's size is at most a constant C over the distance |x − y| to the power d, and its gradient at most C over the distance to the power d + 1.",
+  "example": "The Hilbert kernel 1/(π(x − y)) is the one-dimensional prototype. In ℝ^d, the Riesz transforms have kernels proportional to (x_j − y_j)/|x − y|^(d+1) and bound second derivatives of u by Δu.",
+  "why": "K is the kernel inside the operator's integral; \"singular\" marks the diagonal where that weighting function blows up.",
+  "note": "Blowing up at the right rate is not enough: the kernel needs cancellation, such as odd symmetry, plus an L² bound. The positive kernel 1/|x − y|^d gives no bounded operator.",
+  "variants": []
+ },
+ "sph": {
+  "short": "A smooth weighting function that turns particle values into continuous fields.",
+  "body": "Smoothed particle hydrodynamics represents a fluid as particles carrying mass m_j, density ρ_j and other quantities A_j. A field at any point is a kernel-weighted sum over nearby particles. The smoothing length h sets the kernel's width; the cubic spline kernel vanishes beyond 2h, so each particle has finitely many neighbors.",
+  "tex": "A(\\mathbf r)\\approx\\sum_j\\frac{m_j}{\\rho_j}\\,A_j\\,W(\\mathbf r-\\mathbf r_j,h)",
+  "read": "The field A at position r is approximately a sum over particles j of each value A_j, times the particle volume m_j/ρ_j, times the kernel W at their separation.",
+  "example": "Setting A = ρ gives the SPH density estimate ρ_i = Σ_j m_j W(r_i − r_j, h). Astrophysics codes such as GADGET use SPH to model gas in galaxy formation.",
+  "why": "W is the kernel inside the smoothing integral and its particle sum, weighting each neighbor's contribution by its distance.",
+  "note": "The smoothing kernel is a mathematical function. A GPU kernel is a program that may compute the particle sum; they are different layers.",
+  "variants": [
+   "Cubic spline",
+   "Wendland",
+   "Gaussian"
+  ]
+ },
+ "stein-prob": {
+  "short": "A function τ that makes an integration-by-parts identity hold for a random variable.",
+  "body": "For a random variable X with mean μ and density p, the Stein kernel τ satisfies the identity below for suitable test functions f. One formula is τ(x) = (1/p(x))∫_x^∞ (y − μ)p(y) dy. X is Gaussian exactly when τ is constant, so τ measures departure from normality.",
+  "tex": "\\mathbb E\\bigl[(X-\\mu)f(X)\\bigr]=\\mathbb E\\bigl[\\tau(X)\\,f'(X)\\bigr]",
+  "read": "The expected value of X minus its mean, times f(X), equals the expected value of the Stein kernel τ(X) times the derivative of f at X.",
+  "example": "For X ∼ N(μ, σ²), τ(x) = σ², which is Stein's lemma. For X uniform on [−1, 1], τ(x) = (1 − x²)/2; with f(x) = x, both sides equal 1/3.",
+  "why": "τ is the weighting function on f′ inside the expectation, carrying how X differs from a Gaussian.",
+  "note": "This τ is a function of one input. The two-input Stein kernel used in kernel Stein discrepancies is a different construction.",
+  "variants": []
+ },
+ "transform": {
+  "short": "The two-variable function that an integral transform multiplies against its input.",
+  "body": "An integral transform maps f to a new function by integrating f against a kernel K(s,t) that links each output variable s to each input variable t. The kernel defines the transform: complex exponentials give Fourier, decaying exponentials give Laplace, and Bessel functions give Hankel.",
+  "tex": "(Tf)(s)=\\int K(s,t)\\,f(t)\\,dt",
+  "read": "The transform of f at s is the integral over t of the kernel K(s,t) times f(t).",
+  "example": "The Fourier kernel is e^(−2πiξx), so f̂(ξ) = ∫ f(x)e^(−2πiξx) dx. The one-sided Laplace kernel is e^(−st) on t ≥ 0, which turns linear differential equations into algebraic ones.",
+  "why": "K is the kernel inside the transform's integral, weighting each input value f(t) for each output s.",
+  "note": "A transform kernel can be complex and oscillating, with no meaning as a similarity or probability. Fourier conventions differ in sign and in where the 2π goes.",
+  "variants": [
+   "Fourier",
+   "Laplace",
+   "Hankel / Bessel transforms"
+  ]
+ },
+ "volterra": {
+  "short": "A multi-lag impulse response describing one order of a nonlinear system.",
+  "body": "A Volterra series extends the convolution of linear systems to nonlinear time-invariant systems with fading memory. The n-th order term weights products of n past input values by a kernel h_n(τ_1, …, τ_n) and integrates over all lags. The first-order kernel h_1 is the ordinary impulse response.",
+  "tex": "y(t)=h_0+\\int h_1(\\tau)\\,x(t-\\tau)\\,d\\tau+\\iint h_2(\\tau_1,\\tau_2)\\,x(t-\\tau_1)\\,x(t-\\tau_2)\\,d\\tau_1\\,d\\tau_2+\\cdots",
+  "read": "The output is a constant h_0, plus past inputs weighted by the one-lag kernel h_1, plus products of input pairs weighted by the two-lag kernel h_2, and so on.",
+  "example": "A linear filter g followed by a squarer, y = (g * x)², has only a second-order kernel: h_2(τ_1, τ_2) = g(τ_1)g(τ_2). Volterra models are used for power-amplifier distortion.",
+  "why": "Each h_n is the kernel inside one integral of the series, weighting how much each combination of past inputs contributes.",
+  "note": "Not the kernel K(t,s) of a Volterra integral equation, ∫_0^t K(t,s)u(s) ds, which is linear with a variable upper limit. Both are named after Vito Volterra.",
+  "variants": []
+ }
+}

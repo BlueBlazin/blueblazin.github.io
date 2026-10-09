@@ -1,0 +1,78 @@
+{
+ "atomic": {
+  "short": "In Lewis's 1916 atom model, the nucleus plus all inner electrons.",
+  "body": "G. N. Lewis split each atom into two parts: an inner kernel and an outer shell. The kernel holds the nucleus and the inner electrons and does not change in chemical reactions. The valence electrons in the shell form bonds.",
+  "tex": "\\text{atomic kernel} = \\text{nucleus} + \\text{inner electrons}",
+  "read": "The atomic kernel equals the nucleus together with the inner (core) electrons, leaving out the outer valence electrons.",
+  "example": "Carbon has 6 protons and 2 inner electrons, so its kernel carries a net charge of +4. Its 4 valence electrons sit in the shell outside the kernel.",
+  "why": "The kernel is the compact inner core of the atom, what remains once the outer valence shell is set aside.",
+  "note": "Don't confuse it with the nucleus: the kernel also includes the inner electrons. Lewis's model predates quantum mechanics, and modern chemists usually say \"core\" instead.",
+  "variants": []
+ },
+ "flame": {
+  "short": "A small hot, reacting gas region that may grow into a flame.",
+  "body": "An ignition source such as a spark heats a small volume of fuel-air mixture until reactions start. If the heat they release outpaces heat loss and the stretching of the kernel's curved surface, the kernel grows into a self-sustaining flame. If not, it cools and goes out.",
+  "tex": "",
+  "read": "",
+  "example": "In a gasoline engine, each spark-plug discharge creates a flame kernel. If it survives, the flame spreads through the cylinder; if it is quenched, the cylinder misfires.",
+  "why": "The kernel is the small core from which the whole flame grows, much as a plant grows from a seed.",
+  "note": "Don't confuse it with a numerical kernel (a filter or weighting function) used in combustion simulations. This kernel is a physical region of gas.",
+  "variants": []
+ },
+ "grain": {
+  "short": "A single cereal grain, botanically a fruit fused to its one seed.",
+  "body": "Botanists call a cereal grain a caryopsis: a dry fruit whose thin outer wall is fused to the seed coat. A corn kernel has an outer skin (pericarp), a starchy endosperm that makes up most of its weight, and an embryo called the germ.",
+  "tex": "",
+  "read": "",
+  "example": "Corn wet milling separates kernels into starch, germ (pressed for corn oil), fiber and protein. Whole-wheat flour grinds the entire wheat kernel, while white flour keeps mostly the endosperm.",
+  "why": "Kernel originally meant a small seed or grain, so a grain kernel is the word's oldest, most literal sense.",
+  "note": "Don't confuse the kernel with the germ. The germ is only the embryo inside the kernel; the kernel is the whole grain.",
+  "variants": [
+   "Corn (maize)",
+   "Wheat",
+   "Rice",
+   "Other cereal grains"
+  ]
+ },
+ "fuel": {
+  "short": "The tiny uranium-bearing sphere at the center of a coated fuel particle.",
+  "body": "In TRISO (tristructural isotropic) fuel, a kernel of uranium dioxide or uranium oxycarbide sits at the center of a particle about the size of a poppy seed. Layers of porous carbon, pyrolytic carbon and silicon carbide surround it and hold in the fission products.",
+  "tex": "\\text{fuel kernel} \\subset \\text{TRISO particle}",
+  "read": "The fuel kernel is contained within the TRISO particle, which wraps it in protective coating layers.",
+  "example": "High-temperature gas reactors pack thousands of TRISO particles into graphite pebbles or cylindrical compacts. Fission happens in each kernel, while its coatings keep the radioactive products inside.",
+  "why": "The kernel is the fuel-bearing core at the very center of the particle, wrapped in layers like a seed in its shell.",
+  "note": "Don't confuse it with a radiation point kernel, which is a mathematical function describing how radiation spreads from a point source. The fuel kernel is a physical piece of material.",
+  "variants": []
+ },
+ "nut": {
+  "short": "The edible seed inside a nut's shell.",
+  "body": "In nut growing and processing, the kernel is the seed recovered once the shell is cracked and removed. Processors grade kernels by traits such as color and shriveling, and track how much kernel a batch of in-shell nuts yields. Culinary nuts need not be nuts botanically.",
+  "tex": "",
+  "read": "",
+  "example": "Crack a walnut and the wrinkled, lobed seed inside is the kernel. Lighter kernel color, little shriveling and a high kernel yield mark a better crop.",
+  "why": "The kernel is the core left inside once the hard outer shell is removed.",
+  "note": "Don't confuse the culinary label with botany. An almond is the seed of a drupe and a peanut is a legume seed, yet processors still call the edible part the kernel.",
+  "variants": []
+ },
+ "spice": {
+  "short": "A data file read by SPICE, NASA's toolkit for space mission geometry.",
+  "body": "SPICE, built by NASA's Navigation and Ancillary Information Facility (NAIF) at JPL, keeps its data in files called kernels. Each kernel type holds one kind of data, such as ephemerides, orientations or time conversions, in binary or text form. A program loads the kernels it needs, then queries positions, orientations and times.",
+  "tex": "\\mathbf{r}(t) = \\mathbf{x}_{\\text{target}}(t) - \\mathbf{x}_{\\text{observer}}(t)",
+  "read": "The geometric position r of a target relative to an observer at ephemeris time t is the target's position minus the observer's, both taken from loaded SPK kernels.",
+  "example": "To find where Mars appears from Earth at a given UTC time, load a leapseconds kernel and a planetary ephemeris such as de440.bsp, convert the time with str2et, then call spkpos.",
+  "why": "The kernels hold the core data that every SPICE computation draws on, kept separate from the toolkit's code.",
+  "note": "Don't confuse it with the SPICE electronic circuit simulator, or with code: a SPICE kernel is data, never executed. A meta-kernel is a text file listing other kernels to load.",
+  "variants": [
+   "SPK: Positions and velocities (ephemerides)",
+   "CK: Time-varying orientation (pointing), optionally with angular rates",
+   "PCK: Body constants, shapes and orientation models",
+   "FK: Reference-frame definitions",
+   "IK: Instrument geometry and parameters",
+   "LSK: Leapseconds and time-conversion constants",
+   "SCLK: Spacecraft-clock correlation and conversion",
+   "DSK: Detailed shape models",
+   "EK: Event information; less commonly used today",
+   "MK (meta-kernel): An ordered list of kernel files to load"
+  ]
+ }
+}

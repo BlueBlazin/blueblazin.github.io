@@ -1,0 +1,126 @@
+{
+  "linux": {
+    "short": "The core of an operating system, managing hardware and protected resources.",
+    "body": "An operating-system kernel runs in a privileged processor mode and provides core mechanisms: process scheduling, memory management, device access and protection between programs. Applications request its services through system calls. Linux is a prominent example.",
+    "tex": "\\text{applications} \\xrightarrow{\\text{system calls}} \\text{kernel} \\longrightarrow \\text{hardware}",
+    "read": "Applications ask the kernel for services through system calls, and the kernel in turn drives the hardware on their behalf.",
+    "example": "When a program makes the read() system call on a file, the CPU switches into kernel mode. Linux checks permissions, fetches the data through the filesystem and disk driver, copies it into the program's memory and returns.",
+    "why": "It is the innermost layer of the system, the core that sits between every program and the hardware.",
+    "note": "The Linux kernel is not a full Linux distribution, which adds libraries, tools and applications. \"Kernel mode\" names the privilege level the kernel runs in, not a separate meaning.",
+    "variants": [
+      "Monolithic (often modular): Linux",
+      "Microkernel: seL4",
+      "Hybrid: common classification for Windows and XNU",
+      "Real-time OS kernels"
+    ]
+  },
+  "lean": {
+    "short": "The small trusted checker that verifies every Lean proof term.",
+    "body": "Lean's kernel type-checks terms in its core dependent type theory, where a proof of a proposition P is a term of type P. Elaboration and tactics, which are large and complex, only produce candidate terms; the kernel checks each one independently. A theorem is accepted only if its term passes this check.",
+    "tex": "\\Gamma \\vdash p : P",
+    "read": "In context Γ (the hypotheses and declarations in scope), the term p has type P, meaning p is a proof of the proposition P.",
+    "example": "The term fun h => h proves P → P. A tactic script such as intro h; exact h builds this term, and the kernel then checks that it really has type P → P.",
+    "why": "It is the small trusted core of the system: other components may have bugs, but nothing is accepted unless it passes the kernel.",
+    "note": "Kernel acceptance is relative to the declared statement and axioms. It cannot tell whether a formal statement matches the intended informal claim, and sorry adds an unproved assumption.",
+    "variants": [
+      "Lean core type checker",
+      "Rocq / Coq kernel (related architecture)",
+      "Proof terms and declared axioms"
+    ]
+  },
+  "jupyter": {
+    "short": "The separate language process that runs a notebook's code.",
+    "body": "A Jupyter kernel is a process, separate from the notebook interface, that executes code in one language and holds the program state. The interface sends code and receives results over the Jupyter messaging protocol. One interface can therefore work with Python, Julia, R and many other languages.",
+    "tex": "\\text{notebook UI} \\xleftrightarrow{\\text{messages}} \\text{kernel process}",
+    "read": "The notebook interface and the kernel process exchange messages in both directions: code goes to the kernel, and results come back to the interface.",
+    "example": "Run x = 10 in one Python cell and print(x) in another: the kernel remembers x between cells. Restarting the kernel wipes that state, though the saved outputs stay visible in the notebook.",
+    "why": "It is the core process that actually computes, while the notebook around it only sends input and displays results.",
+    "note": "Outputs shown in a notebook may be stale and are not the kernel's live state. This kernel is unrelated to the OS kernel or a GPU compute kernel.",
+    "variants": [
+      "IPython / ipykernel",
+      "IJulia",
+      "IRkernel",
+      "Other Jupyter language kernels"
+    ]
+  },
+  "microkernel": {
+    "short": "A minimal privileged OS core, with most services running as ordinary processes.",
+    "body": "A microkernel keeps only essential mechanisms in privileged mode: address spaces, thread scheduling and inter-process communication (IPC). Filesystems, device drivers and network stacks run as separate user-level processes that talk through IPC. A small core is easier to verify and limits the damage a faulty driver can do.",
+    "tex": "\\text{user-level services} \\xleftrightarrow{\\text{IPC}} \\text{microkernel}",
+    "read": "User-level services communicate with each other and with the small kernel by inter-process communication (IPC), the message passing that the microkernel provides.",
+    "example": "seL4 is a microkernel with a machine-checked proof that its C implementation matches its specification. On seL4, a filesystem runs as a user-level component that other programs reach through IPC.",
+    "why": "Like other OS kernels it is the privileged core of the system, here pared down to the minimum.",
+    "note": "Unrelated to a BLAS or GEMM microkernel, which is a small hand-tuned inner loop for matrix multiplication. Where the kernel boundary falls also varies between microkernel designs.",
+    "variants": []
+  },
+  "cgal": {
+    "short": "A library component bundling geometric types, predicates and constructions.",
+    "body": "In CGAL, a kernel supplies basic geometric objects, such as points, segments and lines, plus operations on them. Predicates answer yes/no or sign questions, like whether three points make a left turn; constructions build new objects, like an intersection point. Kernels differ in number representation and in which results are computed exactly.",
+    "tex": "\\operatorname{orient}(p,q,r) = \\operatorname{sign}\\det\\begin{pmatrix} q_x - p_x & r_x - p_x \\\\ q_y - p_y & r_y - p_y \\end{pmatrix}",
+    "read": "The orientation of points p, q, r is the sign of the determinant of the vectors q minus p and r minus p: positive for a left turn, negative for right, zero if collinear.",
+    "example": "CGAL's Exact_predicates_inexact_constructions_kernel always decides predicates like orientation correctly, but stores constructed points in floating point, so they may be slightly off. It is fast and suits algorithms like convex hulls that need only predicates.",
+    "why": "It is the core set of primitives on which every higher-level geometric algorithm in the library is built.",
+    "note": "Unrelated to the kernel of a polygon, the region from which the whole polygon is visible, although both appear in computational geometry.",
+    "variants": []
+  },
+  "cad": {
+    "short": "The engine inside CAD software that builds and edits solid models.",
+    "body": "Most modeling kernels represent a solid by its boundary: surfaces and curves joined into a connected structure of faces, edges and vertices. The kernel performs operations on these models, such as Boolean union, subtraction and intersection, blending and offsetting. CAD applications build their interface and design features on top.",
+    "tex": "A \\cup B, \\quad A \\cap B, \\quad A \\setminus B",
+    "read": "Boolean operations combine solids A and B: the union keeps material in either, the intersection keeps the shared part, and the difference removes B from A.",
+    "example": "To cut a hole, a CAD program asks the kernel to subtract a cylinder from a block. Parasolid (Siemens) and Open CASCADE are widely used kernels of this kind.",
+    "why": "It is the core engine that all of a CAD program's geometry operations pass through.",
+    "note": "Unrelated to the kernel of a polygon, the region from which the whole polygon is visible. It also differs from a CGAL-style kernel, which supplies lower-level primitives rather than full solid modeling.",
+    "variants": []
+  },
+  "exokernel": {
+    "short": "A minimal kernel that protects hardware resources but leaves abstractions to applications.",
+    "body": "An exokernel separates protection from management. It securely shares raw resources such as disk blocks, memory pages and processor time, tracking which application owns what. Abstractions like files and virtual-memory policies live in library operating systems linked into each application, so programs can customize them.",
+    "tex": "\\underbrace{\\text{protection}}_{\\text{exokernel}} \\;+\\; \\underbrace{\\text{abstractions and policy}}_{\\text{library OS}}",
+    "read": "The exokernel handles only the protection of resources, while a library OS linked into each application supplies the abstractions and management policy.",
+    "example": "An application-specific library OS can choose its own file layout or page-replacement policy, while the exokernel only checks that the application owns the disk blocks and memory pages it touches.",
+    "why": "It keeps only the irreducible core of a kernel, secure resource protection, and moves everything else out.",
+    "note": "Not a synonym for microkernel. A microkernel moves services into server processes but still offers abstractions; an exokernel exposes low-level resources and pushes abstractions into application libraries.",
+    "variants": []
+  },
+  "lcf": {
+    "short": "The small trusted code that alone can create theorem values.",
+    "body": "In LCF-style provers such as HOL and Isabelle, theorems belong to an abstract type. The only functions that can create values of that type implement the primitive inference rules, so the programming language's type system guarantees every theorem was derived by those rules. Tactics and decision procedures can be large, but must build results through the kernel.",
+    "tex": "\\dfrac{\\Gamma \\vdash p \\Rightarrow q \\qquad \\Delta \\vdash p}{\\Gamma \\cup \\Delta \\vdash q}",
+    "read": "If hypotheses Γ prove p implies q, and hypotheses Δ prove p, then Γ and Δ together prove q: modus ponens, a typical primitive rule.",
+    "example": "The HOL Light kernel, written in OCaml, has ten primitive inference rules. A tactic that runs a large automated search still produces its theorem only by calling those rules.",
+    "why": "It is the small core of trusted code through which every theorem must pass.",
+    "note": "Related to Lean's kernel but not identical: an LCF kernel guards theorem creation through an abstract type, while Lean's kernel type-checks complete proof terms after they are built.",
+    "variants": []
+  },
+  "security": {
+    "short": "The trusted hardware, firmware and software that implement a reference monitor.",
+    "body": "A reference monitor is the concept of a mechanism that checks every access by a subject (a user or process) to an object (a file, device or memory region). A security kernel implements it and must mediate all accesses, be tamperproof, and be small enough to verify. It is part of the system's trusted computing base.",
+    "tex": "\\text{subject} \\xrightarrow{\\text{checked access}} \\text{object}",
+    "read": "A subject reaches an object only through an access that the security kernel has checked against the system's security policy.",
+    "example": "When a process opens a classified file, a security kernel compares the process's clearance with the file's classification label and allows or denies the access.",
+    "why": "It is the small, protected core of a system's security, which every access must pass through.",
+    "note": "Not necessarily the same as the OS kernel. A security kernel may include hardware and firmware, and need not cover all of the OS kernel's code.",
+    "variants": []
+  },
+  "simulation": {
+    "short": "The core scheduler of a simulator, which orders events and advances simulated time.",
+    "body": "A simulation kernel keeps a queue of pending events, runs the processes each event triggers, and advances simulated time to the next event. In SystemC it also runs delta cycles: rounds of evaluation and update at the same simulated time, which let signal changes propagate before time moves on.",
+    "tex": "(t, \\delta) \\longmapsto (t, \\delta + 1) \\quad \\text{or} \\quad (t', 0), \\; t' > t",
+    "read": "The simulator's position is a time t and delta count δ: the kernel either runs another delta cycle at the same time or jumps to a later time t′ and resets δ.",
+    "example": "In a SystemC circuit model, a clock edge at 10 ns triggers a register, whose new output triggers combinational logic in a following delta cycle, still at 10 ns. Only when no updates remain does the kernel advance time.",
+    "why": "It is the core engine of the simulator: every process and event passes through its scheduling loop.",
+    "note": "Simulated time is unrelated to wall-clock time. A GPU kernel may speed up a simulation's numerical work, but it is not the event scheduler.",
+    "variants": []
+  },
+  "wolfram": {
+    "short": "The process that evaluates Wolfram Language code, separate from the notebook front end.",
+    "body": "Mathematica and other Wolfram systems split into two programs. The front end handles notebooks, input and display; the kernel evaluates Wolfram Language expressions, applying rules until the result stops changing. They communicate through WSTP, Wolfram's message protocol, so a kernel can also run without a front end or on a remote machine.",
+    "tex": "\\mathtt{Integrate}[x^2, x] \\longmapsto \\frac{x^3}{3}",
+    "read": "The kernel takes the expression Integrate[x^2, x], the integral of x squared with respect to x, and evaluates it to x cubed over 3.",
+    "example": "Typing Integrate[x^2, x] in a notebook sends the expression to the kernel, which returns x^3/3 for the front end to display. Quitting the kernel clears all definitions while the notebook stays open.",
+    "why": "It is the computational core of the system; the front end is only the interface around it.",
+    "note": "This is a software process, not a mathematical kernel function, though the Wolfram kernel can compute with such functions.",
+    "variants": []
+  }
+}

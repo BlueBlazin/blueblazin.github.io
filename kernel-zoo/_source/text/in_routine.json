@@ -1,0 +1,303 @@
+[
+ {
+  "id": "cuda",
+  "name": "CUDA kernel",
+  "formalName": "CUDA kernel",
+  "domain": "GPU programming",
+  "short": "A device function launched over a grid of threads.",
+  "body": "A CUDA kernel is a GPU entry-point function. A launch specifies a grid of thread blocks; thread indices let each invocation work on a different portion of the input.",
+  "tex": "i=\\text{blockIdx.x}\\cdot\\text{blockDim.x}+\\text{threadIdx.x}",
+  "example": "For vector addition, each in-range thread computes c[i]=a[i]+b[i]. A bounds check handles a final partially used block.",
+  "note": "The routine can compute any supported operation. It need not be a convolution or an ML similarity kernel.",
+  "variants": [],
+  "code": "__global__ void add(const float* a, const float* b,\n                    float* c, int n) {\n  int i = blockIdx.x * blockDim.x + threadIdx.x;\n  if (i < n) c[i] = a[i] + b[i];\n}\n// Device pointers assumed; n > 0.\nadd<<<(n + 255) / 256, 256>>>(a, b, c, n);",
+  "refs": [
+   "cuda"
+  ],
+  "type": "GPU routine",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "Writing SIMT Kernels",
+    "url": "https://docs.nvidia.com/cuda/cuda-programming-guide/02-basics/writing-cuda-kernels.html",
+    "publisher": "NVIDIA",
+    "kind": "Documentation"
+   }
+  ],
+  "plate": "The Routine"
+ },
+ {
+  "id": "triton",
+  "name": "Triton kernel",
+  "formalName": "Triton kernel",
+  "domain": "Deep-learning infrastructure",
+  "short": "A program written for tiled GPU computation.",
+  "body": "Triton kernels express operations on blocks of elements. Program IDs divide work into tiles, while the compiler maps those block operations to device execution.",
+  "tex": "\\text{offsets}=\\text{program ID}\\cdot B+[0,\\ldots,B-1]",
+  "example": "A block-vector-add program loads B positions, masks out-of-range offsets, adds the values and stores a tile.",
+  "note": "A Triton program is not one scalar CUDA thread. The programming abstraction exposes blocks of data.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "triton"
+  ],
+  "type": "Executable routine",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "Vector Addition",
+    "url": "https://triton-lang.org/main/getting-started/tutorials/01-vector-add.html",
+    "publisher": "Triton",
+    "kind": "Documentation"
+   }
+  ],
+  "plate": "The Routine"
+ },
+ {
+  "id": "pallas",
+  "name": "Pallas kernel",
+  "formalName": "Pallas kernel",
+  "domain": "JAX · GPU / TPU programming",
+  "short": "A custom accelerator routine expressed through JAX APIs.",
+  "body": "Pallas provides lower-level kernel programming with explicit memory access and division of work across accelerator compute units. It supports GPU and TPU programming through backend-dependent paths.",
+  "tex": "\\text{input refs}\\longmapsto\\text{output refs}",
+  "example": "A vector-add kernel loads tiles from references, adds them with JAX array operations, and writes an output tile.",
+  "note": "An ordinary JAX function is not itself necessarily a single Pallas or hardware kernel. Backends and experimental APIs evolve.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "pallas"
+  ],
+  "type": "Executable routine",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "Pallas Quickstart",
+    "url": "https://docs.jax.dev/en/latest/pallas/quickstart.html",
+    "publisher": "JAX",
+    "kind": "Documentation"
+   }
+  ],
+  "plate": "The Routine"
+ },
+ {
+  "id": "compute-cpu",
+  "name": "CPU numerical kernel / BLAS microkernel",
+  "formalName": "CPU numerical kernel / BLAS microkernel",
+  "domain": "Scientific computing · performance",
+  "short": "A tightly optimized numerical routine.",
+  "body": "Kernel can name a performance-critical computation on any processor. In BLIS, a GEMM microkernel computes a small matrix tile and is embedded in larger blocking loops.",
+  "tex": "C_{\\rm tile}\\mathrel{+}=A_{\\rm panel}B_{\\rm panel}",
+  "example": "A CPU microkernel keeps a small output tile in registers and uses SIMD instructions to accumulate products.",
+  "note": "A BLAS microkernel is a numerical routine, not a small operating-system kernel.",
+  "variants": [
+   "GEMM / dot-product kernels",
+   "SIMD inner loops",
+   "Benchmark computational kernels"
+  ],
+  "code": null,
+  "refs": [
+   "blas"
+  ],
+  "type": "Executable routine",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "Anatomy of High-Performance Many-Threaded Matrix Multiplication",
+    "url": "https://www.cs.utexas.edu/~flame/pubs/blis3_ipdps14.pdf",
+    "publisher": "Smith, van de Geijn et al. / UT Austin",
+    "kind": "Research paper"
+   }
+  ],
+  "plate": "The Routine"
+ },
+ {
+  "id": "metal",
+  "name": "Metal compute kernel",
+  "formalName": "Metal compute kernel",
+  "domain": "Apple GPU programming",
+  "short": "A Metal function with the kernel entry-point attribute.",
+  "body": "Metal distinguishes vertex, fragment and kernel entry points. A compute kernel runs threads arranged into threadgroups and a grid.",
+  "tex": "i=\\text{thread\\_position\\_in\\_grid}",
+  "example": "A Metal compute function can add vectors or apply an image operation on an Apple GPU.",
+  "note": "The word kernel selects a compute entry point in the language. Vertex and fragment entry points have different roles.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "metal"
+  ],
+  "type": "Executable routine",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "Metal library function entry points",
+    "url": "https://developer.apple.com/documentation/metal/mtllibrary/functionnames",
+    "publisher": "Apple",
+    "kind": "Documentation"
+   }
+  ],
+  "plate": "The Routine"
+ },
+ {
+  "id": "opencl",
+  "name": "OpenCL kernel",
+  "formalName": "OpenCL kernel",
+  "domain": "Heterogeneous computing",
+  "short": "An entry point executed by OpenCL work-items.",
+  "body": "OpenCL C marks kernel entry points with __kernel or kernel. Work-items are organized into work-groups over an index space, called an NDRange.",
+  "tex": "i=\\operatorname{get\\_global\\_id}(0)",
+  "example": "A vector-add work-item reads a[i] and b[i] and writes c[i], with i obtained from its global ID.",
+  "note": "OpenCL kernels can target supported device types beyond GPUs. A work-group is analogous to, but not identical in all details to, a CUDA block.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "opencl"
+  ],
+  "type": "Executable routine",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "Qualifiers for Kernel Functions",
+    "url": "https://registry.khronos.org/OpenCL/specs/unified/refpages/man/html/kernel.html",
+    "publisher": "Khronos Group",
+    "kind": "Specification"
+   }
+  ],
+  "plate": "The Routine"
+ },
+ {
+  "id": "hip",
+  "name": "HIP kernel",
+  "formalName": "HIP kernel",
+  "domain": "AMD · portable GPU programming",
+  "short": "A GPU entry point in the HIP programming model.",
+  "body": "HIP uses CUDA-like C++ syntax and a thread/block model. A __global__ function denotes a device kernel entry point.",
+  "tex": "i=\\text{blockIdx.x}\\cdot\\text{blockDim.x}+\\text{threadIdx.x}",
+  "example": "A vector-add kernel uses the same familiar global-index pattern, while HIP supplies the relevant compilation and runtime layer.",
+  "note": "This is the executable-computation meaning of kernel; portability does not make hardware performance or every implementation detail identical.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "hip"
+  ],
+  "type": "Executable routine",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "Introduction to the HIP programming model",
+    "url": "https://rocm.docs.amd.com/projects/HIP/en/develop/understand/programming_model.html",
+    "publisher": "AMD",
+    "kind": "Documentation"
+   }
+  ],
+  "plate": "The Routine"
+ },
+ {
+  "id": "fusion",
+  "name": "Fused / compiler-generated kernel",
+  "formalName": "Fused / compiler-generated kernel",
+  "domain": "XLA · optimizing compilers",
+  "short": "A routine combining several computations.",
+  "body": "A compiler may combine several operations into a generated device kernel, reducing intermediate storage and launch overhead. XLA:GPU describes its fusion operation as compiling to one GPU kernel.",
+  "tex": "y=\\max(0,a\\cdot x+b)",
+  "example": "A fused pointwise routine can compute multiplication, addition and ReLU while keeping intermediates in registers.",
+  "note": "Fusion is a compiler choice with performance constraints. One high-level function or model does not always become one kernel.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "fusion"
+  ],
+  "type": "Executable routine",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "XLA:GPU Architecture Overview",
+    "url": "https://openxla.org/xla/gpu_architecture",
+    "publisher": "OpenXLA",
+    "kind": "Documentation"
+   }
+  ],
+  "plate": "The Routine"
+ },
+ {
+  "id": "dispatch",
+  "name": "Framework operator kernel",
+  "formalName": "Framework operator kernel",
+  "domain": "PyTorch · tensor runtimes",
+  "short": "An implementation selected for an operator and backend.",
+  "body": "PyTorch's dispatcher selects registered implementations according to dispatch keys derived from tensors and execution state. Kernels can implement CPU, CUDA, autograd or other behavior.",
+  "tex": "\\text{operator + dispatch key}\\longmapsto\\text{implementation}",
+  "example": "The same operation may dispatch to a CPU implementation for a CPU tensor and another implementation for a CUDA tensor.",
+  "note": "An operator kernel may launch several GPU kernels, call a library, or run entirely on the CPU. It is not necessarily one device launch.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "dispatch"
+  ],
+  "type": "Executable routine",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "Registering a Dispatched Operator in C++",
+    "url": "https://docs.pytorch.org/tutorials/advanced/dispatcher",
+    "publisher": "PyTorch",
+    "kind": "Documentation"
+   }
+  ],
+  "plate": "The Routine"
+ },
+ {
+  "id": "tf",
+  "name": "TensorFlow OpKernel",
+  "formalName": "TensorFlow OpKernel",
+  "domain": "TensorFlow internals",
+  "short": "The concrete computation implementing an operation.",
+  "body": "A TensorFlow custom operation can have a C++ OpKernel class that supplies its Compute method. Registration associates implementations with devices and type constraints.",
+  "tex": "\\text{operation schema}\\longmapsto\\text{OpKernel implementation}",
+  "example": "A custom CPU operation derives from OpKernel, checks its inputs, allocates an output and computes that output.",
+  "note": "The graph operation and its implementation are different layers. An OpKernel need not be a CUDA kernel.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "tf"
+  ],
+  "type": "Executable routine",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "Create an op",
+    "url": "https://www.tensorflow.org/guide/create_op",
+    "publisher": "TensorFlow",
+    "kind": "Documentation"
+   }
+  ],
+  "plate": "The Routine"
+ },
+ {
+  "id": "shader",
+  "name": "Compute shader / compute kernel",
+  "formalName": "Compute shader / compute kernel",
+  "domain": "Graphics · GPGPU",
+  "short": "A parallel compute entry point dispatched by a graphics API.",
+  "body": "Compute shaders run invocations in workgroups, without requiring the vertex-to-fragment graphics pipeline. Some tools and discussions call these compute kernels.",
+  "tex": "i=\\text{global invocation ID}",
+  "example": "A Vulkan compute dispatch can update particles or multiply arrays; each invocation uses its ID to find its work.",
+  "note": "A shader is not always a compute kernel: vertex and fragment shaders serve different pipeline stages.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "shader"
+  ],
+  "type": "Executable routine",
+  "status": "API-dependent terminology",
+  "sources": [
+   {
+    "title": "Compute Shaders",
+    "url": "https://docs.vulkan.org/guide/latest/compute_shaders.html",
+    "publisher": "Khronos Group",
+    "kind": "Documentation"
+   }
+  ],
+  "plate": "The Routine"
+ }
+]

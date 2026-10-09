@@ -1,2 +1,7 @@
+_source/raw/
+_source/raw-light/
+_source/raw-rejected/
+_source/samples/
+API_KEY
 __pycache__/
-*.pyc
+.DS_Store

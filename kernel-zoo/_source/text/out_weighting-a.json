@@ -1,0 +1,195 @@
+{
+  "cnn": {
+    "short": "A small learned array of weights that a convolution layer slides across its input.",
+    "body": "A convolutional layer learns one weight tensor per output channel and reuses it at every spatial position. Each output value is a bias plus a weighted sum over a small window of all input channels. Training tunes the weights so each filter responds to useful patterns such as edges or textures.",
+    "tex": "Y_o[p,q]=b_o+\\sum_{c}\\sum_{i,j}W_{o,c,i,j}\\,X_c[p+i,\\,q+j]",
+    "read": "Output channel o at position (p, q) equals its bias b_o plus the sum, over input channels c and window offsets i and j, of weight W times input X.",
+    "example": "A PyTorch Conv2d layer with 3 input channels, 8 output channels and 3×3 filters stores a weight tensor of shape 8×3×3×3: 216 weights, plus 8 optional biases.",
+    "why": "It plays the role of the convolution kernel from signal processing: the weighting function slid across the input.",
+    "note": "PyTorch's Conv2d actually computes cross-correlation, with no flip. These weight tensors are also distinct from GPU or CPU kernels, the compiled programs that apply them.",
+    "variants": []
+  },
+  "convolution": {
+    "short": "A single weighting function that is shifted to every point to mix a signal.",
+    "body": "Convolution is the special case of an integral operator whose kernel depends only on the offset: K(x, y) = k(x − y). One function k then sets how nearby input values are mixed at every location. This translation invariance is why convolution describes blurring, smoothing and linear time-invariant systems.",
+    "tex": "(f*k)(x)=\\int_{-\\infty}^{\\infty} f(y)\\,k(x-y)\\,dy",
+    "read": "The convolution of signal f with kernel k at point x is the integral over all y of f at y times k evaluated at the offset x minus y.",
+    "example": "Convolving with a box kernel equal to 1/(2a) on [−a, a] replaces each value by its average over a window of width 2a. Convolving a unit impulse with k returns k itself.",
+    "why": "The kernel is the fixed function inside the convolution integral that does all the weighting.",
+    "note": "Cross-correlation, used in many image and deep learning libraries, skips the flip of k. The two give the same result when the kernel is symmetric.",
+    "variants": []
+  },
+  "filter": {
+    "short": "A small array of coefficients slid across a signal or image to filter it.",
+    "body": "A discrete kernel is a short list or small grid of weights. Each output sample is a weighted sum of the input samples in a neighborhood, using those weights. Different weight patterns blur, sharpen, take derivatives or detect edges.",
+    "tex": "y[n]=\\sum_{j} k[j]\\,x[n-j]",
+    "read": "Output sample y at index n is the sum, over kernel indices j, of kernel weight k[j] times input sample x at index n minus j.",
+    "example": "The kernel [¼, ½, ¼] turns the neighborhood [2, 8, 2] into ¼·2 + ½·8 + ¼·2 = 5, softening the spike. A 3×3 Sobel kernel estimates an image's horizontal brightness derivative.",
+    "why": "It is the small core of weights that defines the filter, the discrete version of a convolution kernel.",
+    "note": "Results depend on padding at the borders, the kernel's origin, stride, and whether the library flips the array. Kernel weights need not be positive or sum to 1.",
+    "variants": [
+      "Box / Gaussian blur",
+      "Sobel and derivative filters",
+      "Laplacian / sharpening",
+      "Audio FIR filters"
+    ]
+  },
+  "integral": {
+    "short": "The two-variable function K(x, y) that defines an integral operator.",
+    "body": "An integral operator T turns a function f into a new function Tf. The kernel K(x, y) sets how much the input at y contributes to the output at x, and integrating over y adds up the contributions. More generally, a Schwartz kernel may be a distribution, a generalized function such as the Dirac delta.",
+    "tex": "(Tf)(x)=\\int K(x,y)\\,f(y)\\,dy",
+    "read": "The operator T applied to f and evaluated at x is the integral over y of the kernel K(x, y) times the input value f(y).",
+    "example": "With K(x, y) = xy on [0, 1] and f(y) = y, the output is (Tf)(x) = x∫₀¹ y² dy = x/3.",
+    "why": "K is the function sitting inside the integral, and it carries everything that distinguishes one such operator from another.",
+    "note": "The kernel function K is different from the kernel (null space) of T, the set of inputs f with Tf = 0. Both meanings can appear in the same discussion.",
+    "variants": []
+  },
+  "kde": {
+    "short": "A normalized bump placed on each data point to estimate a smooth density.",
+    "body": "Kernel density estimation centers a scaled copy of a kernel K on each observation and averages them. The result is a smooth estimate of the probability density the data came from. The bandwidth h sets the width of each bump and so the amount of smoothing.",
+    "tex": "\\hat p_h(x)=\\frac{1}{nh}\\sum_{i=1}^{n} K\\left(\\frac{x-x_i}{h}\\right)",
+    "read": "The estimated density at x is 1/(nh) times the sum, over the n observations x_i, of the kernel K evaluated at (x − x_i)/h, where h is the bandwidth.",
+    "example": "SciPy's gaussian_kde places a Gaussian bump on each sample and averages them. A smaller bandwidth shows more detail but also more sampling noise; a larger one can blur real features such as two separate peaks.",
+    "why": "The kernel is the basic shape repeated at every data point, the building block of the whole estimate.",
+    "note": "A density kernel is usually required to integrate to 1, not to be positive semidefinite like an SVM kernel. Higher-order density kernels can even take negative values.",
+    "variants": [
+      "Gaussian",
+      "Epanechnikov",
+      "Uniform / box",
+      "Triangular"
+    ]
+  },
+  "heat": {
+    "short": "The Gaussian that describes how a point of heat spreads out over time.",
+    "body": "The heat kernel is the solution of the heat equation ∂u/∂t = DΔu that starts as a single point of heat. In ℝᵈ it is a normalized Gaussian whose width grows like √t. Convolving it with an initial temperature profile gives the solution at time t.",
+    "tex": "H_t(z)=\\frac{1}{(4\\pi Dt)^{d/2}}\\,e^{-\\|z\\|^2/(4Dt)},\\quad t>0",
+    "read": "At time t, the kernel at displacement z is a Gaussian in z scaled by (4πDt)^(−d/2), where D is the diffusion coefficient and d the dimension.",
+    "example": "In one dimension the kernel is a normal distribution with variance 2Dt. Doubling the elapsed time doubles the variance, giving a wider, lower peak with the same total heat.",
+    "why": "It is the kernel of the integral that turns the initial temperature into the temperature at time t.",
+    "note": "On a curved manifold or bounded domain the heat kernel is generally not a Gaussian in distance. The Gaussian (RBF) kernel of machine learning has the same shape but a different role.",
+    "variants": []
+  },
+  "markov": {
+    "short": "A rule giving the probability distribution of the next state from the current one.",
+    "body": "A transition kernel defines one step of a Markov chain: from state x, it gives the probability of landing in each set B. On a finite state space it is a matrix with nonnegative entries and rows summing to 1. On general spaces it is a probability kernel.",
+    "tex": "P(x,B)=\\Pr\\left(X_{t+1}\\in B\\mid X_t=x\\right)",
+    "read": "P(x, B) is the probability that the next state X_{t+1} lies in the set B, given that the current state X_t equals x.",
+    "example": "With P = [[0.8, 0.2], [0.3, 0.7]], a chain in state 0 moves to state 1 with probability 0.2 and stays with probability 0.8. In MCMC, Metropolis-Hastings builds a kernel whose stationary distribution is the target.",
+    "why": "The kernel is the weighting that carries the distribution at one step to the next, like an integral kernel.",
+    "note": "A Markov kernel need not be symmetric or positive semidefinite, so it is not an SVM-style similarity kernel. Its rows sum to 1; its columns generally do not.",
+    "variants": [
+      "MCMC proposal / transition kernels",
+      "Feller kernels",
+      "Diffusion transition densities"
+    ]
+  },
+  "probability": {
+    "short": "A rule assigning a measure, often a probability distribution, to each input point.",
+    "body": "A measure kernel K assigns to each point x a measure K(x, ·) on another space Y. For each fixed measurable set B, the map x ↦ K(x, B) must be measurable. A probability kernel is one where every K(x, ·) is a probability measure; densities are optional and not part of the definition.",
+    "tex": "K:X\\times\\mathcal{B}(Y)\\to[0,\\infty]",
+    "read": "K takes a point of the space X and a measurable set of the space Y, and returns a measure value between 0 and infinity.",
+    "example": "The kernel K(x, B) = δₓ(B), equal to 1 if x ∈ B and 0 otherwise, copies x deterministically. A noisy channel that outputs x plus Gaussian noise is the probability kernel K(x, ·) = N(x, σ²).",
+    "why": "It is the weighting object inside integrals such as ∫ f(y) K(x, dy), extending the integral kernel from functions to measures.",
+    "note": "The second argument of K(x, B) is a set, not a point. A density k(x, y), when one exists, represents the kernel through K(x, B) = ∫_B k(x, y) dy.",
+    "variants": [
+      "Stochastic kernels",
+      "Conditional-distribution kernels",
+      "Randomization kernels",
+      "Communication-channel kernels"
+    ]
+  },
+  "morphology": {
+    "short": "A small shape, or structuring element, that defines the neighborhood for morphological operations.",
+    "body": "In mathematical morphology, the kernel is a small binary mask such as a 3×3 square, cross or disk. Erosion takes the minimum over that neighborhood and dilation takes the maximum; opening and closing combine the two. These are nonlinear operations, not weighted sums.",
+    "tex": "(f\\oplus B)(x)=\\max_{b\\in B} f(x-b)",
+    "read": "The dilation of image f by structuring element B at pixel x is the maximum of f over the points x − b, for b in B.",
+    "example": "In OpenCV, cv2.getStructuringElement(cv2.MORPH_CROSS, (3, 3)) builds a cross-shaped kernel. Dilating a binary image with it grows each white region by one pixel up, down, left and right.",
+    "why": "It is the small core shape that probes the image, playing the role a filter kernel plays in convolution.",
+    "note": "A morphological kernel is a shape or footprint, not a set of weights. Erosion and dilation are not linear convolutions, even though libraries pass the kernel in the same way.",
+    "variants": []
+  },
+  "averaging": {
+    "short": "A matrix showing how the true state is reflected in a retrieved estimate.",
+    "body": "Remote-sensing retrievals estimate a quantity, such as an atmospheric temperature profile, from indirect measurements. The averaging kernel matrix A is the derivative of the retrieved state with respect to the true state. Each row shows how true values are blended into one retrieved value, revealing the retrieval's resolution and sensitivity.",
+    "tex": "A=\\frac{\\partial\\hat{x}}{\\partial x}",
+    "read": "The averaging kernel A is the matrix of partial derivatives of the retrieved state x̂ with respect to the true state x.",
+    "example": "A retrieved temperature at one altitude often blends true temperatures from nearby altitudes, so its row of A is a broad peak rather than a spike. An ideal noise-free retrieval with full resolution would have A = I.",
+    "why": "It is the weighting function that averages the true profile into each retrieved value, as an integral kernel weights its input.",
+    "note": "Averaging kernels can have negative lobes, so they are not simple averages. They also differ from the forward model's weighting functions (Jacobian), which map the true state to the measurements.",
+    "variants": []
+  },
+  "bethe": {
+    "short": "The interaction term in the Bethe–Salpeter equation for two interacting particles.",
+    "body": "The Bethe–Salpeter equation describes two-particle bound states and scattering in quantum field theory. Its interaction kernel K collects the two-particle-irreducible interactions, those that cannot be split apart by cutting one line of each particle. Since K cannot be computed exactly, the chosen approximation decides which interactions the model includes.",
+    "tex": "\\Gamma=K\\,G_0\\,\\Gamma",
+    "read": "Schematically, the bound-state vertex Γ equals the interaction kernel K, times the free two-particle propagator G₀, times Γ again.",
+    "example": "In the ladder approximation, K is a single exchange of one particle, such as a photon or gluon, between the two constituents. Iterating it sums repeated exchanges, a standard route to positronium and meson bound states.",
+    "why": "As in an integral equation, the kernel is the function inside the integral that couples the amplitude back to itself.",
+    "note": "The equation shown is schematic. Loop integrations, propagator factors and index conventions vary between formulations, so compare kernels only within one convention.",
+    "variants": []
+  },
+  "cauchy": {
+    "short": "The factor 1/(2πi(ζ − z)) that rebuilds a holomorphic function from boundary values.",
+    "body": "If f is holomorphic (complex-differentiable) on and inside a simple closed contour, its values on the contour fix its value at every interior point z. Cauchy's integral formula writes f(z) as an integral of those boundary values weighted by the Cauchy kernel 1/(2πi(ζ − z)).",
+    "tex": "f(z)=\\frac{1}{2\\pi i}\\oint_{\\gamma}\\frac{f(\\zeta)}{\\zeta-z}\\,d\\zeta",
+    "read": "The value of f at an interior point z equals 1/(2πi) times the integral, around the counterclockwise contour γ, of f(ζ) divided by ζ − z.",
+    "example": "With f = 1 and γ the unit circle, (1/2πi)∮ dζ/(ζ − z) equals 1 for z inside the circle and 0 for z outside.",
+    "why": "It is the weighting function inside the integral that turns boundary values into interior values.",
+    "note": "The Cauchy kernel is not the same object as the Cauchy probability density. The formula requires a counterclockwise contour with z strictly inside it.",
+    "variants": []
+  },
+  "collision": {
+    "short": "The rate at which particles of sizes a and b collide or merge.",
+    "body": "In population-balance models of aerosols, droplets or polymers, the coagulation kernel K(a, b) is the rate coefficient for particles of sizes a and b merging. The Smoluchowski equation uses it to track how the size distribution n changes. Collision kernels in the Boltzmann equation play the same role for molecular collisions.",
+    "tex": "\\frac{\\partial n(x,t)}{\\partial t}=\\frac12\\int_0^x K(x-y,y)\\,n(x-y,t)\\,n(y,t)\\,dy-n(x,t)\\int_0^\\infty K(x,y)\\,n(y,t)\\,dy",
+    "read": "The density n(x, t) of size-x particles gains from pairs of sizes x − y and y merging at rate K, and loses whenever a size-x particle merges with any other.",
+    "example": "The classic exactly solvable cases are the constant kernel K = 1, the additive kernel K(a, b) = a + b and the multiplicative kernel K(a, b) = ab. The multiplicative kernel forms an infinite-size cluster, a gel, in finite time.",
+    "why": "K is the weighting function inside the collision integrals, setting how strongly each pair of sizes contributes.",
+    "note": "Coagulation kernels are rates, with units such as volume per time, not similarity scores. Being nonnegative does not make them positive-semidefinite kernels in the machine learning sense.",
+    "variants": [
+      "Smoluchowski coagulation",
+      "Boltzmann collision kernels",
+      "Fragmentation kernels"
+    ]
+  },
+  "likelihood": {
+    "short": "The part of a density or likelihood left after dropping constant factors.",
+    "body": "Many statistical calculations need a density only up to a constant multiple. The kernel is the factor that depends on the variable of interest, with all other constant factors dropped. Bayesian samplers such as Stan can work with these kernels, since the normalizing constant does not change the shape of the distribution.",
+    "tex": "p(\\theta)=\\frac{g(\\theta)}{\\int g(u)\\,du}\\propto g(\\theta)",
+    "read": "The density p of θ equals its kernel g divided by the integral of g, so p is proportional to g.",
+    "example": "For a normal observation x with known σ, the likelihood of the mean μ is proportional to exp(−(x − μ)²/(2σ²)). The factor 1/(σ√(2π)) is dropped.",
+    "why": "The kernel is the core of the formula, carrying all the dependence on the variable once constants are stripped away.",
+    "note": "Constant means constant in the variable being studied. If σ is also unknown, the 1/σ factor depends on a parameter and must be kept.",
+    "variants": []
+  },
+  "dirichlet": {
+    "short": "The kernel whose convolution with a periodic function gives its Fourier partial sum.",
+    "body": "The Nth Fourier partial sum S_N f keeps only the frequencies from −N through N. It equals f convolved with the Dirichlet kernel D_N, divided by 2π. D_N has a tall central peak and oscillating side lobes that take negative values.",
+    "tex": "D_N(\\theta)=\\sum_{n=-N}^{N}e^{in\\theta}=\\frac{\\sin\\left((N+\\tfrac12)\\theta\\right)}{\\sin(\\theta/2)}",
+    "read": "The Dirichlet kernel of order N at angle θ is the sum of the exponentials e^(inθ) for n from −N to N, which simplifies to a ratio of sines.",
+    "example": "D₁(θ) = 1 + 2cos θ, which is negative near θ = π. Such negative lobes help explain the Gibbs phenomenon: partial sums overshoot a jump by about 9% of its size, however large N becomes.",
+    "why": "It is the weighting function in the convolution integral that produces the partial sum.",
+    "note": "Unlike the Fejér kernel, D_N takes negative values and is not a probability density. It is also unrelated to Dirichlet boundary conditions and the Dirichlet distribution.",
+    "variants": []
+  },
+  "dispersal": {
+    "short": "A probability distribution for how far seeds or organisms travel from their source.",
+    "body": "A dispersal kernel gives the probability density of where a seed, spore or offspring lands relative to its source. In integrodifference models, a population reproduces locally and then spreads by convolution with this kernel. The tails matter most: heavier tails allow rare long-distance jumps that greatly speed up spread.",
+    "tex": "n_{t+1}(x)=\\int k(x-y)\\,g\\big(n_t(y)\\big)\\,dy",
+    "read": "The next generation's density at x is the integral over source locations y of the dispersal kernel k(x − y) times g(n_t(y)), the offspring produced at y.",
+    "example": "A narrow Gaussian kernel models mostly local seed fall and gives a steady invasion speed. A fat-tailed kernel, decaying more slowly than any exponential, can make the invasion front accelerate over time.",
+    "why": "It is the weighting function inside the redistribution integral, setting how much each source location contributes to each destination.",
+    "note": "A density of dispersal distance differs from a density per unit area by a radial factor: in two dimensions, f(r) = 2πr k(r) for an isotropic kernel k. Check units and normalization.",
+    "variants": []
+  },
+  "xc": {
+    "short": "The derivative of the exchange-correlation potential with respect to electron density.",
+    "body": "Time-dependent density functional theory (TDDFT) describes electrons through their density. The exchange-correlation kernel f_xc gives how the exchange-correlation potential at one point and time responds to a small density change at another. It is a key input for computing excitation energies and absorption spectra.",
+    "tex": "f_{\\mathrm{xc}}(\\mathbf{r},t;\\mathbf{r}',t')=\\frac{\\delta v_{\\mathrm{xc}}(\\mathbf{r},t)}{\\delta n(\\mathbf{r}',t')}",
+    "read": "The kernel f_xc is the functional derivative of the exchange-correlation potential v_xc at position r and time t with respect to the electron density n at r′ and t′.",
+    "example": "The adiabatic local density approximation (ALDA) sets f_xc = δ(r − r′)δ(t − t′) dv_xc/dn, using the local density approximation. This kernel acts only at the same point and instant.",
+    "why": "It is the kernel of the linear response integral, weighting how density changes everywhere feed into the potential at each point.",
+    "note": "f_xc is the derivative of the potential, not the potential v_xc itself. It is also unrelated to the chemist's atomic kernel of nucleus plus inner electrons.",
+    "variants": []
+  }
+}

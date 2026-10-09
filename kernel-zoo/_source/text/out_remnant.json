@@ -1,0 +1,150 @@
+{
+  "kernelization": {
+    "short": "A reduced equivalent instance whose size is bounded by a function of the parameter.",
+    "body": "Kernelization is a polynomial-time algorithm that maps an instance (I, k) of a parameterized problem to an equivalent instance (I′, k′) of size at most g(k). Equivalent means (I, k) is a yes-instance exactly when (I′, k′) is. A polynomial kernel is one where g is a polynomial.",
+    "tex": "(I,k)\\in L\\iff(I',k')\\in L,\\qquad |I'|+k'\\le g(k)",
+    "read": "The instance (I, k) belongs to the problem L exactly when the reduced instance (I′, k′) does, and the reduced size plus the new parameter is at most g(k).",
+    "example": "For Vertex Cover with budget k, any vertex of degree above k must be in the cover, so take it and lower k by 1. Afterward a yes-instance has at most k² edges, so anything larger is rejected.",
+    "why": "The kernel is the hard core of the instance that remains after every easy part has been reduced away.",
+    "note": "Kernelization needs a provably answer-preserving reduction with a size bound. A heuristic that merely shrinks the input, such as the Kernel Search method, does not qualify.",
+    "variants": [
+      "Polynomial kernels",
+      "Generalized kernels / bikernels",
+      "Turing kernelization"
+    ]
+  },
+  "lossy": {
+    "short": "A small reduced instance whose solutions lift back with bounded approximation loss.",
+    "body": "Lossy kernelization relaxes exact equivalence for parameterized optimization problems. A reduction shrinks the instance to size bounded by g(k), and a lifting algorithm turns any solution of the reduced instance into one for the original. An α-approximate kernel guarantees that lifting worsens the approximation ratio by at most a factor α.",
+    "tex": "\\frac{\\Pi(I,k,s)}{\\mathrm{OPT}_\\Pi(I,k)}\\le\\alpha\\cdot\\frac{\\Pi(I',k',s')}{\\mathrm{OPT}_\\Pi(I',k')}",
+    "read": "The ratio of the lifted solution s's value Π to the optimum OPT on the original instance is at most α times the same ratio for s′ on the reduced instance.",
+    "example": "Connected Vertex Cover has no polynomial kernel under standard complexity assumptions, yet for every α > 1 it has a polynomial-size α-approximate kernel. Solving that small instance exactly yields an α-approximate solution to the original.",
+    "why": "As with exact kernels, the kernel is the small core left after reduction, here allowed to give up a bounded amount of solution quality.",
+    "note": "The size bound and the factor α are proven, so this is not an optimization heuristic. It is unrelated to Kernel Search, a heuristic with a similar name.",
+    "variants": []
+  },
+  "belief": {
+    "short": "An inclusion-minimal subset of a belief base that implies a given sentence.",
+    "body": "In belief revision, an α-kernel of a belief base B is a subset of B that implies α but has no proper subset that does. Kernel contraction gives up α by deleting at least one belief from every α-kernel, with the choice made by a selection rule called an incision function.",
+    "tex": "B\\perp\\!\\!\\perp\\alpha=\\{X\\subseteq B:\\ \\alpha\\in\\mathrm{Cn}(X),\\ \\alpha\\notin\\mathrm{Cn}(Y)\\text{ for all }Y\\subsetneq X\\}",
+    "read": "The α-kernels of B are the subsets X of B whose logical consequences Cn(X) include α, while no proper subset Y of X has α among its consequences.",
+    "example": "For B = {p, p→q, q}, the q-kernels are {q} and {p, p→q}. Deleting only q leaves p and p→q, which still imply q, so contraction must also cut p or p→q.",
+    "why": "Each kernel is an irreducible core of support for α: no belief can be removed from it without losing the derivation.",
+    "note": "Minimal means no proper subset works, not smallest size: {p, p→q} is a kernel even though {q} is smaller. Contrast with remainder sets, the maximal subsets that fail to imply α.",
+    "variants": []
+  },
+  "game": {
+    "short": "Payoff allocations in which every pair of players is balanced in bargaining strength.",
+    "body": "Davis and Maschler's kernel is a solution concept for cooperative games with transferable utility. The surplus s_ij(x) is the largest gain v(S) − x(S) any coalition S containing i but not j could make by breaking away from allocation x. In the kernel, s_ij may exceed s_ji only if j already receives just its standalone value v({j}).",
+    "tex": "s_{ij}(x)=\\max_{S\\ni i,\\ j\\notin S}\\Big(v(S)-\\sum_{k\\in S}x_k\\Big)",
+    "read": "The surplus of player i over player j at allocation x is the maximum, over coalitions S containing i but not j, of S's value v(S) minus the payoffs x_k its members receive.",
+    "example": "In a three-player game where only the grand coalition earns anything, with value 1, every pair's surpluses balance only at the equal split (1/3, 1/3, 1/3), so that point is the kernel.",
+    "why": "It names the small central set of allocations that survives once every pairwise bargaining claim must balance.",
+    "note": "The prekernel drops the standalone-value exception and requires s_ij = s_ji for every pair. Neither is the core of a game, the allocations no coalition can improve on by acting alone.",
+    "variants": []
+  },
+  "digraph": {
+    "short": "A set of vertices with no internal arcs that every outside vertex points into.",
+    "body": "A kernel of a directed graph is a vertex set K that is independent, with no arc between two members, and absorbing, with an arc from every outside vertex into K. Kernels need not exist. In a finite acyclic game graph where a player unable to move loses, the unique kernel is the set of losing positions.",
+    "tex": "\\forall u,w\\in K:\\ (u,w)\\notin A,\\qquad \\forall v\\notin K\\ \\exists u\\in K:\\ (v,u)\\in A",
+    "read": "No arc in the arc set A joins two vertices of K, and every vertex v outside K has an arc (v, u) to some vertex u in K.",
+    "example": "In the path a→b→c, K = {a, c} is a kernel: a and c are not joined by an arc, and b points to c. A directed 3-cycle has no kernel.",
+    "why": "The kernel is a stable core: no conflicts inside it, and every other vertex leads directly into it.",
+    "note": "Here absorption uses outgoing arcs; some authors use incoming arcs instead. A maximal independent set need not be a kernel, since an outside vertex may only receive arcs from it.",
+    "variants": [
+      "Quasi-kernels (distance ≤ 2)",
+      "k-kernels",
+      "Kernels by paths / colored kernels"
+    ]
+  },
+  "discriminating": {
+    "short": "States from which a controller can stay safe against any disturbance.",
+    "body": "The discriminating kernel extends the viability kernel to systems with two inputs: a control u and a disturbance or opponent v. It contains the states from which some control strategy keeps the state in the constraint set K for all time, whatever v does. The result depends on what the controller may observe of v.",
+    "tex": "\\operatorname{Disc}(K)=\\{x_0:\\ \\exists\\,\\text{strategy }u\\ \\forall v(\\cdot),\\ x(t)\\in K\\ \\forall t\\ge 0\\}",
+    "read": "The discriminating kernel of K is the set of starting states x0 from which some control strategy u keeps the state x(t) in K at all times t, whatever the disturbance v does.",
+    "example": "A drone must stay in a corridor despite gusts. States near the walls that are safe in calm air can drop out of the discriminating kernel, because a worst-case gust could push the drone out before it recovers.",
+    "why": "It is what remains of the constraint set after discarding every state an adversary could force out of it.",
+    "note": "Do not confuse it with the viability kernel, which has no adversary and needs only one safe evolution. Results also depend on quantifier order and on what the controller observes.",
+    "variants": []
+  },
+  "kernel-search": {
+    "short": "A heuristic's working set of promising variables in a mixed-integer program.",
+    "body": "Kernel Search is a heuristic for mixed-integer linear programs (MILPs) with many binary variables. It uses the LP relaxation to pick a small kernel of promising variables, then solves a series of restricted MILPs on the kernel plus one bucket of other variables at a time. Variables that prove useful join the kernel.",
+    "tex": "\\min\\{c^{\\top}x:\\ x\\in X,\\ x_j=0\\ \\text{for } j\\notin K\\cup B_i\\}",
+    "read": "Minimize the cost cᵀx over the feasible set X, with every variable x_j outside the kernel K and the current bucket B_i fixed to zero.",
+    "example": "In index tracking, it picks a small portfolio of stocks whose returns follow a market index, starting from the most promising stocks and testing further groups of stocks to improve the portfolio.",
+    "why": "The kernel is the core set of variables expected to hold a good solution, with everything else treated as peripheral.",
+    "note": "Unlike kernelization in complexity theory, Kernel Search gives no equivalent smaller instance and no size or quality guarantee. It is a practical heuristic.",
+    "variants": []
+  },
+  "perfect": {
+    "short": "The perfect part left after repeatedly removing isolated points.",
+    "body": "The Cantor–Bendixson theorem splits any Polish space, such as a closed subset of ℝⁿ, into a perfect set and a countable set. The perfect part is the perfect kernel. It is reached by deleting isolated points over and over, possibly through transfinitely many rounds, since each deletion can expose new isolated points.",
+    "tex": "X=P\\sqcup C,\\quad P\\text{ perfect},\\ C\\text{ countable and open}",
+    "read": "A Polish space X splits into two disjoint parts: a perfect set P, closed with no isolated points, and a countable open set C.",
+    "example": "For the Cantor set plus the isolated point 2, the perfect kernel is the Cantor set. For {0} ∪ {1/n : n ≥ 1}, two rounds remove everything, so the kernel is empty.",
+    "why": "It is the solid core that survives after every isolated, removable point has been stripped away.",
+    "note": "Removing isolated points once is often not enough, as new isolated points can appear. Do not confuse it with the topological kernel of a set, the intersection of its open supersets.",
+    "variants": []
+  },
+  "kern": {
+    "short": "The region where a compressive load causes no tension in a cross-section.",
+    "body": "The kern, or core, of a cross-section is the region where a compressive force can act without causing tension anywhere in the section, assuming linear elastic stress. Inside it, the bending stress from the off-center load never outweighs the uniform compression P/A. For a rectangle it is a rhombus; for a solid circle, a concentric circle of one-quarter the radius.",
+    "tex": "\\sigma_{\\min}=\\frac{P}{A}\\left(1-\\frac{6e}{b}\\right)\\ge 0\\iff e\\le\\frac{b}{6}",
+    "read": "With compression positive, the smallest stress across a rectangle of width b, under load P on area A at offset e along the width, is nonnegative exactly when e is at most b/6.",
+    "example": "A rectangular masonry pier 600 mm wide has no tension under a load offset along its width as long as the load stays within 100 mm of center, the middle third.",
+    "why": "The kern is the inner core of the section: loads placed inside it keep the whole section in compression.",
+    "note": "The usual English term is kern, not kernel. It is unrelated to kerning in typography, the adjustment of space between letters.",
+    "variants": []
+  },
+  "semigroup": {
+    "short": "The smallest two-sided ideal of a semigroup, when one exists.",
+    "body": "A two-sided ideal of a semigroup S is a nonempty subset I with SI ∪ IS ⊆ I: multiplying by anything on either side stays in I. The kernel is the least such ideal, equal to the intersection of all of them when that intersection is nonempty. Every finite semigroup has a kernel.",
+    "tex": "K(S)=\\bigcap\\{\\,I: I\\text{ a nonempty two-sided ideal of }S\\,\\}",
+    "read": "The kernel K(S) of a semigroup S is the intersection of all its nonempty two-sided ideals I, provided that intersection is nonempty.",
+    "example": "If S has a zero, with 0s = s0 = 0, then {0} lies in every ideal and is the kernel. In (ℤ⁺, +), the ideals {n, n+1, …} have empty intersection, so there is no kernel.",
+    "why": "The kernel is the innermost ideal, the part of the semigroup that every ideal must contain.",
+    "note": "Do not confuse it with the kernel of a semigroup homomorphism, which is a congruence on S (the pairs with equal images), not a subset of S.",
+    "variants": []
+  },
+  "radical": {
+    "short": "The product of the distinct primes dividing a positive integer.",
+    "body": "The squarefree kernel, or radical, of a positive integer n multiplies each prime factor of n once, ignoring multiplicity. It is the largest squarefree divisor of n, and rad(1) = 1. The radical appears in the abc conjecture, which compares c with rad(abc).",
+    "tex": "\\operatorname{rad}(n)=\\prod_{p\\mid n,\\ p\\text{ prime}}p",
+    "read": "The radical of n is the product of all primes p that divide n, each taken once.",
+    "example": "72 = 2³ · 3², so rad(72) = 2 · 3 = 6. The squarefree part is different: writing 72 = 6² · 2 gives s = 2.",
+    "why": "The kernel is what remains of n's factorization once all repetition is stripped away: just the primes themselves.",
+    "note": "Some sources use squarefree kernel for the squarefree part s in n = m²s instead. For 72 that gives 2, not 6, so check the definition.",
+    "variants": []
+  },
+  "saturation": {
+    "short": "The intersection of all open sets that contain a given set.",
+    "body": "In general topology, the kernel of a set A is the intersection of every open set containing A. It always contains A and can be strictly larger: it holds exactly the points that no open superset of A can leave out. Some authors call it the saturation of A.",
+    "tex": "\\ker A=\\bigcap\\{U:\\ A\\subseteq U,\\ U\\text{ open}\\}",
+    "read": "The kernel of A is the intersection of all open sets U that contain A.",
+    "example": "In the Sierpiński space {0, 1} with open sets ∅, {1}, {0, 1}, the only open set containing 0 is the whole space, so the kernel of {0} is {0, 1}.",
+    "why": "It is what remains after cutting away every point that some open superset of A excludes.",
+    "note": "This kernel enlarges A rather than shrinking it, and in a T₁ space, where points are closed, it equals A. It is unrelated to the perfect kernel of Cantor–Bendixson.",
+    "variants": []
+  },
+  "viability": {
+    "short": "States from which at least one evolution stays in the constraint set forever.",
+    "body": "Given dynamics x′ ∈ F(x), where F(x) is the set of velocities allowed at x, and a constraint set K, the viability kernel is the set of states in K from which some evolution stays in K for all time. From states in K outside the kernel, every evolution eventually leaves K.",
+    "tex": "\\operatorname{Viab}_F(K)=\\{x_0\\in K:\\ \\exists\\,x(\\cdot)\\text{ with }x'\\in F(x),\\ x(0)=x_0,\\ x(t)\\in K\\ \\forall t\\ge 0\\}",
+    "read": "The viability kernel of K under dynamics F is the set of starting points x0 in K from which some solution of x′ ∈ F(x) stays in K for all times t.",
+    "example": "A car approaching a wall must stop short of it. A state close to the wall at low speed is in the viability kernel, but the same position at high speed is not, since full braking cannot stop the car in time.",
+    "why": "It is the part of the constraint set that survives once every state bound to leave it has been removed.",
+    "note": "Membership means some control keeps the system safe, not that every control does. The discriminating kernel adds a disturbance that the control must overcome.",
+    "variants": []
+  },
+  "polygon": {
+    "short": "The set of points in a polygon that can see the whole polygon.",
+    "body": "The kernel of a polygon P is the set of points in P that can see every point of P along a segment staying inside P. It is always convex, and P is called star-shaped when its kernel is nonempty. For a simple polygon it equals the intersection of the inner half-planes of all its edges, computable in O(n) time.",
+    "tex": "\\ker P=\\{p\\in P:\\ \\overline{pq}\\subseteq P\\ \\text{for all }q\\in P\\}",
+    "read": "The kernel of P is the set of points p in P such that the segment from p to q lies in P for every point q of P.",
+    "example": "A convex polygon is its own kernel. A five-pointed star polygon has the central pentagon as its kernel, while a U shape with tall arms has an empty kernel.",
+    "why": "The kernel is the central region of the shape from which nothing is hidden.",
+    "note": "Do not confuse it with a geometry kernel in software such as CGAL, which is the library layer supplying basic objects and predicates.",
+    "variants": []
+  }
+}

@@ -1,0 +1,116 @@
+{
+ "cuda": {
+  "short": "A GPU function that a grid of threads runs in parallel.",
+  "body": "A CUDA kernel is a function, marked __global__, that runs on the GPU. A launch sets a grid of thread blocks, and every thread runs the same kernel code. Each thread combines its block and thread indices to choose which part of the data it handles.",
+  "tex": "i=\\text{blockIdx.x}\\cdot\\text{blockDim.x}+\\text{threadIdx.x}",
+  "read": "The global index i equals the block's index times the number of threads per block, plus the thread's index within its block, all along the x dimension.",
+  "example": "To add two vectors of length n, launch (n + 255)/256 blocks of 256 threads, and thread i computes c[i] = a[i] + b[i]. A bounds check i < n idles the extra threads in the last block.",
+  "why": "The kernel is the core computation, written once and run by every thread on its own share of the data.",
+  "note": "A CUDA kernel can be any GPU routine. It is not the same thing as a convolution filter or an ML similarity kernel, though it may compute one.",
+  "variants": []
+ },
+ "triton": {
+  "short": "A Python function that Triton compiles into a GPU program operating on blocks.",
+  "body": "Triton kernels are Python functions, marked @triton.jit, that work on blocks of elements rather than single values. Each program instance reads its program ID to find its block of the data. The Triton compiler maps these block operations onto GPU threads.",
+  "tex": "\\text{offsets}=\\text{pid}\\cdot B+[0,1,\\ldots,B-1]",
+  "read": "The offsets a program handles are its program ID, pid, times the block size B, plus each integer from 0 to B minus 1.",
+  "example": "In Triton's vector-add tutorial, with B = 1024, each program loads its block of x and y, masks offsets past the end of the arrays, adds the values and stores the block of results.",
+  "why": "The kernel is the core computation, written once and run by every program instance on its own block of the data.",
+  "note": "A Triton program instance is not a single CUDA thread. One instance processes a whole block of elements, and the compiler spreads that work across many threads.",
+  "variants": []
+ },
+ "pallas": {
+  "short": "A custom GPU or TPU routine written in Python with JAX's Pallas extension.",
+  "body": "Pallas is a JAX extension for writing custom kernels for GPUs and TPUs. A kernel receives references to blocks of memory, reads them, computes with JAX array operations and writes results into output references. The programmer controls memory access and how work splits across a grid, and the details vary by backend.",
+  "tex": "\\text{input refs}\\longmapsto\\text{output refs}",
+  "read": "The kernel maps input references to output references: it reads data from input memory references and writes its results by storing into output references.",
+  "example": "The Pallas quickstart adds two vectors: the kernel reads x_ref and y_ref, adds the arrays and stores the sum in o_ref, and pallas_call runs it on the accelerator.",
+  "why": "The kernel is the core computation, written once and run by every program instance on its own block of the data.",
+  "note": "An ordinary jitted JAX function is not a Pallas kernel: XLA compiles it, possibly into several kernels. Pallas lets you write one kernel by hand, and its APIs are still evolving.",
+  "variants": []
+ },
+ "compute-cpu": {
+  "short": "A small, heavily optimized routine at the heart of a numerical computation.",
+  "body": "In numerical computing, a kernel is the performance-critical inner routine where most of the time is spent. In BLIS, matrix multiplication is a set of loops that split the matrices into cache-sized blocks around a GEMM microkernel. The microkernel updates a small tile of C held in registers, using SIMD instructions.",
+  "tex": "C_{m_r\\times n_r}\\mathrel{+}=A_{m_r\\times k_c}\\,B_{k_c\\times n_r}",
+  "read": "A small m_r-by-n_r tile of C is increased by the product of an m_r-by-k_c panel of A and a k_c-by-n_r panel of B.",
+  "example": "BLIS supports a new CPU mainly by adding a hand-tuned GEMM microkernel and choosing block sizes. The surrounding blocking loops are shared code.",
+  "why": "The kernel is the innermost core of the computation, the small piece of code where most of the run time is spent.",
+  "note": "A BLAS microkernel is not an operating-system microkernel such as L4 or seL4, which is a minimal OS core. Here microkernel means the innermost matrix-multiply routine.",
+  "variants": [
+   "GEMM and dot-product kernels",
+   "SIMD inner loops",
+   "Benchmark computational kernels"
+  ]
+ },
+ "metal": {
+  "short": "A Metal Shading Language function, marked kernel, that runs in parallel on Apple GPUs.",
+  "body": "The Metal Shading Language marks entry points as vertex, fragment or kernel. A kernel function is a compute entry point: the app dispatches it over a grid of threads, grouped into threadgroups. Each thread reads its position in the grid to pick the data it processes.",
+  "tex": "i=\\text{thread\\_position\\_in\\_grid}",
+  "read": "The index i is the thread's position in the dispatch grid, which Metal supplies through the thread_position_in_grid attribute.",
+  "example": "A kernel function can add two float arrays on an Apple GPU, with each thread computing one element, or apply a filter to every pixel of an image.",
+  "why": "The kernel is the core computation, written once and run by every thread on its own share of the data.",
+  "note": "In Metal, kernel is also a keyword. It marks compute functions, as opposed to vertex and fragment functions, which draw graphics in the render pipeline.",
+  "variants": []
+ },
+ "opencl": {
+  "short": "A function marked __kernel that OpenCL runs on many work-items in parallel.",
+  "body": "OpenCL C marks kernel entry points with __kernel or kernel. A host program enqueues the kernel over an index space called an NDRange. Each point is a work-item, work-items are grouped into work-groups, and the same kernel can run on GPUs, CPUs and other supported devices.",
+  "tex": "i=\\text{get\\_global\\_id}(0)",
+  "read": "The index i is the work-item's global ID along dimension 0, its position in the whole NDRange index space.",
+  "example": "To add two arrays of one million floats, the host enqueues a kernel over a one-dimensional NDRange of 1,000,000 work-items. Each reads a[i] and b[i] and writes c[i].",
+  "why": "The kernel is the core computation, written once and run by every work-item on its own share of the data.",
+  "note": "A work-group is like a CUDA thread block and a work-item like a CUDA thread, but the models differ in details. OpenCL kernels can also target CPUs and other devices.",
+  "variants": []
+ },
+ "hip": {
+  "short": "A GPU function, marked __global__, in AMD's CUDA-like HIP programming model.",
+  "body": "HIP is AMD's C++ programming model for GPUs, with syntax close to CUDA. A function marked __global__ is a kernel: the host launches it over a grid of blocks, and each thread computes its index from built-ins such as blockIdx and threadIdx. HIP code can target AMD GPUs and also NVIDIA GPUs.",
+  "tex": "i=\\text{blockIdx.x}\\cdot\\text{blockDim.x}+\\text{threadIdx.x}",
+  "read": "The global index i equals the block's index times the number of threads per block, plus the thread's index within its block, all along the x dimension.",
+  "example": "A CUDA vector-add kernel ports to HIP almost unchanged: the kernel body and index formula stay the same, and runtime calls such as cudaMalloc become hipMalloc.",
+  "why": "The kernel is the core computation, written once and run by every thread on its own share of the data.",
+  "note": "Portable source does not guarantee identical performance or behavior. For example, AMD GPUs group threads into wavefronts of 64 or 32, while NVIDIA warps have 32 threads.",
+  "variants": []
+ },
+ "fusion": {
+  "short": "A single GPU kernel that a compiler builds by merging several operations.",
+  "body": "An optimizing compiler such as XLA can merge several operations into one generated kernel. The fused kernel keeps intermediate results in registers or on-chip memory instead of writing them to GPU main memory, and it pays the launch cost once. XLA:GPU compiles each fusion into one GPU kernel.",
+  "tex": "y=\\max(0,\\,a x+b)",
+  "read": "Applied elementwise, the output y is the larger of zero and a times x plus b: a multiply, an add and a ReLU.",
+  "example": "Unfused, computing max(0, a x + b) for scalars a, b over a large array x takes three kernels and writes two temporary arrays to memory. Fused, one kernel reads x once and writes y once.",
+  "why": "The fused kernel is the single core routine left after the compiler merges the operations, the unit actually launched on the device.",
+  "note": "Fusion is a compiler decision, not a guarantee. One high-level function or model does not always become one kernel; the compiler fuses only where its rules and performance limits allow.",
+  "variants": []
+ },
+ "dispatch": {
+  "short": "PyTorch's implementation of one operator for one backend, such as CPU or CUDA.",
+  "body": "In PyTorch, each operator, such as add or matmul, can have several registered kernels. The dispatcher computes a dispatch key from the input tensors and current state, such as their device and whether autograd is active, then calls the matching kernel. Kernels exist for CPU, CUDA, autograd and other behavior.",
+  "tex": "(\\text{operator},\\ \\text{dispatch key})\\longmapsto\\text{kernel}",
+  "read": "The pair of an operator and a dispatch key maps to one registered kernel, the function that implements that operator for that key.",
+  "example": "Calling torch.add on two CPU tensors runs the CPU kernel. On CUDA tensors that require gradients, the autograd kernel runs first, records the operation, then redispatches to the CUDA kernel.",
+  "why": "The kernel is the concrete core code that computes an operator, separate from the operator's public name and signature.",
+  "note": "An operator kernel is not the same as a GPU kernel. It may launch several GPU kernels, call a library such as cuBLAS, or run entirely on the CPU.",
+  "variants": []
+ },
+ "tf": {
+  "short": "The C++ class that implements a TensorFlow operation's computation on a device.",
+  "body": "TensorFlow separates an operation's interface from its implementation. An op is registered with its inputs, outputs and attributes; an OpKernel is a C++ class whose Compute method does the actual work. Kernels are registered per device and data type, so one op can have both CPU and GPU kernels.",
+  "tex": "(\\text{op},\\ \\text{device},\\ \\text{type})\\longmapsto\\text{OpKernel}",
+  "read": "An op, together with a device and a data type, maps to the registered OpKernel class that computes it.",
+  "example": "The guide's ZeroOut op has a C++ kernel derived from OpKernel. Its Compute method reads the input tensor, allocates an output, copies the first element and sets the rest to zero.",
+  "why": "The kernel is the concrete core that does the computation, beneath the op's declared interface.",
+  "note": "An OpKernel is not necessarily a GPU kernel. It may run on the CPU, and a GPU OpKernel can launch one or more CUDA kernels to do its work.",
+  "variants": []
+ },
+ "shader": {
+  "short": "A GPU program run through a graphics API for general computation, not drawing.",
+  "body": "A compute shader runs outside the graphics pipeline of vertex and fragment stages. The application dispatches a grid of workgroups, each holding a fixed number of invocations that run the shader in parallel. APIs such as Vulkan, Direct3D, OpenGL and WebGPU support them, and many people call them compute kernels.",
+  "tex": "\\text{GlobalInvocationID}=\\text{WorkgroupID}\\cdot\\text{WorkgroupSize}+\\text{LocalInvocationID}",
+  "read": "Each invocation's global ID equals its workgroup's ID times the workgroup size, plus the invocation's local ID within its workgroup, computed per dimension.",
+  "example": "A particle system can update one million particles with a Vulkan compute dispatch. Each invocation uses its global ID to update one particle's position and velocity.",
+  "why": "The compute shader is the core per-element computation, written once and run by every invocation on its own share of the data.",
+  "note": "Not every shader is a compute kernel. Vertex and fragment shaders are stages of the graphics pipeline that transform vertices and color pixels.",
+  "variants": []
+ }
+}

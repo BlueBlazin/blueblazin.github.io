@@ -1,0 +1,313 @@
+[
+ {
+  "id": "linux",
+  "name": "Linux / OS kernel",
+  "formalName": "Operating-system kernel",
+  "domain": "Operating systems",
+  "short": "The core that manages hardware and protected resources.",
+  "body": "An OS kernel provides core resource management and privileged mechanisms such as scheduling, memory management and device interaction. Linux is a prominent implementation.",
+  "tex": "\\text{applications}\\ \\vert\\ \\text{kernel}\\ \\vert\\ \\text{hardware}",
+  "example": "A process requests a file read through a system call; the kernel mediates access and coordinates the relevant system resources.",
+  "note": "The Linux kernel is not a whole Linux distribution. Kernel mode is a privilege context, not a second independent meaning of kernel.",
+  "variants": [
+   "Monolithic (often modular): Linux",
+   "Microkernel: seL4",
+   "Hybrid: common Windows / XNU classification",
+   "Real-time OS kernels"
+  ],
+  "code": null,
+  "refs": [
+   "linux"
+  ],
+  "type": "OS component",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "The Linux Kernel documentation",
+    "url": "https://docs.kernel.org/",
+    "publisher": "Linux kernel community",
+    "kind": "Documentation"
+   }
+  ],
+  "plate": "The Core"
+ },
+ {
+  "id": "lean",
+  "name": "Lean proof kernel",
+  "formalName": "Proof-assistant kernel: Lean",
+  "domain": "Formal methods · type theory",
+  "short": "The trusted checker of core proof terms.",
+  "body": "Lean's kernel type-checks terms in its core type theory. Elaboration and tactics produce terms that this smaller trusted component checks.",
+  "tex": "\\Gamma\\vdash p:P",
+  "example": "The term fun h => h proves P→P. A tactic may find this term; the kernel checks that it has the claimed type.",
+  "note": "Acceptance is relative to the declared statement and axioms. The kernel does not establish that a formal statement matches an intended informal problem; sorry introduces an assumption.",
+  "variants": [
+   "Lean core type checker",
+   "Rocq / Coq kernel (related architecture)",
+   "Proof terms and declared axioms"
+  ],
+  "code": null,
+  "refs": [
+   "lean"
+  ],
+  "type": "Proof checker",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "Elaboration and Compilation: the kernel",
+    "url": "https://lean-lang.org/doc/reference/latest/Elaboration-and-Compilation/",
+    "publisher": "Lean",
+    "kind": "Documentation"
+   }
+  ],
+  "plate": "The Core"
+ },
+ {
+  "id": "jupyter",
+  "name": "Jupyter / IPython kernel",
+  "formalName": "Jupyter / IPython kernel",
+  "domain": "Interactive computing",
+  "short": "The language process that executes notebook code.",
+  "body": "A Jupyter kernel runs separately from the user interface, executes code for a language and communicates through the Jupyter messaging protocol.",
+  "tex": "\\text{notebook UI}\\longleftrightarrow\\text{language process}",
+  "example": "Run x=10 in one Python cell and print(x) in another: the kernel holds the execution state. Restarting it discards that in-memory state.",
+  "note": "A notebook's displayed outputs are not its live process state. This kernel is not the OS kernel or a GPU routine.",
+  "variants": [
+   "IPython / ipykernel",
+   "IJulia",
+   "IRkernel",
+   "Other Jupyter language kernels"
+  ],
+  "code": null,
+  "refs": [
+   "jupyter"
+  ],
+  "type": "Language process",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "Kernels (Programming Languages)",
+    "url": "https://docs.jupyter.org/en/stable/projects/kernels.html",
+    "publisher": "Project Jupyter",
+    "kind": "Documentation"
+   }
+  ],
+  "plate": "The Core"
+ },
+ {
+  "id": "microkernel",
+  "name": "Microkernel",
+  "formalName": "Microkernel",
+  "domain": "Operating-system architecture",
+  "short": "A small privileged OS core with services outside it.",
+  "body": "Microkernels retain essential mechanisms such as isolation, scheduling and communication in the core, while many system services live in separate processes.",
+  "tex": "\\text{services}\\xleftrightarrow{\\rm IPC}\\text{small kernel}",
+  "example": "A filesystem service can execute outside the privileged core and communicate with other components using IPC.",
+  "note": "The boundary varies by system. This is an OS architecture, unrelated to a BLAS microkernel.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "sel4"
+  ],
+  "type": "OS architecture",
+  "status": "Architecture subtype",
+  "sources": [
+   {
+    "title": "The seL4 Microkernel: An Introduction",
+    "url": "https://sel4.systems/About/whitepaper.html",
+    "publisher": "seL4 Foundation",
+    "kind": "Documentation"
+   }
+  ],
+  "plate": "The Core"
+ },
+ {
+  "id": "cgal",
+  "name": "Computational-geometry kernel",
+  "formalName": "Computational-geometry kernel",
+  "domain": "Geometry software · CGAL",
+  "short": "A package of geometric types, predicates and constructions.",
+  "body": "A CGAL kernel supplies geometric primitives and operations: points, lines, orientation tests, intersections and more. Kernels differ in representation and exactness guarantees.",
+  "tex": "\\text{types + predicates + constructions}",
+  "example": "Exact_predicates_inexact_constructions_kernel gives exact predicate decisions while constructed coordinates may be inexact.",
+  "note": "A software geometry kernel and a polygon's visibility kernel are unrelated objects, despite appearing in the same program.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "cgal"
+  ],
+  "type": "Geometry library",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "2D and 3D Geometry Kernel",
+    "url": "https://doc.cgal.org/Manual/3.5/doc_html/cgal_manual/Kernel_23/Chapter_main.html",
+    "publisher": "CGAL",
+    "kind": "Documentation"
+   }
+  ],
+  "plate": "The Core"
+ },
+ {
+  "id": "cad",
+  "name": "Geometric modeling / CAD kernel",
+  "formalName": "Geometric modeling / CAD kernel",
+  "domain": "CAD · engineering software",
+  "short": "The engine that builds and modifies geometric models.",
+  "body": "A modeling kernel supplies foundational geometry and topology operations for CAD applications, including solid modeling and operations such as Boolean combinations.",
+  "tex": "\\text{solids}\\longmapsto\\text{Boolean / modeling operations}",
+  "example": "A CAD application uses a modeling kernel to subtract a hole from a solid or update part geometry.",
+  "note": "Parasolid and Open CASCADE are examples of this software-engine sense. This is not the visible subset of a polygon.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "cad"
+  ],
+  "type": "Geometry engine",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "Parasolid 3D Geometric Modeling",
+    "url": "https://www.siemens.com/en-us/products/plm-components/parasolid/",
+    "publisher": "Siemens",
+    "kind": "Documentation"
+   }
+  ],
+  "plate": "The Core"
+ },
+ {
+  "id": "exokernel",
+  "name": "Exokernel",
+  "formalName": "Exokernel",
+  "domain": "Operating-system research",
+  "short": "A protection-focused kernel exposing low-level resources.",
+  "body": "An exokernel separates resource protection from higher-level resource management. Library operating systems implement abstractions that conventional kernels often impose.",
+  "tex": "\\text{protection in kernel; policy in library OS}",
+  "example": "An application-specific library OS can manage its own higher-level storage or memory abstractions while the exokernel enforces resource protection.",
+  "note": "An exokernel is not simply a synonym for microkernel; its approach to exposing resources and placing abstractions differs.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "exo"
+  ],
+  "type": "OS architecture",
+  "status": "Architecture subtype",
+  "sources": [
+   {
+    "title": "Exokernel: application-level resource management",
+    "url": "https://www.cs.cornell.edu/courses/cs614/1999sp/notes98/exokernel.html",
+    "publisher": "Engler, Kaashoek and O'Toole; Cornell course notes",
+    "kind": "Paper discussion"
+   }
+  ],
+  "plate": "The Core"
+ },
+ {
+  "id": "lcf",
+  "name": "LCF-style inference kernel",
+  "formalName": "LCF-style inference kernel",
+  "domain": "Interactive theorem proving",
+  "short": "The small trusted code allowed to construct theorems.",
+  "body": "In LCF-style systems, an abstract theorem type can be constructed only through trusted primitive inference operations. Complex proof procedures must reduce their conclusions to those operations.",
+  "tex": "\\text{primitive inferences}\\longmapsto\\text{theorem value}",
+  "example": "A tactic can be large and experimental, while the operations that certify its result remain in a small inference core.",
+  "note": "This architecture is related to, but not identical with, Lean's proof-term type-checking architecture.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "lcf"
+  ],
+  "type": "Inference engine",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "Publications on LCF and HOL",
+    "url": "https://www.cl.cam.ac.uk/~lp15/papers/hol.html",
+    "publisher": "Lawrence Paulson / Cambridge",
+    "kind": "Author's explanation"
+   }
+  ],
+  "plate": "The Core"
+ },
+ {
+  "id": "security",
+  "name": "Security kernel",
+  "formalName": "Security kernel",
+  "domain": "Computer security",
+  "short": "The mechanisms enforcing the reference monitor.",
+  "body": "A security kernel is the trusted computing-base machinery that implements the reference-monitor concept: mediating access, resisting tampering and being amenable to verification.",
+  "tex": "\\text{subject}\\xrightarrow{\\rm mediated\\ access}\\text{object}",
+  "example": "Every access to a protected object is checked against the system's access rules by the designated trusted mechanism.",
+  "note": "The term may include hardware, firmware and software, and need not coincide with the whole OS kernel.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "security"
+  ],
+  "type": "Trusted mechanisms",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "Security kernel",
+    "url": "https://csrc.nist.gov/glossary/term/security_kernel",
+    "publisher": "NIST CSRC",
+    "kind": "Standards terminology"
+   }
+  ],
+  "plate": "The Core"
+ },
+ {
+  "id": "simulation",
+  "name": "Simulation kernel",
+  "formalName": "Simulation kernel",
+  "domain": "SystemC · discrete-event simulation",
+  "short": "The central event scheduler and execution machinery.",
+  "body": "A simulation kernel coordinates processes, events and simulated time. In SystemC, scheduling and synchronization can include delta cycles that advance computation without advancing physical simulation time.",
+  "tex": "(t,\\delta)\\longmapsto\\text{scheduled process updates}",
+  "example": "A signal change schedules dependent processes; further same-time updates can run before the simulator advances to the next timed event.",
+  "note": "The simulated system's time is different from wall-clock time. A GPU kernel can accelerate a simulation but is not its event scheduler.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "systemc"
+  ],
+  "type": "Event scheduler",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "SystemC and Transaction-Level Modeling",
+    "url": "https://systemc.org/overview/systemc-tlm/",
+    "publisher": "Accellera / SystemC",
+    "kind": "Documentation"
+   }
+  ],
+  "plate": "The Core"
+ },
+ {
+  "id": "wolfram",
+  "name": "Wolfram computational kernel",
+  "formalName": "Wolfram computational kernel",
+  "domain": "Symbolic computation",
+  "short": "The computation engine behind the front end.",
+  "body": "Wolfram's notebook front end and computational kernel are separate components. The kernel evaluates Wolfram Language expressions; the front end supplies notebook interaction.",
+  "tex": "\\text{expression}\\longmapsto\\text{evaluated result}",
+  "example": "A notebook can send an integration expression to the kernel and display the resulting symbolic expression.",
+  "note": "A Wolfram kernel process is a computation engine. The word can also appear in mathematical kernel functions evaluated by that same process.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "wolfram"
+  ],
+  "type": "Evaluation engine",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "The Wolfram front end and kernel",
+    "url": "https://reference.wolfram.com/language/ref/%24FrontEnd.html.en",
+    "publisher": "Wolfram Research",
+    "kind": "Documentation"
+   }
+  ],
+  "plate": "The Core"
+ }
+]

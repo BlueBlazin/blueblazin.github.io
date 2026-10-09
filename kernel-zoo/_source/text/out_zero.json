@@ -1,0 +1,105 @@
+{
+ "nullspace": {
+  "short": "The kernel is the set of vectors that a linear map sends to zero.",
+  "body": "The kernel, or nullspace, of a matrix A is the set of inputs x with Ax = 0. It is always a subspace, and it holds the directions the map collapses. By the rank-nullity theorem, its dimension plus the rank of A equals the number of columns of A.",
+  "tex": "\\ker A=\\{x : Ax=0\\}",
+  "read": "The kernel of A is the set of all vectors x for which the matrix A times x equals the zero vector.",
+  "example": "For A = [1 2], A(−2, 1) = −2 + 2 = 0, so every multiple t(−2, 1) lies in the kernel. The kernel is a line through the origin, not just the zero vector.",
+  "why": "It is the part of the input hidden inside the map: everything that becomes zero and leaves no trace in the output.",
+  "note": "A convolution kernel in image processing is a small matrix of filter weights. That is a different meaning of the word; the filter matrix has its own, unrelated nullspace.",
+  "variants": []
+ },
+ "group": {
+  "short": "The kernel is the set of group elements a homomorphism sends to the identity.",
+  "body": "A group homomorphism φ: G → H preserves the group operation. Its kernel is the set of elements of G mapped to the identity e_H of H, and it is always a normal subgroup. The map is injective exactly when the kernel is trivial, and G/ker φ is isomorphic to the image of φ.",
+  "tex": "\\ker\\varphi=\\{g\\in G : \\varphi(g)=e_H\\}",
+  "read": "The kernel of phi is the set of elements g in the group G whose image under phi is e_H, the identity element of the target group H.",
+  "example": "Reduction modulo 3 maps the integers under addition onto ℤ/3ℤ, with kernel 3ℤ, the multiples of 3. The determinant on invertible real n×n matrices has kernel SL(n, ℝ), the matrices of determinant 1.",
+  "why": "It is the core of G that the map collapses to a single point, the identity; dividing it out recovers the image.",
+  "note": "For additive groups the identity is 0, so the kernel is what maps to 0. For multiplicative groups the identity is 1, so the kernel is what maps to 1, not to 0.",
+  "variants": []
+ },
+ "ring": {
+  "short": "A ring homomorphism's kernel is the ideal of elements sent to zero.",
+  "body": "For a ring homomorphism φ: R → S, the kernel is the set of elements of R that map to 0 in S. It is an ideal: closed under addition and under multiplication by any element of R. The quotient R/ker φ is isomorphic to the image of φ.",
+  "tex": "\\ker\\varphi=\\{r\\in R : \\varphi(r)=0\\}",
+  "read": "The kernel of phi is the set of elements r of the ring R that phi sends to the zero element of the target ring.",
+  "example": "Evaluation at 2 sends a real polynomial p(x) to the number p(2). Its kernel is the ideal (x − 2) of all multiples of x − 2, and ℝ[x]/(x − 2) ≅ ℝ.",
+  "why": "It is the part of the ring that the map erases to zero, exactly what you divide out to recover the image.",
+  "note": "This ideal is not a kernel in the category-theory sense. In the category of rings with 1, the zero map is usually not a morphism, so that definition does not apply directly.",
+  "variants": []
+ },
+ "category": {
+  "short": "The kernel of f is the universal arrow k with f∘k = 0.",
+  "body": "In a category with zero morphisms, a kernel of f: A → B is a morphism k: K → A with f ∘ k = 0. It is universal: every g: X → A with f ∘ g = 0 factors uniquely as g = k ∘ u. Equivalently, k is the equalizer of f and the zero morphism.",
+  "tex": "\\ker f=\\operatorname{Eq}(f,0)",
+  "read": "The kernel of f is the equalizer of f and the zero morphism from A to B: the universal arrow into A on which f and 0 agree.",
+  "example": "For vector spaces, K is the usual nullspace and k is its inclusion into A. Any linear map g with f ∘ g = 0 lands inside the nullspace, which gives the unique factorization.",
+  "why": "It generalizes the nullspace: the part of A that f sends to zero, described by an arrow rather than by elements.",
+  "note": "The kernel is the arrow k with its universal property, not just the object K. Categories without zero morphisms, such as the category of sets, have no kernels in this sense.",
+  "variants": []
+ },
+ "congruence": {
+  "short": "The kernel of a function is the relation pairing inputs with equal outputs.",
+  "body": "Under this convention, the kernel of a function f is the equivalence relation x ~ y if and only if f(x) = f(y). Its equivalence classes are the fibers of f. For a homomorphism of algebras, the relation also respects every operation, which makes it a congruence.",
+  "tex": "\\ker f=\\{(x,y) : f(x)=f(y)\\}",
+  "read": "The kernel of f is the set of ordered pairs (x, y) of inputs that f sends to the same output.",
+  "example": "For f(n) = n mod 3 on the integers, the pairs (1, 7) and (2, −4) are in the kernel. The relation splits ℤ into three classes, one for each remainder.",
+  "why": "It records exactly what the function cannot tell apart: the information it throws away.",
+  "note": "This kernel is a set of pairs, not a subset. For groups it matches the usual kernel through the class of the identity: here the class of 0 is 3ℤ.",
+  "variants": []
+ },
+ "operator": {
+  "short": "The kernel is the set of functions a differential operator sends to zero.",
+  "body": "A linear differential operator D maps functions to functions, so it has a nullspace like any linear map. Its kernel is the solution set of the homogeneous equation Df = 0, which depends on the chosen function space and boundary conditions. Every solution of Df = g is one particular solution plus an element of the kernel.",
+  "tex": "\\ker D=\\{f : Df=0\\}",
+  "read": "The kernel of D is the set of functions f for which applying the operator D gives the zero function.",
+  "example": "On an interval, the kernel of d/dx is the constant functions. The kernel of d²/dx² + 1 is spanned by sin x and cos x, and the kernel of the Laplacian is the harmonic functions.",
+  "why": "As with matrices, it is what the operator annihilates: the homogeneous solutions hidden inside every equation Df = g.",
+  "note": "A Green's function, sometimes called a Green kernel, is the integral kernel of a solution operator for D. It is not the nullspace of D.",
+  "variants": []
+ },
+ "isogeny": {
+  "short": "The kernel is the set of curve points an isogeny sends to the identity.",
+  "body": "An isogeny is a nonconstant map between elliptic curves, given by rational functions, that sends the identity point O to O and preserves point addition. Its kernel is a finite subgroup. For separable isogenies, the kernel determines the isogeny up to isomorphism of the target curve, and its size equals the degree.",
+  "tex": "\\ker\\phi=\\{P\\in E(\\overline{K}) : \\phi(P)=O\\}",
+  "read": "The kernel of phi is the set of points P on the curve E, with coordinates in the algebraic closure of the field K, that phi sends to the identity point O.",
+  "example": "Over ℂ, the doubling map [2] has a kernel of four points: O and the three points of order 2. Isogeny-based cryptosystems such as SIDH use a secret kernel subgroup as the private key.",
+  "why": "It is the small finite core of the curve that the map collapses to the identity, and it pins down the map.",
+  "note": "In characteristic p, inseparable isogenies such as Frobenius have only O in their point kernel yet have degree p. There the kernel is properly a group scheme, not just a set of points.",
+  "variants": []
+ },
+ "kernel-pair": {
+  "short": "The kernel pair is the pullback of a map along itself.",
+  "body": "For a morphism f: A → B, the kernel pair is the pullback A ×_B A together with its two projections to A. In sets, it is the set of pairs (x, y) with f(x) = f(y). It needs no zero morphisms, and f is a monomorphism exactly when the two projections are equal.",
+  "tex": "A\\times_B A=\\{(x,y)\\in A\\times A : f(x)=f(y)\\}",
+  "read": "The fiber product of A with itself over B is the set of pairs (x, y) of elements of A that f sends to the same element of B.",
+  "example": "For reduction modulo 3 from ℤ to ℤ/3ℤ, the kernel pair contains (2, 5) and (0, −9) but not (1, 2). Its two projections pick out the first and second entries.",
+  "why": "Like other kernels, it captures what a map forgets, here as the pairs of inputs that the map identifies.",
+  "note": "It differs from the categorical kernel, which needs zero morphisms and records what goes to 0. The kernel pair records which inputs share an image, generalizing the equivalence-relation kernel.",
+  "variants": []
+ },
+ "module": {
+  "short": "The kernel is everything sent to zero; a submodule or Lie ideal.",
+  "body": "The kernel of a module homomorphism f: M → N is the set of elements of M sent to 0. It is a submodule of M, and M/ker f is isomorphic to the image of f. For a Lie-algebra homomorphism the kernel is a Lie ideal: bracketing it with any element of the algebra stays inside it.",
+  "tex": "\\ker f=\\{m\\in M : f(m)=0\\}",
+  "read": "The kernel of f is the set of elements m of the module M that f sends to the zero element of N.",
+  "example": "The quotient map ℤ → ℤ/4ℤ is a homomorphism of ℤ-modules with kernel 4ℤ. For Lie algebras, the trace map from gl(n) to the scalars has kernel sl(n), the trace-zero matrices.",
+  "why": "As in every algebraic setting, it is the part of the structure that the map sends to zero and so forgets.",
+  "note": "The kernel inherits the closure rules of its setting: a subspace for vector spaces, a submodule for modules, a Lie ideal for Lie algebras. A Lie ideal is stronger than a Lie subalgebra.",
+  "variants": [
+   "Module homomorphisms",
+   "Lie-algebra homomorphisms"
+  ]
+ },
+ "code": {
+  "short": "A linear code is the nullspace of its parity-check matrix.",
+  "body": "A linear code of length n over a finite field is a subspace of the length-n vectors. It can be defined as the kernel of a parity-check matrix H: a vector c is a codeword exactly when Hcᵀ = 0. A received word with nonzero syndrome Hcᵀ is not a codeword, so an error is detected.",
+  "tex": "C=\\ker H=\\{c\\in\\mathbb{F}_q^{n} : Hc^{\\mathsf{T}}=0\\}",
+  "read": "The code C is the kernel of H: all length-n vectors c over the finite field with q elements whose product with H, taken as a column, is zero.",
+  "example": "Over 𝔽₂, H = [1 1 1] gives the code {000, 011, 101, 110}: the binary triples with an even number of 1s. Flipping one bit of a codeword makes Hcᵀ = 1, which detects the error.",
+  "why": "It is the linear-algebra kernel at work: the valid codewords are exactly the vectors that the parity checks send to zero.",
+  "note": "Arithmetic is in the finite field, so over 𝔽₂, 1 + 1 = 0. The code is the kernel of H but the image (row space) of a generator matrix G.",
+  "variants": []
+ }
+}

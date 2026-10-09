@@ -1,0 +1,484 @@
+[
+ {
+  "id": "psd",
+  "name": "SVM / similarity kernel",
+  "formalName": "Positive-semidefinite kernel",
+  "domain": "ML · analysis",
+  "short": "A pairwise function whose Gram matrices are PSD.",
+  "body": "For a real symmetric kernel k, every finite Gram matrix must be positive semidefinite. This makes k representable as an inner product in a feature space.",
+  "tex": "\\sum_{i,j}a_ia_jk(x_i,x_j)\\ge0",
+  "example": "The ordinary dot product is a kernel: k(x,y)=xᵀy. More elaborate kernels let algorithms use implicit feature spaces.",
+  "note": "A plausible similarity score is not automatically a valid PSD kernel. Literature often says positive definite while allowing semidefinite Gram matrices.",
+  "variants": [
+   "Mercer kernels (under appropriate hypotheses)",
+   "SVM and kernel ridge regression",
+   "Kernel PCA"
+  ],
+  "code": null,
+  "refs": [
+   "svm"
+  ],
+  "type": "Pairwise function",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "Kernels and support vector machines",
+    "url": "https://web.stanford.edu/class/stats202/notes/Support-vector-machines/Kernels.html",
+    "publisher": "Stanford Statistics",
+    "kind": "Lecture notes"
+   }
+  ],
+  "plate": "The Similarity"
+ },
+ {
+  "id": "rbf",
+  "name": "Gaussian / RBF similarity kernel",
+  "formalName": "Gaussian / RBF similarity kernel",
+  "domain": "Machine learning",
+  "short": "Exponentially decreasing similarity in squared distance.",
+  "body": "The Gaussian radial-basis-function kernel compares points using their squared Euclidean distance and a scale parameter. It is a standard PSD kernel.",
+  "tex": "k(x,y)=\\exp\\left(-\\frac{\\|x-y\\|^2}{2\\ell^2}\\right)",
+  "example": "At distance ℓ, similarity is e⁻¹/²≈0.607. At zero distance it is 1.",
+  "note": "The same Gaussian shape appears in heat flow, KDE and image blur. Their arguments, units and normalization differ.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "pairwise"
+  ],
+  "type": "Pairwise function",
+  "status": "Named kernel",
+  "sources": [
+   {
+    "title": "Pairwise kernel functions",
+    "url": "https://scikit-learn.org/stable/modules/generated/sklearn.metrics.pairwise.pairwise_kernels.html",
+    "publisher": "scikit-learn",
+    "kind": "Documentation"
+   }
+  ],
+  "plate": "The Similarity"
+ },
+ {
+  "id": "gp",
+  "name": "Covariance kernel",
+  "formalName": "Covariance kernel",
+  "domain": "Gaussian processes · random fields",
+  "short": "The covariance between indexed random variables.",
+  "body": "A covariance kernel expresses how fluctuations at two inputs co-vary. For a Gaussian process, a mean function and a valid covariance kernel specify all finite-dimensional distributions.",
+  "tex": "k(x,y)=\\operatorname{Cov}(f(x),f(y))",
+  "example": "A long length scale in an RBF covariance makes nearby observations strongly correlated; a shorter scale allows faster variation.",
+  "note": "A covariance may be negative at some pairs while its Gram matrices remain PSD. Positive entrywise values and positive semidefiniteness are different properties.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "gp"
+  ],
+  "type": "Covariance function",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "Gaussian Processes for Machine Learning: covariance functions",
+    "url": "https://gaussianprocess.org/gpml/chapters/RW4.pdf",
+    "publisher": "Rasmussen and Williams / MIT Press",
+    "kind": "Author-hosted book"
+   }
+  ],
+  "plate": "The Similarity"
+ },
+ {
+  "id": "ntk",
+  "name": "Neural tangent kernel",
+  "formalName": "Neural tangent kernel",
+  "domain": "Deep-learning theory",
+  "short": "Inner products of parameter gradients.",
+  "body": "For a scalar network output, the NTK compares gradients of the output with respect to model parameters. It describes local function changes during training.",
+  "tex": "\\Theta_\\theta(x,y)=\\langle\\nabla_\\theta f_\\theta(x),\\nabla_\\theta f_\\theta(y)\\rangle",
+  "example": "For fθ(x)=θx, the NTK is xy. For a finite nonlinear network, it generally changes as θ changes.",
+  "note": "The limiting constant-kernel training description requires specific infinite-width assumptions. An arbitrary finite network is not automatically in that regime.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "ntk"
+  ],
+  "type": "Pairwise function",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "Neural Tangent Kernel: Convergence and Generalization",
+    "url": "https://arxiv.org/abs/1806.07572",
+    "publisher": "Jacot, Gabriel and Hongler",
+    "kind": "Research paper"
+   }
+  ],
+  "plate": "The Similarity"
+ },
+ {
+  "id": "rkhs",
+  "name": "Reproducing kernel",
+  "formalName": "Reproducing kernel",
+  "domain": "Functional analysis",
+  "short": "A pairwise function that reproduces evaluation.",
+  "body": "In a reproducing kernel Hilbert space, evaluation is an inner product with a distinguished kernel section. Every positive-semidefinite kernel determines an associated RKHS.",
+  "tex": "f(x)=\\langle f,k(x,\\cdot)\\rangle_{\\mathcal H}",
+  "example": "If k(x,y)=xy on ℝ, the associated functions have the form f(x)=ax; pairing with k(x,·) recovers ax.",
+  "note": "Not every Hilbert space of functions is an RKHS: point evaluation must be a bounded functional.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "rkhs"
+  ],
+  "type": "Reproducing function",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "Reproducing kernel Hilbert spaces",
+    "url": "https://web.stanford.edu/class/stats305c/lectures/RKHS.html",
+    "publisher": "Stanford Statistics",
+    "kind": "Lecture notes"
+   }
+  ],
+  "plate": "The Similarity"
+ },
+ {
+  "id": "attention",
+  "name": "Attention kernel / feature map",
+  "formalName": "Attention kernel / feature map",
+  "domain": "Transformer architectures",
+  "short": "A pairwise weighting expressed using kernel features.",
+  "body": "Kernel formulations of attention express pairwise weights through feature maps. Associativity can then rearrange some attention computations to avoid explicitly forming every pairwise weight.",
+  "tex": "k(q,k)=\\phi(q)^{\\mathsf T}\\phi(k)",
+  "example": "A nonnegative feature map can give usable attention weights, followed by row normalization and a weighted sum of value vectors.",
+  "note": "Distinct query/key projections and row normalization generally do not produce a symmetric PSD token matrix. Not every attention score is a Mercer kernel.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "attention"
+  ],
+  "type": "Pairwise function",
+  "status": "Context-dependent usage",
+  "sources": [
+   {
+    "title": "Transformers are RNNs: Linear Attention",
+    "url": "https://arxiv.org/abs/2006.16236",
+    "publisher": "Katharopoulos, Vyas, Pappas and Fleuret",
+    "kind": "Research paper"
+   }
+  ],
+  "plate": "The Similarity"
+ },
+ {
+  "id": "quantum",
+  "name": "Quantum feature kernel",
+  "formalName": "Quantum feature kernel",
+  "domain": "Quantum machine learning",
+  "short": "Similarity defined by encoded quantum states.",
+  "body": "A quantum feature map encodes an input into a state. A common kernel is the squared overlap of two encoded states, also interpretable as an inner product of density operators.",
+  "tex": "k(x,y)=|\\langle\\psi(x)|\\psi(y)\\rangle|^2",
+  "example": "Identical pure states give similarity 1; orthogonal states give 0.",
+  "note": "This is a kernel method implemented or estimated with quantum circuits. A useful quantum advantage does not follow merely from the definition.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "quantum"
+  ],
+  "type": "Pairwise function",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "Supervised learning with quantum enhanced feature spaces",
+    "url": "https://arxiv.org/abs/1804.11326",
+    "publisher": "Havlíček et al.",
+    "kind": "Research paper"
+   }
+  ],
+  "plate": "The Similarity"
+ },
+ {
+  "id": "bergman",
+  "name": "Bergman kernel",
+  "formalName": "Bergman kernel",
+  "domain": "Complex analysis",
+  "short": "The reproducing kernel for square-integrable holomorphic functions.",
+  "body": "The Bergman kernel reproduces holomorphic functions in an L² space on a complex domain and represents the Bergman projection.",
+  "tex": "B_{\\mathbb D}(z,w)=\\frac1{\\pi(1-z\\bar w)^2}",
+  "example": "On the unit disk with ordinary area measure, integrating B(z,w)f(w) over the disk recovers f(z) for suitable holomorphic f.",
+  "note": "The domain and measure normalization determine the formula. It is both an integral kernel and a reproducing kernel.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "bergman"
+  ],
+  "type": "Pairwise function",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "Functional analysis: Bergman projection",
+    "url": "https://math.berkeley.edu/~moorxu/oldsite/notes/205b/205bmain.pdf",
+    "publisher": "UC Berkeley",
+    "kind": "Lecture notes"
+   }
+  ],
+  "plate": "The Similarity"
+ },
+ {
+  "id": "determinantal",
+  "name": "Determinantal / correlation kernel",
+  "formalName": "Determinantal / correlation kernel",
+  "domain": "Random matrices · probability",
+  "short": "A kernel whose determinants encode joint point correlations.",
+  "body": "Determinantal point processes express their correlation functions as determinants of matrices built from a kernel. Famous scaling limits include the sine, Airy and Bessel kernels.",
+  "tex": "\\rho_n(x_1,\\ldots,x_n)=\\det[K(x_i,x_j)]_{i,j=1}^n",
+  "example": "The sine kernel is sin(π(x−y))/(π(x−y)), with diagonal value 1, in a common bulk-scaling convention.",
+  "note": "Not every PSD kernel defines a valid determinantal process. Operator constraints and the reference measure also matter.",
+  "variants": [
+   "Sine",
+   "Airy",
+   "Bessel"
+  ],
+  "code": null,
+  "refs": [
+   "dpp"
+  ],
+  "type": "Pairwise function",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "Random point fields and random matrices",
+    "url": "https://www.cambridge.org/core/books/abs/random-matrices-high-dimensional-phenomena/random-point-fields-and-random-matrices/3ABEF2AA9A747C36EA24E51CDFE23EE8",
+    "publisher": "Gordon Blower / Cambridge University Press",
+    "kind": "Author's book chapter"
+   }
+  ],
+  "plate": "The Similarity"
+ },
+ {
+  "id": "fisher",
+  "name": "Fisher kernel",
+  "formalName": "Fisher kernel",
+  "domain": "Statistical machine learning",
+  "short": "Similarity between model-score vectors.",
+  "body": "A generative model provides score features: gradients of log likelihood with respect to its parameters. The Fisher kernel compares those features using an information-based metric.",
+  "tex": "k(x,y)=U_x^{\\mathsf T}I^{-1}U_y,\\quad U_x=\\nabla_\\theta\\log p_\\theta(x)",
+  "example": "Two observations are similar when they suggest similar parameter changes in the chosen generative model.",
+  "note": "The model and parameterization are part of the construction; an inverse or suitable generalized inverse requires care.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "fisher"
+  ],
+  "type": "Pairwise function",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "Exploiting Generative Models in Discriminative Classifiers",
+    "url": "https://papers.nips.cc/paper_files/paper/1998/hash/db1915052d15f7815c8b88e879465a1e-Abstract.html",
+    "publisher": "Jaakkola and Haussler / NeurIPS",
+    "kind": "Research paper"
+   }
+  ],
+  "plate": "The Similarity"
+ },
+ {
+  "id": "graph-ml",
+  "name": "Graph kernel: machine learning",
+  "formalName": "Graph kernel: machine learning",
+  "domain": "Graph ML",
+  "short": "A similarity kernel between whole graphs.",
+  "body": "Graph kernels use features such as walks, subgraphs or neighborhood patterns to compare graph-structured inputs within kernel methods.",
+  "tex": "k(G,H)=\\langle\\phi(G),\\phi(H)\\rangle",
+  "example": "A simple kernel compares vectors counting vertex labels. Richer kernels compare shared walks or Weisfeiler–Lehman patterns.",
+  "note": "A graph-theory kernel is a selected vertex set in a single digraph; a graph ML kernel compares two graph objects.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "graphml"
+  ],
+  "type": "Pairwise function",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "Graph Kernels",
+    "url": "https://www.jmlr.org/papers/volume11/vishwanathan10a/vishwanathan10a.pdf",
+    "publisher": "Vishwanathan et al. / JMLR",
+    "kind": "Research paper"
+   }
+  ],
+  "plate": "The Similarity"
+ },
+ {
+  "id": "mmd",
+  "name": "Kernel mean / distribution embedding",
+  "formalName": "Kernel mean / distribution embedding",
+  "domain": "Statistics · machine learning",
+  "short": "Represent a distribution by an average kernel section.",
+  "body": "A kernel mean embedding averages feature representations under a distribution. Distances between such embeddings produce the maximum mean discrepancy (MMD).",
+  "tex": "\\mu_P=\\mathbb E_{X\\sim P}[k(X,\\cdot)]",
+  "example": "With a linear kernel, the embedding captures the ordinary mean. A characteristic kernel can distinguish all probability distributions in an appropriate class.",
+  "note": "Kernel here is still the underlying pairwise PSD function; the mean embedding is a derived object. Moment and measurability assumptions apply.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "mmd"
+  ],
+  "type": "Pairwise function",
+  "status": "Derived construction",
+  "sources": [
+   {
+    "title": "A Kernel Two-Sample Test",
+    "url": "https://www.jmlr.org/papers/v13/gretton12a.html",
+    "publisher": "Gretton et al. / JMLR",
+    "kind": "Research paper"
+   }
+  ],
+  "plate": "The Similarity"
+ },
+ {
+  "id": "kernel-families",
+  "name": "Named similarity-kernel families",
+  "formalName": "Named similarity-kernel families",
+  "domain": "Machine learning · Gaussian processes",
+  "short": "Different constructions inside the PSD family.",
+  "body": "Linear, polynomial, Laplacian, Matérn, rational-quadratic and periodic kernels encode different notions of features, smoothness or repetition.",
+  "tex": "k_{\\rm poly}(x,y)=(\\gamma x^{\\mathsf T}y+c)^d",
+  "example": "For γ=1, c=0 and d=2, the polynomial kernel equals the dot product of quadratic feature vectors.",
+  "note": "Parameters and domains matter. The sigmoid formula tanh(γxᵀy+c), although offered by software APIs, is not PSD for arbitrary parameters.",
+  "variants": [
+   "Linear",
+   "Polynomial",
+   "Laplacian",
+   "Matérn",
+   "Rational quadratic",
+   "Periodic",
+   "Histogram / χ² kernels"
+  ],
+  "code": null,
+  "refs": [
+   "gp",
+   "pairwise"
+  ],
+  "type": "Pairwise function",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "Gaussian Processes for Machine Learning: covariance functions",
+    "url": "https://gaussianprocess.org/gpml/chapters/RW4.pdf",
+    "publisher": "Rasmussen and Williams / MIT Press",
+    "kind": "Author-hosted book"
+   },
+   {
+    "title": "Pairwise kernel functions",
+    "url": "https://scikit-learn.org/stable/modules/generated/sklearn.metrics.pairwise.pairwise_kernels.html",
+    "publisher": "scikit-learn",
+    "kind": "Documentation"
+   }
+  ],
+  "plate": "The Similarity"
+ },
+ {
+  "id": "nngp",
+  "name": "Neural-network GP kernel",
+  "formalName": "Neural-network GP kernel",
+  "domain": "Deep-learning theory",
+  "short": "Output covariance from a random network.",
+  "body": "Randomly initialized networks can induce covariance kernels. Under suitable infinite-width conditions, their outputs converge to a Gaussian process with a network-dependent kernel.",
+  "tex": "k(x,y)=\\mathbb E[f_\\theta(x)f_\\theta(y)]\\quad\\text{(zero mean)}",
+  "example": "For fθ(x)=θx with θ∼N(0,1), the induced covariance is xy.",
+  "note": "The NNGP kernel uses random outputs; the NTK uses parameter gradients. Their roles and formulas differ.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "ntk"
+  ],
+  "type": "Pairwise function",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "Neural Tangent Kernel: Convergence and Generalization",
+    "url": "https://arxiv.org/abs/1806.07572",
+    "publisher": "Jacot, Gabriel and Hongler",
+    "kind": "Research paper"
+   }
+  ],
+  "plate": "The Similarity"
+ },
+ {
+  "id": "stein-ml",
+  "name": "Stein kernel: pairwise discrepancy",
+  "formalName": "Stein kernel: pairwise discrepancy",
+  "domain": "Statistical ML",
+  "short": "An RKHS kernel transformed by Stein operators.",
+  "body": "Applying a distribution's Stein operator to both arguments of a base kernel produces a pairwise kernel used to assess sample fit, often without a density's normalizing constant.",
+  "tex": "k_p(x,y)=\\mathcal T_p^x\\mathcal T_p^y k(x,y)\\quad\\text{(schematic)}",
+  "example": "A kernel Stein discrepancy combines density scores and derivatives of an RBF kernel to compare a sample with a model.",
+  "note": "This pairwise function is distinct from the one-input integration-by-parts Stein kernel τ(x). Boundary and regularity conditions matter.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "steinml"
+  ],
+  "type": "Pairwise function",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "A Kernelized Stein Discrepancy for Goodness-of-fit Tests",
+    "url": "https://proceedings.mlr.press/v48/liub16.html",
+    "publisher": "Liu, Lee and Jordan / ICML",
+    "kind": "Research paper"
+   }
+  ],
+  "plate": "The Similarity"
+ },
+ {
+  "id": "string",
+  "name": "String / sequence kernel",
+  "formalName": "String / sequence kernel",
+  "domain": "Bioinformatics · NLP",
+  "short": "An inner-product comparison of sequence features.",
+  "body": "String kernels compare sequences through features such as counts of substrings or subsequences, often without explicitly constructing the full feature vectors.",
+  "tex": "k(s,t)=\\sum_u\\operatorname{count}_s(u)\\operatorname{count}_t(u)",
+  "example": "For length-2 substring counts, AABA has AA, AB and BA once each. Comparing these counts gives a simple spectrum kernel.",
+  "note": "This is a similarity function for sequences, not a text-processing routine or language runtime.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "string"
+  ],
+  "type": "Pairwise function",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "Fast String Kernels",
+    "url": "https://www.jmlr.org/papers/volume5/leslie04a/leslie04a.pdf",
+    "publisher": "Leslie and Kuang / JMLR",
+    "kind": "Research paper"
+   }
+  ],
+  "plate": "The Similarity"
+ },
+ {
+  "id": "szego",
+  "name": "Szegő kernel",
+  "formalName": "Szegő kernel",
+  "domain": "Complex analysis",
+  "short": "A reproducing kernel for a Hardy-space setting.",
+  "body": "The Szegő kernel reproduces functions in a Hardy space, using boundary rather than area-based data in the standard disk setting.",
+  "tex": "S_{\\mathbb D}(z,w)=\\frac1{1-z\\bar w}",
+  "example": "With normalized boundary measure dθ/(2π), the disk Hardy-space kernel is 1/(1−z w̄).",
+  "note": "Normalization varies. The Szegő and Bergman kernels reproduce different function spaces; they are not interchangeable.",
+  "variants": [],
+  "code": null,
+  "refs": [
+   "szego"
+  ],
+  "type": "Pairwise function",
+  "status": "Meaning",
+  "sources": [
+   {
+    "title": "A Szegő Kernel for Discrete Series",
+    "url": "https://www.math.stonybrook.edu/~aknapp/pdf-files/proc-icm-szego-1974.pdf",
+    "publisher": "Anthony Knapp / ICM",
+    "kind": "Research paper"
+   }
+  ],
+  "plate": "The Similarity"
+ }
+]

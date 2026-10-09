@@ -1,0 +1,188 @@
+{
+ "psd": {
+  "short": "A symmetric function whose Gram matrices are all positive semidefinite.",
+  "body": "A kernel k(x, y) is positive semidefinite (PSD) if, for any finite set of points, the matrix of values k(x_i, x_j) is symmetric with no negative eigenvalues. Exactly these functions can be written as an inner product ⟨φ(x), φ(y)⟩ of feature vectors, possibly infinite-dimensional. Algorithms that need only inner products can then use k directly.",
+  "tex": "\\sum_{i=1}^{n}\\sum_{j=1}^{n}c_i c_j\\,k(x_i,x_j)\\ge 0",
+  "read": "For any n points x_1 to x_n and any real coefficients c_1 to c_n, the weighted double sum of kernel values k(x_i, x_j) is never negative.",
+  "example": "The dot product k(x, y) = xᵀy is the simplest PSD kernel. An SVM using (xᵀy)² learns a quadratic decision boundary without ever forming the quadratic features.",
+  "why": "k(x, y) is the kernel of the integral operator f ↦ ∫ k(x, y) f(y) dy, the setting of Mercer's theorem.",
+  "note": "A plausible similarity score is not automatically PSD. Also, much of the literature says \"positive definite kernel\" for what this card calls positive semidefinite.",
+  "variants": [
+   "Mercer kernels (under appropriate hypotheses)",
+   "SVMs and kernel ridge regression",
+   "Kernel PCA"
+  ]
+ },
+ "rbf": {
+  "short": "A similarity that decays exponentially with the squared distance between two points.",
+  "body": "The Gaussian radial basis function (RBF) kernel depends only on the Euclidean distance between x and y. It equals 1 when the points coincide and falls toward 0 as they separate, at a rate set by the length scale ℓ. It is PSD and is the default kernel of scikit-learn's SVC classifier.",
+  "tex": "k(x,y)=\\exp\\left(-\\frac{\\|x-y\\|^2}{2\\ell^2}\\right)",
+  "read": "The similarity of x and y is e raised to minus their squared Euclidean distance divided by twice the squared length scale ℓ.",
+  "example": "Points one length scale apart have similarity e^(−1/2) ≈ 0.607; points three length scales apart, e^(−4.5) ≈ 0.011. scikit-learn writes it as exp(−γ‖x − y‖²) with γ = 1/(2ℓ²).",
+  "why": "It is a PSD kernel: the pairwise function at the center of a kernel method, here a Gaussian bump around each point.",
+  "note": "The same Gaussian shape is the heat kernel, the KDE kernel and the image-blur kernel. Those are normalized to integrate to 1 and play different roles; this one is a similarity with peak value 1.",
+  "variants": []
+ },
+ "gp": {
+  "short": "The covariance between a random function's values at two inputs.",
+  "body": "A covariance kernel says how strongly f(x) and f(y) vary together. A Gaussian process is fully specified by a mean function and a covariance kernel, which must be PSD. Choosing the kernel sets prior assumptions about the function, such as its smoothness, length scale and periodicity.",
+  "tex": "k(x,y)=\\operatorname{Cov}\\bigl(f(x),f(y)\\bigr)",
+  "read": "The kernel at x and y is the covariance between the random function's value at x and its value at y.",
+  "example": "With an RBF covariance of unit variance and length scale 1, values 0.5 apart have correlation e^(−0.125) ≈ 0.88, while values 3 apart have correlation about 0.011.",
+  "why": "It is a PSD kernel, and as the kernel of the covariance operator it holds all of the process's second-order structure.",
+  "note": "A covariance kernel can be negative for some pairs and still be valid. Being PSD is a property of whole Gram matrices, not of the sign of individual entries.",
+  "variants": []
+ },
+ "ntk": {
+  "short": "The inner product of a network's parameter gradients at two inputs.",
+  "body": "For a network f_θ with scalar output, the neural tangent kernel (NTK) compares how the outputs at x and y respond to a change in the parameters θ. Under gradient descent, it determines how a training step on one input moves the output at another. In a suitable infinite-width limit, it stays fixed during training.",
+  "tex": "\\Theta_\\theta(x,y)=\\bigl\\langle\\nabla_\\theta f_\\theta(x),\\,\\nabla_\\theta f_\\theta(y)\\bigr\\rangle",
+  "read": "The NTK at x and y, for parameters θ, is the inner product of the gradient of the network output with respect to θ at x and at y.",
+  "example": "For the linear model f_θ(x) = θx, the gradient is x, so the NTK is xy. For a finite nonlinear network, the NTK generally changes as training updates θ.",
+  "why": "It is a PSD kernel, an inner product of gradient features, and it plays the kernel's role in the training dynamics.",
+  "note": "The NNGP kernel is the covariance of outputs at random initialization, not of gradients. Also, the constant-kernel picture of training holds only under specific infinite-width assumptions.",
+  "variants": []
+ },
+ "rkhs": {
+  "short": "A kernel that recovers function values through an inner product.",
+  "body": "A reproducing kernel Hilbert space (RKHS) is a Hilbert space of functions in which evaluating f at a point x is a continuous operation. Each x then has a representer k(x, ·) in the space, and the inner product with it returns f(x). Every PSD kernel has exactly one RKHS, and every RKHS has exactly one reproducing kernel.",
+  "tex": "f(x)=\\langle f,\\,k(x,\\cdot)\\rangle_{\\mathcal H}",
+  "read": "The value of f at x equals the inner product, in the Hilbert space H, of f with the kernel function k(x, ·), where the dot marks the free argument.",
+  "example": "For k(x, y) = xy on ℝ, the RKHS holds the lines f(t) = at, with ⟨f, g⟩ = ab when g(t) = bt. Pairing f with k(x, ·), the line of slope x, gives ax = f(x).",
+  "why": "The kernel k(x, ·) is the fixed function inside the inner product that reproduces f, and every PSD similarity kernel is one.",
+  "note": "Not every Hilbert space of functions is an RKHS. In L², functions are defined only almost everywhere, so evaluating one at a single point is not even well defined.",
+  "variants": []
+ },
+ "attention": {
+  "short": "Attention weights written as inner products of feature-mapped queries and keys.",
+  "body": "Softmax attention weights each value v_j by exp(q_iᵀk_j/√d), normalized over j. Kernel views replace this score with φ(q_i)ᵀφ(k_j) for a feature map φ. Because matrix products are associative, the sum Σ_j φ(k_j)v_jᵀ can be computed once and shared by every query, cutting cost from quadratic to linear in sequence length.",
+  "tex": "\\operatorname{sim}(q,k)=\\phi(q)^{\\mathsf T}\\phi(k)",
+  "read": "The similarity between a query q and a key k is the dot product of their feature vectors φ(q) and φ(k), produced by a fixed feature map φ.",
+  "example": "Katharopoulos et al. used φ(x) = elu(x) + 1, which keeps all weights positive. Their linear transformer then runs in time and memory linear in sequence length, rather than quadratic.",
+  "why": "The score φ(q)ᵀφ(k) has the inner-product form of a similarity kernel, the same structure used in SVMs and Gaussian processes.",
+  "note": "Not every attention score is a PSD kernel. Queries and keys come from different projections and rows are normalized, so the attention matrix is generally neither symmetric nor PSD.",
+  "variants": []
+ },
+ "quantum": {
+  "short": "A similarity measured by the overlap of two encoded quantum states.",
+  "body": "A quantum feature map runs a circuit that encodes an input x as a state |ψ(x)⟩. The kernel is the squared overlap of two such states, estimated by repeated measurement on quantum hardware. The resulting kernel values then feed a classical method such as an SVM.",
+  "tex": "k(x,y)=\\bigl|\\langle\\psi(x)|\\psi(y)\\rangle\\bigr|^2",
+  "read": "The kernel is the squared magnitude of the inner product between the quantum state that encodes x and the state that encodes y.",
+  "example": "Identical states give 1 and orthogonal states give 0. Havlíček et al. estimated such kernels on a superconducting quantum processor and used them to train an SVM.",
+  "why": "Like any PSD kernel, it is an inner product of features, here the density matrices of the two encoded states.",
+  "note": "This is a classical kernel method whose kernel values are computed on a quantum device. The definition alone does not guarantee any speed or accuracy advantage over classical kernels.",
+  "variants": []
+ },
+ "bergman": {
+  "short": "The reproducing kernel for square-integrable holomorphic functions on a domain.",
+  "body": "On a complex domain, the holomorphic functions with finite ∫|f|² dA form a Hilbert space, the Bergman space. Its reproducing kernel B(z, w) recovers f(z) as an area integral of B(z, w) f(w). The same integral applied to any square-integrable function is the Bergman projection onto the holomorphic ones.",
+  "tex": "f(z)=\\int_{\\mathbb D}\\frac{f(w)}{\\pi(1-z\\bar w)^2}\\,dA(w)",
+  "read": "On the unit disk D, f at z equals the area integral over D of f(w) divided by π times (1 minus z times the conjugate of w) squared.",
+  "example": "On the unit disk, B(z, w) = 1/(π(1 − z w̄)²). At z = 0 this is the constant 1/π, so f(0) is the average of f over the disk, the mean value property.",
+  "why": "It is the kernel of an integral operator, the Bergman projection, and also the reproducing kernel of its function space.",
+  "note": "The Szegő kernel is the boundary analog: it reproduces Hardy-space functions from their values on the boundary. The Bergman formula also depends on the domain and on how area is normalized.",
+  "variants": []
+ },
+ "determinantal": {
+  "short": "A kernel whose determinants give the joint correlations of a random point set.",
+  "body": "In a determinantal point process, the density of finding points at x_1, …, x_n is the determinant of the n × n matrix of kernel values K(x_i, x_j). The determinant vanishes when two points coincide, so points repel. Eigenvalues of many random matrices behave this way, with the sine, Airy and Bessel kernels as scaling limits.",
+  "tex": "\\rho_n(x_1,\\ldots,x_n)=\\det\\bigl[K(x_i,x_j)\\bigr]_{i,j=1}^{n}",
+  "read": "The n-point correlation function at x_1 through x_n equals the determinant of the n by n matrix whose (i, j) entry is K(x_i, x_j).",
+  "example": "Bulk eigenvalues of large GUE random matrices, scaled to unit density, follow the sine kernel K(x, y) = sin(π(x − y))/(π(x − y)). Then ρ₂(x, y) = 1 − K(x, y)², which drops to 0 as y approaches x.",
+  "why": "K(x, y) is the kernel of an integral operator, and properties of that operator decide whether a valid process exists.",
+  "note": "Not every PSD kernel defines a valid process. For a Hermitian kernel, the associated integral operator must have eigenvalues between 0 and 1, relative to a chosen reference measure.",
+  "variants": [
+   "Sine",
+   "Airy",
+   "Bessel"
+  ]
+ },
+ "fisher": {
+  "short": "A similarity kernel built from a generative model's score vectors.",
+  "body": "A probabilistic model p_θ maps each data point x to its Fisher score U_x, the gradient of log p_θ(x) with respect to the parameters. The Fisher kernel compares two scores, weighting directions by the inverse Fisher information matrix I. This turns a generative model into features for a discriminative classifier such as an SVM.",
+  "tex": "k(x,y)=U_x^{\\mathsf T}I^{-1}U_y,\\qquad U_x=\\nabla_\\theta\\log p_\\theta(x)",
+  "read": "The kernel is the score vector of x, times the inverse Fisher information matrix I, times the score of y; a score is the parameter gradient of the log-likelihood.",
+  "example": "Jaakkola and Haussler derived kernels from hidden Markov models and used them in SVMs, improving classification of DNA and protein sequences. In practice I is often replaced by the identity matrix.",
+  "why": "It is a PSD similarity kernel, an inner product of score features, with the generative model supplying the feature map.",
+  "note": "The kernel depends on the chosen model and its parameterization. If the Fisher information matrix is singular, a generalized inverse or a regularized version is needed.",
+  "variants": []
+ },
+ "graph-ml": {
+  "short": "A similarity kernel that compares two whole graphs.",
+  "body": "A graph kernel maps each graph to features, such as counts of labeled walks, small subgraphs or neighborhood patterns, and takes their inner product. Many are computed without listing the features explicitly. Any kernel method, such as an SVM, can then classify graphs like molecules or social networks.",
+  "tex": "k(G,H)=\\langle\\phi(G),\\phi(H)\\rangle",
+  "read": "The kernel between graphs G and H is the inner product of their feature vectors φ(G) and φ(H).",
+  "example": "The simplest version counts vertex labels in each graph and takes the dot product. The Weisfeiler–Lehman kernel repeatedly relabels each vertex using its neighbors' labels, then compares the label counts.",
+  "why": "It is a PSD similarity kernel in the machine-learning sense, applied to whole graphs as inputs.",
+  "note": "In graph theory, a kernel of a directed graph is a set of vertices with no arcs among them that every outside vertex points into. That is a vertex set in one graph, not a comparison of two graphs.",
+  "variants": []
+ },
+ "mmd": {
+  "short": "A distribution represented by the average of its kernel features.",
+  "body": "Averaging the function k(X, ·) over X drawn from P gives a single element μ_P of the kernel's RKHS. The distance between two such embeddings is the maximum mean discrepancy (MMD), which can be estimated from samples using only kernel evaluations. It underlies kernel two-sample tests.",
+  "tex": "\\mu_P=\\mathbb E_{X\\sim P}\\bigl[k(X,\\cdot)\\bigr],\\qquad \\operatorname{MMD}(P,Q)=\\|\\mu_P-\\mu_Q\\|_{\\mathcal H}",
+  "read": "The embedding of P is the expected kernel function k(X, ·) for X drawn from P; the MMD is the RKHS distance between the embeddings of P and Q.",
+  "example": "With the linear kernel, the MMD is the distance between the two means. With the Gaussian kernel, which is characteristic, the MMD is zero only when P = Q, so it detects any difference.",
+  "why": "The kernel is still the PSD similarity k; the mean embedding is a derived object built by averaging its feature functions.",
+  "note": "Not kernel density estimation: KDE averages normalized bumps to estimate a density, while the mean embedding lives in an RKHS and need not be a density. Moment and measurability assumptions apply.",
+  "variants": []
+ },
+ "kernel-families": {
+  "short": "Standard PSD kernels that encode different features, smoothness or periodicity.",
+  "body": "Each common kernel builds in a different assumption: linear and polynomial kernels compare explicit feature products; Laplacian, Matérn and rational quadratic kernels set how rough or smooth functions are; periodic kernels model repetition. Sums and products of PSD kernels are again PSD, so kernels can be combined.",
+  "tex": "k_{\\mathrm{poly}}(x,y)=\\bigl(\\gamma\\,x^{\\mathsf T}y+c\\bigr)^d",
+  "read": "The polynomial kernel is γ times the dot product of x and y, plus a constant c, all raised to the integer power d.",
+  "example": "With γ = 1, c = 0 and d = 2 in two dimensions, (xᵀy)² equals the dot product of the feature vectors (x₁², √2 x₁x₂, x₂²).",
+  "why": "Each is a PSD kernel: a similarity function that implicitly defines an inner product of feature vectors.",
+  "note": "The sigmoid kernel tanh(γxᵀy + c), offered by libraries such as scikit-learn, is not PSD for general parameters. The polynomial kernel is guaranteed PSD for γ > 0 and c ≥ 0.",
+  "variants": [
+   "Linear",
+   "Polynomial",
+   "Laplacian",
+   "Matérn",
+   "Rational quadratic",
+   "Periodic",
+   "Histogram / χ² kernels"
+  ]
+ },
+ "nngp": {
+  "short": "The output covariance of a randomly initialized neural network.",
+  "body": "Draw a network's parameters θ at random and treat its output f_θ(x) as a random function. In a suitable infinite-width limit, that output becomes a Gaussian process, and its covariance kernel is the NNGP kernel, computed layer by layer from the architecture. It can then serve directly as a GP prior.",
+  "tex": "k(x,y)=\\mathbb E_\\theta\\bigl[f_\\theta(x)\\,f_\\theta(y)\\bigr]\\quad\\text{(zero mean)}",
+  "read": "For zero-mean outputs, the kernel at x and y is the expected product of the network outputs at x and y, averaged over random parameters θ.",
+  "example": "For f_θ(x) = θx with θ drawn from N(0, 1), the kernel is E[θ²]xy = xy.",
+  "why": "It is a covariance kernel, and therefore PSD, induced by the random network.",
+  "note": "The NNGP kernel is the covariance of random network outputs; the NTK is an inner product of parameter gradients. The first describes the prior at initialization, the second the training dynamics.",
+  "variants": []
+ },
+ "stein-ml": {
+  "short": "A base kernel transformed with a model's score to test sample fit.",
+  "body": "Given a model density p with score s_p = ∇ log p, applying the Stein operator to both arguments of a base kernel k gives a new kernel u_p. Its average over samples from q is the kernel Stein discrepancy, zero when q = p under mild conditions. The score needs no normalizing constant.",
+  "tex": "u_p(x,y)=s_p(x)^{\\mathsf T}k(x,y)\\,s_p(y)+s_p(x)^{\\mathsf T}\\nabla_y k(x,y)+\\nabla_x k(x,y)^{\\mathsf T}s_p(y)+\\operatorname{tr}\\bigl(\\nabla_x\\nabla_y^{\\mathsf T}k(x,y)\\bigr)",
+  "read": "u_p combines the base kernel k, its gradients in each argument and its mixed second derivatives, each paired with the model score s_p, the gradient of log p.",
+  "example": "To check MCMC samples against a Bayesian posterior known only up to a constant, average u_p with an RBF base kernel over pairs of distinct samples. A value well above 0 signals a mismatch.",
+  "why": "It is a PSD kernel in the similarity sense, obtained by transforming an ordinary RKHS kernel with the model's score.",
+  "note": "Distinct from the one-input Stein kernel τ(x) used in integration-by-parts identities in probability. Boundary and smoothness conditions on p and k are needed for the discrepancy to behave.",
+  "variants": []
+ },
+ "string": {
+  "short": "A similarity between sequences computed from shared substrings or subsequences.",
+  "body": "A string kernel maps each sequence to counts of features, such as every substring of a fixed length, and takes the inner product of the count vectors. Efficient algorithms sum over shared features without building the very large full vectors. This lets SVMs classify DNA, protein and text sequences.",
+  "tex": "k(s,t)=\\sum_u\\operatorname{count}_s(u)\\,\\operatorname{count}_t(u)",
+  "read": "The kernel between sequences s and t sums, over every substring u, the number of times u occurs in s times the number of times it occurs in t.",
+  "example": "With length-2 substrings, AABA contains AA, AB and BA once each, and ABAB contains AB twice and BA once. Their spectrum kernel is 1·2 + 1·1 = 3.",
+  "why": "It is a PSD similarity kernel, an inner product of feature counts, applied to strings.",
+  "note": "This is a similarity function for sequences, unrelated to string-handling routines in an operating system kernel or a language runtime.",
+  "variants": []
+ },
+ "szego": {
+  "short": "The reproducing kernel of a Hardy space, recovering functions from boundary values.",
+  "body": "The Hardy space H² on the unit disk holds holomorphic functions whose boundary values are square-integrable on the circle. Its reproducing kernel, the Szegő kernel, recovers f(z) inside the disk as an integral of f over the boundary circle. On the disk this is Cauchy's integral formula.",
+  "tex": "S_{\\mathbb D}(z,w)=\\frac{1}{1-z\\bar w}",
+  "read": "On the unit disk, the Szegő kernel at z and w is 1 divided by 1 minus z times the complex conjugate of w.",
+  "example": "The monomials 1, z, z², … are orthonormal in H² with boundary measure dθ/(2π), so S(z, w) = Σ zⁿw̄ⁿ = 1/(1 − z w̄), a geometric series.",
+  "why": "It is a reproducing kernel and also the kernel of an integral operator over the boundary, the Szegő projection.",
+  "note": "The Bergman kernel reproduces area-integrable holomorphic functions and on the disk equals 1/(π(1 − z w̄)²). Normalizations of the boundary measure also vary between sources.",
+  "variants": []
+ }
+}
