@@ -3,114 +3,42 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="A visual field guide to kernels across mathematics, computing, physics, engineering and biology. Sourced definitions, worked examples, interactive labs and a cross-disciplinary taxonomy.">
-<meta name="theme-color" content="#ffffff">
-<title>The Kernel Zoo — A visual field guide</title>
+<meta name="description" content="Explore the different meanings of kernel: Linux, CUDA, CNN filters, SVMs, nullspaces, Lean, and their connections across STEM.">
+<meta name="theme-color" content="#fdfdfc">
+<title>Kernel zoo</title>
 <link rel="canonical" href="https://blueblazin.github.io/kernel-zoo/">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23191f2c'/%3E%3Cpath d='M9 7v18m14-18L9 16l14 9' fill='none' stroke='%23fcad34' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='white' stroke='%23252d31' stroke-width='2'/%3E%3Cpath d='M10 8v16m12-16L10 16l12 8' fill='none' stroke='%23c55226' stroke-width='2'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="../courses/assets/katex/katex.min.css">
-<link rel="stylesheet" href="styles.css">
-<script src="app.js" defer></script>
+<link rel="stylesheet" href="styles.css?v=2">
+<script src="app.js?v=2" defer></script>
+<script src="experiments.js?v=2" defer></script>
 </head>
 <body>
-<a class="skip" href="#atlas">Skip to the atlas</a>
+<a class="skip" href="#main">Skip to content</a>
 <header class="topbar">
-  <a class="wordmark" href="#top"><span class="brand-k">K</span><span>THE KERNEL ZOO</span></a>
-  <nav aria-label="Sections"><a href="#atlas">Atlas</a><a href="#mixups">Mix-ups</a><a href="#labs">Try it</a><a href="#sources">Sources</a></nav>
-  <a class="home-link" href="/">BlueBlazin</a>
+ <a class="wordmark" href="#map" aria-label="Kernel zoo, map">kernel<span>zoo</span><i aria-hidden="true"></i></a>
+ <nav class="view-tabs" aria-label="Views"><button type="button" data-view="map" class="active" aria-pressed="true">Map</button><button type="button" data-view="index" aria-pressed="false">Index <small>@@COUNT@@</small></button><button type="button" data-view="experiments" aria-pressed="false">Experiments</button></nav>
+ <div class="search-box"><label class="sr-only" for="search">Find a kernel</label><input id="search" type="search" placeholder="Find a kernel…" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="search-results"><kbd aria-hidden="true">/</kbd><div class="search-popup" id="search-popup" hidden><div id="search-results" role="listbox" aria-label="Kernel matches"></div><button type="button" id="search-all">See all results</button></div></div>
+ <button type="button" class="about-button" id="about-open" aria-label="About and sources">?</button>
 </header>
-<div class="page" id="top">
-  <aside class="rail">
-    <span class="eyebrow">Nine conceptual families</span>
-    <nav class="family-nav" aria-label="Filter kernels by family">@@NAV@@</nav>
-    <p class="rail-note">A function, a set, a file, a program, a process. The same word can name very different types of things.</p>
-    <a class="method-link" href="#scope">How this atlas is organized</a>
-  </aside>
-  <main>
-    <section class="introduction">
-      <span class="eyebrow">A field guide to an overloaded word</span>
-      <h1>The kernel zoo<span class="orange">.</span></h1>
-      <p class="intro-text">One word. Many species.<br>Find out which kernel you’re looking at—and which ones are actually related.</p>
-      <div class="intro-meta"><span><strong>@@COUNT@@</strong> entries</span><span><strong>9</strong> families</span><span><strong>@@SOURCECOUNT@@</strong> sources</span><span>Math · Computing · Physical &amp; life sciences</span></div>
-    </section>
-    <section id="atlas" class="atlas">
-      <div class="section-heading"><h2>The family map</h2><span class="secondary">Conceptual groups, not a historical family tree</span></div>
-      <div class="family-map">@@MAP@@</div>
-    </section>
-    <section id="catalog" class="catalog">
-      <div class="catalog-toolbar">
-        <div><span class="eyebrow">Browse the specimens</span><h2 id="catalog-title">All kernels</h2></div>
-        <div class="search-wrap"><label for="search">Search the atlas</label><input id="search" type="search" placeholder="Try “Gaussian”, “Lean”, “graph”…" autocomplete="off"><span class="search-shortcut" aria-hidden="true">/</span></div>
-      </div>
-      <div class="catalog-meta"><p id="results" role="status" aria-live="polite">@@COUNT@@ entries · open an entry for examples and sources</p><button class="reset" id="reset" type="button" hidden>Clear filters</button></div>
-      <div class="specimen-grid">@@SPECIMENS@@</div>
-      <div id="empty" class="empty" hidden><h3>No matching kernels</h3><p>Try a broader name or clear the family filter.</p><button type="button" id="empty-reset">Show all kernels</button></div>
-    </section>
-    <section id="mixups" class="mixups">
-      <div class="section-heading"><div><span class="eyebrow">The confusion desk</span><h2>Same word. Different objects.</h2></div><span class="secondary">The type of the thing is your first clue.</span></div>
-      <div class="stack-demo">
-        <div class="stack-caption"><h3>Three kernels in one computation</h3><p>A neural network applies a learned filter to an image.</p></div>
-        <div class="stack-layer" style="--family:#087b70"><span class="stack-index">01</span><a href="#cnn">CNN kernel</a><span>A tensor of learned weights</span><code>W : [out, in, h, w]</code></div>
-        <div class="stack-link">used by a computation executed in</div>
-        <div class="stack-layer" style="--family:#0073a6"><span class="stack-index">02</span><a href="#cuda">GPU kernel</a><span>An executable device routine</span><code>apply_filter(…)</code></div>
-        <div class="stack-link">while the host process uses services of</div>
-        <div class="stack-layer" style="--family:#5b6580"><span class="stack-index">03</span><a href="#linux">OS kernel</a><span>A privileged system component</span><code>memory · scheduling · drivers</code></div>
-        <p class="small-note">A framework may use multiple launches or library calls. This is a conceptual example, not a claim that every convolution uses one launch.</p>
-      </div>
-      <div class="comparison-grid">
-        <article><span class="pair-no">A</span><h3>Gaussian is a shape, not one meaning.</h3><p><a href="#filter">Blur</a> mixes pixels. <a href="#kde">KDE</a> estimates a density. <a href="#heat">Heat flow</a> spreads an impulse. An <a href="#rbf">RBF kernel</a> compares inputs. Similar formulas play different roles.</p><div class="comparison-type">local weights · density bumps · propagator · similarity</div></article>
-        <article><span class="pair-no">B</span><h3>A graph kernel can be a set or a function.</h3><p>A <a href="#digraph">digraph kernel</a> is an independent, absorbing vertex set. A <a href="#graph-ml">graph ML kernel</a> is a pairwise function comparing graph objects.</p><div class="comparison-type">K ⊆ V &nbsp; versus &nbsp; k(G, H) ∈ ℝ</div></article>
-        <article><span class="pair-no">C</span><h3>Two kernels can belong to one operator.</h3><p>An <a href="#integral">integral kernel</a> K(x,y) specifies T. The <a href="#nullspace">kernel of T</a> is the set of functions sent to zero. Knowing one does not make them the same object.</p><div class="comparison-type">representation of T &nbsp; versus &nbsp; nullspace of T</div></article>
-        <article><span class="pair-no">D</span><h3>“The kernel accepted it” has a scope.</h3><p><a href="#lean">Lean’s kernel</a> checks a proof term against a formal proposition under declared assumptions. People must still check that proposition’s intended meaning and its axioms.</p><div class="comparison-type">formal checking · specification review</div></article>
-        <article><span class="pair-no">E</span><h3>A Markov kernel need not be an SVM kernel.</h3><p>A <a href="#markov">transition matrix</a> has nonnegative rows summing to 1. A <a href="#psd">PSD kernel</a> must give symmetric positive-semidefinite Gram matrices. Neither requirement implies the other.</p><div class="comparison-type">probability transition &nbsp; versus &nbsp; feature inner product</div></article>
-        <article><span class="pair-no">F</span><h3>Small core, different job.</h3><p>An OS <a href="#microkernel">microkernel</a> manages isolation and communication. A BLAS <a href="#compute-cpu">microkernel</a> computes a small matrix tile. The prefix describes size, not a shared architecture.</p><div class="comparison-type">system mechanisms &nbsp; versus &nbsp; numerical inner loop</div></article>
-      </div>
-      <div class="table-scroll"><table class="type-table"><caption>A quick type check</caption><thead><tr><th scope="col">When you hear…</th><th scope="col">Look for…</th><th scope="col">The object is…</th></tr></thead><tbody>
-        <tr><td>“Launch a kernel”</td><td>threads, blocks, device, dispatch</td><td><a href="#cuda">Executable function</a></td></tr>
-        <tr><td>“Use a 3×3 kernel”</td><td>weights, neighborhood, channels</td><td><a href="#filter">Array / tensor</a></td></tr>
-        <tr><td>“Choose an RBF kernel”</td><td>Gram matrix, SVM, length scale</td><td><a href="#rbf">Pairwise function</a></td></tr>
-        <tr><td>“Find the kernel of A”</td><td>Ax=0, homomorphism, identity</td><td><a href="#nullspace">Subspace / zero fiber</a></td></tr>
-        <tr><td>“Restart the kernel”</td><td>notebook, variables, execution state</td><td><a href="#jupyter">Language process</a></td></tr>
-        <tr><td>“Load an SPK kernel”</td><td>SPICE, ephemeris, spacecraft</td><td><a href="#spice">Data file</a></td></tr>
-        <tr><td>“A kernel of size g(k)”</td><td>parameter, equivalent instance</td><td><a href="#kernelization">Reduced problem instance</a></td></tr>
-      </tbody></table></div>
-    </section>
-    <section id="labs" class="labs">
-      <div class="section-heading"><div><span class="eyebrow">Four small experiments</span><h2>See the meaning move.</h2></div></div>
-      <article class="lab" id="filter-lab">
-        <div class="lab-header"><span class="lab-number">01</span><div><h3>A filter is a pattern of weights.</h3><p>Choose a filter, then select a cell in the input grid. Values outside the grid are zero.</p></div><a href="#filter">Atlas entry</a></div>
-        <div class="lab-controls"><label>Filter<select id="filter-choice"><option value="blur">Box blur</option><option value="sharpen">Sharpen</option><option value="edge">Sobel horizontal derivative</option><option value="asymmetric">Asymmetric example</option></select></label><fieldset><legend>Operation</legend><label><input type="radio" name="filter-mode" value="correlation" checked> Cross-correlation</label><label><input type="radio" name="filter-mode" value="convolution"> Convolution (flip)</label></fieldset></div>
-        <div class="filter-stages"><div><h4>Input <span>select a cell</span></h4><div class="pixel-grid" id="input-grid"></div></div><div class="filter-middle"><h4>Applied 3×3 weights</h4><div id="weight-grid" class="weight-grid"></div><div class="operation-sign">× then Σ</div></div><div><h4>Output <span>same shape</span></h4><div class="pixel-grid" id="output-grid" role="img" aria-label="Filtered numerical grid"></div></div></div>
-        <div id="filter-calculation" class="calculation" aria-live="polite"></div><p class="small-note">Synthetic numbers, not a photograph. Output colors use a fixed signed scale: teal is positive, rose is negative. The asymmetric filter makes the flip visible.</p>
-      </article>
-      <article class="lab" id="gram-lab">
-        <div class="lab-header"><span class="lab-number">02</span><div><h3>A similarity kernel makes a Gram matrix.</h3><p>Each cell compares two points. Positive semidefinite is a property of the whole matrix.</p></div><a href="#psd">Atlas entry</a></div>
-        <div class="lab-controls"><label>Pairwise function<select id="gram-choice"><option value="rbf">Gaussian / RBF</option><option value="poly">Polynomial (1 + xy)²</option><option value="invalid">A counterexample matrix</option></select></label><label class="range-label">RBF length scale <output id="length-value">1.0</output><input type="range" id="length-scale" min="0.2" max="3" step="0.1" value="1"></label></div>
-        <div class="gram-layout"><div><div class="sample-line" id="sample-line"></div><div class="gram-table-wrap" id="gram-table"></div></div><div class="gram-explanation"><span class="eyebrow">The PSD check</span><div id="gram-verdict"></div><p id="gram-explanation"></p><p class="small-note">Eigenvalues are calculated numerically. Tiny values near zero can reflect floating-point rounding.</p></div></div>
-      </article>
-      <article class="lab" id="cuda-lab">
-        <div class="lab-header"><span class="lab-number">03</span><div><h3>A GPU kernel is a routine, run by many threads.</h3><p>A one-dimensional vector-add launch. Every in-range thread writes one output.</p></div><a href="#cuda">Atlas entry</a></div>
-        <div class="lab-controls"><label class="range-label">Vector length n <output id="n-value">37</output><input type="range" id="vector-length" min="1" max="96" value="37"></label><label>Threads per block<select id="block-size"><option value="8">8</option><option value="16">16</option><option value="32">32</option></select></label></div>
-        <div class="launch-stats" id="launch-stats"></div><div class="blocks" id="blocks"></div><div class="calculation" id="launch-code"></div><p class="small-note"><span class="key-color active-key"></span> In range: compute c[i]. <span class="key-color inactive-key"></span> Extra thread: skip via i &lt; n. Blocks are logical groups; this diagram does not depict physical GPU cores or execution order.</p>
-      </article>
-      <article class="lab" id="null-lab">
-        <div class="lab-header"><span class="lab-number">04</span><div><h3>A nullspace is a set of inputs, not a routine.</h3><p>Move along the kernel of A=[1 2]. Every selected point is mapped to zero.</p></div><a href="#nullspace">Atlas entry</a></div>
-        <div class="null-layout"><div id="null-plot"></div><div><label class="range-label">Parameter t <output id="t-value">2.0</output><input type="range" id="null-t" min="-4" max="4" step="0.1" value="2"></label><div class="calculation" id="null-calculation" aria-live="polite"></div><p>The highlighted line is span{(−2,1)}. Moving anywhere along it changes the input while leaving Ax=0.</p></div></div>
-      </article>
-    </section>
-    <section id="scope" class="scope">
-      <span class="eyebrow">About the taxonomy</span><h2>A map of meanings, not a claim of finality.</h2>
-      <div class="scope-columns"><div><p>This atlas surveys established uses across STEM, including a few historical and less-common meanings. The families group concepts by what the kernel <em>is</em> or <em>does</em>; they do not assert a shared etymology or historical descent.</p><p>Some entries are distinct senses; others are named kernels, software architectures or specializations. Those are labeled, and variants are grouped where separate entries would add little.</p></div><div><p>Connections cross family boundaries. A heat kernel can be an integral kernel and a transition density. A Bergman kernel is both an integral representation and a reproducing kernel. Placement is a reading aid, not an exclusive classification.</p><p>No finite catalogue can guarantee every local coinage, every paper-specific kernel or every future variant. The source list makes the coverage inspectable. Formulas state conventions where needed; simplified and schematic examples are identified.</p></div></div>
-      <div class="method-meta"><span>Research checked 9 October 2026</span><span>Definitions paraphrased; examples and diagrams created for this atlas</span></div>
-    </section>
-    <section id="sources" class="sources">
-      <div class="section-heading"><div><span class="eyebrow">Follow the trail</span><h2>@@SOURCECOUNT@@ sources, linked to their entries.</h2></div></div>
-      <p class="sources-lead">Official documentation, mathematical texts, university notes and research papers. Some full papers require institutional access; the atlas provides original explanations, not reproduced passages.</p>
-      <details class="bibliography"><summary>Open the complete bibliography <span>@@SOURCECOUNT@@ references</span></summary><ol>@@SOURCES@@</ol></details>
-    </section>
-    <footer><a class="wordmark" href="#top"><span class="brand-k">K</span><span>THE KERNEL ZOO</span></a><p>A cross-disciplinary field guide on <a href="/">BlueBlazin</a>.</p><a href="https://github.com/BlueBlazin/blueblazin.github.io/tree/master/kernel-zoo">Website source</a></footer>
-  </main>
-</div>
-<noscript><style>.family-map,.family-nav,.search-wrap,.lab-controls,.labs{display:none}.specimen-grid{display:block}.specimen{margin-bottom:1rem}</style><p class="noscript">The atlas and examples in its entries work without JavaScript. Interactive experiments and filters require JavaScript.</p></noscript>
+<main id="main" class="workspace">
+ <section id="map-view" class="map-view" aria-label="Interactive map">
+  <div class="map-toolbar"><label class="scope-select"><span class="sr-only">Map scope</span><select id="map-scope">@@SCOPES@@</select></label><button type="button" id="back-overview" hidden>Common kernels</button><div class="map-description" id="map-description">Select a kernel to see its definition and connections.</div></div>
+  <div class="map-frame" id="map-frame"><svg id="network" class="network" role="group" aria-label="Kernel relationships. Select a labeled node to read its definition."><title>Kernel relationships</title><g id="graph"></g></svg><div class="map-hint" id="map-hint">Drag to pan <span>·</span> Scroll to zoom</div><div class="map-key"><span class="line-key"></span>Connection <span class="line-key dashed"></span>Different meanings</div><div class="map-controls"><button type="button" id="zoom-out" aria-label="Zoom out">−</button><button type="button" id="zoom-in" aria-label="Zoom in">+</button><button type="button" id="fit-map">Fit</button></div><div class="graph-status sr-only" id="graph-status" role="status" aria-live="polite"></div></div>
+ </section>
+ <section id="index-view" class="index-view" aria-label="Complete kernel index" hidden>
+  <aside class="index-nav"><button type="button" class="index-topic active" data-topic="all">All kernels <span>@@COUNT@@</span></button>@@TOPICS@@</aside>
+  <div class="index-main"><div class="index-toolbar"><div><h1 id="index-title">All kernels</h1><p id="index-count">@@COUNT@@ entries</p></div><div class="index-options"><label class="index-mobile-scope"><span class="sr-only">Filter by field</span><select id="index-scope">@@INDEXSCOPES@@</select></label><label><span class="sr-only">Sort kernels</span><select id="index-sort"><option value="common">Common first</option><option value="alpha">A–Z</option></select></label></div></div><div class="index-columns" aria-hidden="true"><span>Kernel</span><span>Field</span><span>Object</span></div><ul class="index-list" id="index-list"></ul><div class="index-empty" id="index-empty" hidden>No matching kernels. <button type="button" id="index-reset">Clear search and filters</button></div></div>
+ </section>
+ <section id="experiments-view" class="experiments-view" aria-label="Interactive experiments" hidden>
+  <nav class="experiment-tabs" aria-label="Choose an experiment"><button type="button" data-lab="filter" class="active" aria-pressed="true">Image filtering</button><button type="button" data-lab="gram" aria-pressed="false">Similarity matrix</button><button type="button" data-lab="cuda" aria-pressed="false">GPU launch</button><button type="button" data-lab="null" aria-pressed="false">Nullspace</button></nav>
+  <div class="experiment-body">@@LABS@@</div>
+ </section>
+ <aside class="reader" id="reader" aria-label="Kernel definition" hidden><div class="reader-bar"><button type="button" id="reader-map">Show connections</button><button type="button" class="close-button" id="reader-close" aria-label="Close definition">×</button></div><article id="entry"></article></aside>
+</main>
+<footer class="site-footer"><button type="button" id="footer-about">About &amp; sources</button><a href="https://github.com/BlueBlazin/blueblazin.github.io/tree/master/kernel-zoo">Source</a><a href="/">BlueBlazin</a></footer>
+<dialog class="about-dialog" id="about-dialog"><div class="dialog-heading"><h2>About this catalogue</h2><button type="button" class="close-button" id="about-close" aria-label="Close about and sources">×</button></div><div class="about-content"><p>@@COUNT@@ entries covering established uses of <em>kernel</em> across STEM. Related variants are grouped within entries. The index starts with familiar computing and mathematical uses.</p><p>Categories organize entries by field. Connections describe specific relationships; dashed lines compare different meanings of the same word. Dotted lines show other cross-references. The map does not represent historical ancestry.</p><p>Definitions are paraphrased from @@SOURCECOUNT@@ references. Examples and diagrams were made for this catalogue. No finite collection can include every local coinage or future variant.</p><p class="about-meta">Research checked 9 October 2026. Some full papers require institutional access.</p><a href="reference.html">Read the static version</a><details class="bibliography"><summary>All @@SOURCECOUNT@@ references</summary><ol>@@SOURCES@@</ol></details></div></dialog>
+<noscript><div class="no-js"><h1>Kernel zoo</h1><p>The interactive map needs JavaScript. The complete catalogue is also available as a <a href="reference.html">static page</a>.</p></div><style>.workspace,.topbar,.site-footer{display:none}</style></noscript>
+<script type="application/json" id="catalog-data">@@DATA@@</script>
 </body>
 </html>

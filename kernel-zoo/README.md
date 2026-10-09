@@ -1,47 +1,62 @@
-# The Kernel Zoo
+# Kernel zoo
 
-A visual, searchable field guide to the word **kernel** across STEM, published at
+An interactive map of STEM meanings of **kernel**, published at
 <https://blueblazin.github.io/kernel-zoo/>.
 
-The atlas contains 103 entries in nine conceptual families, 105 cited sources,
-and four interactive numerical examples. Entries distinguish independent senses,
-named specializations, architecture variants, and related terminology. Families
-are reading aids, not mutually exclusive mathematical classes or a historical
-genealogy. The scope note on the website explains the limits of any finite survey.
+The catalogue has 103 entries in 14 fields and 105 cited sources. The opening map
+emphasizes familiar computing and mathematical uses. This is an editorial order,
+not a measured popularity ranking. Selecting a node opens its definition and a
+focused graph of connections. The complete index is searchable and can be sorted
+by name or filtered by field. Four numerical experiments cover filtering, Gram
+matrices, GPU launches, and nullspaces.
 
-## Editing and building
+Categories are reading aids, not exclusive mathematical classifications. Named
+edges describe explicit relationships; dashed edges compare different senses;
+dotted edges are additional cross-references. They do not assert historical
+ancestry. Some entries are separate meanings; others are named specializations,
+architectures, or related terms. The scope note explains the limits of a finite
+survey.
 
-- `_source/catalog.py` contains the curated entries and source registry.
-- `_source/template.html` contains the page structure and interactive-example markup.
-- `_source/build.py` generates `index.html` and the reusable `catalog.json` export.
-- `styles.css` and `app.js` provide presentation and interactions.
+## Editing
 
-From the repository root, run:
+- `_source/catalog.py`: researched definitions, examples, and source registry.
+- `_source/design.py`: display categories, familiar-entry order, aliases, and
+  explicit edge labels. The common map uses authored coordinates so it stays
+  stable while the reader explores.
+- `_source/icons.py`: original SVG concept diagrams.
+- `_source/template.html` and `_source/labs.html`: interface and experiment markup.
+- `_source/build.py`: generates the map page, machine-readable `catalog.json`,
+  and the JavaScript-free `reference.html`.
+- `app.js`: map, search, index, reader, navigation, and touch interactions.
+- `experiments.js`: the four numerical examples.
+- `styles.css`: responsive layout and presentation.
+
+From the repository root:
 
 ```sh
 python kernel-zoo/_source/build.py
 node --check kernel-zoo/app.js
+node --check kernel-zoo/experiments.js
 ```
 
 The builder uses Python's standard library, Node, and the repository's existing
 vendored KaTeX runtime. Equations are rendered at build time to HTML and MathML.
-The published page uses the existing `courses/assets/katex/` stylesheet and fonts.
-No framework, package installation, external CDN, or server is needed to read it.
+The pages use the existing `courses/assets/katex/` stylesheet and fonts. No
+framework, external CDN, package installation, or server is required.
 
 ## Research and verification
 
 Definitions are original paraphrases with entry-level references to official
-documentation, research papers, mathematical texts, and university notes. Examples
-and SVG concept diagrams were created for this atlas. Some papers require access
-through their publisher. Source URLs and the complete bibliography are included
-in both the page and the JSON export. Research was checked on 9 October 2026.
+technical documentation, research papers, mathematical texts, and university
+notes. Examples and SVG diagrams were created for this catalogue. Some papers
+require publisher access. Research was checked on 9 October 2026.
 
-Before publication, filtering and convolution outputs were compared with SciPy,
-and Gram matrices and eigenvalues with NumPy. Browser checks covered search,
-family filters, cross-family links, GPU launch bounds, nullspace values, equation
-rendering, five viewport widths from 320 to 1440 pixels, enlarged text, and reading
-with JavaScript disabled. Desktop and mobile screenshots were visually inspected.
+Filtering and convolution outputs were compared with SciPy; Gram matrices and
+eigenvalues with NumPy. Browser checks cover every entry panel, every category,
+search and keyboard selection, index sorting, back navigation, pan and zoom,
+responsive layouts, enlarged text, touch input, and the static version. Desktop
+and mobile screenshots are visually inspected before publication.
 
-The numerical labs are teaching examples: the GPU diagram shows logical threads
-and blocks, not physical cores; the filter uses a synthetic numerical grid; the
-Gram-matrix eigenvalues are numerical approximations.
+The GPU experiment shows logical threads and blocks, not physical cores or
+execution order. The filter uses synthetic numbers. Gram-matrix eigenvalues are
+numerical approximations.
